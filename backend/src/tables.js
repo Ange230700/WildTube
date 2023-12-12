@@ -26,7 +26,7 @@ managers.forEach((ManagerClass) => {
   tables[manager.table] = manager;
 });
 
-// console.info("Registered tables:", Object.keys(tables));
+console.info("Registered tables:", Object.keys(tables));
 
 /* ************************************************************************* */
 
