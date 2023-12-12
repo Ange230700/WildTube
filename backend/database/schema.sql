@@ -23,7 +23,7 @@ CREATE TABLE
         `naissance` DATE NOT NULL,
         `civility` BOOLEAN NOT NULL,
         `password` varchar(50) not null,
-        `is_admin` bool not null
+        `IsAdmin` bool not null
     );
 
 DROP TABLE IF EXISTS `Film`;
@@ -36,7 +36,7 @@ CREATE TABLE
         `duration` INT not null,
         `year` DATE NOT NULL,
         `description` VARCHAR(500) not null,
-        `is_available` BOOLEAN NOT NULL
+        `IsAvailable` BOOLEAN NOT NULL
     );
 
 DROP TABLE IF EXISTS `Categorie`;
