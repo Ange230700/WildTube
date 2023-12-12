@@ -253,8 +253,35 @@ function App() {
           </div>
         </section>
       </div>
-      {/* <div className="navbar">
-      </div> */}
+      <div className="navbar">
+        <div className="nav-icon-container">
+          <div className="home-icon">
+            <img
+              className="icon"
+              src="/src/assets/icons/home_icon.svg"
+              alt="home icon"
+            />
+          </div>
+        </div>
+        <div className="nav-icon-container">
+          <div className="search-icon">
+            <img
+              className="icon"
+              src="/src/assets/icons/search_icon.svg"
+              alt="search icon"
+            />
+          </div>
+        </div>
+        <div className="nav-icon-container">
+          <div className="profile-icon">
+            <img
+              className="icon"
+              src="/src/assets/icons/profile_icon.svg"
+              alt="profile icon"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
