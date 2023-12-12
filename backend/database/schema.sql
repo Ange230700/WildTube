@@ -84,7 +84,7 @@ CREATE TABLE
 DROP TABLE IF EXISTS ` En_tendance_serie`;
 
 CREATE TABLE
-    `en_tendance_serie` (
+    `En_tendance_serie` (
         `user_id` INT NOT NULL,
         `serie_id` INT NOT NULL,
         CONSTRAINT FK_En_tendance_Serie_user_id FOREIGN KEY (`user_id`) REFERENCES `User`(`id`),
