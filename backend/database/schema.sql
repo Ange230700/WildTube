@@ -36,7 +36,7 @@ CREATE TABLE
         `duration` INT not null,
         `year` DATE NOT NULL,
         `description` VARCHAR(500) not null,
-        `is_available` BOOLEAN NOT NULL
+        `IsAvailable` BOOLEAN NOT NULL
     );
 
 DROP TABLE IF EXISTS `Categorie`;
