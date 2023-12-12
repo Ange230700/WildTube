@@ -3,6 +3,26 @@
 const express = require("express");
 
 const app = express();
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: [
+      process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
+      "http://mysite.com",
+      "http://another-domain.com",
+    ],
+  })
+);
+app.use(express.json());
+
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
+const router = require("./router");
+
+app.use("/api", router);
 
 // Configure it
 
@@ -25,19 +45,17 @@ const app = express();
 // 4. Be sure to only have URLs in the array with domains from which you want to allow requests.
 // For example: ["http://mysite.com", "http://another-domain.com"]
 
-/*
-const cors = require("cors");
+// const cors = require("cors");
 
-app.use(
-  cors({
-    origin: [
-      process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
-      "http://mysite.com",
-      "http://another-domain.com",
-    ]
-  })
-);
-*/
+// app.use(
+//   cors({
+//     origin: [
+//       process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
+//       "http://mysite.com",
+//       "http://another-domain.com",
+//     ],
+//   })
+// );
 
 /* ************************************************************************* */
 
@@ -85,10 +103,10 @@ app.use(
 /* ************************************************************************* */
 
 // Import the API routes from the router module
-const router = require("./router");
+// const router = require("./router");
 
 // Mount the API routes under the "/api" endpoint
-app.use("/api", router);
+// app.use("/api", router);
 
 /* ************************************************************************* */
 
