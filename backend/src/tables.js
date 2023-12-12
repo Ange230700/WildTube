@@ -3,10 +3,10 @@
 /* ************************************************************************* */
 
 // Import the manager modules responsible for handling data operations on the tables
-const ItemManager = require("./models/ItemManager");
+const CategorieManager = require("./models/CategorieManager");
 
 const managers = [
-  ItemManager,
+  CategorieManager,
   // Add other managers here
 ];
 
@@ -19,6 +19,8 @@ managers.forEach((ManagerClass) => {
 
   tables[manager.table] = manager;
 });
+
+console.info("Registered tables:", Object.keys(tables));
 
 /* ************************************************************************* */
 

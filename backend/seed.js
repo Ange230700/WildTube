@@ -19,15 +19,31 @@ const seed = async () => {
 
     // Generating Seed Data
 
-    // Optional: Truncate tables (remove existing data)
-    await database.query("truncate item");
+    // // Optional: Truncate tables (remove existing data)
+    // await database.query("truncate item");
 
-    // Insert fake data into the 'item' table
-    for (let i = 0; i < 10; i += 1) {
+    // // Insert fake data into the 'item' table
+    // for (let i = 0; i < 10; i += 1) {
+    //   queries.push(
+    //     database.query("insert into item(title) values (?)", [
+    //       faker.lorem.word(),
+    //     ])
+    //   );
+    // }
+
+    for (let numberOfData = 0; numberOfData < 100; numberOfData += 1) {
       queries.push(
-        database.query("insert into item(title) values (?)", [
-          faker.lorem.word(),
-        ])
+        database.query(
+          "INSERT INTO `Film` (`miniature`, `title`, `duration`, `year`, `description`, `is_available`) VALUES (?, ?, ?, ?, ?, ?)",
+          [
+            faker.image.imageUrl(),
+            faker.lorem.words(),
+            faker.datatype.number(),
+            faker.datatype.number(),
+            faker.lorem.paragraph(),
+            faker.datatype.boolean(),
+          ]
+        )
       );
     }
 

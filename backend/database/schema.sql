@@ -171,3 +171,27 @@ VALUES
         'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
         0
     );
+
+INSERT INTO
+    `Categorie` (`name`, `position`)
+VALUES
+    ('Action', 1),
+    ('Adventure', 2),
+    ('Sci-Fi', 3),
+    ('Drama', 4),
+    ('Thriller', 5),
+    ('Comedy', 6),
+    ('Crime', 7),
+    ('Fantasy', 8),
+    ('Mystery', 9),
+    ('Animation', 10),
+    ('Family', 11),
+    ('Biography', 12),
+    ('History', 13),
+    ('Horror', 14),
+    ('Music', 15),
+    ('Musical', 16),
+    ('Romance', 17),
+    ('Sport', 18),
+    ('War', 19),
+    ('Western', 20);
