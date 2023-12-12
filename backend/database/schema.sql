@@ -23,7 +23,7 @@ CREATE TABLE
         `naissance` DATE NOT NULL,
         `civility` BOOLEAN NOT NULL,
         `password` varchar(50) not null,
-        `is_admin` bool not null
+        `IsAdmin` bool not null
     );
 
 DROP TABLE IF EXISTS `Film`;
