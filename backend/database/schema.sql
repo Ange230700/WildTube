@@ -8,9 +8,9 @@ CREATE TABLE
         `duration` INT not NULL,
         `year` DATE not NULL,
         `descripion` VARCHAR(500) not NULL,
-        `is_vailable` BOOLEAN not NULL,
-        `episodes_number` INT not NULL,
-        `seasons_number` INT not NULL
+        `IsVailable` BOOLEAN not NULL,
+        `EpisodesNumber` INT not NULL,
+        `SeasonsNumber` INT not NULL
     );
 
 DROP TABLE IF EXISTS `User`;
