@@ -4,23 +4,6 @@ const express = require("express");
 
 const app = express();
 
-const cors = require("cors");
-
-app.use(
-  cors({
-    origin: [
-      process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
-      "http://mysite.com",
-      "http://another-domain.com",
-    ],
-  })
-);
-app.use(express.json());
-
-const router = require("./router");
-
-app.use("/api", router);
-
 // Configure it
 
 /* ************************************************************************* */
@@ -42,6 +25,20 @@ app.use("/api", router);
 // 4. Be sure to only have URLs in the array with domains from which you want to allow requests.
 // For example: ["http://mysite.com", "http://another-domain.com"]
 
+const cors = require("cors"); // eslint-disable-line
+
+app.use(
+  cors({
+    origin: [
+      process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
+      "http://mysite.com",
+      "http://another-domain.com",
+      "http://wildtube.com",
+    ],
+  })
+);
+/**/
+
 /* ************************************************************************* */
 
 // Request Parsing: Understanding the purpose of this part
@@ -57,6 +54,7 @@ app.use("/api", router);
 
 // Uncomment one or more of these options depending on the format of the data sent by your client:
 
+app.use(express.json());
 // app.use(express.urlencoded());
 // app.use(express.text());
 // app.use(express.raw());
@@ -74,7 +72,7 @@ app.use("/api", router);
 
 // Then, require the module and use it as middleware in your Express application:
 
-// const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser"); // eslint-disable-line
 
 // app.use(cookieParser());
 
@@ -89,8 +87,10 @@ app.use("/api", router);
 /* ************************************************************************* */
 
 // Import the API routes from the router module
+const router = require("./router");
 
 // Mount the API routes under the "/api" endpoint
+app.use("/api", router);
 
 /* ************************************************************************* */
 
@@ -109,17 +109,17 @@ app.use("/api", router);
 // 1. Uncomment the lines related to serving static files and redirecting unhandled requests.
 // 2. Ensure that the `reactBuildPath` points to the correct directory where your frontend's build artifacts are located.
 
-const reactBuildPath = `${__dirname}/../../frontend/dist`;
+// const reactBuildPath = `${__dirname}/../../frontend/dist`;
 
-// Serve react resources
+// // Serve react resources
 
-app.use(express.static(reactBuildPath));
+// app.use(express.static(reactBuildPath));
 
-// Redirect unhandled requests to the react index file
+// // Redirect unhandled requests to the react index file
 
-app.get("*", (req, res) => {
-  res.sendFile(`${reactBuildPath}/index.html`);
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(`${reactBuildPath}/index.html`);
+// });
 
 /* ************************************************************************* */
 

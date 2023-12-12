@@ -3,17 +3,16 @@
 /* ************************************************************************* */
 
 // Import the manager modules responsible for handling data operations on the tables
-const ItemManager = require("./models/ItemManager"); 
+const CategorieManager = require("./models/CategorieManager");
 const UserManager = require("./models/UserManager");
 const FilmManager = require("./models/FilmManager");
 const SerieManager = require("./models/SerieManager");
 
 const managers = [
-  ItemManager,
+  CategorieManager,
   UserManager,
   FilmManager,
   SerieManager,
-
   // Add other managers here
 ];
 
@@ -26,6 +25,8 @@ managers.forEach((ManagerClass) => {
 
   tables[manager.table] = manager;
 });
+
+// console.info("Registered tables:", Object.keys(tables));
 
 /* ************************************************************************* */
 
