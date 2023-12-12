@@ -135,3 +135,39 @@ CREATE TABLE
         CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorie_id`) REFERENCES `Categorie`(`id`),
         PRIMARY KEY (`film_id`, `categorie_id`)
     );
+
+INSERT INTO 
+    `Film` (`miniature`, `title`, `duration`, `year`, `description`, `is_available`)
+VALUES
+    (
+        'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
+        'Avengers: Endgame',
+        181,
+        '2019-04-24',
+        'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.',
+        1
+    ),
+    (
+        'https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg',
+        'Avengers: Infinity War',
+        149,
+        '2018-04-25',
+        'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.',
+        0
+    ),
+    (
+        'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
+        'The Avengers',
+        143,
+        '2012-04-25',
+        'Earth mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
+        1
+    ),
+    (
+        'https://static.wikia.nocookie.net/ironman/images/d/da/P170620_v_v8_ba.jpg/revision/latest?cb=20191202183622',
+        'Iron man',
+        126,
+        '2008-04-30',
+        'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
+        0
+    );
