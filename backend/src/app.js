@@ -25,8 +25,7 @@ const app = express();
 // 4. Be sure to only have URLs in the array with domains from which you want to allow requests.
 // For example: ["http://mysite.com", "http://another-domain.com"]
 
-/*
-const cors = require("cors");
+const cors = require("cors"); // eslint-disable-line
 
 app.use(
   cors({
@@ -34,10 +33,11 @@ app.use(
       process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
       "http://mysite.com",
       "http://another-domain.com",
-    ]
+      "http://wildtube.com",
+    ],
   })
 );
-*/
+/**/
 
 /* ************************************************************************* */
 
@@ -54,7 +54,7 @@ app.use(
 
 // Uncomment one or more of these options depending on the format of the data sent by your client:
 
-// app.use(express.json());
+app.use(express.json());
 // app.use(express.urlencoded());
 // app.use(express.text());
 // app.use(express.raw());
@@ -72,7 +72,8 @@ app.use(
 
 // Then, require the module and use it as middleware in your Express application:
 
-// const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser"); // eslint-disable-line
+
 // app.use(cookieParser());
 
 // Once `cookie-parser` is set up, you can read and set cookies in your routes.
