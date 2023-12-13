@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import { MovieProvider } from "./contexts/MovieContext";
 import "./sass/index.scss";
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router}>
+      <MovieProvider>
+        <App />
+      </MovieProvider>
+    </RouterProvider>
   </React.StrictMode>
 );

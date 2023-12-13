@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react";
-import axios from "axios"; // eslint-disable-line
+import { useMovies } from "../contexts/MovieContext";
 
 function Home() {
-  const [movies, setMovies] = useState([]);
+  const { movies } = useMovies();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3310/api/films")
-      .then((response) => {
-        setMovies(response.data);
-        console.info(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
   return (
     <div className="home">
       <div className="movies-display-section">
