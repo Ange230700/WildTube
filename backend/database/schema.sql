@@ -21,7 +21,7 @@ CREATE TABLE
         `id` int primary key auto_increment not null,
         `name` varchar(50) not null,
         `email` varchar(50) not null,
-        `naissance` DATETIME NOT NULL,
+        `naissance` DATE NOT NULL,
         `civility` BOOLEAN NOT NULL,
         `password` varchar(50) not null,
         `IsAdmin` bool not null
@@ -160,3 +160,83 @@ CREATE TABLE
         CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie`(`id`),
         PRIMARY KEY (`filmId`, `categorieId`)
     );
+
+INSERT INTO 
+    `Film` (`miniature`, `title`, `duration`, `year`, `description`, `isAvailable`)
+VALUES
+    (
+        'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
+        'Avengers: Endgame',
+        181,
+        '2019',
+        'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.',
+        1
+    ),
+    (
+        'https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg',
+        'Avengers: Infinity War',
+        149,
+        '2018',
+        'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.',
+        0
+    ),
+    (
+        'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
+        'The Avengers',
+        143,
+        '2012',
+        'Earth mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
+        1
+    ),
+    (
+        'https://static.wikia.nocookie.net/ironman/images/d/da/P170620_v_v8_ba.jpg/revision/latest?cb=20191202183622',
+        'Iron man',
+        126,
+        '2008',
+        'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
+        0
+    );
+
+INSERT INTO
+    `Categorie` (`name`, `position`)
+VALUES
+    ('Action', 1),
+    ('Adventure', 2),
+    ('Sci-Fi', 3),
+    ('Drama', 4),
+    ('Thriller', 5),
+    ('Comedy', 6),
+    ('Crime', 7),
+    ('Fantasy', 8),
+    ('Mystery', 9),
+    ('Animation', 10),
+    ('Family', 11),
+    ('Biography', 12),
+    ('History', 13),
+    ('Horror', 14),
+    ('Music', 15),
+    ('Musical', 16),
+    ('Romance', 17),
+    ('Sport', 18),
+    ('War', 19),
+    ('Western', 20);
+
+INSERT INTO 
+    `User` (`name`, `email`,`naissance`, `civility`, `password`, `IsAdmin`)
+    VALUES
+        (
+        'Aurel',
+        'aurelien.emeriau@wcs.com',
+        '1983/06/10',
+        '0',
+        'ggfd4554',
+        '0'
+        ),
+         (
+        'Alex',
+        'alex@wcs.com',
+        '1998/03/19',
+        '0',
+        'ggfd455',
+        '0'
+        );

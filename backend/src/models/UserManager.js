@@ -45,7 +45,7 @@ class UserManager extends AbstractManager {
   async update({ name, email, naissance, civility, password, IsAdmin, id }) {
     // Execute the SQL UPDATE query to update a item to the "user" table
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET name=?, email=?, naissance=?, civilty=?, password=?, IsAdmin=?  WHERE id=?`,
+      `UPDATE ${this.table} SET name=?, email=?, naissance=?, civility=?, password=?, IsAdmin=?  WHERE id=?`,
       [name, email, naissance, civility, password, IsAdmin, id]
     );
 
@@ -58,7 +58,7 @@ class UserManager extends AbstractManager {
 
   async delete(id) {
     const [rows] = await this.database.query(
-      `DELETE FROM * from ${this.table} where id = ?`,
+      `DELETE from ${this.table} where id = ?`,
       [id]
     );
 
