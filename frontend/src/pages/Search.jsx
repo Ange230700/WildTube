@@ -5,7 +5,6 @@ function Search() {
   return (
     <div className="search">
       <div className="search-display-section">
-        <h1>Search</h1>
         <div className="search-bar-container">
           <input
             className="search-bar"
