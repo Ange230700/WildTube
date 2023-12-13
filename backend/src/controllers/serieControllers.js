@@ -23,11 +23,11 @@ const read = async (req, res, next) => {
 };
 
 const edit = async (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   req.body.id = id;
   try {
     const result = await tables.serie.update(req.body);
-    if (result.affectedRows) {
+    if (result) {
       res.json(result);
       res.sendStatus(204);
     } else {
@@ -50,7 +50,7 @@ const add = async (req, res, next) => {
 };
 
 const destroy = async (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   try {
     const result = await tables.serie.delete(id);
     if (result.affectedRows) {
