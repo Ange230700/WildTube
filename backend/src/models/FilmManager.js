@@ -15,7 +15,7 @@ class FilmManager extends AbstractManager {
     isAvailable,
   }) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (miniature, title, videoUrl, duration, year, description, isAvailable) values (?,?,?,?,?,?)`,
+      `insert into ${this.table} (miniature, title, videoUrl, duration, year, description, isAvailable) values (?,?,?,?,?,?,?)`,
       [miniature, title, videoUrl, duration, year, description, isAvailable]
     );
     return result.insertId;
@@ -52,8 +52,8 @@ class FilmManager extends AbstractManager {
   }
 
   async delete(id) {
-    const [result] = await this.database.query(
-      `delete * from ${this.table} where id = ?`,
+    const result = await this.database.query(
+      `delete  from ${this.table} where id = ?`,
       [id]
     );
     return result;
