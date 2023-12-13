@@ -41,6 +41,29 @@ CREATE TABLE
         `IsAvailable` BOOLEAN NOT NULL
     );
 
+INSERT INTO 
+    `Film` (`miniature`, `title`, `videoUrl`, `duration`, `year`, `description`, `IsAvailable`) 
+VALUES 
+    (
+        "https://m.media-amazon.com/images/M/MV5BMTkxM2FiYjctYjliYy00NjY2LWFmOTEtMWZiYWRjNjA4MGYxXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
+        "Aquaman and the Lost Kingdom",
+        "https://www.youtube.com/watch?v=2wcj6SrX4zw",
+        120,
+        "2023",
+        "The film is directed by James Wan from a screenplay written by David Leslie Johnson-McGoldrick and Will Beall and stars Jason Momoa as Aquaman, alongside Amber Heard, Patrick Wilson, Dolph Lundgren, Yahya Abdul-Mateen II, and Temuera Morrison. In the film, Aquaman must save the world from the threat of Ocean Master and Black Manta.",
+        1
+    ),
+    (
+        "https://cdn.entries.clios.com/styles/clio_aotw_ems_image_details_retina/s3/entry_attachments/image/72/2297/22197/123544/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg",
+        "The Batman",
+        "https://www.youtube.com/watch?v=mqqft2x_Aa4",
+        120,
+        "2022",
+        "The film is directed by Matt Reeves, who wrote the screenplay with Peter Craig. It stars Robert Pattinson as Bruce Wayne / Batman, with Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, and Colin Farrell rounding out the ensemble cast.",
+        1
+    );
+
+
 DROP TABLE IF EXISTS `Categorie`;
 
 CREATE TABLE
@@ -217,6 +240,7 @@ INSERT INTO
         'ggfd455',
         '0'
         );
+<<<<<<< HEAD
 
 INSERT INTO 
     `Favori_film` (`userId`, `filmId`)
@@ -224,3 +248,5 @@ INSERT INTO
     (1, 1),
     (1, 2)
 
+=======
+>>>>>>> 6cd8201133e255c8babffa97c76bccf6c66fb495

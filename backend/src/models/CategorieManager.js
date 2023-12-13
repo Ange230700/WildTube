@@ -9,11 +9,11 @@ class CategorieManager extends AbstractManager {
 
   // The C of CRUD - Create operation
 
-  async create(categorie) {
+  async create({ name, position }) {
     // Execute the SQL INSERT query to add a new categorie to the "categorie" table
     const [result] = await this.database.query(
       `insert into ${this.table} (name, position) values (?, ?)`,
-      [categorie.name, categorie.position]
+      [name, position]
     );
 
     // Return the ID of the newly inserted categorie
@@ -44,11 +44,11 @@ class CategorieManager extends AbstractManager {
   // The U of CRUD - Update operation
   // ^ Implemented the update operation to modify an existing categorie
 
-  async update(categorie) {
+  async update({ id, name, position }) {
     // Execute the SQL UPDATE query to modify an existing categorie
     const [result] = await this.database.query(
       `update ${this.table} set name = ?, position = ? where id = ?`,
-      [categorie.name, categorie.position, categorie.id]
+      [name, position, id]
     );
 
     // Return the number of affected rows
@@ -66,7 +66,7 @@ class CategorieManager extends AbstractManager {
     );
 
     // Return the number of affected rows
-    return result.affectedRows;
+    return result;
   }
 }
 
