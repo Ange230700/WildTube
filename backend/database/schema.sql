@@ -7,7 +7,7 @@ CREATE TABLE
         `title` VARCHAR(50) not NULL,
         `duration` INT not NULL,
         `year` DATE not NULL,
-        `descripion` VARCHAR(500) not NULL,
+        `description` VARCHAR(500) not NULL,
         `is_available` BOOLEAN not NULL,
         `episodes_number` INT not NULL,
         `seasons_number` INT not NULL
