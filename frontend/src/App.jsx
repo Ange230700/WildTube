@@ -11,7 +11,7 @@ function App() {
         </div>
         <div className="dynamic-hero-slider-container">
           <img
-            src="https://via.placeholder.com/256x140"
+            src="https://3238leblogdemarvelll-1278.kxcdn.com/wp-content/uploads/2020/01/1917-banniere-850x478.jpg"
             alt="hero movie slide"
             className="hero-movie-slide"
           />
