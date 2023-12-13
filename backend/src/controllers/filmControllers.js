@@ -11,7 +11,7 @@ const browse = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    const film = await tables.item.read(req.params.id);
+    const film = await tables.film.read(req.params.id);
     if (film == null) {
       res.sendStatus(404);
     } else {

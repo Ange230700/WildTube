@@ -5,13 +5,13 @@ CREATE TABLE
         `id` int primary key auto_increment not null,
         `miniature` varchar(255) not null,
         `title` VARCHAR(50) not NULL,
-        `video_url` VARCHAR(255) not null
+        `videoUrl` VARCHAR(255) not null,
         `duration` INT not NULL,
         `year` DATE not NULL,
         `description` VARCHAR(500) not NULL,
-        `is_available` BOOLEAN not NULL,
-        `episodes_number` INT not NULL,
-        `seasons_number` INT not NULL
+        `IsAvailable` BOOLEAN not NULL,
+        `EpisodesNumber` INT not NULL,
+        `SeasonsNumber` INT not NULL
     );
 
 DROP TABLE IF EXISTS `User`;
@@ -34,7 +34,7 @@ CREATE TABLE
         `id` int primary key auto_increment not null,
         `miniature` VARCHAR(255) not null,
         `title` VARCHAR(255) not null,
-        `video_url` VARCHAR(255) not null
+        `VideoUrl` VARCHAR(255) not null,
         `duration` INT not null,
         `year` DATE NOT NULL,
         `description` VARCHAR(500) not null,

@@ -10,22 +10,24 @@ class SerieManager extends AbstractManager {
   async create({
     miniature,
     title,
+    VideoUrl,
     duration,
     year,
     description,
-    IsVailable,
+    IsAvailable,
     EpisodesNumber,
     SeasonsNumber,
   }) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (miniature, title, duration, year, description, IsVailable, EpisodesNumber, SeasonsNumber) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO ${this.table} (miniature, title, VideoUrl, duration, year, description, IsAvailable, EpisodesNumber, SeasonsNumber) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         miniature,
         title,
+        VideoUrl,
         duration,
         year,
         description,
-        IsVailable,
+        IsAvailable,
         EpisodesNumber,
         SeasonsNumber,
       ]
@@ -49,24 +51,26 @@ class SerieManager extends AbstractManager {
     id,
     miniature,
     title,
+    VideoUrl,
     duration,
     year,
     description,
-    IsVailable,
+    IsAvailable,
     EpisodesNumber,
     SeasonsNumber,
   }) {
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET  miniature = ?, title = ?, duration = ?, year = ?, description = ?, IsVailable = ?, EpisodesNumber = ?, SeasonsNumber = ?, WHERE id = ?`
+      `UPDATE ${this.table} SET  miniature = ?, title = ?, VideoUrl = ?, duration = ?, year = ?, description = ?, IsAvailable = ?, EpisodesNumber = ?, SeasonsNumber = ?, WHERE id = ?`
     );
     [
       id,
       miniature,
       title,
+      VideoUrl,
       duration,
       year,
       description,
-      IsVailable,
+      IsAvailable,
       EpisodesNumber,
       SeasonsNumber,
     ];
