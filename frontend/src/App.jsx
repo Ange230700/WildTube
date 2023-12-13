@@ -67,7 +67,7 @@ function App() {
               </div>
             </div>
             {movies.map((movie) => {
-              if (movie.is_available) {
+              if (!movie.is_available) {
                 return (
                   <img
                     key={movie.id}

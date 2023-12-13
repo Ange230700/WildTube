@@ -21,7 +21,7 @@ CREATE TABLE
         `id` int primary key auto_increment not null,
         `name` varchar(50) not null,
         `email` varchar(50) not null,
-        `naissance` DATETIME NOT NULL,
+        `naissance` DATE NOT NULL,
         `civility` BOOLEAN NOT NULL,
         `password` varchar(50) not null,
         `IsAdmin` bool not null
@@ -197,3 +197,24 @@ VALUES
     ('Sport', 18),
     ('War', 19),
     ('Western', 20);
+
+INSERT INTO 
+    `User` (`name`, `email`,`naissance`, `civility`, `password`, `IsAdmin`)
+    VALUES
+        (
+        'Aurel',
+        'aurelien.emeriau@wcs.com',
+        '1983/06/10',
+        '0',
+        'ggfd4554',
+        '0'
+        ),
+         (
+        'Alex',
+        'alex@wcs.com',
+        '1998/03/19',
+        '0',
+        'ggfd455',
+        '0'
+        );
+

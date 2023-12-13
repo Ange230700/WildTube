@@ -39,15 +39,15 @@ const read = async (req, res, next) => {
 
 // eslint-disable-next-line consistent-return
 const edit = async (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   req.body.id = id;
   try {
     const result = await tables.user.update(req.body);
-    if (result.affectedRows > 0) {
+    if (result) {
       res.json(result);
       res.status(204);
     } else {
-      return res.status(404).send("Not found");
+      return res.sendStatus(404);
     }
   } catch (err) {
     next(err);
@@ -61,7 +61,7 @@ const add = async (req, res, next) => {
 
   try {
     // Insert the item into the database
-    const insertId = await tables.item.create(user);
+    const insertId = await tables.user.create(user);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(201).json({ insertId });
@@ -74,7 +74,7 @@ const add = async (req, res, next) => {
 // The D of BREAD - Destroy (Delete) operation
 // This operation is not yet implemented
 const destroy = async (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   try {
     const result = await tables.user.delete(id);
     if (result.affectedRows) {
