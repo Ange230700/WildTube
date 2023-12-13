@@ -23,11 +23,11 @@ const read = async (req, res, next) => {
 };
 
 const edit = async (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   req.body.id = id;
   try {
     const result = await tables.film.update(req.body);
-    if (result.affectedRows) {
+    if (result) {
       res.json(result);
       res.sendStatus(204);
     } else {
