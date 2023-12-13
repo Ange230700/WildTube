@@ -240,3 +240,13 @@ INSERT INTO
         'ggfd455',
         '0'
         );
+<<<<<<< HEAD
+
+INSERT INTO 
+    `Favori_film` (`userId`, `filmId`)
+    VALUES
+    (1, 1),
+    (1, 2)
+
+=======
+>>>>>>> 6cd8201133e255c8babffa97c76bccf6c66fb495
