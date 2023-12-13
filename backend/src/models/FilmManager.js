@@ -26,10 +26,18 @@ class FilmManager extends AbstractManager {
     return result;
   }
 
-  async update(id, miniature, title, duration, year, description, IsAvailable) {
+  async update({
+    id,
+    miniature,
+    title,
+    duration,
+    year,
+    description,
+    IsAvailable,
+  }) {
     const [result] = await this.database.query(
       `update ${this.table} SET miniature=? title=? duration=? year=? description=? IsAvailable=? where id=?`,
-      [miniature, title, duration, year, description, IsAvailable]
+      [miniature, title, duration, year, description, IsAvailable, id]
     );
     return result;
   }
