@@ -76,6 +76,7 @@ DROP TABLE IF EXISTS `En_tendance_film`;
 
 CREATE TABLE
     `En_tendance_film` (
+        -- `id` int primary key auto_increment not null,
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
         CONSTRAINT FK_En_tendance_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User`(`id`),
@@ -217,4 +218,22 @@ INSERT INTO
         'ggfd455',
         '0'
         );
+
+INSERT INTO 
+    `En_tendance_film` (`userId`, `filmId`)
+    VALUES
+    (
+        '1',
+        '1'
+    );
+
+
+    --     CREATE TABLE
+    -- `En_tendance_film` (
+    --     `userId` INT NOT NULL,
+    --     `filmId` INT NOT NULL,
+    --     CONSTRAINT FK_En_tendance_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User`(`id`),
+    --     CONSTRAINT FK_En_tendance_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film`(`id`),
+    --     PRIMARY KEY (`userId`, `filmId`)
+    -- );
 
