@@ -16,13 +16,11 @@ const categorieParFilmControllers = require("./controllers/categorieParFilmContr
 router.get("/categories", categorieControllers.browse);
 router.get("/films", filmControllers.browse);
 router.get("/series", serieControllers.browse);
-router.get("/categorieParFilm", categorieParFilmControllers.browse);
 
 // Route to get a specific item by ID
 router.get("/categories/:id", categorieControllers.read);
 router.get("/films/:id", filmControllers.read);
 router.get("/series/:id", serieControllers.read);
-router.get("/categorieParFilm/:id", categorieParFilmControllers.read);
 
 // Route to edit a specific item by ID
 router.put("/categories/:id", categorieControllers.edit);
@@ -38,6 +36,24 @@ router.post("/series", serieControllers.add);
 router.delete("/categories/:id", categorieControllers.destroy);
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/series/:id", serieControllers.destroy);
+
+// Route to get all categories for a specific film
+router.get(
+  "/categoriesForFilm/",
+  categorieParFilmControllers.browseCategoriesForSpecificFilm
+);
+
+// Route to get all films for a specific categorie
+router.get(
+  "/filmsForCategorie/",
+  categorieParFilmControllers.browseFilmsForSpecificCategorie
+);
+
+// Route to add a new categorieParFilm
+router.post("/categoriesParFilm", categorieParFilmControllers.add);
+
+// Route to delete a specific categorieParFilm
+router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
 /* ************************************************************************* */
 
 module.exports = router;
