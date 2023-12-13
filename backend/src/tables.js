@@ -7,12 +7,14 @@ const CategorieManager = require("./models/CategorieManager");
 const UserManager = require("./models/UserManager");
 const FilmManager = require("./models/FilmManager");
 const SerieManager = require("./models/SerieManager");
+const FavoriFilmManager = require("./models/FavoriFilmManager");
 
 const managers = [
   CategorieManager,
   UserManager,
   FilmManager,
   SerieManager,
+  FavoriFilmManager,
   // Add other managers here
 ];
 

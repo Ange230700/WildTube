@@ -218,3 +218,9 @@ INSERT INTO
         '0'
         );
 
+INSERT INTO 
+    `Favori_film` (`userId`, `filmId`)
+    VALUES
+    (1, 1),
+    (1, 2)
+
