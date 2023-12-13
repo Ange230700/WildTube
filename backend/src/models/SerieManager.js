@@ -10,26 +10,26 @@ class SerieManager extends AbstractManager {
   async create({
     miniature,
     title,
-    VideoUrl,
+    videoUrl,
     duration,
     year,
     description,
-    IsAvailable,
-    EpisodesNumber,
-    SeasonsNumber,
+    isAvailable,
+    episodesNumber,
+    seasonsNumber,
   }) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (miniature, title, VideoUrl, duration, year, description, IsAvailable, EpisodesNumber, SeasonsNumber) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO ${this.table} (miniature, title, videoUrl, duration, year, description, isAvailable, episodesNumber, seasonsNumber) values (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         miniature,
         title,
-        VideoUrl,
+        videoUrl,
         duration,
         year,
         description,
-        IsAvailable,
-        EpisodesNumber,
-        SeasonsNumber,
+        isAvailable,
+        episodesNumber,
+        seasonsNumber,
       ]
     );
     return result;
@@ -51,28 +51,28 @@ class SerieManager extends AbstractManager {
     id,
     miniature,
     title,
-    VideoUrl,
+    videoUrl,
     duration,
     year,
     description,
-    IsAvailable,
-    EpisodesNumber,
-    SeasonsNumber,
+    isAvailable,
+    episodesNumber,
+    seasonsNumber,
   }) {
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET  miniature = ?, title = ?, VideoUrl = ?, duration = ?, year = ?, description = ?, IsAvailable = ?, EpisodesNumber = ?, SeasonsNumber = ?, WHERE id = ?`
+      `UPDATE ${this.table} SET  miniature = ?, title = ?, videoUrl = ?, duration = ?, year = ?, description = ?, isVailable = ?, episodesNumber = ?, seasonsNumber = ?, WHERE id = ?`
     );
     [
       id,
       miniature,
       title,
-      VideoUrl,
+      videoUrl,
       duration,
       year,
       description,
-      IsAvailable,
-      EpisodesNumber,
-      SeasonsNumber,
+      isAvailable,
+      episodesNumber,
+      seasonsNumber,
     ];
     return result;
   }

@@ -8,15 +8,15 @@ class FilmManager extends AbstractManager {
   async create({
     miniature,
     title,
-    VideoUrl,
+    videoUrl,
     duration,
     year,
     description,
-    IsAvailable,
+    isAvailable,
   }) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (miniature, title, VideoUrl, duration, year, description, IsAvailable) values (?,?,?,?,?,?,?)`,
-      [miniature, title, VideoUrl, duration, year, description, IsAvailable]
+      `insert into ${this.table} (miniature, title, videoUrl, duration, year, description, isAvailable) values (?,?,?,?,?,?)`,
+      [miniature, title, videoUrl, duration, year, description, isAvailable]
     );
     return result.insertId;
   }
@@ -38,15 +38,15 @@ class FilmManager extends AbstractManager {
     id,
     miniature,
     title,
-    VideoUrl,
+    videoUrl,
     duration,
     year,
     description,
-    IsAvailable,
+    isAvailable,
   }) {
     const [result] = await this.database.query(
-      `update ${this.table} SET miniature=? title=? VideoUrl=? duration=? year=? description=? IsAvailable=? where id=?`,
-      [miniature, title, VideoUrl, duration, year, description, IsAvailable, id]
+      `update ${this.table} SET miniature=?, title=?, videoUrl=?, duration=?, year=?, description=?, isAvailable=? where id=?`,
+      [miniature, title, videoUrl, duration, year, description, isAvailable, id]
     );
     return result.affectedRows;
   }
