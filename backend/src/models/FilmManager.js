@@ -2,15 +2,15 @@ const AbstractManager = require("./AbstractManager");
 
 class FilmManager extends AbstractManager {
   constructor() {
-    super({ table: "Film" });
+    super({ table: "film" });
   }
 
-  async create(miniature, title, duration, year, description, IsAvailable) {
+  async create({ miniature, title, duration, year, description, IsAvailable }) {
     const [result] = await this.database.query(
       `insert into ${this.table} (miniature, title, duration, year, description, is_available) values (?,?,?,?,?,?)`,
       [miniature, title, duration, year, description, IsAvailable]
     );
-    return result;
+    return result.insertId;
   }
 
   async read(id) {
@@ -18,10 +18,10 @@ class FilmManager extends AbstractManager {
       `select * from ${this.table} where id = ?`,
       [id]
     );
-    return result;
+    return result[0];
   }
 
-  async readall() {
+  async readAll() {
     const [result] = await this.database.query(`select * from ${this.table}`);
     return result;
   }
@@ -29,9 +29,9 @@ class FilmManager extends AbstractManager {
   async update(id, miniature, title, duration, year, description, IsAvailable) {
     const [result] = await this.database.query(
       `update ${this.table} SET miniature=? title=? duration=? year=? description=? IsAvailable=? where id=?`,
-      [miniature, title, duration, year, description, IsAvailable]
+      [miniature, title, duration, year, description, IsAvailable, id]
     );
-    return result;
+    return result.affectedRows;
   }
 
   async delete(id) {
