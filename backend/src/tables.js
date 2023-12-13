@@ -7,12 +7,14 @@ const CategorieManager = require("./models/CategorieManager");
 const UserManager = require("./models/UserManager");
 const FilmManager = require("./models/FilmManager");
 const SerieManager = require("./models/SerieManager");
+const CategorieParFilmManager = require("./models/CategorieParFilmManager");
 
 const managers = [
   CategorieManager,
   UserManager,
   FilmManager,
   SerieManager,
+  CategorieParFilmManager,
   // Add other managers here
 ];
 
