@@ -4,7 +4,7 @@ const AbstractManager = require("./AbstractManager");
 
 class SerieManager extends AbstractManager {
   constructor() {
-    super({ table: "Serie" });
+    super({ table: "serie" });
   }
 
   async create({
@@ -19,7 +19,7 @@ class SerieManager extends AbstractManager {
     seasonsNumber,
   }) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (miniature, title, videoUrl, duration, year, description, isAvailable, episodesNumber, seasonsNumber) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO ${this.table} (miniature, title, videoUrl, duration, year, description, isAvailable, episodesNumber, seasonsNumber) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         miniature,
         title,
@@ -27,9 +27,9 @@ class SerieManager extends AbstractManager {
         duration,
         year,
         description,
-        IsVailable,
-        EpisodesNumber,
-        SeasonsNumber,
+        isAvailable,
+        episodesNumber,
+        seasonsNumber,
       ]
     );
     return result;
@@ -42,6 +42,7 @@ class SerieManager extends AbstractManager {
     );
     return result;
   }
+
   async readAll() {
     const [result] = await this.database.query(`select * from ${this.table} `);
     return result;
@@ -60,26 +61,27 @@ class SerieManager extends AbstractManager {
     seasonsNumber,
   }) {
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET  miniature = ?, title = ?, videoUrl = ?, duration = ?, year = ?, description = ?, IsVailable = ?, EpisodesNumber = ?, SeasonsNumber = ?, WHERE id = ?`
+      `UPDATE ${this.table} SET miniature=?, title=?, videoUrl=?, duration=?, year=?, description=?, isAvailable=?, episodesNumber=?, seasonsNumber=? WHERE id=?`,
+      [
+        miniature,
+        title,
+        videoUrl,
+        duration,
+        year,
+        description,
+        isAvailable,
+        episodesNumber,
+        seasonsNumber,
+        id,
+      ]
     );
-    [
-      id,
-      miniature,
-      title,
-      videoUrl,
-      duration,
-      year,
-      description,
-      IsVailable,
-      EpisodesNumber,
-      SeasonsNumber,
-    ];
-    return result;
+    return result.affectedRows;
   }
   async delete(id) {
-    const [result] = await this.database.query(
-      `delete from ${this.table} where id = ?,`
-    )[id];
+    const result = await this.database.query(
+      `delete  from ${this.table} where id = ?`,
+      [id]
+    );
     return result;
   }
 }
