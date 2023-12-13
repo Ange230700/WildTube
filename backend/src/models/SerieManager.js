@@ -55,9 +55,9 @@ class SerieManager extends AbstractManager {
     duration,
     year,
     description,
-    IsVailable,
-    EpisodesNumber,
-    SeasonsNumber,
+    isAvailable,
+    episodesNumber,
+    seasonsNumber,
   }) {
     const [result] = await this.database.query(
       `UPDATE ${this.table} SET  miniature = ?, title = ?, videoUrl = ?, duration = ?, year = ?, description = ?, IsVailable = ?, EpisodesNumber = ?, SeasonsNumber = ?, WHERE id = ?`
