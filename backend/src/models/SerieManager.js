@@ -27,9 +27,9 @@ class SerieManager extends AbstractManager {
         duration,
         year,
         description,
-        IsVailable,
-        EpisodesNumber,
-        SeasonsNumber,
+        isAvailable,
+        episodesNumber,
+        seasonsNumber,
       ]
     );
     return result;
@@ -60,7 +60,7 @@ class SerieManager extends AbstractManager {
     seasonsNumber,
   }) {
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET  miniature = ?, title = ?, videoUrl = ?, duration = ?, year = ?, description = ?, IsVailable = ?, EpisodesNumber = ?, SeasonsNumber = ?, WHERE id = ?`
+      `UPDATE ${this.table} SET  miniature = ?, title = ?, videoUrl = ?, duration = ?, year = ?, description = ?, isVailable = ?, episodesNumber = ?, seasonsNumber = ?, WHERE id = ?`
     );
     [
       id,
@@ -70,9 +70,9 @@ class SerieManager extends AbstractManager {
       duration,
       year,
       description,
-      IsVailable,
-      EpisodesNumber,
-      SeasonsNumber,
+      isAvailable,
+      episodesNumber,
+      seasonsNumber,
     ];
     return result;
   }
