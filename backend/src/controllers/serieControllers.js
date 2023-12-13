@@ -2,8 +2,8 @@ const tables = require("../tables");
 
 const browse = async (req, res, next) => {
   try {
-    const films = await tables.film.readAll();
-    res.json(films);
+    const series = await tables.serie.readAll();
+    res.json(series);
   } catch (err) {
     next(err);
   }
@@ -11,11 +11,11 @@ const browse = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    const film = await tables.film.read(req.params.id);
-    if (film == null) {
+    const serie = await tables.serie.read(req.params.id);
+    if (serie == null) {
       res.sendStatus(404);
     } else {
-      res.json(film);
+      res.json(serie);
     }
   } catch (err) {
     next(err);
@@ -26,7 +26,7 @@ const edit = async (req, res, next) => {
   const { id } = req.params.id;
   req.body.id = id;
   try {
-    const result = await tables.film.update(req.body);
+    const result = await tables.serie.update(req.body);
     if (result.affectedRows) {
       res.json(result);
       res.sendStatus(204);
@@ -39,10 +39,10 @@ const edit = async (req, res, next) => {
 };
 
 const add = async (req, res, next) => {
-  const film = req.body;
+  const serie = req.body;
 
   try {
-    const insertId = await tables.film.create(film);
+    const insertId = await tables.serie.create(serie);
     res.status(201).json({ insertId });
   } catch (err) {
     next(err);
@@ -52,7 +52,7 @@ const add = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   const { id } = req.params.id;
   try {
-    const result = await tables.film.delete(id);
+    const result = await tables.serie.delete(id);
     if (result.affectedRows) {
       res.sendStatus(200);
     } else {
