@@ -52,7 +52,7 @@ const add = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const result = await tables.film.delete(id);
+    const [result] = await tables.film.delete(id);
     if (result.affectedRows) {
       res.sendStatus(200);
     } else {
