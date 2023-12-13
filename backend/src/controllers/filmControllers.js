@@ -11,7 +11,7 @@ const browse = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    const film = await tables.item.read(req.params.id);
+    const film = await tables.film.read(req.params.id);
     if (film == null) {
       res.sendStatus(404);
     } else {
@@ -23,11 +23,11 @@ const read = async (req, res, next) => {
 };
 
 const edit = async (req, res, next) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   req.body.id = id;
   try {
     const result = await tables.film.update(req.body);
-    if (result.affectedRows) {
+    if (result) {
       res.json(result);
       res.sendStatus(204);
     } else {

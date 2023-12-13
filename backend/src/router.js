@@ -18,10 +18,14 @@ router.get("/films", filmControllers.browse);
 router.get("/categories/:id", categorieControllers.read);
 router.get("/films/:id", filmControllers.read);
 
+// Route to edit a specific item by ID
+router.put("/films/:id", filmControllers.edit);
 // Route to add a new item
 router.post("/categories", categorieControllers.add);
 router.post("/films", filmControllers.add);
 
+// Route to detele a specific item by ID
+router.delete("/films/:id", filmControllers.destroy);
 /* ************************************************************************* */
 
 module.exports = router;
