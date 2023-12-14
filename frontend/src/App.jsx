@@ -1,38 +1,14 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import { MovieProvider } from "./contexts/MovieContext";
 
 function App() {
   return (
     <div className="app">
-      <Outlet />
-      <div className="navbar">
-        <div className="nav-icon-container">
-          <NavLink to="/" className="home-icon">
-            <img
-              className="icon"
-              src="/src/assets/icons/home_icon.svg"
-              alt="home icon"
-            />
-          </NavLink>
-        </div>
-        <div className="nav-icon-container">
-          <NavLink to="/search" className="search-icon">
-            <img
-              className="icon"
-              src="/src/assets/icons/search_icon.svg"
-              alt="search icon"
-            />
-          </NavLink>
-        </div>
-        {/* <div className="nav-icon-container">
-          <NavLink to="/profile" className="profile-icon">
-            <img
-              className="icon"
-              src="/src/assets/icons/profile_icon.svg"
-              alt="profile icon"
-            />
-          </NavLink>
-        </div> */}
-      </div>
+      <MovieProvider>
+        <Outlet />
+      </MovieProvider>
+      <NavBar />
     </div>
   );
 }
