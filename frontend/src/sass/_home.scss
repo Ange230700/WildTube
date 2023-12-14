@@ -129,7 +129,8 @@
         align-items: center;
         gap: calc(var(--spacing-constant) * 1);
         display: flex;
-        overflow-x: scroll;
+        // overflow-x: scroll;
+        flex-wrap: wrap;
       }
     }
   }

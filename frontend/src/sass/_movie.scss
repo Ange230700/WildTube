@@ -1,0 +1,149 @@
+.movie-page-details {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  overflow-y: scroll;
+
+  .movie-information-display {
+    align-self: stretch;
+    height: 100%;
+    flex-direction: column;
+    gap: calc(var(--spacing-constant) * 1);
+    display: flex;
+
+    .thumbnail-container {
+      align-self: stretch;
+      height: 206px;
+      flex-direction: column;
+      gap: calc(var(--spacing-constant) * 1);
+      display: flex;
+      justify-content: center;
+      position: relative;
+
+      .movie-cover {
+        align-self: stretch;
+        height: 100%;
+        flex-direction: column;
+        display: flex;
+        object-fit: cover;
+      }
+
+      .upper-layer {
+        height: 100%;
+        background: hsla(0, 0%, 0%, 0.1);
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        flex-direction: column;
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        .play-button-container {
+          width: 34px;
+          height: 34px;
+          position: relative;
+
+          .play-button {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    .details-option-wrapper {
+      align-self: stretch;
+      padding: 0 calc(var(--spacing-constant) * 1);
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+
+      .details-container {
+        padding: 0 calc(var(--spacing-constant) * 1);
+        gap: calc(var(--spacing-constant) * 1);
+        display: flex;
+        align-items: center;
+
+        .movie-info {
+          font-size: calc(var(--font-size-constant) * 1.2);
+        }
+      }
+    }
+
+    .description-container {
+      align-self: stretch;
+      padding: 0 calc(var(--spacing-constant) * 1);
+      flex-direction: column;
+      gap: calc(var(--spacing-constant) * 1);
+      display: flex;
+
+      .movie-title {
+        font-size: calc(var(--font-size-constant) * 1.4);
+        font-weight: var(--font-weight-semi-bold);
+        text-decoration: underline;
+      }
+
+      .movie-description {
+        font-size: calc(var(--font-size-constant) * 1.2);
+      }
+    }
+
+    .comments-section {
+      padding: 0 calc(var(--spacing-constant) * 1);
+      flex-direction: column;
+      gap: calc(var(--spacing-constant) * 1);
+      display: flex;
+
+      .comments-section-title {
+        align-self: stretch;
+        padding: 0 calc(var(--spacing-constant) * 1);
+        gap: calc(var(--spacing-constant) * 1);
+        display: flex;
+
+        .comments-section-title-text {
+          font-size: calc(var(--font-size-constant) * 1.4);
+          font-weight: var(--font-weight-semi-bold);
+          text-decoration: underline;
+        }
+      }
+
+      .comments-section-content {
+        align-self: stretch;
+        padding: 0 calc(var(--spacing-constant) * 1);
+        gap: calc(var(--spacing-constant) * 1);
+        display: flex;
+        flex: 1;
+
+        .registration-invitation-container {
+          flex: 1 1 0;
+          align-self: stretch;
+          padding: calc(var(--spacing-constant) * 0.5)
+            calc(var(--spacing-constant) * 1);
+          background: var(--text-field-background-color);
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          height: var(--comment-section-height, 200px);
+          border-radius: var(--border-radius-constant, 10px);
+
+          .registration-invitation {
+            font-size: calc(var(--font-size-constant) * 2);
+            font-weight: var(--font-weight-semi-bold);
+            text-align: center;
+            color: var(--text-field-color, hsla(210, 89%, 7%, 1));
+          }
+        }
+      }
+    }
+  }
+}
+
+.movie-page-details::-webkit-scrollbar {
+  display: none;
+}
