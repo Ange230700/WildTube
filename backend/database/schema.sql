@@ -62,7 +62,7 @@ VALUES
         181,
         '2019',
         'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.',
-        1
+        0
     ),
     (
         'https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg',
@@ -82,7 +82,7 @@ VALUES
         143,
         '2012',
         'Earth mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
-        1
+        0
     ),
     (
         'https://i.ebayimg.com/images/g/Sv8AAOSwb7Rc0l0P/s-l1600.jpg',
@@ -102,7 +102,7 @@ VALUES
         120,
         "2023",
         "The film is directed by James Wan from a screenplay written by David Leslie Johnson-McGoldrick and Will Beall and stars Jason Momoa as Aquaman, alongside Amber Heard, Patrick Wilson, Dolph Lundgren, Yahya Abdul-Mateen II, and Temuera Morrison. In the film, Aquaman must save the world from the threat of Ocean Master and Black Manta.",
-        1
+        0
     ),
     (
         "https://cdn.entries.clios.com/styles/clio_aotw_ems_image_details_retina/s3/entry_attachments/image/72/2297/22197/123544/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg",
@@ -136,7 +136,7 @@ VALUES
     ),
     (
         'https://static.posters.cz/image/1300/art-photo/harry-potter-and-the-half-blood-prince-i167377.jpg',
-        'https://picfiles.alphacoders.com/621/62184.jpg'
+        'https://picfiles.alphacoders.com/621/62184.jpg',
         'Harry Potter and the Half-Blood Prince',
         'https://www.youtube.com/watch?v=tAiy66Xrsz4&ab_channel=HarryPotter',
         153,
@@ -162,7 +162,7 @@ VALUES
         155,
         '2000',
         'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge', 
-        1
+        0
     ),
     (
         'https://fr.web.img6.acsta.net/medias/nmedia/18/82/69/17/19806656.jpg',
@@ -172,16 +172,6 @@ VALUES
         92,
         '2011',
         'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.', 
-        1
-    ),
-    (
-        'https://fr.web.img2.acsta.net/medias/nmedia/18/84/94/35/20078430.jpg',
-        'https://radiodisneyclub.fr/wp-content/uploads/2017/09/Braveentete-e1504969060697-700x359.jpg',
-        'Rebelle',
-        'https://www.youtube.com/watch?v=TEHWDA_6e3M&ab_channel=Pixar',
-        95,
-        '2012',
-        'Since the dawn of time, in the heart of the wild and mysterious lands of the Scottish Highlands, stories of epic battles and mythical legends have been passed down from generation to generation.', 
         1
     );
 
