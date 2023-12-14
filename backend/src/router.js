@@ -12,6 +12,7 @@ const filmControllers = require("./controllers/filmControllers");
 const userControllers = require("./controllers/userControllers");
 const serieControllers = require("./controllers/serieControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
+const favoriSerieControllers = require("./controllers/favoriSerieControllers");
 // const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 
 // Route to get a list of items
@@ -19,13 +20,15 @@ router.get("/categories", categorieControllers.browse);
 router.get("/films", filmControllers.browse);
 router.get("/series", serieControllers.browse);
 router.get("/users", userControllers.browse);
-router.get("/favorites", favoriFilmControllers.browse);
+router.get("/favorites/film", favoriFilmControllers.browse);
+router.get("/favorites/serie", favoriSerieControllers.browse);
 // Route to get a specific item by ID
 router.get("/categories/:id", categorieControllers.read);
 router.get("/films/:id", filmControllers.read);
 router.get("/series/:id", serieControllers.read);
 router.get("/users/:id", userControllers.read);
-router.get("/favorites/:id", favoriFilmControllers.read);
+router.get("/favorites/film/:id", favoriFilmControllers.read);
+router.get("/favorites/serie/:id", favoriSerieControllers.read);
 
 // Route to edit a specific item by ID
 router.put("/categories/:id", categorieControllers.edit);
@@ -38,13 +41,15 @@ router.post("/categories", categorieControllers.add);
 router.post("/films", filmControllers.add);
 router.post("/series", serieControllers.add);
 router.post("/users", userControllers.add);
-router.post("/favorites", favoriFilmControllers.add);
+router.post("/favorites/film", favoriFilmControllers.add);
+router.post("/favorites/serie", favoriSerieControllers.add);
 
 // Route to delete a specific item by ID
 router.delete("/categories/:id", categorieControllers.destroy);
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/series/:id", serieControllers.destroy);
 router.delete("/users/:id", userControllers.destroy);
-router.delete("/favorites/:id", favoriFilmControllers.destroy);
+router.delete("/favorites/film/:id", favoriFilmControllers.destroy);
+router.delete("/favorites/serie/:id", favoriSerieControllers.destroy);
 
 module.exports = router;
