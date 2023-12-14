@@ -1,7 +1,15 @@
-// import { useEffect, useState } from "react";
-// import axios from "axios"; // eslint-disable-line
+import { useState } from "react";
+import { useMovies } from "../contexts/MovieContext";
+import MovieSlide from "../components/MovieSlide";
 
 function Search() {
+  const [searchValue, setSearchValue] = useState("");
+  const { movies } = useMovies();
+
+  function handleSearchChange(event) {
+    setSearchValue(event.target.value);
+  }
+
   return (
     <div className="search">
       <div className="search-display-section">
@@ -10,6 +18,8 @@ function Search() {
             className="search-bar"
             type="search"
             placeholder="Rechercher un film"
+            value={searchValue}
+            onChange={handleSearchChange}
           />
         </div>
         <div className="sort-container">
@@ -22,7 +32,25 @@ function Search() {
             />
           </button>
         </div>
-        {/* <div className="search-result-container"></div> */}
+        <div className="search-result-container">
+          {searchValue.length > 0 ? (
+            <>
+              {movies
+                .filter((movie) =>
+                  movie.title.toLowerCase().includes(searchValue.toLowerCase())
+                )
+                .map((movie) => (
+                  <MovieSlide key={movie.id} movie={movie} />
+                ))}
+            </>
+          ) : (
+            <>
+              {movies.map((movie) => (
+                <MovieSlide key={movie.id} movie={movie} />
+              ))}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

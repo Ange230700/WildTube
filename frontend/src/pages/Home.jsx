@@ -1,4 +1,6 @@
+import { NavLink } from "react-router-dom";
 import { useMovies } from "../contexts/MovieContext";
+import MovieSlide from "../components/MovieSlide";
 
 function Home() {
   const { movies } = useMovies();
@@ -41,40 +43,11 @@ function Home() {
             <p className="category-page-link">Voir tout</p>
           </div> */}
           <div className="static-slider-container">
-            {movies.map((movie) => {
-              if (movie.IsAvailable) {
-                return (
-                  <img
-                    key={movie.id}
-                    src={movie.miniature}
-                    alt={movie.title}
-                    className="movie-slide"
-                  />
-                );
-              }
-
-              return (
-                <div
-                  key={movie.id}
-                  className="movie-slide-requiring-registration"
-                >
-                  <img
-                    src={movie.miniature}
-                    alt={movie.title}
-                    className="movie-slide"
-                  />
-                  <div className="locked-overlay">
-                    <div className="lock-icon-container">
-                      <img
-                        className="lock-icon"
-                        src="/src/assets/icons/lock_icon.svg"
-                        alt="lock icon"
-                      />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {movies.map((movie) => (
+              <NavLink key={movie.id} to={`/movies/${movie.id}`}>
+                <MovieSlide key={movie.id} movie={movie} />
+              </NavLink>
+            ))}
           </div>
         </section>
       </div>
