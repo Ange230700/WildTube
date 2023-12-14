@@ -6,6 +6,7 @@ import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
+import MoviePlayer from "./pages/MoviePlayer";
 import "./sass/index.scss";
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/movies/:movieId",
         element: <Movie />,
+      },
+      {
+        path: "/moviePlayer/:movieId",
+        element: <MoviePlayer />,
       },
     ],
   },
