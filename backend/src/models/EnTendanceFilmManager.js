@@ -17,14 +17,18 @@ class EnTendanceFilmManager extends AbstractManager {
     );
 
     // Return the ID of the newly inserted item
-    return result;
+    return result.insertId;
   }
   // The Rs of CRUD - Read operations
 
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `SELECT u.id, f.id, f.title
+       FROM En_tendance_film tf
+       INNER JOIN user u on tf.userId = u.id
+       INNER JOIN film f on tf.filmId = f.id
+       where tf.userId = ?`,
       [id]
     );
 
@@ -34,14 +38,8 @@ class EnTendanceFilmManager extends AbstractManager {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "user" table
-    const [rows] = await this.database.query(`select userId, filmId, Film.title
-    FROM En_Tendance_film 
-    INNER JOIN User 
-    INNER JOIN Film 
-    WHERE`);
-
-    // Return the array of items
-    return rows;
+    const [result] = await this.database.query(`select * from ${this.table}`);
+    return result;
   }
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
@@ -60,14 +58,14 @@ class EnTendanceFilmManager extends AbstractManager {
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an item by its ID
 
-  async delete(id) {
-    const [rows] = await this.database.query(
-      `DELETE from ${this.table} where id = ?`,
-      [id]
+  async delete(userId, filmId) {
+    const [result] = await this.database.query(
+      `DELETE from ${this.table} WHERE userId = ? and filmId = ?`,
+      [userId, filmId]
     );
 
     // Return the first row of the result, which represents the item
-    return rows;
+    return result;
   }
 }
 

@@ -36,7 +36,6 @@ router.put("/categories/:id", categorieControllers.edit);
 router.put("/films/:id", filmControllers.edit);
 router.put("/series/:id", serieControllers.edit);
 router.put("/users/:id", userControllers.edit);
-router.put("/FilmsEnTendance/:id", enTendanceFilmControllers.edit);
 
 // Route to add a new item
 router.post("/categories", categorieControllers.add);
@@ -51,7 +50,7 @@ router.delete("/categories/:id", categorieControllers.destroy);
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/series/:id", serieControllers.destroy);
 router.delete("/users/:id", userControllers.destroy);
-router.delete("/FilmsEnTendance", enTendanceFilmControllers.destroy);
+router.delete("/FilmsEnTendance/:id", enTendanceFilmControllers.destroy);
 /* ************************************************************************* */
 router.delete("/favorites/:id", favoriFilmControllers.destroy);
 
