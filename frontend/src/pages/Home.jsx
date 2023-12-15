@@ -45,7 +45,7 @@ function Home() {
           <div className="static-slider-container">
             {movies.map((movie) => (
               <NavLink key={movie.id} to={`/movies/${movie.id}`}>
-                <MovieSlide key={movie.id} movie={movie} />
+                <MovieSlide movie={movie} />
               </NavLink>
             ))}
           </div>

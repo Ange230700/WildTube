@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useMovies } from "../contexts/MovieContext";
 import MovieSlide from "../components/MovieSlide";
@@ -22,7 +23,7 @@ function Search() {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="sort-container">
+        {/* <div className="sort-container">
           <button type="button" className="sort-button">
             <p className="sort-text">Trier</p>
             <img
@@ -31,7 +32,7 @@ function Search() {
               alt="sort icon"
             />
           </button>
-        </div>
+        </div> */}
         <div className="search-result-container">
           {searchValue.length > 0 ? (
             <>
@@ -40,13 +41,17 @@ function Search() {
                   movie.title.toLowerCase().includes(searchValue.toLowerCase())
                 )
                 .map((movie) => (
-                  <MovieSlide key={movie.id} movie={movie} />
+                  <NavLink key={movie.id} to={`/movies/${movie.id}`}>
+                    <MovieSlide movie={movie} />
+                  </NavLink>
                 ))}
             </>
           ) : (
             <>
               {movies.map((movie) => (
-                <MovieSlide key={movie.id} movie={movie} />
+                <NavLink key={movie.id} to={`/movies/${movie.id}`}>
+                  <MovieSlide movie={movie} />
+                </NavLink>
               ))}
             </>
           )}
