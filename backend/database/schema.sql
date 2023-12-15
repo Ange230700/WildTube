@@ -111,6 +111,66 @@ VALUES
         "2022",
         "The film is directed by Matt Reeves, who wrote the screenplay with Peter Craig. It stars Robert Pattinson as Bruce Wayne / Batman, with Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, and Colin Farrell rounding out the ensemble cast.",
         1
+    ),
+    (
+        'https://m.media-amazon.com/images/M/MV5BMzZhYTVlMTMtMGZhMC00ZWYxLTljZDQtN2Y3YmFmZTk5OWU2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg',
+        'https://www.tvinsider.com/wp-content/uploads/2023/11/avatar-the-last-airbender-770x433.jpg',
+        'Avatar: The Last Airbender',
+        'https://www.youtube.com/watch?v=waJKJW_XU90&ab_channel=Netflix',
+        103,
+        '2010',
+        'Air, Water, Earth, Fire: the balance of the world is tipped by a savage war waged for a century already by the Fire Nation against the three other nations. Challenging his courage and combat skills, Aang discovers that he is the new Avatar, the only one capable of mastering all four elements. He joins forces with Katara, a Waterbender, and his older brother Sokka, to stop the Fire Nation before it is too late...',
+        0
+    ),
+    (
+        'https://fr.web.img4.acsta.net/pictures/21/11/17/17/24/3336846.jpg',
+        'https://hustonsite.files.wordpress.com/2023/06/93361-matrixresurrections_bannerposter.jpg',
+        'Matrix Resurrections',
+        'https://www.youtube.com/watch?v=9ix7TUGVYIo',
+        148,
+        '2020',
+        'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ', 
+        1
+    ),
+    (
+        'https://static.posters.cz/image/1300/art-photo/harry-potter-and-the-half-blood-prince-i167377.jpg',
+        'https://picfiles.alphacoders.com/621/62184.jpg',
+        'Harry Potter and the Half-Blood Prince',
+        'https://www.youtube.com/watch?v=tAiy66Xrsz4&ab_channel=HarryPotter',
+        153,
+        '2009',
+        'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.', 
+        0
+    ),
+    (
+        'https://fr.web.img2.acsta.net/pictures/17/09/12/10/29/1142495.jpg',
+        'https://pop.h-cdn.co/assets/17/39/1600x900/hd-aspect-1506522430-2049.jpg',
+        'Blade Runner 2049',
+        'https://www.youtube.com/watch?v=gCcx85zbxz4&ab_channel=WarnerBros.France',
+        164,
+        '2017',
+        'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.', 
+        1
+    ),
+    (
+        'https://fr.web.img4.acsta.net/r_1280_720/img/6b/c7/6bc7a13ca6446a603f160b4ab4414141.jpg',
+        'https://c8.alamy.com/comp/K36B8T/gladiator-gladiator-date-2000-K36B8T.jpg',
+        'Gladiator',
+        'https://www.youtube.com/watch?v=owK1qxDselE&ab_channel=UniversalPicturesFrance',
+        155,
+        '2000',
+        'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge', 
+        0
+    ),
+    (
+        'https://fr.web.img6.acsta.net/medias/nmedia/18/82/69/17/19806656.jpg',
+        'https://assets.mubicdn.net/images/artworks/582651/images-original.png?1686650120',
+        'Intouchables',
+        'https://www.youtube.com/watch?v=34WIbmXkewU&ab_channel=Gaumont',
+        92,
+        '2011',
+        'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.', 
+        1
     );
 
 INSERT INTO 
