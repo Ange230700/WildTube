@@ -21,6 +21,14 @@ const categorieParFilmControllers = require("./controllers/categorieParFilmContr
 router.get("/categories", categorieControllers.browse);
 router.get("/categoriesParSerie", categorieParSerieControllers.browse);
 router.get("/categoriesParFilm", categorieParFilmControllers.browse);
+router.get(
+  "/categoriesParSerie",
+  categorieParSerieControllers.browseSeriesForSpecificCategorie
+);
+router.get(
+  "/categoriesParFilm",
+  categorieParFilmControllers.browseFilmsForSpecificCategorie
+);
 router.get("/films", filmControllers.browse);
 router.get("/series", serieControllers.browse);
 router.get("/users", userControllers.browse);
@@ -40,8 +48,8 @@ router.get("/favorites/:id", favoriFilmControllers.read);
 
 // Route to edit a specific item by ID
 router.put("/categories/:id", categorieControllers.edit);
-router.put("/categoriesParSerie/:id", categorieParSerieControllers.edit);
-router.put("/categoriesParFilm/:id", categorieParFilmControllers.edit);
+// router.put("/categoriesParSerie/:id", categorieParSerieControllers.edit);
+// router.put("/categoriesParFilm/:id", categorieParFilmControllers.edit);
 router.put("/films/:id", filmControllers.edit);
 router.put("/series/:id", serieControllers.edit);
 router.put("/users/:id", userControllers.edit);
@@ -49,7 +57,7 @@ router.put("/users/:id", userControllers.edit);
 // Route to add a new item
 router.post("/categories", categorieControllers.add);
 router.post("/categoriesParSerie", categorieParSerieControllers.add);
-router.post("/categoriesParSerie", categorieParFilmControllers.add);
+router.post("/categoriesParFilm", categorieParFilmControllers.add);
 router.post("/films", filmControllers.add);
 router.post("/series", serieControllers.add);
 router.post("/users", userControllers.add);

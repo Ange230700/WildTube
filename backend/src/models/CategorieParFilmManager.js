@@ -4,7 +4,7 @@ class CategorieParFilmManager extends AbstractManager {
   constructor() {
     // Call the constructor of the parent class (AbstractManager)
     // and pass the table name "categorieParFilm" as configuration
-    super({ table: "categorieParFilm" });
+    super({ table: "Categorie_par_film" });
   }
 
   // The C of CRUD - Create operation
@@ -16,7 +16,16 @@ class CategorieParFilmManager extends AbstractManager {
     );
 
     // Return the ID of the newly inserted categorieParFilm
-    return result.insertId;
+    return result;
+  }
+
+  async readAll() {
+    // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
+    const [rows] = await this.database.query(
+      `SELECT f.title, c.name FROM ${this.table} fc INNER JOIN categorie c ON c.id = fc.categorieId INNER JOIN film f ON f.id = fc.filmId `
+    );
+    // Return the array of categories
+    return rows;
   }
 
   // The Rs of CRUD - Read operations
@@ -35,7 +44,7 @@ class CategorieParFilmManager extends AbstractManager {
   async readAllFilmsForSpecificCategorie(idCategorie) {
     // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
     const [rows] = await this.database.query(
-      `select film.title from film inner join ${this.table} on film.id = ${this.table}.filmId where ${this.table}.categorieId = ?`,
+      `select f.title, c.name from ${this.table} fc inner join categorie c on c.id = fc.categorieId INNER JOIN film f ON f.id = fc.filmId where c.id = ?`,
       [idCategorie]
     );
     // Return the array of categories
@@ -52,7 +61,7 @@ class CategorieParFilmManager extends AbstractManager {
     );
 
     // Return the number of affected rows
-    return result.affectedRows;
+    return result;
   }
 }
 
