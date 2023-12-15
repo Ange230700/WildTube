@@ -1,2 +1,30 @@
-.movie-player-wrapper {
+.movie-player {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1;
+  background-color: var(--background-color-2, hsla(0, 0%, 0%, 1));
+  padding-top: calc(var(--spacing-constant) * 1);
+
+  .back-to-previous-page {
+    display: flex;
+    width: 100%;
+    padding-left: calc(var(--spacing-constant) * 1);
+  }
+
+  .movie-player-wrapper {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1;
+
+    iframe {
+      flex: 1;
+    }
+  }
 }
