@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 function MovieSlide({ movie }) {
   if (movie.IsAvailable) {
     return (
-      //   <NavLink to={`/movie/${movie.id}`}></NavLink>
       <img src={movie.miniature} alt={movie.title} className="movie-slide" />
     );
   }

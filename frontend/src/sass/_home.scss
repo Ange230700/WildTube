@@ -129,8 +129,9 @@
         align-items: center;
         gap: calc(var(--spacing-constant) * 1);
         display: flex;
-        flex-wrap: wrap;
         // overflow-x: scroll;
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   }

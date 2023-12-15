@@ -61,7 +61,6 @@ class SerieManager extends AbstractManager {
     seasonsNumber,
   }) {
     const [result] = await this.database.query(
-
       `UPDATE ${this.table} SET miniature=?, title=?, videoUrl=?, duration=?, year=?, description=?, isAvailable=?, episodesNumber=?, seasonsNumber=? WHERE id=?`,
       [
         miniature,
@@ -77,7 +76,6 @@ class SerieManager extends AbstractManager {
       ]
     );
     return result.affectedRows;
-
   }
   async delete(id) {
     const result = await this.database.query(
