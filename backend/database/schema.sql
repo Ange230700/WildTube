@@ -8,7 +8,7 @@ CREATE TABLE
         `videoUrl` VARCHAR(255),
         `duration` INT not NULL,
         `year` VARCHAR(4) not NULL,
-        `description` TEXT not NULL,
+        `description` VARCHAR(700) not NULL,
         `isAvailable` BOOLEAN not NULL,
         `episodesNumber` INT not NULL,
         `seasonsNumber` INT not NULL
@@ -363,5 +363,11 @@ VALUES
 INSERT INTO
     `Favori_film` (`userId`, `filmId`)
 VALUES
+    (1, 1),
+    (1, 2);
+
+INSERT INTO 
+    `En_tendance_serie` (`userId`, `serieId`)
+    VALUES
     (1, 1),
     (1, 2);
