@@ -20,12 +20,12 @@ const managers = [
   FilmManager,
   SerieManager,
   EnTendanceFilmManager,
-  EnTendanceSerieManager,
   FavoriFilmManager,
   FavoriSerieManager,
   CategorieParFilmManager,
-  S1_tableJointure
   CategorieParSerieManager,
+  EnTendanceSerieManager,
+  // S1_tableJointure,
   // Add other managers here
 ];
 
