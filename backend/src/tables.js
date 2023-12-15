@@ -24,8 +24,8 @@ const managers = [
   FavoriFilmManager,
   FavoriSerieManager,
   CategorieParFilmManager,
-  S1_tableJointure
   CategorieParSerieManager,
+  // S1_tableJointure,
   // Add other managers here
 ];
 
