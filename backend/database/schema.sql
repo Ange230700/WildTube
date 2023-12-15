@@ -8,7 +8,7 @@ CREATE TABLE
         `videoUrl` VARCHAR(255),
         `duration` INT not NULL,
         `year` VARCHAR(4) not NULL,
-        `description` VARCHAR(500) not NULL,
+        `description` TEXT not NULL,
         `isAvailable` BOOLEAN not NULL,
         `episodesNumber` INT not NULL,
         `seasonsNumber` INT not NULL
@@ -67,6 +67,37 @@ VALUES (
         "2022",
         "The film is directed by Matt Reeves, who wrote the screenplay with Peter Craig. It stars Robert Pattinson as Bruce Wayne / Batman, with Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, and Colin Farrell rounding out the ensemble cast.",
         1
+    );
+
+INSERT INTO
+    `Serie` (
+        `miniature`,
+        `title`,
+        `duration`,
+        `year`,
+        `description`,
+        `IsAvailable`,
+        `episodesNumber`,
+        `seasonsNumber`
+    )
+VALUES (
+        "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
+        'One Piece',
+        55,
+        '2023',
+        'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
+        1,
+        9,
+        1
+    ), (
+        "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
+        "Naruto",
+        22,
+        "2002",
+        "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
+        1,
+        224,
+        9
     );
 
 DROP TABLE IF EXISTS `Categorie`;
@@ -196,152 +227,133 @@ VALUES (
         '2012',
         'Earth mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img6.acsta.net/c_310_420/medias/nmedia/18/62/89/45/18876909.jpg',
         'Iron man',
         126,
         '2008',
         'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/medias/nmedia/18/70/76/18/19444000.jpg',
         'the last airbender',
         103,
         '2010',
         'Air, Water, Earth, Fire: the balance of the world is tipped by a savage war waged for a century already by the Fire Nation against the three other nations. Challenging his courage and combat skills, Aang discovers that he is the new Avatar, the only one capable of mastering all four elements. He joins forces with Katara, a Waterbender, and his older brother Sokka, to stop the Fire Nation before it is too late...',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/pictures/21/11/17/17/24/3336846.jpg',
         'Matrix Resurrections',
         148,
         '2020',
-        'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ', 
+        'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img3.acsta.net/medias/nmedia/18/65/64/35/19116953.jpg',
         'Harry Potter',
         153,
         '2009',
-        'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.', 
+        'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/pictures/17/09/12/10/29/1142495.jpg',
         'Blade Runner 2049',
         164,
         '2017',
-        'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.', 
+        'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/r_1280_720/img/6b/c7/6bc7a13ca6446a603f160b4ab4414141.jpg',
         'Gladiator',
         155,
         '2000',
-        'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge', 
+        'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img6.acsta.net/medias/nmedia/18/82/69/17/19806656.jpg',
         'Intouchables',
         92,
         '2011',
-        'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.', 
+        'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/medias/nmedia/18/84/94/35/20078430.jpg',
         'Rebelle',
         95,
         '2012',
-        'Since the dawn of time, in the heart of the wild and mysterious lands of the Scottish Highlands, stories of epic battles and mythical legends have been passed down from generation to generation.', 
+        'Since the dawn of time, in the heart of the wild and mysterious lands of the Scottish Highlands, stories of epic battles and mythical legends have been passed down from generation to generation.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/medias/nmedia/18/35/57/73/18660716.jpg',
         'Le parrain',
         175,
         '1972',
-        'In 1945, in New York, the Corleones are one of the five mafia families. Don Vito Corleone, "godfather" of this family, marries his daughter to a bookmaker. Sollozzo, "godfather" of the Tattaglia family, offers Don Vito an association in drug trafficking, but he refuses. Sonny, one of his sons, is in favor of it.', 
+        'In 1945, in New York, the Corleones are one of the five mafia families. Don Vito Corleone, "godfather" of this family, marries his daughter to a bookmaker. Sollozzo, "godfather" of the Tattaglia family, offers Don Vito an association in drug trafficking, but he refuses. Sonny, one of his sons, is in favor of it.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img5.acsta.net/medias/nmedia/18/63/95/41/18927494.jpg',
         'Indina Jones et le cadran de la destinée',
         154,
         '2023',
-        '1969. After spending more than ten years teaching at Hunter College in New York, the esteemed Dr. Jones, professor of archeology, is about to retire and live out peaceful days.', 
+        '1969. After spending more than ten years teaching at Hunter College in New York, the esteemed Dr. Jones, professor of archeology, is about to retire and live out peaceful days.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/pictures/16/02/03/11/17/130929.jpg',
         'Batman VS Superman',
         153,
         '2016',
-        'Fearing that Superman will abuse his omnipotence, the Dark Knight decides to confront him: does the world need more a superhero with limitless powers or a vigilante with formidable strength? of human origin? Meanwhile, a terrible threat looms on the horizon...', 
+        'Fearing that Superman will abuse his omnipotence, the Dark Knight decides to confront him: does the world need more a superhero with limitless powers or a vigilante with formidable strength? of human origin? Meanwhile, a terrible threat looms on the horizon...',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img5.acsta.net/pictures/22/04/08/10/30/1779137.jpg',
         'Dr Strange',
         126,
         '2022',
-        'In this new Marvel Studios film, the Marvel Cinematic Universe unlocks and pushes the boundaries of the multiverse even further. Journey into the unknown with Doctor Strange, who with the help of old and new mystical allies, traverses the mind-blowing and dangerous realities of the multiverse to face a mysterious new adversary.', 
+        'In this new Marvel Studios film, the Marvel Cinematic Universe unlocks and pushes the boundaries of the multiverse even further. Journey into the unknown with Doctor Strange, who with the help of old and new mystical allies, traverses the mind-blowing and dangerous realities of the multiverse to face a mysterious new adversary.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img3.acsta.net/pictures/22/10/04/09/10/4429153.jpg',
         'Black Panter',
         162,
         '2022',
-        'Queen Ramonda, Shuri, MBaku, Okoye and the Dora Milaje fight to protect their nation from interference from other world powers after the death of King TChalla. As the people strive to move forward, our heroes will have to unite and count on the help of mercenary Nakia and Everett Ross to bring the kingdom of Wakanda into a new era. But a terrible threat arises from a kingdom hidden deep in the oceans: Talokan.', 
+        'Queen Ramonda, Shuri, MBaku, Okoye and the Dora Milaje fight to protect their nation from interference from other world powers after the death of King TChalla. As the people strive to move forward, our heroes will have to unite and count on the help of mercenary Nakia and Everett Ross to bring the kingdom of Wakanda into a new era. But a terrible threat arises from a kingdom hidden deep in the oceans: Talokan.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/pictures/21/11/16/10/01/4860598.jpg',
         'SpiderMan No Way Hole',
         148,
         '2021',
-        'For the first time in his cinematic history, Spider-Man, the friendly neighborhood hero, is unmasked and can no longer separate his normal life from his heavy superhero responsibilities. When he asks Doctor Strange for help, the stakes become even more dangerous, forcing him to discover what being Spider-Man truly means', 
+        'For the first time in his cinematic history, Spider-Man, the friendly neighborhood hero, is unmasked and can no longer separate his normal life from his heavy superhero responsibilities. When he asks Doctor Strange for help, the stakes become even more dangerous, forcing him to discover what being Spider-Man truly means',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img6.acsta.net/pictures/22/05/24/11/16/2411535.jpg',
         'Thot Love and Thunder',
         119,
         '2022',
-        'While Thor is deep in introspection and seeking serenity, his retreat is interrupted by a galactic killer known as Gorr, who has made it his mission to exterminate all the gods.', 
+        'While Thor is deep in introspection and seeking serenity, his retreat is interrupted by a galactic killer known as Gorr, who has made it his mission to exterminate all the gods.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/pictures/21/07/30/15/39/5399627.jpg',
         'Shang-Shi',
         132,
         '2021',
-        'Shang-Chi will have to confront a past he thought he had left behind when he is caught in the web of the mysterious Ten Rings organization.', 
+        'Shang-Chi will have to confront a past he thought he had left behind when he is caught in the web of the mysterious Ten Rings organization.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img6.acsta.net/pictures/23/07/17/15/06/1535719.jpg',
         'Napoleon',
         158,
         '2023',
-        'Spectacular fresco, Napoleon focuses on the rise and fall of Emperor Napoleon Bonaparte. The film traces Bonaparte s relentless conquest of power through the prism of his passionate and tormented relationship with Joséphine, the great love of his life.', 
+        'Spectacular fresco, Napoleon focuses on the rise and fall of Emperor Napoleon Bonaparte. The film traces Bonaparte s relentless conquest of power through the prism of his passionate and tormented relationship with Joséphine, the great love of his life.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/pictures/19/10/25/11/18/5224976.jpg',
         'Titanic',
         194,
         '1998',
-        'Southampton, April 10, 1912. The largest and most modern liner in the world, renowned for its unsinkability, the "Titanic", sets sail for its first voyage. Four days later, it hits an iceberg. On board, a poor artist and a wealthy bourgeois woman fall in love.', 
+        'Southampton, April 10, 1912. The largest and most modern liner in the world, renowned for its unsinkability, the "Titanic", sets sail for its first voyage. Four days later, it hits an iceberg. On board, a poor artist and a wealthy bourgeois woman fall in love.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/pictures/20/08/03/12/15/2118693.jpg',
         'Tenet',
         210,
@@ -377,18 +389,12 @@ VALUES (
         '0',
         'ggfd455',
         '0'
-        );
+    );
 
-INSERT INTO 
+INSERT INTO
     `En_tendance_film` (`userId`, `filmId`)
-    VALUES
-    (1, 1),
-    (1, 2);
+VALUES (1, 1), (1, 2);
 
-    
-INSERT INTO 
+INSERT INTO
     `Favori_film` (`userId`, `filmId`)
-    VALUES
-    (1, 1),
-    (1, 2);
-    
+VALUES (1, 1), (1, 2);
