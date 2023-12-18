@@ -246,3 +246,6 @@ INSERT INTO
     VALUES
     (1, 1),
     (1, 2)
+
+INSERT INTO 
+    `Commentaire_film` ()
