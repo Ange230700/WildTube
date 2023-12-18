@@ -31,7 +31,7 @@ class FavoriFilmManager extends AbstractManager {
   }
 
   async delete(userId, filmId) {
-    const result = await this.database.query(
+    const [result] = await this.database.query(
       `delete from ${this.table} where userId = ? and filmId = ?`,
       [userId, filmId]
     );

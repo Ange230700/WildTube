@@ -3,19 +3,19 @@ const tables = require("../tables");
 
 const browse = async (req, res, next) => {
   try {
-    const categorieParFilm = await tables.Categorie_par_film.readAll();
-    res.json(categorieParFilm);
+    const categorieParSerie = await tables.Categorie_par_serie.readAll();
+    res.json(categorieParSerie);
   } catch (err) {
     next(err);
   }
 };
 
 // The B of BREAD - Browse (Read All) operation
-const browseCategoriesForSpecificFilm = async (request, response, next) => {
+const browseCategoriesForSpecificSerie = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const categories =
-      await tables.Categorie_par_film.readAllCategoriesForSpecificFilm(
+      await tables.Categorie_par_serie.readAllCategoriesForSpecificSerie(
         request.params.id
       );
 
@@ -27,16 +27,16 @@ const browseCategoriesForSpecificFilm = async (request, response, next) => {
   }
 };
 
-const browseFilmsForSpecificCategorie = async (request, response, next) => {
+const browseSeriesForSpecificCategorie = async (request, response, next) => {
   try {
     // Fetch all items from the database
-    const films =
-      await tables.Categorie_par_film.readAllFilmsForSpecificCategorie(
+    const series =
+      await tables.Categorie_par_serie.readAllSeriesForSpecificCategorie(
         request.params.id
       );
 
     // Respond with the items in JSON format
-    response.json(films);
+    response.json(series);
   } catch (error) {
     // Pass any errors to the error-handling middleware
     next(error);
@@ -45,31 +45,30 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
 
 // The A of BREAD - Add operation
 const add = async (request, response, next) => {
-  const { filmId, categorieId } = request.body;
+  const { serieId, categorieId } = request.body;
 
   try {
     // Insert the new item into the database
-    const result = await tables.Categorie_par_film.create({
-      filmId,
+    const result = await tables.Categorie_par_serie.create({
+      serieId,
       categorieId,
     });
 
     if (result.affectedRows) {
-      const categorieParFilm =
-        await tables.Categorie_par_film.readAllFilmsForSpecificCategorie(
+      const categorieParSerie =
+        await tables.Categorie_par_serie.readAllSeriesForSpecificCategorie(
           categorieId
         );
-
-      // Fetch the newly created item from the database
-      // const categorieParFilm = await tables.categorieParFilm.read(id);
-
-      // Respond with the newly created item in JSON format
-      response.status(200).json(categorieParFilm);
+      response.status(200).json(categorieParSerie);
     } else {
       response
         .status(200)
         .json({ message: "no problem but element not created" });
     }
+
+    // Fetch the newly created item from the database
+
+    // Respond with the newly created item in JSON format
   } catch (error) {
     // Pass any errors to the error-handling middleware
     next(error);
@@ -78,12 +77,12 @@ const add = async (request, response, next) => {
 
 // The D of BREAD - Delete operation
 const destroy = async (req, response, next) => {
-  const { id: filmId } = req.params;
+  const { id: serieId } = req.params;
   const { categorieId } = req.body;
   try {
     // Delete the item from the database
-    const result = await tables.Categorie_par_film.delete({
-      filmId,
+    const result = await tables.Categorie_par_serie.delete({
+      serieId,
       categorieId,
     });
 
@@ -103,8 +102,8 @@ const destroy = async (req, response, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
-  browseCategoriesForSpecificFilm,
-  browseFilmsForSpecificCategorie,
+  browseCategoriesForSpecificSerie,
+  browseSeriesForSpecificCategorie,
   add,
   destroy,
 };

@@ -3,6 +3,7 @@
   --background-color: hsla(210, 89%, 7%, 1);
   --primary-font-color: hsla(53, 82%, 66%, 1);
   --secondary-font-color: hsla(335, 100%, 66%, 1);
+  --text-field-background-color: hsla(0, 0%, 86%, 1);
 
   // ^ fonts
   --main-font: "Roboto Flex", sans-serif;
@@ -17,6 +18,10 @@
 
   // ^ spacing
   --spacing-constant: 8px;
+
+  // ^ other sizes
+
+  --movie-slide-width: 90px;
 }
 
 * {

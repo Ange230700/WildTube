@@ -129,49 +129,9 @@
         align-items: center;
         gap: calc(var(--spacing-constant) * 1);
         display: flex;
-        overflow-x: scroll;
-
-        .movie-slide {
-          width: var(--movie-slide-width, 70px);
-          height: var(--movie-slide-height, 90px);
-          border-radius: var(--border-radius-constant, 10px);
-        }
-
-        .movie-slide-requiring-registration {
-          justify-content: center;
-          align-items: center;
-          gap: calc(var(--spacing-constant) * 1);
-          display: flex;
-          width: var(--movie-slide-width, 70px);
-          height: var(--movie-slide-height, 90px);
-          position: relative;
-
-          .movie-slide {
-            border-radius: var(--border-radius-constant, 10px);
-            filter: blur(2px);
-          }
-
-          .locked-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 0 calc(var(--spacing-constant) * 1);
-            justify-content: center;
-            align-items: center;
-            gap: calc(var(--spacing-constant) * 1);
-            display: flex;
-
-            .lock-icon-container {
-              .lock-icon {
-                width: 30px;
-                height: 30px;
-                position: relative;
-              }
-            }
-          }
-        }
+        // overflow-x: scroll;
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
   }

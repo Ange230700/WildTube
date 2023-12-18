@@ -1,18 +1,18 @@
 const AbstractManager = require("./AbstractManager");
 
-class CategorieParFilmManager extends AbstractManager {
+class CategorieParSerieManager extends AbstractManager {
   constructor() {
     // Call the constructor of the parent class (AbstractManager)
     // and pass the table name "categorieParFilm" as configuration
-    super({ table: "Categorie_par_film" });
+    super({ table: "Categorie_par_serie" });
   }
 
   // The C of CRUD - Create operation
-  async create({ filmId, categorieId }) {
+  async create({ serieId, categorieId }) {
     // Execute the SQL INSERT query to add a new categorieParFilm to the "categorieParFilm" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (filmId, categorieId) values (?, ?)`,
-      [filmId, categorieId]
+      `insert into ${this.table} (serieId, categorieId) values (?, ?)`,
+      [serieId, categorieId]
     );
 
     // Return the ID of the newly inserted categorieParFilm
@@ -22,7 +22,7 @@ class CategorieParFilmManager extends AbstractManager {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
     const [rows] = await this.database.query(
-      `SELECT f.title, c.name FROM ${this.table} fc INNER JOIN categorie c ON c.id = fc.categorieId INNER JOIN film f ON f.id = fc.filmId `
+      `SELECT s.title, c.name FROM ${this.table} sc INNER JOIN categorie c ON c.id = sc.categorieId INNER JOIN serie s ON s.id = sc.serieId `
     );
     // Return the array of categories
     return rows;
@@ -30,21 +30,21 @@ class CategorieParFilmManager extends AbstractManager {
 
   // The Rs of CRUD - Read operations
   // ? get all categories for a specific film
-  async readAllCategoriesForSpecificFilm(idFilm) {
+  async readAllCategoriesForSpecificSerie(idSerie) {
     // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
     const [rows] = await this.database.query(
-      `select categorie.name from categorie inner join ${this.table} on categorie.id = ${this.table}.categorieId where ${this.table}.filmId = ?`,
-      [idFilm]
+      `select categorie.name from categorie inner join ${this.table} on categorie.id = ${this.table}.categorieId where ${this.table}.serieId = ?`,
+      [idSerie]
     );
     // Return the array of categories
     return rows;
   }
 
   // ? get all films for a specific categorie
-  async readAllFilmsForSpecificCategorie(idCategorie) {
+  async readAllSeriesForSpecificCategorie(idCategorie) {
     // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
     const [rows] = await this.database.query(
-      `select f.title, c.name from ${this.table} fc inner join categorie c on c.id = fc.categorieId INNER JOIN film f ON f.id = fc.filmId where c.id = ?`,
+      `SELECT s.title, c.name FROM ${this.table} sc INNER JOIN categorie c ON c.id = sc.categorieId INNER JOIN serie s ON s.id = sc.serieId WHERE c.id = ?`,
       [idCategorie]
     );
     // Return the array of categories
@@ -53,11 +53,11 @@ class CategorieParFilmManager extends AbstractManager {
 
   // The D of CRUD - Delete operation
 
-  async delete({ filmId, categorieId }) {
+  async delete({ serieId, categorieId }) {
     // Execute the SQL DELETE query to remove an categorieParFilm by its ID
     const [result] = await this.database.query(
-      `delete from ${this.table} where filmId = ? and categorieId = ?`,
-      [filmId, categorieId]
+      `delete from ${this.table} where serieId = ? and categorieId = ?`,
+      [serieId, categorieId]
     );
 
     // Return the number of affected rows
@@ -66,4 +66,4 @@ class CategorieParFilmManager extends AbstractManager {
 }
 
 // Ready to export the manager
-module.exports = CategorieParFilmManager;
+module.exports = CategorieParSerieManager;
