@@ -1,15 +1,14 @@
 .hero-movie-slide {
   width: clamp(
-    var(--hero-movie-slide-min-width, 255px),
-    var(--hero-movie-slide-preferred-width, 80%),
-    var(--hero-movie-slide-max-width, 1200px)
+    calc(var(--hero-movie-slide-min-width, 255px) * 1),
+    calc(var(--hero-movie-slide-preferred-width, 80vw) * 1),
+    calc(var(--hero-movie-slide-max-width, 1200px) * 1)
   );
   height: clamp(
-    var(--hero-movie-slide-min-height, 140px),
-    var(--hero-movie-slide-preferred-height, 25vh),
-    var(--hero-movie-slide-max-height, 655px)
+    calc(var(--hero-movie-slide-min-width, 255px) * 0.5),
+    calc(var(--hero-movie-slide-preferred-width, 80vw) * 0.5),
+    calc(var(--hero-movie-slide-max-width, 1200px) * 0.5)
   );
+  border-radius: var(--border-radius-constant, 20px);
   object-fit: cover;
-  position: relative;
-  border-radius: var(--border-radius-constant, 10px);
 }

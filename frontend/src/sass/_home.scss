@@ -21,19 +21,14 @@
       align-items: center;
 
       .logo {
-        width: clamp(
-          var(--logo-min-width, 75px),
-          var(--logo-preferred-width, 25%),
-          var(--logo-max-width, 185px)
-        );
-        height: clamp(
-          var(--logo-min-height, 45px),
-          var(--logo-preferred-height, 8vh),
-          var(--logo-max-height, 110px)
-        );
-        object-fit: cover;
-        object-position: center;
-        position: relative;
+        width: 100%;
+        max-width: 100px;
+      }
+    }
+
+    @media screen and (width > 768px) {
+      .logo-container {
+        display: none;
       }
     }
 

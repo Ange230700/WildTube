@@ -1,9 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import HeroMovieSlide from "./HeroMovieSlide";
+import HeroMovieSlideLink from "./HeroMovieSlideLink";
 
 const responsive = {
   desktop: {
@@ -34,11 +33,7 @@ function DynamicHeroSlider({ movies }) {
     >
       {movies.map((movie) => {
         if (movie.IsAvailable) {
-          return (
-            <NavLink key={movie.id} to={`/movies/${movie.id}`}>
-              <HeroMovieSlide movie={movie} />
-            </NavLink>
-          );
+          return <HeroMovieSlideLink key={movie.id} movie={movie} />;
         }
         return null;
       })}

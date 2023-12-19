@@ -306,6 +306,7 @@ CREATE TABLE
 INSERT INTO
     `Categorie` (`name`, `position`)
 VALUES
+    ('All', 0),
     ('Action', 1),
     ('Adventure', 2),
     ('Sci-Fi', 3),
