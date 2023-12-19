@@ -37,31 +37,6 @@
       }
     }
 
-    .dynamic-hero-slider-container {
-      align-self: stretch;
-      justify-content: center;
-      gap: calc(var(--spacing-constant) * 1);
-      display: flex;
-      overflow-x: scroll;
-      scroll-behavior: smooth;
-
-      .hero-movie-slide {
-        width: clamp(
-          var(--hero-movie-slide-min-width, 255px),
-          var(--hero-movie-slide-preferred-width, 80%),
-          var(--hero-movie-slide-max-width, 1200px)
-        );
-        height: clamp(
-          var(--hero-movie-slide-min-height, 140px),
-          var(--hero-movie-slide-preferred-height, 25vh),
-          var(--hero-movie-slide-max-height, 655px)
-        );
-        object-fit: cover;
-        position: relative;
-        border-radius: var(--border-radius-constant, 10px);
-      }
-    }
-
     .movie-genre-tabs-container {
       align-self: stretch;
       padding: 0 calc(var(--spacing-constant) * 1);
