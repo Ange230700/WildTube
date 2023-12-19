@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
 import { useMovies } from "../contexts/MovieContext";
-import MovieSlide from "../components/MovieSlide";
+import DynamicHeroSlider from "../components/DynamicHeroSlider";
+import MovieLink from "../components/MovieLink";
 
 function Home() {
   const { movies } = useMovies();
@@ -15,8 +15,7 @@ function Home() {
             alt="wildtube logo"
           />
         </div>
-        {/* <div className="dynamic-hero-slider-container">
-        </div> */}
+        <DynamicHeroSlider movies={movies} />
         {/* <ul className="movie-genre-tabs-container">
           <li className="movie-genre-tab-container">
             <p className="movie-genre selected-tab">Toutes les catégories</p>
@@ -44,9 +43,7 @@ function Home() {
           </div> */}
           <div className="static-slider-container">
             {movies.map((movie) => (
-              <NavLink key={movie.id} to={`/movies/${movie.id}`}>
-                <MovieSlide movie={movie} />
-              </NavLink>
+              <MovieLink key={movie.id} movie={movie} />
             ))}
           </div>
         </section>

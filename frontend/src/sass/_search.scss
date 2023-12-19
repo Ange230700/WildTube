@@ -75,6 +75,10 @@
       display: flex;
       flex-wrap: wrap;
       padding: 0 calc(var(--spacing-constant) * 1.5);
+
+      .movie-link {
+        position: relative;
+      }
     }
   }
 }
