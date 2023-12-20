@@ -7,36 +7,25 @@
   overflow-y: scroll;
 
   .movie-information-display {
-    align-self: stretch;
-    height: 100%;
     flex-direction: column;
     gap: calc(var(--spacing-constant) * 1);
     display: flex;
 
     .thumbnail-container {
-      align-self: stretch;
-      height: 206px;
+      max-height: 350px;
       flex-direction: column;
-      gap: calc(var(--spacing-constant) * 1);
       display: flex;
-      justify-content: center;
       position: relative;
 
       .movie-cover {
-        align-self: stretch;
         height: 100%;
-        flex-direction: column;
-        display: flex;
         object-fit: cover;
       }
 
       .upper-layer {
-        height: 100%;
         background: hsla(0, 0%, 0%, 0.1);
         justify-content: center;
         align-items: center;
-        align-self: stretch;
-        flex-direction: column;
         display: flex;
         position: absolute;
         top: 0;
@@ -45,9 +34,16 @@
         bottom: 0;
 
         .play-button-container {
-          width: 34px;
-          height: 34px;
-          position: relative;
+          width: clamp(
+            calc(var(--movie-slide-min-width, 34px) * 1),
+            var(--movie-slide-preferred-width, 10vw),
+            calc(
+              var(
+                  --movie-slide-max-width,
+                  calc(var(--movie-slide-min-width, 34px) * 2)
+                ) * 1
+            )
+          );
 
           .play-button {
             width: 100%;
@@ -58,7 +54,6 @@
     }
 
     .details-option-wrapper {
-      align-self: stretch;
       padding: 0 calc(var(--spacing-constant) * 1);
       justify-content: space-between;
       align-items: center;
@@ -69,28 +64,38 @@
         gap: calc(var(--spacing-constant) * 1);
         display: flex;
         align-items: center;
-
-        .movie-info {
-          font-size: calc(var(--font-size-constant) * 1.2);
-        }
+        font-size: clamp(
+          calc(var(--font-size-constant) * 1.2),
+          calc(var(--preferred-font-size-constant, 3.75vw)),
+          calc(var(--font-size-constant) * 1.2 * 1.5)
+        );
+        color: var(--neutral-color, hsla(0, 0%, 100%, 1));
       }
     }
 
     .description-container {
-      align-self: stretch;
       padding: 0 calc(var(--spacing-constant) * 1);
       flex-direction: column;
       gap: calc(var(--spacing-constant) * 1);
       display: flex;
 
       .movie-title {
-        font-size: calc(var(--font-size-constant) * 1.4);
+        font-size: clamp(
+          calc(var(--font-size-constant) * 1.4),
+          calc(var(--preferred-font-size-constant, 4.5vw)),
+          calc(var(--font-size-constant) * 1.4 * 1.5)
+        );
         font-weight: var(--font-weight-semi-bold);
         text-decoration: underline;
       }
 
       .movie-description {
-        font-size: calc(var(--font-size-constant) * 1.2);
+        font-size: clamp(
+          calc(var(--font-size-constant) * 1.2),
+          calc(var(--preferred-font-size-constant, 3.75vw)),
+          calc(var(--font-size-constant) * 1.2 * 1.5)
+        );
+        color: var(--neutral-color, hsla(0, 0%, 100%, 1));
       }
     }
 
@@ -101,30 +106,27 @@
       display: flex;
 
       .comments-section-title {
-        align-self: stretch;
         padding: 0 calc(var(--spacing-constant) * 1);
         gap: calc(var(--spacing-constant) * 1);
         display: flex;
 
         .comments-section-title-text {
-          font-size: calc(var(--font-size-constant) * 1.4);
+          font-size: clamp(
+            calc(var(--font-size-constant) * 1.4),
+            calc(var(--preferred-font-size-constant, 4.5vw)),
+            calc(var(--font-size-constant) * 1.4 * 1.5)
+          );
           font-weight: var(--font-weight-semi-bold);
           text-decoration: underline;
         }
       }
 
       .comments-section-content {
-        align-self: stretch;
         padding: 0 calc(var(--spacing-constant) * 1);
-        gap: calc(var(--spacing-constant) * 1);
         display: flex;
-        flex: 1;
 
         .registration-invitation-container {
           flex: 1 1 0;
-          align-self: stretch;
-          padding: calc(var(--spacing-constant) * 0.5)
-            calc(var(--spacing-constant) * 1);
           background: var(--text-field-background-color);
           justify-content: center;
           align-items: center;
@@ -133,10 +135,14 @@
           border-radius: var(--border-radius-constant, 10px);
 
           .registration-invitation {
-            font-size: calc(var(--font-size-constant) * 2);
+            font-size: clamp(
+              calc(var(--font-size-constant) * 2),
+              calc(var(--preferred-font-size-constant, 6.25vw)),
+              calc(var(--font-size-constant) * 2 * 1.5)
+            );
             font-weight: var(--font-weight-semi-bold);
             text-align: center;
-            color: var(--text-field-color, hsla(210, 89%, 7%, 1));
+            color: var(--background-color);
           }
         }
       }

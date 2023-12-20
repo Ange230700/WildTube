@@ -6,30 +6,51 @@ import HeroMovieSlideLink from "./HeroMovieSlideLink";
 
 const responsive = {
   desktop: {
-    breakpoint: { max: 3000, min: 1025 },
+    breakpoint: { max: 1600, min: 1025 },
     items: 1,
+    // partialVisibilityGutter: 0,
+  },
+  landscapeTablet: {
+    breakpoint: { max: 1024, min: 835 },
+    items: 1,
+    // partialVisibilityGutter: 0,
   },
   tablet: {
-    breakpoint: { max: 1024, min: 465 },
+    breakpoint: { max: 834, min: 769 },
     items: 1,
+    // partialVisibilityGutter: 0,
+  },
+  landscapeMobile: {
+    breakpoint: { max: 768, min: 481 },
+    items: 1,
+    // partialVisibilityGutter: 0,
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 480, min: 320 },
     items: 1,
+    // partialVisibilityGutter: 0,
   },
 };
 
 function DynamicHeroSlider({ movies }) {
   return (
     <Carousel
-      className="dynamic-hero-slider-container"
-      responsive={responsive}
-      swipeable
-      infinite
+      additionalTransfrom={0}
+      arrows
       autoPlay
       autoPlaySpeed={3000}
+      containerClass="dynamic-hero-slider-container"
+      draggable
+      infinite
+      itemClass="slider-item"
+      keyBoardControl
+      minimumTouchDrag={80}
+      removeArrowOnDeviceType={["landscapeMobile", "mobile"]}
+      responsive={responsive}
+      sliderClass="inner-slider-container"
+      slidesToSlide={1}
+      swipeable
       transitionDuration={500}
-      arrows={false}
     >
       {movies.map((movie) => {
         if (movie.IsAvailable) {

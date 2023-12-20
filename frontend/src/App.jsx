@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="app">
-      <NavBarDesktop />
+      {!location.pathname.includes("/moviePlayer/") && <NavBarDesktop />}
       <MovieProvider>
         <Outlet />
       </MovieProvider>

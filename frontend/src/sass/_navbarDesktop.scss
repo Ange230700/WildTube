@@ -4,72 +4,40 @@
 
 @media screen and (width > 768px) {
   .navbar-desktop {
-    align-self: stretch;
     padding-left: 10px;
     padding-right: 10px;
-    justify-content: flex-start;
     align-items: center;
     gap: 10px;
     display: flex;
 
-    .logo-container {
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
+    .logo {
       display: flex;
-
-      .logo {
-        width: 100%;
-        max-width: 100px;
-      }
+      width: 100%;
+      max-width: clamp(
+        var(--logo-width, 150px),
+        var(--logo-width, 13vw),
+        var(--logo-width, calc(var(--logo-width, 100px) * 1.5))
+      );
     }
 
     .links-container {
-      flex: 1 1 0;
-      height: 66px;
-      padding-left: 33px;
-      padding-right: 33px;
-      background: #021222;
-      justify-content: space-between;
-      align-items: center;
+      height: calc(var(--links-container-height, 66px));
+      padding: 0 calc(var(--spacing-constant) * 4);
+      background: var(--background-color);
       display: flex;
 
       .links-wrapper {
-        justify-content: flex-start;
         align-items: center;
         gap: 30px;
         display: flex;
 
         .link {
-          height: 33px;
-          justify-content: center;
-          align-items: center;
-          gap: 10px;
-          display: flex;
+          text-decoration: none;
 
           .link-text {
-            text-align: center;
             color: white;
             font-size: 28px;
-            font-family: var(--main-font);
-            font-weight: 400;
           }
-        }
-      }
-
-      .link {
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        display: flex;
-
-        .link-text {
-          text-align: center;
-          color: white;
-          font-size: 28px;
-          font-family: var(--main-font);
-          font-weight: 400;
-          word-wrap: break-word;
         }
       }
     }

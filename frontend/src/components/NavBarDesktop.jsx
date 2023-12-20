@@ -3,9 +3,7 @@ import { NavLink } from "react-router-dom";
 function NavBarDesktop() {
   return (
     <div className="navbar-desktop">
-      <div className="logo-container">
-        <img className="logo" src="/src/assets/icons/logo.svg" alt="logo" />
-      </div>
+      <img className="logo" src="/src/assets/icons/logo.svg" alt="logo" />
       <div className="links-container">
         <div className="links-wrapper">
           <NavLink className="link" to="/">
