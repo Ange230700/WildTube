@@ -21,15 +21,15 @@ function NavBar() {
           />
         </NavLink>
       </div>
-      {/* <div className="nav-icon-container">
-          <NavLink to="/profile" className="profile-icon">
-            <img
-              className="icon"
-              src="/src/assets/icons/profile_icon.svg"
-              alt="profile icon"
-            />
-          </NavLink>
-        </div> */}
+      <div className="nav-icon-container">
+        <NavLink to="/Inscription" className="profile-icon">
+          <img
+            className="icon"
+            src="/src/assets/icons/profile_icon.svg"
+            alt="profile icon"
+          />
+        </NavLink>
+      </div>
     </div>
   );
 }
