@@ -1,5 +1,4 @@
 const express = require("express");
-/*eslint-disable*/
 
 const router = express.Router();
 
@@ -88,7 +87,6 @@ router.delete("/FilmsEnTendance/:id", enTendanceFilmControllers.destroy);
 router.delete("/SeriesEnTendance/:id", enTendanceSerieControllers.destroy);
 router.delete("/favorites/:id", favoriFilmControllers.destroy);
 
-//auth
 router.post("/login", authControllers.login);
 
 module.exports = router;
