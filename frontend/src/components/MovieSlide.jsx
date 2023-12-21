@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
+import { useUser } from "../contexts/UserContext";
 // import { NavLink } from "react-router-dom";
 
 function MovieSlide({ movie }) {
-  if (movie.IsAvailable) {
+  const { user } = useUser;
+  if (movie.IsAvailable || !user) {
     return (
       <img src={movie.miniature} alt={movie.title} className="movie-slide" />
     );
