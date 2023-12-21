@@ -72,6 +72,17 @@ class UserManager extends AbstractManager {
     // Return the first row of the result, which represents the item
     return rows;
   }
+
+  async readByEmail(email) {
+    // Execute the SQL SELECT query to retrieve a specific item by its ID
+    const [result] = await this.database.query(
+      `select * from ${this.table} where email = ?`,
+      [email]
+    );
+
+    // Return the first row of the result, which represents the item
+    return result[0];
+  }
 }
 
 module.exports = UserManager;

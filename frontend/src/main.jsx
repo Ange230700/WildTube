@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
+import { UserProvider } from "./contexts/UserContext";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
 import MoviePlayer from "./pages/MoviePlayer";
 import Inscription from "./pages/Inscription";
+import Connection from "./pages/Connection";
 import "./sass/index.scss";
 
 const router = createBrowserRouter([
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
         element: <MoviePlayer />,
       },
       {
+        path: "/connection",
+        element: <Connection />,
+      },
+      {
         path: "/Inscription",
         element: <Inscription />,
       },
@@ -47,10 +53,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}>
+    <UserProvider>
       <MovieProvider>
-        <App />
+        <RouterProvider router={router} />
       </MovieProvider>
-    </RouterProvider>
+    </UserProvider>
   </React.StrictMode>
 );
