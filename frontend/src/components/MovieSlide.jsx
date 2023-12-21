@@ -3,13 +3,10 @@ import { useUser } from "../contexts/UserContext";
 // import { NavLink } from "react-router-dom";
 
 function MovieSlide({ movie }) {
-  const { user } = useUser;
-  if (movie.IsAvailable || !user) {
-    return (
-      <img src={movie.miniature} alt={movie.title} className="movie-slide" />
-    );
-  }
-  return (
+  const { user } = useUser();
+  return movie.IsAvailable || user ? (
+    <img src={movie.miniature} alt={movie.title} className="movie-slide" />
+  ) : (
     <>
       <div className="movie-slide-requiring-registration">
         <img
