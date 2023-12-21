@@ -15,7 +15,7 @@ function Serie() {
           return serie.id === parseInt(serieId, 10);
         })
         .map((serie) => {
-          if (serie.isAvailable) {
+          if (serie.IsAvailable) {
             return (
               <div className="serie-page-details" key={parseInt(serieId, 10)}>
                 <div className="serie-information-display">
