@@ -12,7 +12,6 @@ export function MovieProvider({ children }) {
       .get("http://localhost:3310/api/films")
       .then((response) => {
         setMovies(response.data);
-        // console.info(response.data);
       })
       .catch((error) => {
         console.error(error);

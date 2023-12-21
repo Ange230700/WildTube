@@ -5,7 +5,7 @@ import MovieDescription from "../components/MovieDescription";
 function Movie() {
   const { movieId } = useParams();
   const { movies } = useMovies();
-  // console.info(movies);
+
   if (!movieId) {
     return <h1>Aucun film trouvé.</h1>;
   }

@@ -9,13 +9,13 @@ const router = express.Router();
 // Import itemControllers module for handling item-related operations
 const categorieControllers = require("./controllers/categorieControllers");
 const categorieParSerieControllers = require("./controllers/categorieParSerieControllers");
+const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 const filmControllers = require("./controllers/filmControllers");
 const userControllers = require("./controllers/userControllers");
 const serieControllers = require("./controllers/serieControllers");
 const enTendanceFilmControllers = require("./controllers/enTendanceFilmControllers");
 const enTendanceSerieControllers = require("./controllers/enTendanceSerieControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
-const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 const favoriSerieControllers = require("./controllers/favoriSerieControllers");
 // const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 
@@ -24,12 +24,20 @@ router.get("/categories", categorieControllers.browse);
 router.get("/categoriesParSerie", categorieParSerieControllers.browse);
 router.get("/categoriesParFilm", categorieParFilmControllers.browse);
 router.get(
-  "/categoriesParSerie",
+  "/series/category/:id",
   categorieParSerieControllers.browseSeriesForSpecificCategorie
 );
 router.get(
-  "/categoriesParFilm",
+  "/films/category/:id",
   categorieParFilmControllers.browseFilmsForSpecificCategorie
+);
+router.get(
+  "/categories/film/:id",
+  categorieParFilmControllers.browseCategoriesForSpecificFilm
+);
+router.get(
+  "/categories/serie/:id",
+  categorieParSerieControllers.browseCategoriesForSpecificSerie
 );
 router.get("/films", filmControllers.browse);
 router.get("/series", serieControllers.browse);

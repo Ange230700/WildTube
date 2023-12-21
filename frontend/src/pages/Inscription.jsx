@@ -31,7 +31,7 @@ const Inscription = () => {
 
     try {
       const result = await axios.post("http://localhost:3310/api/users", user);
-      console.log(user);
+      // console.log(user);
       if (result.status === 201) {
         setSucces(true);
       } else {
@@ -39,7 +39,7 @@ const Inscription = () => {
       }
 
       // console.log("Request URL:", url);
-      console.log("User registered successfully");
+      // console.log("User registered successfully");
     } catch (error) {
       setError(true);
       console.error("Error during registration:", error);
