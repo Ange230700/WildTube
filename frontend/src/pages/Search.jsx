@@ -4,6 +4,7 @@ import MovieLink from "../components/MovieLink";
 
 function Search() {
   const [searchValue, setSearchValue] = useState("");
+
   const { movies } = useMovies();
 
   function handleSearchChange(event) {
@@ -32,6 +33,7 @@ function Search() {
             />
           </button>
         </div> */}
+
         <div className="search-result-container">
           {searchValue.length > 0 ? (
             <>

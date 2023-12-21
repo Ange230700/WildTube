@@ -1,18 +1,17 @@
-/*eslint-disable */
 import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
 // import { NavLink } from "react-router-dom";
 
-function MovieSlide({ movie }) {
+function SerieSlide({ serie }) {
   const { user } = useUser;
-  if (movie.IsAvailable || !user) {
+  if (serie.IsAvailable || !user) {
     return (
-      <img src={movie.miniature} alt={movie.title} className="movie-slide" />
+      <img src={serie.miniature} alt={serie.title} className="movie-slide" />
     );
   }
   return (
     <div className="movie-slide-requiring-registration">
-      <img src={movie.miniature} alt={movie.title} className="movie-slide" />
+      <img src={serie.miniature} alt={serie.title} className="movie-slide" />
       <div className="locked-overlay">
         <div className="lock-icon-container">
           <img
@@ -26,8 +25,8 @@ function MovieSlide({ movie }) {
   );
 }
 
-MovieSlide.propTypes = {
-  movie: PropTypes.shape({
+SerieSlide.propTypes = {
+  serie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     miniature: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -39,4 +38,4 @@ MovieSlide.propTypes = {
   }).isRequired,
 };
 
-export default MovieSlide;
+export default SerieSlide;
