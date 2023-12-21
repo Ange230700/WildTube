@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useMovies } from "../contexts/MovieContext";
-import MovieSlide from "../components/MovieSlide";
+import MovieLink from "../components/MovieLink";
 
 function Search() {
   const [searchValue, setSearchValue] = useState("");
@@ -43,17 +42,13 @@ function Search() {
                   movie.title.toLowerCase().includes(searchValue.toLowerCase())
                 )
                 .map((movie) => (
-                  <Link key={movie.id} to={`/movies/${movie.id}`}>
-                    <MovieSlide movie={movie} />
-                  </Link>
+                  <MovieLink key={movie.id} movie={movie} />
                 ))}
             </>
           ) : (
             <>
               {movies.map((movie) => (
-                <Link key={movie.id} to={`/movies/${movie.id}`}>
-                  <MovieSlide movie={movie} />
-                </Link>
+                <MovieLink key={movie.id} movie={movie} />
               ))}
             </>
           )}

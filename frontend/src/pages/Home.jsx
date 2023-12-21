@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useMovies } from "../contexts/MovieContext";
+import DynamicHeroSlider from "../components/DynamicHeroSlider";
+// import MovieLink from "../components/MovieLink";
 import MovieSlide from "../components/MovieSlide";
 
 function Home() {
@@ -70,6 +72,27 @@ function Home() {
           <div className="CategoryPageLink">Show all</div>
         </div>
 
+        <DynamicHeroSlider movies={movies} />
+        {/* <ul className="movie-genre-tabs-container">
+          <li className="movie-genre-tab-container">
+            <p className="movie-genre selected-tab">Toutes les catégories</p>
+          </li>
+          <li className="movie-genre-tab-container">
+            <p className="movie-genre">Action</p>
+          </li>
+          <li className="movie-genre-tab-container">
+            <p className="movie-genre">Aventure</p>
+          </li>
+          <li className="movie-genre-tab-container">
+            <p className="movie-genre">Comédie</p>
+          </li>
+          <li className="movie-genre-tab-container">
+            <p className="movie-genre">Romance</p>
+          </li>
+          <li className="movie-genre-tab-container">
+            <p className="movie-genre">Science-fiction</p>
+          </li>
+        </ul> */}
         <section className="category-movie-display-container">
           <div className="static-slider-container">
             {movies.map((movie) => (

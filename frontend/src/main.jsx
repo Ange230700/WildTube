@@ -9,6 +9,7 @@ import Categories from "./pages/Categories";
 import Movie from "./pages/Movie";
 import Serie from "./pages/Serie";
 import MoviePlayer from "./pages/MoviePlayer";
+import Inscription from "./pages/Inscription";
 import "./sass/index.scss";
 import { SerieProvider } from "./contexts/SerieContext";
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/moviePlayer/:movieId",
         element: <MoviePlayer />,
+      },
+      {
+        path: "/Inscription",
+        element: <Inscription />,
       },
     ],
   },
