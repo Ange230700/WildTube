@@ -4,7 +4,7 @@ import { useUser } from "../contexts/UserContext";
 
 function MovieSlide({ movie }) {
   const { user } = useUser;
-  if (movie.IsAvailable || user !== "") {
+  if (movie.IsAvailable || !user) {
     return (
       <img src={movie.miniature} alt={movie.title} className="movie-slide" />
     );

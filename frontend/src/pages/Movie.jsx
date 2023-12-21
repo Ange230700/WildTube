@@ -17,7 +17,7 @@ function Movie() {
           return movie.id === parseInt(movieId, 10);
         })
         .map((movie) => {
-          if (movie.IsAvailable || user !== "") {
+          if (movie.IsAvailable || !user) {
             return (
               <div className="movie-page-details" key={parseInt(movieId, 10)}>
                 <div className="movie-information-display">
