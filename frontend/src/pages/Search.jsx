@@ -1,10 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useMovies } from "../contexts/MovieContext";
 import MovieSlide from "../components/MovieSlide";
 
 function Search() {
   const [searchValue, setSearchValue] = useState("");
+
   const { movies } = useMovies();
 
   function handleSearchChange(event) {
@@ -33,6 +34,7 @@ function Search() {
             />
           </button>
         </div> */}
+
         <div className="search-result-container">
           {searchValue.length > 0 ? (
             <>
@@ -41,17 +43,17 @@ function Search() {
                   movie.title.toLowerCase().includes(searchValue.toLowerCase())
                 )
                 .map((movie) => (
-                  <NavLink key={movie.id} to={`/movies/${movie.id}`}>
+                  <Link key={movie.id} to={`/movies/${movie.id}`}>
                     <MovieSlide movie={movie} />
-                  </NavLink>
+                  </Link>
                 ))}
             </>
           ) : (
             <>
               {movies.map((movie) => (
-                <NavLink key={movie.id} to={`/movies/${movie.id}`}>
+                <Link key={movie.id} to={`/movies/${movie.id}`}>
                   <MovieSlide movie={movie} />
-                </NavLink>
+                </Link>
               ))}
             </>
           )}

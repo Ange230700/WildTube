@@ -5,9 +5,12 @@ import { MovieProvider } from "./contexts/MovieContext";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import Categories from "./pages/Categories";
 import Movie from "./pages/Movie";
+import Serie from "./pages/Serie";
 import MoviePlayer from "./pages/MoviePlayer";
 import "./sass/index.scss";
+import { SerieProvider } from "./contexts/SerieContext";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +22,12 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "search",
+        path: "search/",
         element: <Search />,
+      },
+      {
+        path: "category/:catId",
+        element: <Categories />,
       },
       // {
       //   path: "profile",
@@ -29,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/movies/:movieId",
         element: <Movie />,
+      },
+      {
+        path: "/series/:serieId",
+        element: <Serie />,
       },
       {
         path: "/moviePlayer/:movieId",
@@ -43,9 +54,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router}>
-      <MovieProvider>
-        <App />
-      </MovieProvider>
+      <SerieProvider>
+        <MovieProvider>
+          <App />
+        </MovieProvider>
+      </SerieProvider>
     </RouterProvider>
   </React.StrictMode>
 );

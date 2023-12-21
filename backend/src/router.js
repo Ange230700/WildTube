@@ -24,12 +24,20 @@ router.get("/categories", categorieControllers.browse);
 router.get("/categoriesParSerie", categorieParSerieControllers.browse);
 router.get("/categoriesParFilm", categorieParFilmControllers.browse);
 router.get(
-  "/categoriesParSerie",
+  "/series/category/:id",
   categorieParSerieControllers.browseSeriesForSpecificCategorie
 );
 router.get(
-  "/categoriesParFilm",
+  "/films/category/:id",
   categorieParFilmControllers.browseFilmsForSpecificCategorie
+);
+router.get(
+  "/categories/film/:id",
+  categorieParFilmControllers.browseCategoriesForSpecificFilm
+);
+router.get(
+  "/categories/serie/:id",
+  categorieParSerieControllers.browseCategoriesForSpecificSerie
 );
 router.get("/films", filmControllers.browse);
 router.get("/series", serieControllers.browse);

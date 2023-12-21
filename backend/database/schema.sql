@@ -4,6 +4,7 @@ CREATE TABLE
     `Serie` (
         `id` int primary key auto_increment not null,
         `miniature` varchar(255) not null,
+        `cover` VARCHAR(255) NOT NULL,
         `title` VARCHAR(50) not NULL,
         `videoUrl` VARCHAR(255),
         `duration` INT not NULL,
@@ -174,10 +175,11 @@ VALUES
     );
 
 INSERT INTO 
-    `Serie` (`miniature`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
+    `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
 VALUES 
     (
         "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
+        "https://i.ytimg.com/vi/gJIHLGHckzk/hq720.jpg",
         'One Piece',
         55,
         '2023',
@@ -188,6 +190,7 @@ VALUES
     ),
     (
         "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
+        "https://fr.web.img6.acsta.net/r_654_368/newsv7/19/01/17/15/43/1457863.jpg",
         "Naruto",
         22,
         "2002",
@@ -351,7 +354,7 @@ VALUES
     (1, 1),
     (1, 2);
 
-INSERT INTO 
+INSERT INTO
     `Favori_film` (`userId`, `filmId`)
     VALUES
     (1, 1),
@@ -362,4 +365,28 @@ INSERT INTO
     VALUES
     (1, 1),
     (1, 2);
+
+INSERT INTO  
+    `Categorie_par_film` (`filmId`, `categorieId`)
+    VALUES
+    (1, 1),
+    (2, 1),
+    (3, 1),
+    (4, 1),
+    (5, 1),
+    (6, 1),
+    (7, 3),
+    (8, 3),
+    (9, 8),
+    (10, 3),
+    (11, 1),
+    (12, 4);
+
+INSERT INTO 
+    `Categorie_par_serie` (`serieId`, `categorieId`)
+    VALUES
+    (1, 10),
+    (2, 10);
+
+
     

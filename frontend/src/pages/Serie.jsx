@@ -1,34 +1,34 @@
 import { useParams, NavLink } from "react-router-dom";
-import { useMovies } from "../contexts/MovieContext";
+import { useSeries } from "../contexts/SerieContext";
 
-function Movie() {
-  const { movieId } = useParams();
-  const { movies } = useMovies();
+function Serie() {
+  const { serieId } = useParams();
+  const { series } = useSeries();
 
-  if (!movieId) {
-    return <h1>Aucun film trouvé.</h1>;
+  if (!serieId) {
+    return <h1>Aucune série trouvée.</h1>;
   }
   return (
     <>
-      {movies
-        .filter((movie) => {
-          return movie.id === parseInt(movieId, 10);
+      {series
+        .filter((serie) => {
+          return serie.id === parseInt(serieId, 10);
         })
-        .map((movie) => {
-          if (movie.IsAvailable) {
+        .map((serie) => {
+          if (serie.IsAvailable) {
             return (
-              <div className="movie-page-details" key={parseInt(movieId, 10)}>
-                <div className="movie-information-display">
+              <div className="serie-page-details" key={parseInt(serieId, 10)}>
+                <div className="serie-information-display">
                   <div className="thumbnail-container">
                     <img
-                      className="movie-cover"
-                      src={movie.cover}
-                      alt={movie.title}
+                      className="serie-cover"
+                      src={serie.cover}
+                      alt={serie.title}
                     />
                     <div className="upper-layer">
                       <NavLink
                         className="play-button-container"
-                        to={`/moviePlayer/${movie.id}`}
+                        to={`/seriePlayer/${serie.id}`}
                       >
                         <img
                           className="play-button"
@@ -40,14 +40,14 @@ function Movie() {
                   </div>
                   <div className="details-option-wrapper">
                     <div className="details-container">
-                      <p className="movie-info release-year">{movie.year}</p>
+                      <p className="serie-info release-year">{serie.year}</p>
                       <p className="separator">•</p>
-                      <p className="movie-info duration">{movie.duration}m</p>
+                      <p className="serie-info duration">{serie.duration}m</p>
                     </div>
                   </div>
                   <div className="description-container">
-                    <p className="movie-title">{movie.title}</p>
-                    <p className="movie-description">{movie.description}</p>
+                    <p className="serie-title">{serie.title}</p>
+                    <p className="serie-description">{serie.description}</p>
                   </div>
                   <div className="comments-section">
                     <div className="comments-section-title">
@@ -69,17 +69,17 @@ function Movie() {
           }
           return (
             <div
-              className="movie-page-details"
-              key={parseInt(movieId, 10)}
+              className="serie-page-details"
+              key={parseInt(serieId, 10)}
               style={{ overflowY: "hidden" }}
             >
-              <div className="movie-information-display-wrapper">
-                <div className="movie-information-display">
+              <div className="serie-information-display-wrapper">
+                <div className="serie-information-display">
                   <div className="thumbnail-container">
                     <img
-                      className="movie-cover"
-                      src={movie.cover}
-                      alt={movie.title}
+                      className="serie-cover"
+                      src={serie.cover}
+                      alt={serie.title}
                     />
                     <div className="upper-layer">
                       <div className="play-button-container">
@@ -93,14 +93,14 @@ function Movie() {
                   </div>
                   <div className="details-option-wrapper">
                     <div className="details-container">
-                      <p className="movie-info release-year">{movie.year}</p>
+                      <p className="serie-info release-year">{serie.year}</p>
                       <p className="separator">•</p>
-                      <p className="movie-info duration">{movie.duration}m</p>
+                      <p className="serie-info duration">{serie.duration}m</p>
                     </div>
                   </div>
                   <div className="description-container">
-                    <p className="movie-title">{movie.title}</p>
-                    <p className="movie-description">{movie.description}</p>
+                    <p className="serie-title">{serie.title}</p>
+                    <p className="serie-description">{serie.description}</p>
                   </div>
                   <div className="comments-section">
                     <div className="comments-section-title">
@@ -132,4 +132,4 @@ function Movie() {
   );
 }
 
-export default Movie;
+export default Serie;
