@@ -14,22 +14,6 @@
     gap: calc(var(--spacing-constant) * 1);
     display: flex;
 
-    .logo-container {
-      display: flex;
-      justify-content: center;
-
-      .logo {
-        width: 100%;
-        max-width: 100px;
-      }
-    }
-
-    @media screen and (width > 768px) {
-      .logo-container {
-        display: none;
-      }
-    }
-
     .category-movie-display-container {
       .category-title-container {
         align-self: stretch;

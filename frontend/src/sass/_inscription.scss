@@ -1,32 +1,26 @@
 .signUpPageMockupGuest {
-  width: 320;
   flex-direction: column;
+  display: flex;
+  flex: 1;
+
   .searchDisplaySection {
-    align-self: stretch;
     flex-direction: column;
     display: flex;
-  }
-  .logoContainer {
-    align-self: stretch;
-    justify-content: center;
-    align-items: center;
-    gap: 10;
-    display: inline-flex;
   }
 
   .form {
     flex-direction: column;
     display: flex;
+    gap: var(--spacing-constant);
   }
   .inputs {
-    height: 35vh;
     flex-direction: column;
     display: flex;
+    gap: var(--spacing-constant);
   }
   .inputContainer {
     justify-content: center;
-    display: inline-flex;
-    padding-bottom: 15px;
+    display: flex;
   }
   .input {
     width: 63vw;
@@ -48,8 +42,6 @@
     }
   }
   .additionalInformation {
-    padding-top: 5rem;
-    height: 40vh;
     flex-direction: column;
     display: flex;
   }
@@ -72,6 +64,9 @@
   }
   .orientationText {
     font-weight: var(--font-weight-semi-bold);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-constant) * 0.5);
   }
   .radioButton {
     width: 6vw;
@@ -103,16 +98,15 @@
     margin-right: 2px;
   }
   .buttonContainer {
-    align-self: center;
-    padding-top: 15px;
+    justify-content: center;
+    display: flex;
   }
   .signUpButton {
     width: 35vw;
-    height: 5vh;
     background-color: var(--secondary-font-color);
     border-radius: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
+    padding: calc(var(--spacing-constant) * 1) calc(var(--spacing-constant) * 2);
+    border: none;
   }
   .inscription {
     text-align: center;

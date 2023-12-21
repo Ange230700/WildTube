@@ -4,6 +4,7 @@ import { useMovies } from "../contexts/MovieContext";
 import DynamicHeroSlider from "../components/DynamicHeroSlider";
 import CategoryDisplay from "../components/CategoryDisplay";
 import MovieGenreTabsContainer from "../components/MovieGenreTabsContainer";
+import LogoContainer from "../components/LogoContainer";
 
 function Home() {
   const { movies } = useMovies();
@@ -41,13 +42,7 @@ function Home() {
   return (
     <div className="home">
       <div className="movies-display-section">
-        <div className="logo-container">
-          <img
-            className="logo"
-            src="/src/assets/icons/logo.svg"
-            alt="wildtube logo"
-          />
-        </div>
+        <LogoContainer />
         <DynamicHeroSlider movies={movies} />
         <MovieGenreTabsContainer categories={categories} />
         {categories.map((categorie) => (

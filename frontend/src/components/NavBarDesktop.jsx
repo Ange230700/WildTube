@@ -13,9 +13,9 @@ function NavBarDesktop() {
             <p className="link-text">Recherche</p>
           </NavLink>
         </div>
-        {/* <NavLink className="link" to="/profile">
+        <NavLink className="link" to="/Connection">
           <p className="link-text">Connexion</p>
-        </NavLink> */}
+        </NavLink>
       </div>
     </div>
   );

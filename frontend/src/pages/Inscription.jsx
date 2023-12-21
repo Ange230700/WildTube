@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-/* eslint-disable */
 import axios from "axios";
+import LogoContainer from "../components/LogoContainer";
 
-const Inscription = () => {
+function Inscription() {
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -40,9 +40,9 @@ const Inscription = () => {
 
       // console.log("Request URL:", url);
       // console.log("User registered successfully");
-    } catch (error) {
+    } catch (someError) {
       setError(true);
-      console.error("Error during registration:", error);
+      console.error("Error during registration:", someError);
     }
   };
   return (
@@ -50,9 +50,7 @@ const Inscription = () => {
       {error && <h1 style={{ color: "red", fontSize: 12 }}>Error</h1>}
       {succes && <h1 style={{ color: "green", fontSize: 12 }}>Sicces</h1>}
       <div className="searchDisplaySection">
-        <div className="logoContainer">
-          <img className="logo2" src="src/assets/icons/logo.svg" alt="Logo" />
-        </div>
+        <LogoContainer />
         <div className="form">
           <div className="inputs">
             <div className="inputContainer">
@@ -63,7 +61,7 @@ const Inscription = () => {
                 name="name"
                 className="input"
                 onChange={handleInputChange}
-              ></input>
+              />
             </div>
             <div className="inputContainer">
               <input
@@ -73,7 +71,7 @@ const Inscription = () => {
                 onChange={handleInputChange}
                 placeholder="Adresse Mail"
                 className="input"
-              ></input>
+              />
             </div>
             <div className="inputContainer">
               <input
@@ -83,14 +81,14 @@ const Inscription = () => {
                 onChange={handleInputChange}
                 className="input"
                 placeholder="Mot de passe"
-              ></input>
+              />
             </div>
             <div className="inputContainer">
               <input
                 type="password"
                 className="input"
                 placeholder="Confirmation du mot de passe"
-              ></input>
+              />
             </div>
           </div>
 
@@ -98,26 +96,30 @@ const Inscription = () => {
             <div className="orientation">Civilité :</div>
             <div className="orientationContainer">
               <div className="orientationOption">
-                <label className="orientationText">Madame</label>
-                <input
-                  name="civility"
-                  type="radio"
-                  value="Madame"
-                  className="radioButton"
-                  onChange={handleInputChange}
-                  checked={user.civility === "Madame"}
-                />
+                <label className="orientationText">
+                  Madame
+                  <input
+                    name="civility"
+                    type="radio"
+                    value="Madame"
+                    className="radioButton"
+                    onChange={handleInputChange}
+                    checked={user.civility === "Madame"}
+                  />
+                </label>
               </div>
               <div className="orientationOption">
-                <label className="orientationText">Monsieur</label>
-                <input
-                  name="civility"
-                  type="radio"
-                  className="radioButton"
-                  onChange={handleInputChange}
-                  value="Monsieur"
-                  checked={user.civility === "Monsieur"}
-                />
+                <label className="orientationText">
+                  Monsieur
+                  <input
+                    name="civility"
+                    type="radio"
+                    className="radioButton"
+                    onChange={handleInputChange}
+                    value="Monsieur"
+                    checked={user.civility === "Monsieur"}
+                  />
+                </label>
               </div>
             </div>
             <section className="birthday">Date de naissance :</section>
@@ -132,14 +134,18 @@ const Inscription = () => {
             </div>
           </div>
           <div className="buttonContainer">
-            <div className="signUpButton" onClick={handleSubmit}>
+            <button
+              className="signUpButton"
+              onClick={handleSubmit}
+              type="button"
+            >
               <div className="inscription">Inscription</div>
-            </div>
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Inscription;

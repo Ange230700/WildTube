@@ -1,7 +1,6 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import MovieSlide from "../components/MovieSlide";
 // import SerieSlide from "../components/SerieSlide";
 import MovieLink from "../components/MovieLink";
 import MovieGenreTabsContainer from "../components/MovieGenreTabsContainer";
@@ -86,20 +85,13 @@ function Categories() {
                       .includes(searchValue.toLowerCase())
                   )
                   .map((movie) => (
-                    <Link key={movie.id} to={`/movies/${movie.id}`}>
-                      <MovieLink movie={movie} />
-                    </Link>
+                    <MovieLink movie={movie} />
                   ))}
               </>
             ) : (
               <>
                 {reqOneCount.map((film) => {
-                  return (
-                    <NavLink key={film.id} to={`/movies/${film.id}`}>
-                      {/* <h1>{film.filmId}</h1> */}
-                      <MovieSlide movie={film} />
-                    </NavLink>
-                  );
+                  return <MovieLink movie={film} />;
                 })}
                 {/* {reqTwoCount.map((serie) => {
                   return (

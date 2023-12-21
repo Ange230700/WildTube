@@ -5,7 +5,7 @@ const login = async (req, res) => {
 
   const user = await tables.user.readByEmail(email);
 
-  if (user.password === password) {
+  if (user && user.password === password) {
     res.status(200).send(user);
   } else {
     res.status(400).send("incorrect email or password");

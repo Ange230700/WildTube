@@ -25,6 +25,9 @@
       padding: 0 calc(var(--spacing-constant) * 4);
       background: var(--background-color);
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
 
       .links-wrapper {
         align-items: center;
@@ -38,6 +41,15 @@
             color: white;
             font-size: 28px;
           }
+        }
+      }
+
+      .link {
+        text-decoration: none;
+
+        .link-text {
+          color: white;
+          font-size: 28px;
         }
       }
     }
