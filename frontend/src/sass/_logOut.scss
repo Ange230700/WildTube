@@ -1,0 +1,14 @@
+.containerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .logOut {
+    color: var(--text-field-background-color);
+    background-color: var(--secondary-font-color);
+    font-weight: var(--font-weight-semi-bold);
+    width: 45vw;
+    height: 8vh;
+    border-radius: 6px;
+  }
+}
