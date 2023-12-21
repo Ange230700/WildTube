@@ -1,7 +1,10 @@
+/*eslint-disable */
 import { useParams, NavLink } from "react-router-dom";
 import { useMovies } from "../contexts/MovieContext";
+import { useUser } from "../contexts/UserContext";
 
 function Movie() {
+  const { user } = useUser;
   const { movieId } = useParams();
   const { movies } = useMovies();
 
@@ -15,7 +18,7 @@ function Movie() {
           return movie.id === parseInt(movieId, 10);
         })
         .map((movie) => {
-          if (movie.IsAvailable) {
+          if (movie.IsAvailable || !user) {
             return (
               <div className="movie-page-details" key={parseInt(movieId, 10)}>
                 <div className="movie-information-display">

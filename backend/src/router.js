@@ -17,6 +17,7 @@ const enTendanceFilmControllers = require("./controllers/enTendanceFilmControlle
 const enTendanceSerieControllers = require("./controllers/enTendanceSerieControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
 const favoriSerieControllers = require("./controllers/favoriSerieControllers");
+const authControllers = require("./controllers/authControllers");
 // const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 
 // Route to get a list of items
@@ -93,5 +94,7 @@ router.delete("/favorites/serie/:id", favoriSerieControllers.destroy);
 router.delete("/FilmsEnTendance/:id", enTendanceFilmControllers.destroy);
 router.delete("/SeriesEnTendance/:id", enTendanceSerieControllers.destroy);
 router.delete("/favorites/:id", favoriFilmControllers.destroy);
+
+router.post("/login", authControllers.login);
 
 module.exports = router;
