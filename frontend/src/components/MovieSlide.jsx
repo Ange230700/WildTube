@@ -8,14 +8,8 @@ function MovieSlide({ movie }) {
     );
   }
   return (
-    <>
-      <div className="movie-slide-requiring-registration">
-        <img
-          src={movie.miniature}
-          alt={movie.title}
-          className="movie-slide blur-filter"
-        />
-      </div>
+    <div className="movie-slide-requiring-registration">
+      <img src={movie.miniature} alt={movie.title} className="movie-slide" />
       <div className="locked-overlay">
         <div className="lock-icon-container">
           <img
@@ -25,7 +19,7 @@ function MovieSlide({ movie }) {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

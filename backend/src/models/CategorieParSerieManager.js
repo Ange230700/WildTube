@@ -44,7 +44,7 @@ class CategorieParSerieManager extends AbstractManager {
   async readAllSeriesForSpecificCategorie(idCategorie) {
     // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
     const [rows] = await this.database.query(
-      `SELECT s.title, c.name, s.miniature, s.isAvailable, s.id AS serieId FROM ${this.table} sc INNER JOIN categorie c ON c.id = sc.categorieId INNER JOIN serie s ON s.id = sc.serieId WHERE c.id = ?`,
+      `SELECT s.title, c.name, s.miniature, s.IsAvailable, s.id AS serieId FROM ${this.table} sc INNER JOIN categorie c ON c.id = sc.categorieId INNER JOIN serie s ON s.id = sc.serieId WHERE c.id = ?`,
       [idCategorie]
     );
     // Return the array of categories

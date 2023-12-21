@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import MovieSlide from "../components/MovieSlide";
 import SerieSlide from "../components/SerieSlide";
+import MovieLink from "../components/MovieLink";
 
 function Categories() {
   const [searchValue, setSearchValue] = useState("");
@@ -25,7 +26,7 @@ function Categories() {
       ]);
       const resFilms = result[0].data;
       const resSeries = result[1].data;
-      console.warn(resFilms, resSeries);
+      // console.warn("films", resFilms, "series", resSeries);
       setReqOneCount(resFilms);
       setReqTwoCount(resSeries);
     } catch (error) {
@@ -104,7 +105,7 @@ function Categories() {
                   )
                   .map((movie) => (
                     <Link key={movie.id} to={`/movies/${movie.id}`}>
-                      <MovieSlide movie={movie} />
+                      <MovieLink movie={movie} />
                     </Link>
                   ))}
               </>
@@ -112,9 +113,10 @@ function Categories() {
               <>
                 {reqOneCount.map((film) => {
                   return (
-                    <Link key={film.filmId} to={`/movies/${film.filmId}`}>
+                    <NavLink key={film.filmId} to={`/movies/${film.filmId}`}>
+                      {/* <h1>{film.filmId}</h1> */}
                       <MovieSlide movie={film} />
-                    </Link>
+                    </NavLink>
                   );
                 })}
                 {reqTwoCount.map((serie) => {

@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useMovies } from "../contexts/MovieContext";
 import DynamicHeroSlider from "../components/DynamicHeroSlider";
-// import MovieLink from "../components/MovieLink";
-import MovieSlide from "../components/MovieSlide";
+import MovieLink from "../components/MovieLink";
 
 function Home() {
   const { movies } = useMovies();
@@ -78,7 +77,7 @@ function Home() {
           <div className="static-slider-container">
             {movies.map((movie) => (
               <Link key={movie.id} to={`/movies/${movie.id}`}>
-                <MovieSlide movie={movie} />
+                <MovieLink movie={movie} />
               </Link>
             ))}
           </div>
@@ -89,11 +88,23 @@ function Home() {
           <div className="CategoryPageLink">Show all</div>
         </div>
 
+        {/* get all sections 
+        sections.map(() => {
+          return 
+            <Carousel>
+              get all movies
+              movies.map((movie ) => {
+                return <VideoCard movie={movie}>
+              })
+            </Carousel>
+        })
+        */}
+
         <section className="category-movie-display-container">
           <div className="static-slider-container">
             {entendance.map((movie) => (
               <Link key={movie.id} to={`/movies/${movie.id}`}>
-                <MovieSlide movie={movie} />
+                <MovieLink movie={movie} />
               </Link>
             ))}
           </div>
@@ -108,7 +119,7 @@ function Home() {
           <div className="static-slider-container">
             {entendance.map((movie) => (
               <Link key={movie.id} to={`/movies/${movie.id}`}>
-                <MovieSlide movie={movie} />
+                <MovieLink movie={movie} />
               </Link>
             ))}
           </div>

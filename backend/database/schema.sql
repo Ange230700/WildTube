@@ -174,7 +174,7 @@ VALUES
         55,
         '2023',
         'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
-        1,
+        0,
         9,
         1
     ), (
