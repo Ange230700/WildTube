@@ -15,6 +15,7 @@ CREATE TABLE
     );
 
 DROP TABLE IF EXISTS `User`;
+
 CREATE TABLE
     `User` (
         `id` int primary key auto_increment not null,
@@ -25,6 +26,7 @@ CREATE TABLE
         `password` varchar(50) not null,
         `IsAdmin` bool not null
     );
+
 DROP TABLE IF EXISTS `Film`;
 
 CREATE TABLE
@@ -51,8 +53,7 @@ INSERT INTO
         `description`,
         `IsAvailable`
     )
-VALUES
-    (
+VALUES (
         'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
         'https://w0.peakpx.com/wallpaper/34/966/HD-wallpaper-the-avengers-avengers-endgame-avengers-avengers-endgame.jpg',
         'Avengers: Endgame',
@@ -61,8 +62,7 @@ VALUES
         '2019',
         'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.',
         0
-    ),
-    (
+    ), (
         'https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg',
         'https://www.highlandernews.org/wp-content/uploads/landscape-1522924460-avengers-infinity-war-poster.jpg',
         'Avengers: Infinity War',
@@ -71,8 +71,7 @@ VALUES
         '2018',
         'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.',
         1
-    ),
-    (
+    ), (
         'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
         'https://pbs.twimg.com/media/EJHjitpUUAA2EAp.jpg',
         'The Avengers',
@@ -81,8 +80,7 @@ VALUES
         '2012',
         'Earth mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
         0
-    ),
-    (
+    ), (
         'https://i.ebayimg.com/images/g/Sv8AAOSwb7Rc0l0P/s-l1600.jpg',
         'https://wallpapercave.com/wp/wp11799668.jpg',
         'Iron man',
@@ -91,8 +89,7 @@ VALUES
         '2008',
         'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
         1
-    ),
-    (
+    ), (
         "https://m.media-amazon.com/images/M/MV5BMTkxM2FiYjctYjliYy00NjY2LWFmOTEtMWZiYWRjNjA4MGYxXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
         'https://www.wheninmanila.com/wp-content/uploads/2023/11/SHARED-Cover-Collage-x2-30-2.png',
         "Aquaman and the Lost Kingdom",
@@ -101,8 +98,7 @@ VALUES
         "2023",
         "The film is directed by James Wan from a screenplay written by David Leslie Johnson-McGoldrick and Will Beall and stars Jason Momoa as Aquaman, alongside Amber Heard, Patrick Wilson, Dolph Lundgren, Yahya Abdul-Mateen II, and Temuera Morrison. In the film, Aquaman must save the world from the threat of Ocean Master and Black Manta.",
         0
-    ),
-    (
+    ), (
         "https://cdn.entries.clios.com/styles/clio_aotw_ems_image_details_retina/s3/entry_attachments/image/72/2297/22197/123544/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg",
         'https://w0.peakpx.com/wallpaper/307/244/HD-wallpaper-batman-the-batman.jpg',
         "The Batman",
@@ -111,8 +107,7 @@ VALUES
         "2022",
         "The film is directed by Matt Reeves, who wrote the screenplay with Peter Craig. It stars Robert Pattinson as Bruce Wayne / Batman, with Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, and Colin Farrell rounding out the ensemble cast.",
         1
-    ),
-    (
+    ), (
         'https://m.media-amazon.com/images/M/MV5BMzZhYTVlMTMtMGZhMC00ZWYxLTljZDQtN2Y3YmFmZTk5OWU2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg',
         'https://www.tvinsider.com/wp-content/uploads/2023/11/avatar-the-last-airbender-770x433.jpg',
         'Avatar: The Last Airbender',
@@ -121,55 +116,50 @@ VALUES
         '2010',
         'Air, Water, Earth, Fire: the balance of the world is tipped by a savage war waged for a century already by the Fire Nation against the three other nations. Challenging his courage and combat skills, Aang discovers that he is the new Avatar, the only one capable of mastering all four elements. He joins forces with Katara, a Waterbender, and his older brother Sokka, to stop the Fire Nation before it is too late...',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/pictures/21/11/17/17/24/3336846.jpg',
         'https://hustonsite.files.wordpress.com/2023/06/93361-matrixresurrections_bannerposter.jpg',
         'Matrix Resurrections',
         'https://www.youtube.com/watch?v=9ix7TUGVYIo',
         148,
         '2020',
-        'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ', 
+        'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ',
         1
-    ),
-    (
+    ), (
         'https://static.posters.cz/image/1300/art-photo/harry-potter-and-the-half-blood-prince-i167377.jpg',
         'https://picfiles.alphacoders.com/621/62184.jpg',
         'Harry Potter and the Half-Blood Prince',
         'https://www.youtube.com/watch?v=tAiy66Xrsz4&ab_channel=HarryPotter',
         153,
         '2009',
-        'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.', 
+        'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/pictures/17/09/12/10/29/1142495.jpg',
         'https://pop.h-cdn.co/assets/17/39/1600x900/hd-aspect-1506522430-2049.jpg',
         'Blade Runner 2049',
         'https://www.youtube.com/watch?v=gCcx85zbxz4&ab_channel=WarnerBros.France',
         164,
         '2017',
-        'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.', 
+        'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/r_1280_720/img/6b/c7/6bc7a13ca6446a603f160b4ab4414141.jpg',
         'https://c8.alamy.com/comp/K36B8T/gladiator-gladiator-date-2000-K36B8T.jpg',
         'Gladiator',
         'https://www.youtube.com/watch?v=owK1qxDselE&ab_channel=UniversalPicturesFrance',
         155,
         '2000',
-        'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge', 
+        'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img6.acsta.net/medias/nmedia/18/82/69/17/19806656.jpg',
         'https://assets.mubicdn.net/images/artworks/582651/images-original.png?1686650120',
         'Intouchables',
         'https://www.youtube.com/watch?v=34WIbmXkewU&ab_channel=Gaumont',
         92,
         '2011',
-        'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.', 
+        'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.',
         1
     );
 
@@ -184,8 +174,7 @@ INSERT INTO
         `episodesNumber`,
         `seasonsNumber`
     )
-VALUES
-    (
+VALUES (
         "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
         'One Piece',
         55,
@@ -194,8 +183,7 @@ VALUES
         1,
         9,
         1
-    ),
-    (
+    ), (
         "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
         "Naruto",
         22,
@@ -337,16 +325,14 @@ INSERT INTO
         `password`,
         `IsAdmin`
     )
-VALUES
-    (
+VALUES (
         'Aurel',
         'aurelien.emeriau@wcs.com',
         '1983/06/10',
         '0',
         'ggfd4554',
         '0'
-    ),
-    (
+    ), (
         'Alex',
         'alex@wcs.com',
         '1998/03/19',
@@ -357,18 +343,12 @@ VALUES
 
 INSERT INTO
     `En_tendance_film` (`userId`, `filmId`)
-VALUES
-    (1, 1),
-    (1, 2);
+VALUES (1, 1), (1, 2);
 
 INSERT INTO
     `Favori_film` (`userId`, `filmId`)
-VALUES
-    (1, 1),
-    (1, 2);
+VALUES (1, 1), (1, 2);
 
-INSERT INTO 
+INSERT INTO
     `En_tendance_serie` (`userId`, `serieId`)
-    VALUES
-    (1, 1),
-    (1, 2);
+VALUES (1, 1), (1, 2);
