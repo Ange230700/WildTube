@@ -1,13 +1,15 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import MovieSlide from "../components/MovieSlide";
-import SerieSlide from "../components/SerieSlide";
+// import SerieSlide from "../components/SerieSlide";
+import MovieLink from "../components/MovieLink";
+import MovieGenreTabsContainer from "../components/MovieGenreTabsContainer";
 
 function Categories() {
   const [searchValue, setSearchValue] = useState("");
   const [reqOneCount, setReqOneCount] = useState([]);
-  const [reqTwoCount, setReqTwoCount] = useState([]);
+  // const [reqTwoCount, setReqTwoCount] = useState([]);
   const [categories, setCategories] = useState([]);
 
   const { pathname } = useLocation();
@@ -21,13 +23,12 @@ function Categories() {
     try {
       const result = await axios.all([
         axios.get(`http://localhost:3310/api/films/category/${catId}`),
-        axios.get(`http://localhost:3310/api/series/category/${catId}`),
+        // axios.get(`http://localhost:3310/api/series/category/${catId}`),
       ]);
       const resFilms = result[0].data;
-      const resSeries = result[1].data;
-      // console.warn(resFilms, resSeries);
+      // const resSeries = result[1].data;
       setReqOneCount(resFilms);
-      setReqTwoCount(resSeries);
+      // setReqTwoCount(resSeries);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -73,25 +74,7 @@ function Categories() {
           </button>
         </div> */}
 
-        <div className="MovieGenreTabsContainer">
-          <div className="MovieGenreTabContainerAll">
-            <div className="All">All</div>
-          </div>
-          <div className="MovieGenreContainer">
-            {categories.map((cat) => {
-              return (
-                <Link
-                  className="MovieGenreContainerStyle"
-                  key={cat.id}
-                  to={`/category/${cat.id}`}
-                  state={cat.id}
-                >
-                  <div>{cat.name}</div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        <MovieGenreTabsContainer categories={categories} />
         <div>
           <div className="display">
             {searchValue.length > 0 ? (
@@ -104,7 +87,7 @@ function Categories() {
                   )
                   .map((movie) => (
                     <Link key={movie.id} to={`/movies/${movie.id}`}>
-                      <MovieSlide movie={movie} />
+                      <MovieLink movie={movie} />
                     </Link>
                   ))}
               </>
@@ -112,18 +95,19 @@ function Categories() {
               <>
                 {reqOneCount.map((film) => {
                   return (
-                    <Link key={film.filmId} to={`/movies/${film.filmId}`}>
+                    <NavLink key={film.id} to={`/movies/${film.id}`}>
+                      {/* <h1>{film.filmId}</h1> */}
                       <MovieSlide movie={film} />
-                    </Link>
+                    </NavLink>
                   );
                 })}
-                {reqTwoCount.map((serie) => {
+                {/* {reqTwoCount.map((serie) => {
                   return (
                     <Link key={serie.serieId} to={`/series/${serie.serieId}`}>
                       <SerieSlide serie={serie} />
                     </Link>
                   );
-                })}
+                })} */}
               </>
             )}
           </div>

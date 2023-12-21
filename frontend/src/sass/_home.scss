@@ -30,44 +30,6 @@
       }
     }
 
-    .movie-genre-tabs-container {
-      align-self: stretch;
-      padding: 0 calc(var(--spacing-constant) * 1);
-      align-items: center;
-      gap: calc(var(--spacing-constant) * 1);
-      display: flex;
-      overflow-x: scroll;
-      scroll-behavior: smooth;
-      list-style-type: none;
-
-      .movie-genre-tab-container {
-        align-items: center;
-        gap: calc(var(--spacing-constant) * 1);
-        display: flex;
-
-        .movie-genre {
-          color: var(
-            --not-selected-movie-genre-tab-color,
-            hsla(0, 0%, 100%, 0.6)
-          );
-          font-size: calc(var(--font-size-constant) * 1.2);
-          font-weight: var(--font-weight-semi-bold);
-          text-wrap: nowrap;
-          text-decoration: none;
-        }
-
-        .selected-tab {
-          color: var(--selected-movie-genre-tab-color, hsla(0, 0%, 100%, 1));
-          border-bottom: 1px solid
-            var(--selected-tab-border-bottom-color, hsla(335, 100%, 66%, 1));
-        }
-      }
-    }
-
-    .movie-genre-tabs-container::-webkit-scrollbar {
-      display: none;
-    }
-
     .category-movie-display-container {
       .category-title-container {
         align-self: stretch;
@@ -78,9 +40,13 @@
 
         .category-title {
           color: var(--primary-font-color);
-          font-size: calc(var(--font-size-constant) * 1.4);
           font-weight: var(--font-weight-semi-bold);
           text-wrap: nowrap;
+          font-size: clamp(
+            calc(var(--font-size-constant) * 1.4),
+            4.375vw,
+            calc(var(--font-size-constant) * 1.4 * 1.5)
+          );
         }
 
         .category-page-link {
@@ -101,16 +67,11 @@
         );
         display: flex;
         overflow-x: scroll;
-        justify-content: center;
       }
 
       .static-slider-container::-webkit-scrollbar {
-        height: 5px;
+        height: 4px;
         width: 0;
-      }
-
-      .static-slider-container::-webkit-scrollbar-track {
-        background: var(--scrollbar-track-color, hsla(335, 100%, 66%, 0.502));
       }
 
       .static-slider-container::-webkit-scrollbar-thumb {

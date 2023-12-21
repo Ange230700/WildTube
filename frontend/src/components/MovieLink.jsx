@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MovieSlide from "./MovieSlide";
 
 function MovieLink({ movie }) {
-  if (!movie || !movie.id) {
+  if (!movie) {
     console.error("MovieLink", "movie is not valid", movie);
     return null;
   }

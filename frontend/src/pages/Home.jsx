@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useMovies } from "../contexts/MovieContext";
 import DynamicHeroSlider from "../components/DynamicHeroSlider";
-import MovieLink from "../components/MovieLink";
+import CategoryDisplay from "../components/CategoryDisplay";
+import MovieGenreTabsContainer from "../components/MovieGenreTabsContainer";
 
 function Home() {
   const { movies } = useMovies();
@@ -49,47 +49,14 @@ function Home() {
           />
         </div>
         <DynamicHeroSlider movies={movies} />
-        <ul className="movie-genre-tabs-container">
-          <li className="movie-genre-tab-container">
-            <p className="movie-genre selected-tab">Toutes les catégories</p>
-          </li>
-          {categories.map((cat) => {
-            return (
-              <li className="movie-genre-tab-container" key={cat.id}>
-                <Link
-                  className="movie-genre selected-tab"
-                  to={`/category/${cat.id}`}
-                  state={cat.id}
-                >
-                  {cat.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        <section className="category-movie-display-container">
-          <div className="category-title-container">
-            <div className="category-title">Recommandations</div>
-            <div className="category-page-link">Show all</div>
-          </div>
-          <div className="static-slider-container">
-            {movies.map((movie) => (
-              <MovieLink key={movie.id} movie={movie} />
-            ))}
-          </div>
-        </section>
-        <section className="category-movie-display-container">
-          <div className="category-title-container">
-            <div className="category-title">Recommandations</div>
-            <div className="category-page-link">Show all</div>
-          </div>
-          <div className="static-slider-container">
-            {movies.map((movie) => (
-              <MovieLink key={movie.id} movie={movie} />
-            ))}
-          </div>
-        </section>
+        <MovieGenreTabsContainer categories={categories} />
+        {categories.map((categorie) => (
+          <CategoryDisplay
+            key={categorie.id}
+            categorie={categorie}
+            movies={movies}
+          />
+        ))}
       </div>
     </div>
   );
