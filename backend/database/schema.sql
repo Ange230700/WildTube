@@ -173,7 +173,7 @@ VALUES
         92,
         '2011',
         'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.',
-        1
+        0
     ),
     (
         'https://i.ebayimg.com/images/g/3hUAAOSwfNRhXhUZ/s-l1200.webp',
@@ -192,7 +192,7 @@ VALUES
         'https://www.youtube.com/watch?v=IPDLodUE9gg&ab',
         79,
         '2021',
-        'Justice League: War is a 2014 American animated superhero film featuring the DC Comics superhero team the Justice League, and an adaptation of the 2011 comic book series Justice League: Origin by Geoff Johns and Jim Lee, the first story in DC\'s The New 52. It was directed by Jay Oliva, scripted by Heath Corson. It is the 18th film in the DC Universe Animated Original Movies series. The film was released for downloading on January 21, 2014 and was released on Blu-ray and DVD formats on February 4, 2014. It had its world premiere at the Paley Center for Media on the same day.',
+        'Justice League: War is a 2014 American animated superhero film featuring the DC Comics superhero team the Justice League, and an adaptation of the 2011 comic book series Justice League: Origin by Geoff Johns and Jim Lee, the first story in DC\'s The New 52. It was directed by Jay Oliva, scripted by Heath Corson.',
         0
     ),
     (
@@ -204,6 +204,126 @@ VALUES
         '2010',
         'A heroic version of Lex Luthor from an alternate universe appears to recruit the Justice League to help save his Earth from the Crime Syndicate, an evil version of the League. What ensues is the ultimate battle of good versus evil in a war that threatens both planets and, through a devious plan launched by Batman\'s counterpart Owlman, puts the balance of all existence in peril.',
         1
+    ),
+    (
+        'https://fr.web.img2.acsta.net/medias/nmedia/18/84/94/35/20078430.jpg',
+        'https://thumb.canalplus.pro/http/unsafe/1440x810/filters:quality(80)/img-hapi.canalplus.pro:80/ServiceImage/ImageID/112134748',
+        'Rebelle',
+        'https://www.youtube.com/watch?v=tS9efNQn1Gk?',
+        95,
+        '2012',
+        'Since the dawn of time, in the heart of the wild and mysterious lands of the Scottish Highlands, stories of epic battles and mythical legends have been passed down from generation to generation.',
+        1
+    ),
+    (
+        'https://fr.web.img4.acsta.net/medias/nmedia/18/35/57/73/18660716.jpg',
+        'https://le-cartographe.net/images/stories/Images/godfather_large.jpg',
+        'Le parrain',
+        'https://www.youtube.com/watch?v=bmtuIhesQWA',
+        175,
+        '1972',
+        'In 1945, in New York, the Corleones are one of the five mafia families. Don Vito Corleone, "godfather" of this family, marries his daughter to a bookmaker. Sollozzo, "godfather" of the Tattaglia family, offers Don Vito an association in drug trafficking, but he refuses. Sonny, one of his sons, is in favor of it.',
+        1
+    ),
+    (
+        'https://fr.web.img5.acsta.net/medias/nmedia/18/63/95/41/18927494.jpg',
+        'https://www.fsa.uliege.be/upload/docs/image/jpeg/2023-06/indiana.jpg',
+        'Indina Jones et le cadran de la destinée',
+        'https://www.youtube.com/watch?v=4tvtYAMPsxI',
+        154,
+        '2023',
+        '1969. After spending more than ten years teaching at Hunter College in New York, the esteemed Dr. Jones, professor of archeology, is about to retire and live out peaceful days.',
+        0
+    ),
+    (
+        'https://fr.web.img2.acsta.net/pictures/16/02/03/11/17/130929.jpg',
+        'https://images.affiches-et-posters.com//albums/3/46439/poster-film-batman-superman-l-aube-justice-129600.jpg',
+        'Batman VS Superman',
+        'https://www.youtube.com/watch?v=NAk1BGZQnk0',
+        153,
+        '2016',
+        'Fearing that Superman will abuse his omnipotence, the Dark Knight decides to confront him: does the world need more a superhero with limitless powers or a vigilante with formidable strength? of human origin? Meanwhile, a terrible threat looms on the horizon...',
+        1
+    ),
+    (
+        'https://fr.web.img5.acsta.net/pictures/22/04/08/10/30/1779137.jpg',
+        'https://proxymedia.woopic.com/api/v1/images/331%2FDOCTORSTRANW0191275_BAN1_2424_NEWTV.jpg',
+        'Dr Strange',
+        'https://www.youtube.com/watch?v=C0kqV-TYXP4',
+        126,
+        '2022',
+        'In this new Marvel Studios film, the Marvel Cinematic Universe unlocks and pushes the boundaries of the multiverse even further. Journey into the unknown with Doctor Strange, who with the help of old and new mystical allies, traverses the mind-blowing and dangerous realities of the multiverse to face a mysterious new adversary.',
+        0
+    ),
+    (
+        'https://musicart.xboxlive.com/7/687d6400-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080',
+        'https://res.cloudinary.com/jerrick/image/upload/v1667350087/6361be46da5a81001da26b55.jpg',
+        'Black Panter',
+        'https://www.youtube.com/watch?v=DlGIWM_e9vg',
+        162,
+        '2022',
+        'Queen Ramonda, Shuri, MBaku, Okoye and the Dora Milaje fight to protect their nation from interference from other world powers after the death of King TChalla. As the people strive to move forward, our heroes will have to unite and count on the help of mercenary Nakia and Everett Ross to bring the kingdom of Wakanda into a new era. But a terrible threat arises from a kingdom hidden deep in the oceans: Talokan.',
+        1
+    ),
+    (
+        'https://fr.web.img4.acsta.net/pictures/21/11/16/10/01/4860598.jpg',
+        'https://imgsrc.cineserie.com/2021/12/sp-1.jpg?ver=1',
+        'SpiderMan No Way Hole',
+        'https://www.youtube.com/watch?v=o-qvJ2iUqvA',
+        148,
+        '2021',
+        'For the first time in his cinematic history, Spider-Man, the friendly neighborhood hero, is unmasked and can no longer separate his normal life from his heavy superhero responsibilities. When he asks Doctor Strange for help, the stakes become even more dangerous, forcing him to discover what being Spider-Man truly means',
+        0
+    ),
+    (
+        'https://fr.web.img6.acsta.net/pictures/22/05/24/11/16/2411535.jpg',
+        'https://m.media-amazon.com/images/I/71znSSjPGQL._AC_UF894,1000_QL80_.jpg',
+        'Thor Love and Thunder',
+        'https://www.youtube.com/watch?v=wPPim0we5m8',
+        119,
+        '2022',
+        'While Thor is deep in introspection and seeking serenity, his retreat is interrupted by a galactic killer known as Gorr, who has made it his mission to exterminate all the gods.',
+        1
+    ),
+    (
+        'https://fr.web.img4.acsta.net/pictures/21/07/30/15/39/5399627.jpg',
+        'https://i0.wp.com/www.universdescomics.com/wp-content/uploads/2021/08/Shang-Chi-official-poster-1-e1629547002819.jpg?fit=810%2C522&ssl=1',
+        'Shang-Shi',
+        'https://www.youtube.com/watch?v=PD3rUCBFDlI',
+        132,
+        '2021',
+        'Shang-Chi will have to confront a past he thought he had left behind when he is caught in the web of the mysterious Ten Rings organization.',
+        1
+    ),
+    (
+        'https://fr.web.img6.acsta.net/pictures/23/07/17/15/06/1535719.jpg',
+        'https://dulaccinemas.com/sites/default/files/styles/vignette_fiche_film/public/film/photos/2023/8-LLSIC.jpg?itok=GYqGB912',
+        'Napoleon',
+        'https://www.youtube.com/watch?v=A3xaMZZooVs',
+        158,
+        '2023',
+        'Spectacular fresco, Napoleon focuses on the rise and fall of Emperor Napoleon Bonaparte. The film traces Bonaparte s relentless conquest of power through the prism of his passionate and tormented relationship with Joséphine, the great love of his life.',
+        0
+    ),
+    (
+        'https://fr.web.img2.acsta.net/pictures/19/10/25/11/18/5224976.jpg',
+        'https://i0.wp.com/songedunenuitdete.com/wp-content/uploads/2018/03/Titanic-mythic-kiss.jpg?fit=1920%2C1080&ssl=1',
+        'Titanic',
+        'https://www.youtube.com/watch?v=RSmXRew7hvo',
+        194,
+        '1998',
+        'Southampton, April 10, 1912. The largest and most modern liner in the world, renowned for its unsinkability, the "Titanic", sets sail for its first voyage. Four days later, it hits an iceberg. On board, a poor artist and a wealthy bourgeois woman fall in love.',
+        1
+    ),
+    (
+        'https://fr.web.img2.acsta.net/pictures/20/08/03/12/15/2118693.jpg',
+        'https://www.pieuvre.ca/wp-content/uploads/2020/12/tenet-poster.jpg',
+        'Tenet',
+        'https://www.youtube.com/watch?v=6UG5LJQNjts',
+        210,
+        '2020',
+        'Armed with just one word – Tenet – and determined to fight to save the world, our protagonist travels through the twilight world of international espionage. His mission will project him into a dimension that goes beyond time. However, it is not a question of time travel, but of a temporal reversal...',
+        0
     );
 
 INSERT INTO 
@@ -405,17 +525,27 @@ VALUES
     (3, 9),
     (4, 1),
     (5, 8),
-    (6, 4),
+    (6, 20),
     (7, 3),
     (8, 3),
     (9, 8),
     (10, 3),
     (11, 1),
-    (12, 4),
-    (13, 9),
-    (14, 10),
-    (15, 10);
-    
+    (12, 3),
+    (14, 9),
+    (15, 8),
+    (16, 8),
+    (17, 11),
+    (18, 11),
+    (19, 11),
+    (20, 11),
+    (21, 11),
+    (22, 3),
+    (23, 9),
+    (24, 9),
+    (25, 20),
+    (26, 20),
+    (27, 20);
 
 INSERT INTO
     `Categorie_par_serie` (`serieId`, `categorieId`)
