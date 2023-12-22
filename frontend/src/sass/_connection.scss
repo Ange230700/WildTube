@@ -1,6 +1,8 @@
 .loginPage {
   flex-direction: column;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 1;
 
   .logo2 {
@@ -15,11 +17,13 @@
   .inputs {
     flex-direction: column;
     display: flex;
+    align-items: center;
   }
   .inputContainer {
     padding-bottom: 25px;
     display: inline-flex;
     justify-content: center;
+    max-width: 500px;
   }
   .input {
     width: 63vw;
@@ -45,7 +49,9 @@
     padding-left: 10px;
     padding-right: 10px;
     justify-content: center;
+    align-items: center;
     display: inline-flex;
+    max-width: 300px;
   }
   .connectionButton {
     background: var(--secondary-font-color);
@@ -54,15 +60,17 @@
     padding-right: 10;
   }
   .connexion {
+    color: var(--background-color);
     width: 35vw;
     height: 5vh;
-    text-align: center;
-    color: var(--text-field-background-color);
     font-size: 16px;
     font-weight: var(--font-weight-semi-bold);
-    padding-top: 4px;
     background: none;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
   .signUpText {
     display: flex;

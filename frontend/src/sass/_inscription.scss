@@ -16,11 +16,13 @@
   .inputs {
     flex-direction: column;
     display: flex;
+    align-items: center;
     gap: var(--spacing-constant);
   }
   .inputContainer {
     justify-content: center;
     display: flex;
+    max-width: 500px;
   }
   .input {
     width: 63vw;
@@ -52,10 +54,11 @@
   }
   .orientationContainer {
     display: inline-flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    gap: calc(var(--spacing-constant) * 2);
   }
   .orientationOption {
     display: flex;
@@ -78,6 +81,7 @@
   }
   .inputDate {
     width: 75vw;
+    max-width: 500px;
     height: 6vh;
     text-align: center;
     background: rgba(238, 226, 226, 0.1);
@@ -103,10 +107,12 @@
   }
   .signUpButton {
     width: 35vw;
+    max-width: 300px;
     background-color: var(--secondary-font-color);
     border-radius: 5px;
     padding: calc(var(--spacing-constant) * 1) calc(var(--spacing-constant) * 2);
     border: none;
+    cursor: pointer;
   }
   .inscription {
     text-align: center;
