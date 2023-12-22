@@ -367,21 +367,21 @@ INSERT INTO
     (1, 1),
     (1, 2);
 
--- INSERT INTO
---     `Categorie_par_film` (`filmId`, `categorieId`)
--- VALUES
---     (1, 1),
---     (2, 1),
---     (3, 1),
---     (4, 1),
---     (5, 1),
---     (6, 1),
---     (7, 3),
---     (8, 3),
---     (9, 8),
---     (10, 3),
---     (11, 1),
---     (12, 4);
+INSERT INTO
+    `Categorie_par_film` (`filmId`, `categorieId`)
+VALUES
+    (1, 1),
+    (2, 1),
+    (3, 1),
+    (4, 1),
+    (5, 1),
+    (6, 1),
+    (7, 3),
+    (8, 3),
+    (9, 8),
+    (10, 3),
+    (11, 1),
+    (12, 4);
 
 INSERT INTO
     `Categorie_par_serie` (`serieId`, `categorieId`)
