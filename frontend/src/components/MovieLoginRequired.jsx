@@ -34,7 +34,7 @@ function MovieLoginRequired({ movie }) {
             <p className="movie-title">{movie.title}</p>
             <p className="movie-description">{movie.description}</p>
           </div>
-          <div className="comments-section">
+          {/* <div className="comments-section">
             <div className="comments-section-title">
               <p className="comments-section-title-text">Commentaires</p>
             </div>
@@ -45,7 +45,7 @@ function MovieLoginRequired({ movie }) {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="upper-layer">
           <div className="registration-invitation-container">

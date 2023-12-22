@@ -32,7 +32,7 @@ function FreeMovie({ movie }) {
           <p className="movie-title">{movie.title}</p>
           <p className="movie-description">{movie.description}</p>
         </div>
-        <div className="comments-section">
+        {/* <div className="comments-section">
           <div className="comments-section-title">
             <p className="comments-section-title-text">Commentaires</p>
           </div>
@@ -43,7 +43,7 @@ function FreeMovie({ movie }) {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
