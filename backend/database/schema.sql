@@ -4,6 +4,7 @@ CREATE TABLE
     `Serie` (
         `id` int primary key auto_increment not null,
         `miniature` varchar(255) not null,
+        `cover` VARCHAR(255) NOT NULL,
         `title` VARCHAR(50) not NULL,
         `videoUrl` VARCHAR(255),
         `duration` INT not NULL,
@@ -15,6 +16,7 @@ CREATE TABLE
     );
 
 DROP TABLE IF EXISTS `User`;
+
 CREATE TABLE
     `User` (
         `id` int primary key auto_increment not null,
@@ -25,6 +27,7 @@ CREATE TABLE
         `password` varchar(50) not null,
         `IsAdmin` bool not null
     );
+
 DROP TABLE IF EXISTS `Film`;
 
 CREATE TABLE
@@ -129,7 +132,7 @@ VALUES
         'https://www.youtube.com/watch?v=9ix7TUGVYIo',
         148,
         '2020',
-        'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ', 
+        'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ',
         1
     ),
     (
@@ -139,7 +142,7 @@ VALUES
         'https://www.youtube.com/watch?v=tAiy66Xrsz4&ab_channel=HarryPotter',
         153,
         '2009',
-        'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.', 
+        'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.',
         0
     ),
     (
@@ -149,7 +152,7 @@ VALUES
         'https://www.youtube.com/watch?v=gCcx85zbxz4&ab_channel=WarnerBros.France',
         164,
         '2017',
-        'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.', 
+        'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.',
         1
     ),
     (
@@ -159,7 +162,7 @@ VALUES
         'https://www.youtube.com/watch?v=owK1qxDselE&ab_channel=UniversalPicturesFrance',
         155,
         '2000',
-        'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge', 
+        'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge',
         0
     ),
     (
@@ -169,42 +172,34 @@ VALUES
         'https://www.youtube.com/watch?v=34WIbmXkewU&ab_channel=Gaumont',
         92,
         '2011',
-        'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.', 
+        'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.',
         1
     );
 
-INSERT INTO
-    `Serie` (
-        `miniature`,
-        `title`,
-        `duration`,
-        `year`,
-        `description`,
-        `IsAvailable`,
-        `episodesNumber`,
-        `seasonsNumber`
-    )
-VALUES
-    (
-        "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
-        'One Piece',
-        55,
-        '2023',
-        'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
-        1,
-        9,
-        1
-    ),
-    (
-        "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
-        "Naruto",
-        22,
-        "2002",
-        "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
-        1,
-        224,
-        9
-    );
+-- INSERT INTO 
+--     `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
+-- VALUES 
+--     (
+--         "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
+--         "https://i.ytimg.com/vi/gJIHLGHckzk/hq720.jpg",
+--         'One Piece',
+--         55,
+--         '2023',
+--         'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
+--         0,
+--         9,
+--         1
+--     ), (
+--         "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
+--         "https://fr.web.img6.acsta.net/r_654_368/newsv7/19/01/17/15/43/1457863.jpg",
+--         "Naruto",
+--         22,
+--         "2002",
+--         "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
+--         1,
+--         224,
+--         9
+--     );
 
 DROP TABLE IF EXISTS `Categorie`;
 
@@ -362,12 +357,34 @@ VALUES
 
 INSERT INTO
     `Favori_film` (`userId`, `filmId`)
-VALUES
+    VALUES
     (1, 1),
     (1, 2);
 
-INSERT INTO 
+INSERT INTO
     `En_tendance_serie` (`userId`, `serieId`)
     VALUES
     (1, 1),
     (1, 2);
+
+-- INSERT INTO
+--     `Categorie_par_film` (`filmId`, `categorieId`)
+-- VALUES
+--     (1, 1),
+--     (2, 1),
+--     (3, 1),
+--     (4, 1),
+--     (5, 1),
+--     (6, 1),
+--     (7, 3),
+--     (8, 3),
+--     (9, 8),
+--     (10, 3),
+--     (11, 1),
+--     (12, 4);
+
+INSERT INTO
+    `Categorie_par_serie` (`serieId`, `categorieId`)
+VALUES
+    (1, 10),
+    (2, 10);

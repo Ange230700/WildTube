@@ -44,7 +44,7 @@ class CategorieParFilmManager extends AbstractManager {
   async readAllFilmsForSpecificCategorie(idCategorie) {
     // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
     const [rows] = await this.database.query(
-      `select f.title, c.name from ${this.table} fc inner join categorie c on c.id = fc.categorieId INNER JOIN film f ON f.id = fc.filmId where c.id = ?`,
+      `select f.id, f.miniature, f.cover, f.title, f.videoUrl, f.duration, f.year, f.description, f.IsAvailable, c.name from ${this.table} fc inner join categorie c on c.id = fc.categorieId INNER JOIN film f ON f.id = fc.filmId where c.id = ?`,
       [idCategorie]
     );
     // Return the array of categories
