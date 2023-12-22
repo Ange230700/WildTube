@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import LogOut from "../components/LogOut";
+import LogoContainer from "../components/LogoContainer";
 
 function Connection() {
   const [user, setUser] = useState({
@@ -40,9 +41,7 @@ function Connection() {
         <LogOut />
       ) : (
         <>
-          <div className="logoContainer">
-            <img className="logo2" src="src/assets/icons/logo.svg" alt="Logo" />
-          </div>
+          <LogoContainer />
           <div className="form">
             <div className="inputs">
               <div className="inputContainer">

@@ -4,7 +4,7 @@ function NavBar() {
   return (
     <div className="navbar">
       <div className="nav-icon-container">
-        <NavLink to="/" className="home-icon">
+        <NavLink to="/" className="div-icon">
           <img
             className="icon"
             src="/src/assets/icons/home_icon.svg"
@@ -13,7 +13,7 @@ function NavBar() {
         </NavLink>
       </div>
       <div className="nav-icon-container">
-        <NavLink to="/search" className="search-icon">
+        <NavLink to="/search" className="div-icon">
           <img
             className="icon"
             src="/src/assets/icons/search_icon.svg"

@@ -25,8 +25,7 @@ function MovieSlide({ movie }) {
           />
         </div>
       </div>
-    </div>
-</>
+    </>
   );
 }
 

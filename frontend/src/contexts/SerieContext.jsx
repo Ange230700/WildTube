@@ -12,7 +12,6 @@ export function SerieProvider({ children }) {
       .get("http://localhost:3310/api/series")
       .then((response) => {
         setSeries(response.data);
-        // console.info(response.data);
       })
       .catch((error) => {
         console.error(error);
