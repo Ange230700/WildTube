@@ -179,10 +179,30 @@ VALUES
         'https://i.ebayimg.com/images/g/3hUAAOSwfNRhXhUZ/s-l1200.webp',
         'https://d3dfsf9oc1ojzp.cloudfront.net/original/4X/7/3/b/73b08b82c41c646a8e21866f0998ecf5472ce7df.jpeg',
         'Justice League Dark',
-        'https://youtu.be/dKrVegVI0Us',
+        'https://www.youtube.com/watch?v=NsBnnM2qjAo',
         75,
         '2017',
         'Justice League Dark is a 2017 American animated superhero film produced by Warner Bros. Animation and distributed by Warner Home Video. Featuring the DC Comics team of the same name created by Peter Milligan and Mikel Janin, the film is the twenty-seventh in the DC Universe Animated Original Movies series and a part of DC Animated Movie Universe. It was released digitally on January 24, 2017, and on DVD and Blu-ray on February 7, 2017. The film is directed by Jay Oliva, and stars the voices of Matt Ryan, Jason O\'Mara, Camilla Luddington, Nicholas Turturro, and Ray Chase.',
+        1
+    ),
+    (
+        'https://i.ebayimg.com/images/g/qisAAOSwDvVkuA-M/s-l1600.jpg',
+        'https://4kwallpapers.com/images/wallpapers/justice-league-3840x2160-11805.jpg',
+        'Justice League War World',
+        'https://www.youtube.com/watch?v=IPDLodUE9gg&ab',
+        79,
+        '2021',
+        'Justice League: War is a 2014 American animated superhero film featuring the DC Comics superhero team the Justice League, and an adaptation of the 2011 comic book series Justice League: Origin by Geoff Johns and Jim Lee, the first story in DC\'s The New 52. It was directed by Jay Oliva, scripted by Heath Corson. It is the 18th film in the DC Universe Animated Original Movies series. The film was released for downloading on January 21, 2014 and was released on Blu-ray and DVD formats on February 4, 2014. It had its world premiere at the Paley Center for Media on the same day.',
+        0
+    ),
+    (
+        'https://www.bigflix.com/wp-content/uploads/2023/12/jl-crisis-on-infinite-earths-part1-blogroll-1701467786426.jpg',
+        'https://i0.wp.com/www.iconvsicon.com/wp-content/uploads/2023/12/JL_CRISIS_PT1_-2024-featured.jpg?fit=800%2C485&ssl=1',
+        'Justice League: Crisis on Two Earths',
+        'https://www.youtube.com/watch?v=c6oSqBly2ho?si=Sgb0RXhNJpMhp2ii',
+        75,
+        '2010',
+        'A heroic version of Lex Luthor from an alternate universe appears to recruit the Justice League to help save his Earth from the Crime Syndicate, an evil version of the League. What ensues is the ultimate battle of good versus evil in a war that threatens both planets and, through a devious plan launched by Batman\'s counterpart Owlman, puts the balance of all existence in peril.',
         1
     );
 
@@ -382,17 +402,19 @@ INSERT INTO
 VALUES
     (1, 1),
     (2, 1),
-    (3, 1),
+    (3, 9),
     (4, 1),
-    (5, 1),
-    (6, 1),
+    (5, 8),
+    (6, 4),
     (7, 3),
     (8, 3),
     (9, 8),
     (10, 3),
     (11, 1),
     (12, 4),
-    (13, 9);
+    (13, 9),
+    (14, 10),
+    (15, 10);
     
 
 INSERT INTO
