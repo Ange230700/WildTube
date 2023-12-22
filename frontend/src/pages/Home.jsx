@@ -9,6 +9,7 @@ function Home() {
   const { movies } = useMovies();
   const [categories, setCategories] = useState([]);
   const [entendance, setEnTendance] = useState([]);
+  const [scienceFiction, setScienceFiction] = useState([]);
 
   const getcategories = () => {
     axios
@@ -26,7 +27,7 @@ function Home() {
   const getentendance = () => {
     axios
 
-      .get("http://localhost:3310/api/FilmsEnTendance")
+      .get("http://localhost:3310/api/films/category/1")
 
       .then((response) => {
         setEnTendance(response.data);
@@ -34,6 +35,19 @@ function Home() {
   };
   useEffect(() => {
     getentendance();
+  }, []);
+
+  const getScienceFiction = () => {
+    axios
+
+      .get("http://localhost:3310/api/films/category/3")
+
+      .then((response) => {
+        setScienceFiction(response.data);
+      });
+  };
+  useEffect(() => {
+    getScienceFiction();
   }, []);
 
   return (
@@ -66,12 +80,11 @@ function Home() {
           </div>
         </div>
 
-        <div className="CategoryTitleContainer">
-          <div className="CategoryTitle">Recommandations</div>
-          <div className="CategoryPageLink">Show all</div>
-        </div>
-
         <DynamicHeroSlider movies={movies} />
+
+        <div className="CategoryTitleContainer">
+          <div className="CategoryTitle">All</div>
+        </div>
 
         <section className="category-movie-display-container">
           <div className="static-slider-container">
@@ -84,8 +97,7 @@ function Home() {
         </section>
 
         <div className="CategoryTitleContainer">
-          <div className="CategoryTitle">Nouveautés</div>
-          <div className="CategoryPageLink">Show all</div>
+          <div className="CategoryTitle">Action</div>
         </div>
 
         {/* get all sections 
@@ -103,7 +115,7 @@ function Home() {
         <section className="category-movie-display-container">
           <div className="static-slider-container">
             {entendance.map((movie) => (
-              <Link key={movie.id} to={`/movies/${movie.id}`}>
+              <Link key={movie.filmId} to={`/movies/${movie.filmId}`}>
                 <MovieLink movie={movie} />
               </Link>
             ))}
@@ -111,13 +123,12 @@ function Home() {
         </section>
 
         <div className="CategoryTitleContainer">
-          <div className="CategoryTitle">En tendances</div>
-          <div className="CategoryPageLink">Show all</div>
+          <div className="CategoryTitle">Science Fiction</div>
         </div>
 
         <section className="category-movie-display-container">
           <div className="static-slider-container">
-            {entendance.map((movie) => (
+            {scienceFiction.map((movie) => (
               <Link key={movie.id} to={`/movies/${movie.id}`}>
                 <MovieLink movie={movie} />
               </Link>

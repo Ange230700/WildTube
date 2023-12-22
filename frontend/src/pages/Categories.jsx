@@ -76,7 +76,10 @@ function Categories() {
 
         <div className="MovieGenreTabsContainer">
           <div className="MovieGenreTabContainerAll">
-            <div className="All">All</div>
+            <div className="All">
+              <Link className="all" to="/" />
+              All
+            </div>
           </div>
           <div className="MovieGenreContainer">
             {categories.map((cat) => {
