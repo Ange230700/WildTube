@@ -5,7 +5,8 @@
     "db:seed": "node seed.js",
     "build": "node migrate.js",
     "start": "node index.js",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "npx prettier --write ."
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",

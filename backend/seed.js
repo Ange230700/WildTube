@@ -4,7 +4,7 @@
 require("dotenv").config();
 
 // Import Faker library for generating fake data
-const { faker } = require("@faker-js/faker");
+// const { faker } = require("@faker-js/faker");
 
 // Import database client
 const database = require("./database/client");
@@ -21,6 +21,7 @@ const seed = async () => {
 
     // // Optional: Truncate tables (remove existing data)
     // await database.query("truncate item");
+    await database.query("TRUNCATE Categorie_par_film");
 
     // // Insert fake data into the 'item' table
     // for (let i = 0; i < 10; i += 1) {
@@ -31,20 +32,16 @@ const seed = async () => {
     //   );
     // }
 
-    for (let numberOfData = 0; numberOfData < 100; numberOfData += 1) {
-      queries.push(
-        database.query(
-          "INSERT INTO `Film` (`miniature`, `title`, `duration`, `year`, `description`, `is_available`) VALUES (?, ?, ?, ?, ?, ?)",
-          [
-            faker.image.imageUrl(),
-            faker.lorem.words(),
-            faker.datatype.number(),
-            faker.datatype.number(),
-            faker.lorem.paragraph(),
-            faker.datatype.boolean(),
-          ]
-        )
-      );
+    // Insert fake data into the 'Categorie_par_film' table
+    for (let categorieIndex = 0; categorieIndex < 20; categorieIndex += 1) {
+      for (let filmIndex = 0; filmIndex < 20; filmIndex += 1) {
+        queries.push(
+          database.query(
+            "insert into Categorie_par_film(id_categorie,id_film) values (?,?)",
+            [categorieIndex, filmIndex]
+          )
+        );
+      }
     }
 
     /* ************************************************************************* */

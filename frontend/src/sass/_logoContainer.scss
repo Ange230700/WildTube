@@ -1,0 +1,15 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+
+  .logo {
+    width: 100%;
+    max-width: 100px;
+  }
+}
+
+@media screen and (width > 768px) {
+  .logo-container {
+    display: none;
+  }
+}
