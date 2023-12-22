@@ -174,32 +174,42 @@ VALUES
         '2011',
         'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.',
         1
+    ),
+    (
+        'https://i.ebayimg.com/images/g/3hUAAOSwfNRhXhUZ/s-l1200.webp',
+        'https://d3dfsf9oc1ojzp.cloudfront.net/original/4X/7/3/b/73b08b82c41c646a8e21866f0998ecf5472ce7df.jpeg',
+        'Justice League Dark',
+        'https://youtu.be/dKrVegVI0Us',
+        75,
+        '2017',
+        'Justice League Dark is a 2017 American animated superhero film produced by Warner Bros. Animation and distributed by Warner Home Video. Featuring the DC Comics team of the same name created by Peter Milligan and Mikel Janin, the film is the twenty-seventh in the DC Universe Animated Original Movies series and a part of DC Animated Movie Universe. It was released digitally on January 24, 2017, and on DVD and Blu-ray on February 7, 2017. The film is directed by Jay Oliva, and stars the voices of Matt Ryan, Jason O\'Mara, Camilla Luddington, Nicholas Turturro, and Ray Chase.',
+        1
     );
 
--- INSERT INTO 
---     `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
--- VALUES 
---     (
---         "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
---         "https://i.ytimg.com/vi/gJIHLGHckzk/hq720.jpg",
---         'One Piece',
---         55,
---         '2023',
---         'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
---         0,
---         9,
---         1
---     ), (
---         "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
---         "https://fr.web.img6.acsta.net/r_654_368/newsv7/19/01/17/15/43/1457863.jpg",
---         "Naruto",
---         22,
---         "2002",
---         "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
---         1,
---         224,
---         9
---     );
+INSERT INTO 
+    `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
+VALUES 
+    (
+        "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
+        "https://i.ytimg.com/vi/gJIHLGHckzk/hq720.jpg",
+        'One Piece',
+        55,
+        '2023',
+        'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
+        0,
+        9,
+        1
+    ), (
+        "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
+        "https://fr.web.img6.acsta.net/r_654_368/newsv7/19/01/17/15/43/1457863.jpg",
+        "Naruto",
+        22,
+        "2002",
+        "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
+        1,
+        224,
+        9
+    );
 
 DROP TABLE IF EXISTS `Categorie`;
 
@@ -367,21 +377,23 @@ INSERT INTO
     (1, 1),
     (1, 2);
 
--- INSERT INTO
---     `Categorie_par_film` (`filmId`, `categorieId`)
--- VALUES
---     (1, 1),
---     (2, 1),
---     (3, 1),
---     (4, 1),
---     (5, 1),
---     (6, 1),
---     (7, 3),
---     (8, 3),
---     (9, 8),
---     (10, 3),
---     (11, 1),
---     (12, 4);
+INSERT INTO
+    `Categorie_par_film` (`filmId`, `categorieId`)
+VALUES
+    (1, 1),
+    (2, 1),
+    (3, 1),
+    (4, 1),
+    (5, 1),
+    (6, 1),
+    (7, 3),
+    (8, 3),
+    (9, 8),
+    (10, 3),
+    (11, 1),
+    (12, 4),
+    (13, 9);
+    
 
 INSERT INTO
     `Categorie_par_serie` (`serieId`, `categorieId`)
