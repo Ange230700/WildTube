@@ -1,0 +1,57 @@
+.navbar-desktop {
+  display: none;
+}
+
+@media screen and (width > 768px) {
+  .navbar-desktop {
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+
+    .logo {
+      display: flex;
+      width: 100%;
+      max-width: clamp(
+        var(--logo-width, 150px),
+        var(--logo-width, 13vw),
+        var(--logo-width, calc(var(--logo-width, 100px) * 1.5))
+      );
+    }
+
+    .links-container {
+      height: calc(var(--links-container-height, 66px));
+      padding: 0 calc(var(--spacing-constant) * 4);
+      background: var(--background-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+
+      .links-wrapper {
+        align-items: center;
+        gap: 30px;
+        display: flex;
+
+        .link {
+          text-decoration: none;
+
+          .link-text {
+            color: white;
+            font-size: 28px;
+          }
+        }
+      }
+
+      .link {
+        text-decoration: none;
+
+        .link-text {
+          color: white;
+          font-size: 28px;
+        }
+      }
+    }
+  }
+}

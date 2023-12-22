@@ -3,10 +3,29 @@
 /* ************************************************************************* */
 
 // Import the manager modules responsible for handling data operations on the tables
-const ItemManager = require("./models/ItemManager");
+const CategorieManager = require("./models/CategorieManager");
+const UserManager = require("./models/UserManager");
+const FilmManager = require("./models/FilmManager");
+const SerieManager = require("./models/SerieManager");
+const EnTendanceFilmManager = require("./models/EnTendanceFilmManager");
+const FavoriFilmManager = require("./models/FavoriFilmManager");
+const FavoriSerieManager = require("./models/FavoriSerieManager");
+const CategorieParFilmManager = require("./models/CategorieParFilmManager");
+const CategorieParSerieManager = require("./models/CategorieParSerieManager");
+const EnTendanceSerieManager = require("./models/EnTendanceSerieManager");
 
 const managers = [
-  ItemManager,
+  CategorieManager,
+  UserManager,
+  FilmManager,
+  SerieManager,
+  EnTendanceFilmManager,
+  FavoriFilmManager,
+  FavoriSerieManager,
+  CategorieParFilmManager,
+  CategorieParSerieManager,
+  EnTendanceSerieManager,
+  // S1_tableJointure,
   // Add other managers here
 ];
 
@@ -19,6 +38,8 @@ managers.forEach((ManagerClass) => {
 
   tables[manager.table] = manager;
 });
+
+console.info("Registered tables:", Object.keys(tables));
 
 /* ************************************************************************* */
 

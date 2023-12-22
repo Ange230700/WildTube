@@ -1,0 +1,33 @@
+.navbar {
+  padding: calc(var(--spacing-constant) * 0.7) calc(var(--spacing-constant) * 3);
+  justify-content: space-between;
+  display: flex;
+
+  .nav-icon-container {
+    .div-icon {
+      display: flex;
+      width: clamp(
+        var(--nav-icon-container-width, 18px),
+        var(--nav-icon-container-width, 5.5vw),
+        var(
+          --nav-icon-container-width,
+          calc(var(--nav-icon-container-width, 18px) * 1.5)
+        )
+      );
+      height: clamp(
+        var(--nav-icon-container-height, 18px),
+        var(--nav-icon-container-height, 5.5vw),
+        var(
+          --nav-icon-container-height,
+          calc(var(--nav-icon-container-height, 18px) * 1.5)
+        )
+      );
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .navbar {
+    display: none;
+  }
+}

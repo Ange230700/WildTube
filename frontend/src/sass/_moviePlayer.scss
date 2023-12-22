@@ -1,0 +1,33 @@
+.movie-player {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  background-color: var(--background-color-2, hsla(0, 0%, 0%, 1));
+  padding-top: calc(var(--spacing-constant) * 1);
+
+  .back-to-previous-page {
+    display: flex;
+    width: 100%;
+    padding-left: calc(var(--spacing-constant) * 1);
+    height: var(--back-to-previous-page-height, 24px);
+
+    .back-to-previous-page-link {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .movie-player-wrapper {
+    width: 100%;
+    height: calc(100% - var(--back-to-previous-page-height, 24px));
+    display: flex;
+    position: relative;
+
+    .movie-player-iframe {
+      width: 100%;
+      height: calc(100% - 24px);
+    }
+  }
+}
