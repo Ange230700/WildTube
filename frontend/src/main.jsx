@@ -57,6 +57,10 @@ const router = createBrowserRouter([
         path: "/Inscription",
         element: <Inscription />,
       },
+      {
+        path: "/settingUser",
+        element: <settingUSer />,
+      },
     ],
   },
 ]);
