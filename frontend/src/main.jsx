@@ -61,7 +61,11 @@ const router = createBrowserRouter([
       {
         path: "/Parametre",
         element: <ParametreAdmin />,
-      }
+      },
+      {
+        path: "/settingUser",
+        element: <settingUSer />,
+      },
     ],
   },
 ]);
