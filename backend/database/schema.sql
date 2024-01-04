@@ -474,3 +474,7 @@ VALUES (1, 1), (1, 2);
 INSERT INTO
      `commentaire_film` (`userId`, `filmId`, `content`) 
 VALUES (1, 3, 'dernier commentaire'), (1,3 ,'la bonne') ;
+
+INSERT INTO
+    `commentaire_serie` (`userId`, `serieId`, `content`)
+VALUES (1,2, 'test pour serie'), (1,2 ,'ca fonctionne');

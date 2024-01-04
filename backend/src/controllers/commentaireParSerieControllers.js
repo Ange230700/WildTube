@@ -2,7 +2,7 @@ const tables = require("../tables");
 
 const read = async (req, res, next) => {
   try {
-    const commentaire = await tables.commentaire_film.read(req.params.id);
+    const commentaire = await tables.commentaire_serie.read(req.params.id);
     if (commentaire == null) {
       res.sendStatus(404);
     } else {
@@ -15,10 +15,12 @@ const read = async (req, res, next) => {
 
 const edit = async (req, res, next) => {
   try {
-    const result = await tables.commentaire_film.update(req);
+    const result = await tables.commentaire_serie.update(req);
     if (result) {
       try {
-        const newComment = await tables.commentaire_film.readOne(req.params.id);
+        const newComment = await tables.commentaire_serie.readOne(
+          req.params.id
+        );
         if (newComment) {
           res.json(newComment);
         }
@@ -37,7 +39,7 @@ const add = async (req, res, next) => {
   const commentaire = req.body;
 
   try {
-    const insertId = await tables.commentaire_film.create(commentaire);
+    const insertId = await tables.commentaire_serie.create(commentaire);
     res.status(200).json({ insertId });
   } catch (err) {
     next(err);
@@ -48,7 +50,7 @@ const destroy = async (req, res, next) => {
   const commentaireId = req.params.id;
 
   try {
-    const deletedRows = await tables.commentaire_film.delete({
+    const deletedRows = await tables.commentaire_serie.delete({
       id: commentaireId,
     });
 

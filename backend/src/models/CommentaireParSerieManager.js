@@ -1,21 +1,21 @@
 const AbstractManager = require("./AbstractManager");
 
-class CommentaireParFilmManager extends AbstractManager {
+class CommentaireParSerieManager extends AbstractManager {
   constructor() {
-    super({ table: "commentaire_film" });
+    super({ table: "commentaire_serie" });
   }
 
-  async create({ userId, filmId, content }) {
+  async create({ userId, serieId, content }) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (userId, filmId, content) values (?,?,?)`,
-      [userId, filmId, content]
+      `insert into ${this.table} (userId, serieId, content) values (?,?,?)`,
+      [userId, serieId, content]
     );
     return result.insertId;
   }
 
   async readOne(id) {
     const [result] = await this.database.query(
-      `SELECT cf.id, cf.content, cf.userId FROM ${this.table} cf WHERE id = ?`,
+      `SELECT cs.id, cs.content, cs.userId FROM ${this.table} cs WHERE id = ?`,
       [id]
     );
     return {
@@ -27,11 +27,11 @@ class CommentaireParFilmManager extends AbstractManager {
 
   async read(id) {
     const [result] = await this.database.query(
-      `select cf.id, cf.content, cf.userId
-        from ${this.table} cf
-        inner join user u on cf.userId = u.id
-        inner join film f on cf.filmId = f.id
-        where cf.filmId = ?`,
+      `select cs.id, cs.content, cs.userId
+        from ${this.table} cs
+        inner join user u on cs.userId = u.id
+        inner join serie s on cs.serieId = s.id
+        where cs.serieId = ?`,
       [id]
     );
     return result;
@@ -47,11 +47,11 @@ class CommentaireParFilmManager extends AbstractManager {
 
   async delete(commentaireId) {
     const [result] = await this.database.query(
-      `DELETE FROM commentaire_film WHERE id = ?`,
+      `DELETE FROM commentaire_serie WHERE id = ?`,
       [commentaireId.id]
     );
 
     return result.affectedRows || 0;
   }
 }
-module.exports = CommentaireParFilmManager;
+module.exports = CommentaireParSerieManager;
