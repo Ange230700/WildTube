@@ -13,6 +13,7 @@ const FavoriSerieManager = require("./models/FavoriSerieManager");
 const CategorieParFilmManager = require("./models/CategorieParFilmManager");
 const CategorieParSerieManager = require("./models/CategorieParSerieManager");
 const EnTendanceSerieManager = require("./models/EnTendanceSerieManager");
+const CommentaireParFilmManager = require("./models/CommentaireParFilmManager");
 
 const managers = [
   CategorieManager,
@@ -25,6 +26,7 @@ const managers = [
   FavoriSerieManager,
   CategorieParFilmManager,
   CategorieParSerieManager,
+  CommentaireParFilmManager,
   // Add other managers here
 ];
 

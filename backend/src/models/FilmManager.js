@@ -42,11 +42,11 @@ class FilmManager extends AbstractManager {
     duration,
     year,
     description,
-    isAvailable,
+    IsAvailable,
   }) {
     const [result] = await this.database.query(
-      `update ${this.table} SET miniature=?, title=?, videoUrl=?, duration=?, year=?, description=?, isAvailable=? where id=?`,
-      [miniature, title, videoUrl, duration, year, description, isAvailable, id]
+      `update ${this.table} SET miniature=?, title=?, videoUrl=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
+      [miniature, title, videoUrl, duration, year, description, IsAvailable, id]
     );
     return result.affectedRows;
   }

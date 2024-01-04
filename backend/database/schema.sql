@@ -1,7 +1,8 @@
-DROP TABLE IF EXISTS `Serie`;
+-- SQLBook: Code
+DROP TABLE IF EXISTS `serie`;
 
 CREATE TABLE
-    `Serie` (
+    `serie` (
         `id` int primary key auto_increment not null,
         `miniature` varchar(255) not null,
         `title` VARCHAR(50) not NULL,
@@ -14,10 +15,10 @@ CREATE TABLE
         `seasonsNumber` INT not NULL
     );
 
-DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE
-    `User` (
+    `user` (
         `id` int primary key auto_increment not null,
         `name` varchar(50) not null,
         `email` varchar(50) not null,
@@ -27,10 +28,10 @@ CREATE TABLE
         `IsAdmin` bool not null
     );
 
-DROP TABLE IF EXISTS `Film`;
+DROP TABLE IF EXISTS `film`;
 
 CREATE TABLE
-    `Film` (
+    `film` (
         `id` int primary key auto_increment not null,
         `miniature` VARCHAR(255) not null,
         `cover` VARCHAR(255) NOT NULL,
@@ -43,7 +44,7 @@ CREATE TABLE
     );
 
 INSERT INTO
-    `Film` (
+    `film` (
         `miniature`,
         `cover`,
         `title`,
@@ -164,7 +165,7 @@ VALUES (
     );
 
 INSERT INTO
-    `Serie` (
+    `serie` (
         `miniature`,
         `title`,
         `duration`,
@@ -194,19 +195,19 @@ VALUES (
         9
     );
 
-DROP TABLE IF EXISTS `Categorie`;
+DROP TABLE IF EXISTS `categorie`;
 
 CREATE TABLE
-    `Categorie` (
+    `categorie` (
         `id` int primary key auto_increment not null,
         `name` VARCHAR(255) not null,
         `position` INT
     );
 
-DROP TABLE IF EXISTS `Favori_film`;
+DROP TABLE IF EXISTS `favori_film`;
 
 CREATE TABLE
-    `Favori_film` (
+    `favori_film` (
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
         CONSTRAINT FK_Favori_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -214,10 +215,10 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `filmId`)
     );
 
-DROP TABLE IF EXISTS `Favori_serie`;
+DROP TABLE IF EXISTS `favori_serie`;
 
 CREATE TABLE
-    `Favori_serie` (
+    `favori_serie` (
         `userId` INT NOT NULL,
         `serieId` INT NOT NULL,
         CONSTRAINT FK_Favori_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -225,10 +226,10 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `serieId`)
     );
 
-DROP TABLE IF EXISTS `En_tendance_film`;
+DROP TABLE IF EXISTS `en_tendance_film`;
 
 CREATE TABLE
-    `En_tendance_film` (
+    `en_tendance_film` (
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
         CONSTRAINT FK_En_tendance_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -236,10 +237,10 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `filmId`)
     );
 
-DROP TABLE IF EXISTS ` En_tendance_serie`;
+DROP TABLE IF EXISTS ` en_tendance_serie`;
 
 CREATE TABLE
-    `En_tendance_serie` (
+    `en_tendance_serie` (
         `userId` INT NOT NULL,
         `serieId` INT NOT NULL,
         CONSTRAINT FK_En_tendance_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -247,32 +248,35 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `serieId`)
     );
 
-DROP TABLE IF EXISTS `Commentaire_serie`;
+DROP TABLE IF EXISTS `commentaire_serie`;
 
 CREATE TABLE
-    `Commentaire_serie` (
+    `commentaire_serie` (
+        `id` int primary key auto_increment not null,
         `userId` INT NOT NULL,
         `serieId` INT NOT NULL,
+        `content` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Commentaire_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Commentaire_serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
-        PRIMARY KEY (`userId`, `serieId`)
+        CONSTRAINT FK_Commentaire_serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`)
     );
 
-DROP TABLE IF EXISTS `Commentaire_film`;
+DROP TABLE IF EXISTS `commentaire_film`;
 
 CREATE TABLE
-    `Commentaire_film` (
+    `commentaire_film` (
+        `id` INT NOT NULL AUTO_INCREMENT,
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
+        `content` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
         CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        PRIMARY KEY (`userId`, `filmId`)
+        PRIMARY KEY (`id`)
     );
 
-DROP TABLE IF EXISTS `Categorie_par_serie`;
+DROP TABLE IF EXISTS `categorie_par_serie`;
 
 CREATE TABLE
-    `Categorie_par_serie` (
+    `categorie_par_serie` (
         `serieId` INT NOT NULL,
         `categorieId` INT NOT NULL,
         CONSTRAINT FK_Categorie_Par_Serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
@@ -280,10 +284,10 @@ CREATE TABLE
         PRIMARY KEY (`serieId`, `categorieId`)
     );
 
-DROP TABLE IF EXISTS `Categorie_par_film`;
+DROP TABLE IF EXISTS `categorie_par_film`;
 
 CREATE TABLE
-    `Categorie_par_film` (
+    `categorie_par_film` (
         `filmId` INT NOT NULL,
         `categorieId` INT NOT NULL,
         CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
@@ -292,11 +296,11 @@ CREATE TABLE
     );
 
 INSERT INTO
-    `Categorie` (`name`, `position`)
+    `categorie` (`name`, `position`)
 VALUES ('Action', 1), ('Adventure', 2), ('Sci-Fi', 3), ('Drama', 4), ('Thriller', 5), ('Comedy', 6), ('Crime', 7), ('Fantasy', 8), ('Mystery', 9), ('Animation', 10), ('Family', 11), ('Biography', 12), ('History', 13), ('Horror', 14), ('Music', 15), ('Musical', 16), ('Romance', 17), ('Sport', 18), ('War', 19), ('Western', 20);
 
 INSERT INTO
-    `User` (
+    `user` (
         `name`,
         `email`,
         `naissance`,
@@ -321,15 +325,17 @@ VALUES (
     );
 
 INSERT INTO
-    `En_tendance_film` (`userId`, `filmId`)
+    `en_tendance_film` (`userId`, `filmId`)
 VALUES (1, 1), (1, 2);
 
 INSERT INTO
-    `Favori_film` (`userId`, `filmId`)
+    `favori_film` (`userId`, `filmId`)
 VALUES (1, 1), (1, 2);
 
 INSERT INTO
-    `En_tendance_serie` (`userId`, `serieId`)
-VALUES (1, 1), (1, 2)
+    `en_tendance_serie` (`userId`, `serieId`)
+VALUES (1, 1), (1, 2);
 
-INSERT INTO `Commentaire_film` () (1, 2);
+INSERT INTO
+     `commentaire_film` (`userId`, `filmId`, `content`) 
+VALUES (1, 3, 'dernier commentaire'), (1,3 ,'la bonne') ;
