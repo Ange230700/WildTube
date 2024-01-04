@@ -1,0 +1,122 @@
+.signUpPageMockupGuest {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+
+  .searchDisplaySection {
+    flex-direction: column;
+    display: flex;
+  }
+
+  .form {
+    flex-direction: column;
+    display: flex;
+    gap: var(--spacing-constant);
+  }
+  .inputs {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-constant);
+  }
+  .inputContainer {
+    justify-content: center;
+    display: flex;
+    max-width: 500px;
+  }
+  .input {
+    width: 63vw;
+    color: var(--text-field-background-color);
+    border: none;
+    height: 7vh;
+    padding: 10px;
+    background: rgba(238, 226, 226, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    border-bottom: 1px #ff509a solid;
+    align-items: center;
+    display: flex;
+    &::placeholder {
+      color: var(--text-field-background-color);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .additionalInformation {
+    flex-direction: column;
+    display: flex;
+  }
+  .orientation {
+    text-align: center;
+    color: var(--primary-font-color);
+    font-weight: var(--font-weight-semi-bold);
+  }
+  .orientationContainer {
+    display: inline-flex;
+    justify-content: center;
+    margin: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: calc(var(--spacing-constant) * 2);
+  }
+  .orientationOption {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .orientationText {
+    font-weight: var(--font-weight-semi-bold);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-constant) * 0.5);
+  }
+  .radioButton {
+    width: 6vw;
+    height: 3vh;
+  }
+  .birthday {
+    text-align: center;
+    font-weight: var(--font-weight-semi-bold);
+  }
+  .inputDate {
+    width: 75vw;
+    max-width: 500px;
+    height: 6vh;
+    text-align: center;
+    background: rgba(238, 226, 226, 0.1);
+    border: none;
+    color: var(--text-field-background-color);
+    border-bottom: 1px #ff509a solid;
+    border-radius: 6px;
+    font-family: var(--main-font);
+    &:focus {
+      outline: none;
+    }
+  }
+  ::-webkit-calendar-picker-indicator {
+    background-color: var(--text-field-background-color);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 6px;
+    margin-right: 2px;
+  }
+  .buttonContainer {
+    justify-content: center;
+    display: flex;
+  }
+  .signUpButton {
+    width: 35vw;
+    max-width: 300px;
+    background-color: var(--secondary-font-color);
+    border-radius: 5px;
+    padding: calc(var(--spacing-constant) * 1) calc(var(--spacing-constant) * 2);
+    border: none;
+    cursor: pointer;
+  }
+  .inscription {
+    text-align: center;
+    color: var(--background-color);
+    font-weight: var(--font-weight-semi-bold);
+  }
+}

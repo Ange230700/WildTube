@@ -16,7 +16,7 @@ class FavoriSerieManager extends AbstractManager {
   async read(id) {
     const [result] = await this.database.query(
       `select u.id, s.id, s.title
-      from ${this.table} fs
+      from Favori_serie fs
       inner join user u on fs.userId = u.id
       inner join serie s on fs.serieId = s.id
        where fs.userId = ?`,

@@ -1,0 +1,98 @@
+.loginPage {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+
+  .logo2 {
+    padding-bottom: 45px;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+  }
+  .inputs {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+  }
+  .inputContainer {
+    padding-bottom: 25px;
+    display: inline-flex;
+    justify-content: center;
+    max-width: 500px;
+  }
+  .input {
+    width: 63vw;
+    color: var(--text-field-background-color);
+    border: none;
+    height: 7vh;
+    padding: 10px;
+    background: rgba(238, 226, 226, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    border-bottom: 1px #ff509a solid;
+    align-items: center;
+    display: flex;
+    font-weight: var(--font-weight-semi-bold);
+    &::placeholder {
+      color: var(--text-field-background-color);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .buttonContainer {
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    max-width: 300px;
+  }
+  .connectionButton {
+    background: var(--secondary-font-color);
+    border-radius: 5px;
+    padding-left: 10;
+    padding-right: 10;
+  }
+  .connexion {
+    color: var(--background-color);
+    width: 35vw;
+    height: 5vh;
+    font-size: 16px;
+    font-weight: var(--font-weight-semi-bold);
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .signUpText {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+  }
+  .tuNAsPasDeCompte {
+    text-align: center;
+    font-weight: var(--font-weight-semi-bold);
+  }
+  .signupInviteContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .inscrisToiIci {
+    text-decoration: underline;
+    color: var(--primary-font-color);
+    font-size: 14px;
+    font-weight: var(--font-weight-semi-bold);
+    margin-right: 3px;
+  }
+  .catalogue {
+    font-size: 14px;
+  }
+}

@@ -14,93 +14,7 @@
     gap: calc(var(--spacing-constant) * 1);
     display: flex;
 
-    .logo-container {
-      align-self: stretch;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .logo {
-        width: clamp(
-          var(--logo-min-width, 75px),
-          var(--logo-preferred-width, 25%),
-          var(--logo-max-width, 185px)
-        );
-        height: clamp(
-          var(--logo-min-height, 45px),
-          var(--logo-preferred-height, 8vh),
-          var(--logo-max-height, 110px)
-        );
-        object-fit: cover;
-        object-position: center;
-        position: relative;
-      }
-    }
-
-    .dynamic-hero-slider-container {
-      align-self: stretch;
-      justify-content: center;
-      gap: calc(var(--spacing-constant) * 1);
-      display: flex;
-      overflow-x: scroll;
-      scroll-behavior: smooth;
-
-      .hero-movie-slide {
-        width: clamp(
-          var(--hero-movie-slide-min-width, 255px),
-          var(--hero-movie-slide-preferred-width, 80%),
-          var(--hero-movie-slide-max-width, 1200px)
-        );
-        height: clamp(
-          var(--hero-movie-slide-min-height, 140px),
-          var(--hero-movie-slide-preferred-height, 25vh),
-          var(--hero-movie-slide-max-height, 655px)
-        );
-        object-fit: cover;
-        position: relative;
-        border-radius: var(--border-radius-constant, 10px);
-      }
-    }
-
-    .movie-genre-tabs-container {
-      align-self: stretch;
-      padding: 0 calc(var(--spacing-constant) * 1);
-      align-items: center;
-      gap: calc(var(--spacing-constant) * 1);
-      display: flex;
-      overflow-x: scroll;
-      scroll-behavior: smooth;
-      list-style-type: none;
-
-      .movie-genre-tab-container {
-        align-items: center;
-        gap: calc(var(--spacing-constant) * 1);
-        display: flex;
-
-        .movie-genre {
-          color: var(
-            --not-selected-movie-genre-tab-color,
-            hsla(0, 0%, 100%, 0.6)
-          );
-          font-size: calc(var(--font-size-constant) * 1.2);
-          font-weight: var(--font-weight-semi-bold);
-          text-wrap: nowrap;
-        }
-
-        .selected-tab {
-          color: var(--selected-movie-genre-tab-color, hsla(0, 0%, 100%, 1));
-          border-bottom: 1px solid
-            var(--selected-tab-border-bottom-color, hsla(335, 100%, 66%, 1));
-        }
-      }
-    }
-
     .category-movie-display-container {
-      align-self: stretch;
-      flex-direction: column;
-      gap: calc(var(--spacing-constant) * 1);
-      display: flex;
-
       .category-title-container {
         align-self: stretch;
         padding: 0 calc(var(--spacing-constant) * 1);
@@ -110,9 +24,13 @@
 
         .category-title {
           color: var(--primary-font-color);
-          font-size: calc(var(--font-size-constant) * 1.4);
           font-weight: var(--font-weight-semi-bold);
           text-wrap: nowrap;
+          font-size: clamp(
+            calc(var(--font-size-constant) * 1.4),
+            4.375vw,
+            calc(var(--font-size-constant) * 1.4 * 1.5)
+          );
         }
 
         .category-page-link {
@@ -124,15 +42,39 @@
       }
 
       .static-slider-container {
-        align-self: stretch;
         padding: 0 calc(var(--spacing-constant) * 1);
         align-items: center;
-        gap: calc(var(--spacing-constant) * 1);
+        gap: clamp(
+          calc(var(--spacing-constant) * 1),
+          2.5vw,
+          calc(var(--spacing-constant) * 2)
+        );
         display: flex;
-        // overflow-x: scroll;
-        flex-wrap: wrap;
-        justify-content: center;
+        overflow-x: scroll;
+      }
+
+      .static-slider-container::-webkit-scrollbar {
+        height: 4px;
+        width: 0;
+      }
+
+      .static-slider-container::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));
+        border-radius: 10px;
       }
     }
   }
+}
+
+.home::-webkit-scrollbar {
+  width: 5px;
+}
+
+.home::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color, hsla(335, 100%, 66%, 0.502));
+}
+
+.home::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));
+  border-radius: 10px;
 }

@@ -8,7 +8,10 @@ function MoviePlayer() {
   return (
     <div className="movie-player">
       <div className="back-to-previous-page">
-        <NavLink to={`/movies/${movieId}`}>
+        <NavLink
+          className="back-to-previous-page-link"
+          to={`/movies/${movieId}`}
+        >
           <img
             className="back-arrow"
             src="/src/assets/icons/circle-arrow-left-solid.svg"
@@ -23,17 +26,16 @@ function MoviePlayer() {
           })
           .map((movie) => {
             const videoId = new URL(movie.videoUrl).searchParams.get("v");
-            const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&start=0&end=30&loop=1`;
             return (
               <iframe
                 key={movie.id}
-                width="789"
-                height="328"
+                className="movie-player-iframe"
                 src={embedUrl}
-                title="Marvel Studios&#39; Avengers: Infinity War Official Trailer"
+                title={movie.title}
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
+                loading="lazy"
               ></iframe>
             );
           })}
