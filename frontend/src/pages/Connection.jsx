@@ -31,7 +31,7 @@ function Connection() {
         navigate("/");
       }
     } catch (err) {
-      console.error("Error connecting");
+      console.error("Incorrect email or password");
     }
   };
 

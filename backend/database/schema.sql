@@ -176,30 +176,30 @@ VALUES
         1
     );
 
--- INSERT INTO 
---     `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
--- VALUES 
---     (
---         "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
---         "https://i.ytimg.com/vi/gJIHLGHckzk/hq720.jpg",
---         'One Piece',
---         55,
---         '2023',
---         'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
---         0,
---         9,
---         1
---     ), (
---         "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
---         "https://fr.web.img6.acsta.net/r_654_368/newsv7/19/01/17/15/43/1457863.jpg",
---         "Naruto",
---         22,
---         "2002",
---         "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
---         1,
---         224,
---         9
---     );
+INSERT INTO 
+    `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
+VALUES 
+    (
+        "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
+        "https://i.ytimg.com/vi/gJIHLGHckzk/hq720.jpg",
+        'One Piece',
+        55,
+        '2023',
+        'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
+        0,
+        9,
+        1
+    ), (
+        "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
+        "https://fr.web.img6.acsta.net/r_654_368/newsv7/19/01/17/15/43/1457863.jpg",
+        "Naruto",
+        22,
+        "2002",
+        "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
+        1,
+        224,
+        9
+    );
 
 DROP TABLE IF EXISTS `Categorie`;
 
@@ -335,10 +335,10 @@ VALUES
     (
         'Aurel',
         'aurelien.emeriau@wcs.com',
-        '1983/06/10',
-        '0',
+        '1983-06-10',
+        0,
         'ggfd4554',
-        '0'
+        1
     ),
     (
         'Alex',
@@ -367,21 +367,21 @@ INSERT INTO
     (1, 1),
     (1, 2);
 
--- INSERT INTO
---     `Categorie_par_film` (`filmId`, `categorieId`)
--- VALUES
---     (1, 1),
---     (2, 1),
---     (3, 1),
---     (4, 1),
---     (5, 1),
---     (6, 1),
---     (7, 3),
---     (8, 3),
---     (9, 8),
---     (10, 3),
---     (11, 1),
---     (12, 4);
+INSERT INTO
+    `Categorie_par_film` (`filmId`, `categorieId`)
+VALUES
+    (1, 1),
+    (2, 1),
+    (3, 1),
+    (4, 1),
+    (5, 1),
+    (6, 1),
+    (7, 3),
+    (8, 3),
+    (9, 8),
+    (10, 3),
+    (11, 1),
+    (12, 4);
 
 INSERT INTO
     `Categorie_par_serie` (`serieId`, `categorieId`)
