@@ -25,7 +25,7 @@ function NavBar() {
         <NavLink to="/Connection" className="profile-icon">
           <img
             className="icon"
-            src="/src/assets/icons/profile_icon.svg"
+            src="/src/assets/icons/avatar.svg"
             alt="profile icon"
           />
         </NavLink>
