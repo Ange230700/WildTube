@@ -43,11 +43,10 @@ router.get(
 router.get("/films", filmControllers.browse);
 router.get("/series", serieControllers.browse);
 router.get("/users", userControllers.browse);
-router.get("/favorites/film", favoriFilmControllers.browse);
+router.get("/favorites/film", favoriFilmControllers.readAllFavoriteMovies);
 router.get("/favorites/serie", favoriSerieControllers.browse);
 router.get("/FilmsEnTendance", enTendanceFilmControllers.browse);
 router.get("/SeriesEnTendance", enTendanceSerieControllers.browse);
-router.get("/favorites", favoriFilmControllers.browse);
 
 // Route to get a specific item by ID
 router.get("/categories/:id", categorieControllers.read);
@@ -89,11 +88,10 @@ router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/series/:id", serieControllers.destroy);
 router.delete("/users/:id", userControllers.destroy);
-router.delete("/favorites/film/:id", favoriFilmControllers.destroy);
+router.delete("/favorites/film/:filmId/:userId", favoriFilmControllers.destroy);
 router.delete("/favorites/serie/:id", favoriSerieControllers.destroy);
 router.delete("/FilmsEnTendance/:id", enTendanceFilmControllers.destroy);
 router.delete("/SeriesEnTendance/:id", enTendanceSerieControllers.destroy);
-router.delete("/favorites/:id", favoriFilmControllers.destroy);
 
 router.post("/login", authControllers.login);
 

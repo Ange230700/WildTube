@@ -7,6 +7,7 @@ import { UserProvider } from "./contexts/UserContext";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import Favorites from "./pages/Favorites";
 import Categories from "./pages/Categories";
 import Movie from "./pages/Movie";
 import Serie from "./pages/Serie";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "search/",
         element: <Search />,
+      },
+      {
+        path: "favorites/",
+        element: <Favorites />,
       },
       {
         path: "category/:catId",
