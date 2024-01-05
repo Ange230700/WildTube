@@ -447,11 +447,15 @@ INSERT INTO
 VALUES (
         'Aurel',
         'aurelien.emeriau@wcs.com',
-        '1983/06/10',
-        '0',
+        '1983-06-10',
+        0,
         'ggfd4554',
-        '0'
-    ), (
+
+        1
+    ),
+
+        (
+
         'Alex',
         'alex@wcs.com',
         '1998/03/19',
