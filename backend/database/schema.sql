@@ -1,7 +1,8 @@
-DROP TABLE IF EXISTS `Serie`;
+-- SQLBook: Code
+DROP TABLE IF EXISTS `serie`;
 
 CREATE TABLE
-    `Serie` (
+    `serie` (
         `id` int primary key auto_increment not null,
         `miniature` varchar(255) not null,
         `cover` VARCHAR(255) NOT NULL,
@@ -15,10 +16,10 @@ CREATE TABLE
         `seasonsNumber` INT not NULL
     );
 
-DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE
-    `User` (
+    `user` (
         `id` int primary key auto_increment not null,
         `name` varchar(50) not null,
         `email` varchar(50) not null,
@@ -29,10 +30,10 @@ CREATE TABLE
         `avatar` varchar(255) not null
     );
 
-DROP TABLE IF EXISTS `Film`;
+DROP TABLE IF EXISTS `film`;
 
 CREATE TABLE
-    `Film` (
+    `film` (
         `id` int primary key auto_increment not null,
         `miniature` VARCHAR(255) not null,
         `cover` VARCHAR(255) NOT NULL,
@@ -45,7 +46,7 @@ CREATE TABLE
     );
 
 INSERT INTO
-    `Film` (
+    `film` (
         `miniature`,
         `cover`,
         `title`,
@@ -55,8 +56,7 @@ INSERT INTO
         `description`,
         `IsAvailable`
     )
-VALUES
-    (
+VALUES (
         'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg',
         'https://w0.peakpx.com/wallpaper/34/966/HD-wallpaper-the-avengers-avengers-endgame-avengers-avengers-endgame.jpg',
         'Avengers: Endgame',
@@ -65,8 +65,7 @@ VALUES
         '2019',
         'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.',
         0
-    ),
-    (
+    ), (
         'https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg',
         'https://www.highlandernews.org/wp-content/uploads/landscape-1522924460-avengers-infinity-war-poster.jpg',
         'Avengers: Infinity War',
@@ -75,8 +74,7 @@ VALUES
         '2018',
         'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.',
         1
-    ),
-    (
+    ), (
         'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
         'https://pbs.twimg.com/media/EJHjitpUUAA2EAp.jpg',
         'The Avengers',
@@ -85,8 +83,7 @@ VALUES
         '2012',
         'Earth mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
         0
-    ),
-    (
+    ), (
         'https://i.ebayimg.com/images/g/Sv8AAOSwb7Rc0l0P/s-l1600.jpg',
         'https://wallpapercave.com/wp/wp11799668.jpg',
         'Iron man',
@@ -95,8 +92,7 @@ VALUES
         '2008',
         'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
         1
-    ),
-    (
+    ), (
         "https://m.media-amazon.com/images/M/MV5BMTkxM2FiYjctYjliYy00NjY2LWFmOTEtMWZiYWRjNjA4MGYxXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
         'https://www.wheninmanila.com/wp-content/uploads/2023/11/SHARED-Cover-Collage-x2-30-2.png',
         "Aquaman and the Lost Kingdom",
@@ -105,8 +101,7 @@ VALUES
         "2023",
         "The film is directed by James Wan from a screenplay written by David Leslie Johnson-McGoldrick and Will Beall and stars Jason Momoa as Aquaman, alongside Amber Heard, Patrick Wilson, Dolph Lundgren, Yahya Abdul-Mateen II, and Temuera Morrison. In the film, Aquaman must save the world from the threat of Ocean Master and Black Manta.",
         0
-    ),
-    (
+    ), (
         "https://cdn.entries.clios.com/styles/clio_aotw_ems_image_details_retina/s3/entry_attachments/image/72/2297/22197/123544/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg",
         'https://w0.peakpx.com/wallpaper/307/244/HD-wallpaper-batman-the-batman.jpg',
         "The Batman",
@@ -115,8 +110,7 @@ VALUES
         "2022",
         "The film is directed by Matt Reeves, who wrote the screenplay with Peter Craig. It stars Robert Pattinson as Bruce Wayne / Batman, with Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, and Colin Farrell rounding out the ensemble cast.",
         1
-    ),
-    (
+    ), (
         'https://m.media-amazon.com/images/M/MV5BMzZhYTVlMTMtMGZhMC00ZWYxLTljZDQtN2Y3YmFmZTk5OWU2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg',
         'https://www.tvinsider.com/wp-content/uploads/2023/11/avatar-the-last-airbender-770x433.jpg',
         'Avatar: The Last Airbender',
@@ -125,8 +119,7 @@ VALUES
         '2010',
         'Air, Water, Earth, Fire: the balance of the world is tipped by a savage war waged for a century already by the Fire Nation against the three other nations. Challenging his courage and combat skills, Aang discovers that he is the new Avatar, the only one capable of mastering all four elements. He joins forces with Katara, a Waterbender, and his older brother Sokka, to stop the Fire Nation before it is too late...',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/pictures/21/11/17/17/24/3336846.jpg',
         'https://hustonsite.files.wordpress.com/2023/06/93361-matrixresurrections_bannerposter.jpg',
         'Matrix Resurrections',
@@ -135,8 +128,7 @@ VALUES
         '2020',
         'MATRIX RESURRECTIONS takes us back into two parallel realities – that of our daily lives and that of the world hidden there. To know with certainty whether his own reality is a physical or mental construct, and to truly know himself, Mr. Anderson will have to follow the white rabbit again. ',
         1
-    ),
-    (
+    ), (
         'https://static.posters.cz/image/1300/art-photo/harry-potter-and-the-half-blood-prince-i167377.jpg',
         'https://picfiles.alphacoders.com/621/62184.jpg',
         'Harry Potter and the Half-Blood Prince',
@@ -145,8 +137,7 @@ VALUES
         '2009',
         'Voldemort demonic grip tightens on the Muggle universe and the world of witchcraft. Hogwarts has ceased to be a haven of peace, danger lurks in the heart of the castle... But Dumbledore is more determined than ever to prepare Harry for his final battle, now imminent.',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img2.acsta.net/pictures/17/09/12/10/29/1142495.jpg',
         'https://pop.h-cdn.co/assets/17/39/1600x900/hd-aspect-1506522430-2049.jpg',
         'Blade Runner 2049',
@@ -155,8 +146,7 @@ VALUES
         '2017',
         'In 2049, society is weakened by the numerous tensions between humans and their slaves created by bioengineering. Officer K is a Blade Runner: part of an elite task force tasked with finding and eliminating those who do not obey human orders.',
         1
-    ),
-    (
+    ), (
         'https://fr.web.img4.acsta.net/r_1280_720/img/6b/c7/6bc7a13ca6446a603f160b4ab4414141.jpg',
         'https://c8.alamy.com/comp/K36B8T/gladiator-gladiator-date-2000-K36B8T.jpg',
         'Gladiator',
@@ -165,8 +155,7 @@ VALUES
         '2000',
         'The Roman general Maximus is the most faithful support of the Emperor Marcus Aurelius, whom he led from victory to victory with exemplary bravery and dedication. Jealous of Maximus prestige, and even more so of the emperor love for him, Marcus Aurelius son, Commodus, brutally assumed power, then ordered the general arrest and execution. Maximus escapes his assassins but cannot prevent the massacre of his family. Captured by a slave trader, he becomes a gladiator and plots his revenge',
         0
-    ),
-    (
+    ), (
         'https://fr.web.img6.acsta.net/medias/nmedia/18/82/69/17/19806656.jpg',
         'https://assets.mubicdn.net/images/artworks/582651/images-original.png?1686650120',
         'Intouchables',
@@ -174,16 +163,6 @@ VALUES
         92,
         '2011',
         'Following a paragliding accident, Philippe, a rich aristocrat, hires Driss, a young man from the suburbs who has just been released from prison, as a home helper. In short the least appropriate person for the job. Together they will bring together Vivaldi and Earth Wind and Fire, the word and the joke, the costumes and the tracksuit bottoms... Two universes will collide, tame each other, to give birth to a friendship as crazy, funny and strong than unexpected, a unique relationship that will spark and make them... Untouchable.',
-        0
-    ),
-    (
-        'https://i.ebayimg.com/images/g/3hUAAOSwfNRhXhUZ/s-l1200.webp',
-        'https://d3dfsf9oc1ojzp.cloudfront.net/original/4X/7/3/b/73b08b82c41c646a8e21866f0998ecf5472ce7df.jpeg',
-        'Justice League Dark',
-        'https://www.youtube.com/watch?v=NsBnnM2qjAo',
-        75,
-        '2017',
-        'Justice League Dark is a 2017 American animated superhero film produced by Warner Bros. Animation and distributed by Warner Home Video. Featuring the DC Comics team of the same name created by Peter Milligan and Mikel Janin, the film is the twenty-seventh in the DC Universe Animated Original Movies series and a part of DC Animated Movie Universe. It was released digitally on January 24, 2017, and on DVD and Blu-ray on February 7, 2017. The film is directed by Jay Oliva, and stars the voices of Matt Ryan, Jason O\'Mara, Camilla Luddington, Nicholas Turturro, and Ray Chase.',
         1
     ),
     (
@@ -328,7 +307,7 @@ VALUES
     );
 
 INSERT INTO 
-    `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
+    `serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
 VALUES 
     (
         "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
@@ -352,19 +331,19 @@ VALUES
         9
     );
 
-DROP TABLE IF EXISTS `Categorie`;
+DROP TABLE IF EXISTS `categorie`;
 
 CREATE TABLE
-    `Categorie` (
+    `categorie` (
         `id` int primary key auto_increment not null,
         `name` VARCHAR(255) not null,
         `position` INT
     );
 
-DROP TABLE IF EXISTS `Favori_film`;
+DROP TABLE IF EXISTS `favori_film`;
 
 CREATE TABLE
-    `Favori_film` (
+    `favori_film` (
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
         CONSTRAINT FK_Favori_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -372,10 +351,10 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `filmId`)
     );
 
-DROP TABLE IF EXISTS `Favori_serie`;
+DROP TABLE IF EXISTS `favori_serie`;
 
 CREATE TABLE
-    `Favori_serie` (
+    `favori_serie` (
         `userId` INT NOT NULL,
         `serieId` INT NOT NULL,
         CONSTRAINT FK_Favori_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -383,10 +362,10 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `serieId`)
     );
 
-DROP TABLE IF EXISTS `En_tendance_film`;
+DROP TABLE IF EXISTS `en_tendance_film`;
 
 CREATE TABLE
-    `En_tendance_film` (
+    `en_tendance_film` (
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
         CONSTRAINT FK_En_tendance_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -394,10 +373,10 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `filmId`)
     );
 
-DROP TABLE IF EXISTS ` En_tendance_serie`;
+DROP TABLE IF EXISTS ` en_tendance_serie`;
 
 CREATE TABLE
-    `En_tendance_serie` (
+    `en_tendance_serie` (
         `userId` INT NOT NULL,
         `serieId` INT NOT NULL,
         CONSTRAINT FK_En_tendance_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
@@ -405,32 +384,35 @@ CREATE TABLE
         PRIMARY KEY (`userId`, `serieId`)
     );
 
-DROP TABLE IF EXISTS `Commentaire_serie`;
+DROP TABLE IF EXISTS `commentaire_serie`;
 
 CREATE TABLE
-    `Commentaire_serie` (
+    `commentaire_serie` (
+        `id` int primary key auto_increment not null,
         `userId` INT NOT NULL,
         `serieId` INT NOT NULL,
+        `content` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Commentaire_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Commentaire_serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
-        PRIMARY KEY (`userId`, `serieId`)
+        CONSTRAINT FK_Commentaire_serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`)
     );
 
-DROP TABLE IF EXISTS `Commentaire_film`;
+DROP TABLE IF EXISTS `commentaire_film`;
 
 CREATE TABLE
-    `Commentaire_film` (
+    `commentaire_film` (
+        `id` INT NOT NULL AUTO_INCREMENT,
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
+        `content` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
         CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        PRIMARY KEY (`userId`, `filmId`)
+        PRIMARY KEY (`id`)
     );
 
-DROP TABLE IF EXISTS `Categorie_par_serie`;
+DROP TABLE IF EXISTS `categorie_par_serie`;
 
 CREATE TABLE
-    `Categorie_par_serie` (
+    `categorie_par_serie` (
         `serieId` INT NOT NULL,
         `categorieId` INT NOT NULL,
         CONSTRAINT FK_Categorie_Par_Serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
@@ -438,10 +420,10 @@ CREATE TABLE
         PRIMARY KEY (`serieId`, `categorieId`)
     );
 
-DROP TABLE IF EXISTS `Categorie_par_film`;
+DROP TABLE IF EXISTS `categorie_par_film`;
 
 CREATE TABLE
-    `Categorie_par_film` (
+    `categorie_par_film` (
         `filmId` INT NOT NULL,
         `categorieId` INT NOT NULL,
         CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
@@ -450,31 +432,11 @@ CREATE TABLE
     );
 
 INSERT INTO
-    `Categorie` (`name`, `position`)
-VALUES
-    ('Action', 1),
-    ('Adventure', 2),
-    ('Sci-Fi', 3),
-    ('Drama', 4),
-    ('Thriller', 5),
-    ('Comedy', 6),
-    ('Crime', 7),
-    ('Fantasy', 8),
-    ('Mystery', 9),
-    ('Animation', 10),
-    ('Family', 11),
-    ('Biography', 12),
-    ('History', 13),
-    ('Horror', 14),
-    ('Music', 15),
-    ('Musical', 16),
-    ('Romance', 17),
-    ('Sport', 18),
-    ('War', 19),
-    ('Western', 20);
+    `categorie` (`name`, `position`)
+VALUES ('Action', 1), ('Adventure', 2), ('Sci-Fi', 3), ('Drama', 4), ('Thriller', 5), ('Comedy', 6), ('Crime', 7), ('Fantasy', 8), ('Mystery', 9), ('Animation', 10), ('Family', 11), ('Biography', 12), ('History', 13), ('Horror', 14), ('Music', 15), ('Musical', 16), ('Romance', 17), ('Sport', 18), ('War', 19), ('Western', 20);
 
 INSERT INTO
-    `User` (
+    `user` (
         `name`,
         `email`,
         `naissance`,
@@ -482,16 +444,14 @@ INSERT INTO
         `password`,
         `IsAdmin`
     )
-VALUES
-    (
+VALUES (
         'Aurel',
         'aurelien.emeriau@wcs.com',
         '1983/06/10',
         '0',
         'ggfd4554',
         '0'
-    ),
-    (
+    ), (
         'Alex',
         'alex@wcs.com',
         '1998/03/19',
@@ -501,55 +461,21 @@ VALUES
     );
 
 INSERT INTO
-    `En_tendance_film` (`userId`, `filmId`)
-VALUES
-    (1, 1),
-    (1, 2);
+    `en_tendance_film` (`userId`, `filmId`)
+VALUES (1, 1), (1, 2);
 
 INSERT INTO
-    `Favori_film` (`userId`, `filmId`)
-    VALUES
-    (1, 1),
-    (1, 2);
+    `favori_film` (`userId`, `filmId`)
+VALUES (1, 1), (1, 2);
 
 INSERT INTO
-    `En_tendance_serie` (`userId`, `serieId`)
-    VALUES
-    (1, 1),
-    (1, 2);
+    `en_tendance_serie` (`userId`, `serieId`)
+VALUES (1, 1), (1, 2);
 
 INSERT INTO
-    `Categorie_par_film` (`filmId`, `categorieId`)
-VALUES
-    (1, 1),
-    (2, 1),
-    (3, 9),
-    (4, 1),
-    (5, 8),
-    (6, 20),
-    (7, 3),
-    (8, 3),
-    (9, 8),
-    (10, 3),
-    (11, 1),
-    (12, 3),
-    (14, 9),
-    (15, 8),
-    (16, 8),
-    (17, 11),
-    (18, 11),
-    (19, 11),
-    (20, 11),
-    (21, 11),
-    (22, 3),
-    (23, 9),
-    (24, 9),
-    (25, 20),
-    (26, 20),
-    (27, 20);
+     `commentaire_film` (`userId`, `filmId`, `content`) 
+VALUES (1, 3, 'dernier commentaire'), (1,3 ,'la bonne') ;
 
 INSERT INTO
-    `Categorie_par_serie` (`serieId`, `categorieId`)
-VALUES
-    (1, 10),
-    (2, 10);
+    `commentaire_serie` (`userId`, `serieId`, `content`)
+VALUES (1,2, 'test pour serie'), (1,2 ,'ca fonctionne');

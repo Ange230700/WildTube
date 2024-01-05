@@ -4,7 +4,7 @@ class CategorieParFilmManager extends AbstractManager {
   constructor() {
     // Call the constructor of the parent class (AbstractManager)
     // and pass the table name "categorieParFilm" as configuration
-    super({ table: "Categorie_par_film" });
+    super({ table: "categorie_par_film" });
   }
 
   // The C of CRUD - Create operation

@@ -3,7 +3,7 @@ const tables = require("../tables");
 
 const browse = async (req, res, next) => {
   try {
-    const categorieParFilm = await tables.Categorie_par_film.readAll();
+    const categorieParFilm = await tables.categorie_par_film.readAll();
     res.json(categorieParFilm);
   } catch (err) {
     next(err);
@@ -15,7 +15,7 @@ const browseCategoriesForSpecificFilm = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const categories =
-      await tables.Categorie_par_film.readAllCategoriesForSpecificFilm(
+      await tables.categorie_par_film.readAllCategoriesForSpecificFilm(
         request.params.id
       );
 
@@ -31,7 +31,7 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const films =
-      await tables.Categorie_par_film.readAllFilmsForSpecificCategorie(
+      await tables.categorie_par_film.readAllFilmsForSpecificCategorie(
         request.params.id
       );
 
@@ -49,14 +49,14 @@ const add = async (request, response, next) => {
 
   try {
     // Insert the new item into the database
-    const result = await tables.Categorie_par_film.create({
+    const result = await tables.categorie_par_film.create({
       filmId,
       categorieId,
     });
 
     if (result.affectedRows) {
       const categorieParFilm =
-        await tables.Categorie_par_film.readAllFilmsForSpecificCategorie(
+        await tables.categorie_par_film.readAllFilmsForSpecificCategorie(
           categorieId
         );
 
@@ -82,7 +82,7 @@ const destroy = async (req, response, next) => {
   const { categorieId } = req.body;
   try {
     // Delete the item from the database
-    const result = await tables.Categorie_par_film.delete({
+    const result = await tables.categorie_par_film.delete({
       filmId,
       categorieId,
     });
