@@ -13,6 +13,8 @@ const FavoriSerieManager = require("./models/FavoriSerieManager");
 const CategorieParFilmManager = require("./models/CategorieParFilmManager");
 const CategorieParSerieManager = require("./models/CategorieParSerieManager");
 const EnTendanceSerieManager = require("./models/EnTendanceSerieManager");
+const CommentaireParFilmManager = require("./models/CommentaireParFilmManager");
+const CommentaireParSerieManager = require("./models/CommentaireParSerieManager");
 
 const managers = [
   CategorieManager,
@@ -24,6 +26,8 @@ const managers = [
   FavoriSerieManager,
   CategorieParFilmManager,
   CategorieParSerieManager,
+  CommentaireParFilmManager,
+  CommentaireParSerieManager,
   EnTendanceSerieManager,
   // S1_tableJointure,
   // Add other managers here

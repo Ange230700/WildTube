@@ -16,7 +16,7 @@ class FavoriFilmManager extends AbstractManager {
   async read(id) {
     const [result] = await this.database.query(
       `select u.id, f.id, f.title
-      from Favori_film ff
+      from ${this.table} ff
       inner join user u on ff.userId = u.id
       inner join film f on ff.filmId = f.id
        where ff.userId = ?`,

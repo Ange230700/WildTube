@@ -5,7 +5,7 @@ const tables = require("../tables");
 const browse = async (req, res, next) => {
   try {
     // Fetch all items from the database
-    const tendances = await tables.En_Tendance_Film.readAll();
+    const tendances = await tables.en_tendance_film.readAll();
 
     // Respond with the items in JSON format
     res.json(tendances);
@@ -19,7 +19,7 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
-    const tendances = await tables.En_Tendance_Film.read(req.params.id);
+    const tendances = await tables.en_tendance_film.read(req.params.id);
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
@@ -44,7 +44,7 @@ const add = async (req, res, next) => {
 
   try {
     // Insert the item into the database
-    const insertId = await tables.En_Tendance_Film.create(tendances);
+    const insertId = await tables.en_tendance_film.create(tendances);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(200).json({ insertId });
@@ -60,7 +60,7 @@ const destroy = async (req, res, next) => {
   const { id: userId } = req.params;
   const { filmId } = req.body;
   try {
-    const [result] = await tables.En_Tendance_Film.delete(userId, filmId);
+    const [result] = await tables.en_tendance_film.delete(userId, filmId);
     if (result.affectedRows) {
       res.sendStatus(200);
     } else {
