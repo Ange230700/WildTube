@@ -22,7 +22,7 @@ function NavBar() {
         </NavLink>
       </div>
       <div className="nav-icon-container">
-        <NavLink to="/AregarderPlusTard" className="profile-icon">
+        <NavLink to="/profil" className="profile-icon">
           <img
             className="icon"
             src="/src/assets/icons/profile_icon.svg"
