@@ -14,8 +14,10 @@ import MoviePlayer from "./pages/MoviePlayer";
 import Inscription from "./pages/Inscription";
 import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
+import PlusTard from "./pages/PlusTard";
 import "./sass/index.scss";
 import { SerieProvider } from "./contexts/SerieContext";
+import UserProfil from "./pages/UserProfil";
 
 const router = createBrowserRouter([
   {
@@ -63,8 +65,12 @@ const router = createBrowserRouter([
         element: <ParametreAdmin />,
       },
       {
-        path: "/settingUser",
-        element: <settingUSer />,
+        path: "/AregarderPlusTard",
+        element: <PlusTard />,
+      },
+      {
+        path: "/profil",
+        element: <UserProfil />,
       },
     ],
   },
