@@ -13,8 +13,10 @@ import Serie from "./pages/Serie";
 import MoviePlayer from "./pages/MoviePlayer";
 import Inscription from "./pages/Inscription";
 import Connection from "./pages/Connection";
+import PlusTard from "./pages/PlusTard";
 import "./sass/index.scss";
 import { SerieProvider } from "./contexts/SerieContext";
+import UserProfil from "./pages/UserProfil";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: "/Inscription",
         element: <Inscription />,
+      },
+      {
+        path: "/AregarderPlusTard",
+        element: <PlusTard />,
+      },
+      {
+        path: "/profil",
+        element: <UserProfil />,
       },
     ],
   },
