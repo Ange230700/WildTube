@@ -16,6 +16,7 @@ import Connection from "./pages/Connection";
 import "./sass/index.scss";
 import { SerieProvider } from "./contexts/SerieContext";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,10 +57,6 @@ const router = createBrowserRouter([
       {
         path: "/Inscription",
         element: <Inscription />,
-      },
-      {
-        path: "/settingUser",
-        element: <settingUSer />,
       },
     ],
   },

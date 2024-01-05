@@ -48,7 +48,7 @@ function Inscription() {
   return (
     <div className="signUpPageMockupGuest">
       {error && <h1 style={{ color: "red", fontSize: 12 }}>Error</h1>}
-      {succes && <h1 style={{ color: "green", fontSize: 12 }}>Sicces</h1>}
+      {succes && <h1 style={{ color: "green", fontSize: 12 }}>Succes</h1>}
       <div className="searchDisplaySection">
         <LogoContainer />
         <div className="form">

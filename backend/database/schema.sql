@@ -25,7 +25,8 @@ CREATE TABLE
         `naissance` DATE NOT NULL,
         `civility` BOOLEAN NOT NULL,
         `password` varchar(50) not null,
-        `IsAdmin` bool not null
+        `IsAdmin` bool not null,
+        `avatar` varchar(255) not null
     );
 
 DROP TABLE IF EXISTS `Film`;
