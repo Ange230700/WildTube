@@ -18,6 +18,7 @@ import "./sass/index.scss";
 import { SerieProvider } from "./contexts/SerieContext";
 import UserProfil from "./pages/UserProfil";
 
+
 const router = createBrowserRouter([
   {
     path: "/",

@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
 
 function NavBar() {
+  const { user } = useUser();
   return (
     <div className="navbar">
       <div className="nav-icon-container">
@@ -22,6 +24,24 @@ function NavBar() {
         </NavLink>
       </div>
       <div className="nav-icon-container">
+        <NavLink to="/Connection" className="profile-icon" />
+        {user ? (
+          <img
+            className="icon"
+            src={
+              user.civility === 0
+                ? "/src/assets/icons/avatar1.svg"
+                : "/src/assets/icons/FemaleAvatar.svg"
+            }
+            alt="avatar"
+          />
+        ) : (
+          <img
+            className="icon"
+            src="/src/assets/icons/profile_icon.svg"
+            alt="connexion"
+          />
+        )}
         <NavLink to="/AregarderPlusTard" className="profile-icon">
           <img
             className="icon"
