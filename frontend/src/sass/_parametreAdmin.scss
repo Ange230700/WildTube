@@ -25,6 +25,12 @@
       width: 90vw;
       height: 8vh;
       border-bottom: 1px solid var(--text-field-background-color);
+      button {
+        border: none;
+        background: none;
+        color: var(--text-field-background-color);
+        font-size: calc(var(--font-size-constant) * 1.6);
+      }
     }
   }
 }

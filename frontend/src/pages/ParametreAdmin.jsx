@@ -1,4 +1,13 @@
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
+
 function ParametreAdmin() {
+  const { updateUser } = useUser();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    updateUser(null);
+    navigate("/");
+  };
   return (
     <div className="parametreAdmin">
       <div className="profilPicture">
@@ -19,6 +28,11 @@ function ParametreAdmin() {
         </div>
         <div className="params">
           <h3>Gérer les catégories</h3>
+        </div>
+        <div className="params">
+          <button type="button" onClick={handleLogOut}>
+            <h3>Déconnexion</h3>
+          </button>
         </div>
       </section>
     </div>

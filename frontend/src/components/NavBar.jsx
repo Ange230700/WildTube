@@ -1,6 +1,18 @@
 import { NavLink } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
 
 function NavBar() {
+  const { user } = useUser();
+
+  const changeProfile = () => {
+    if (user && user.IsAdmin) {
+      return "/Parametre";
+    }
+    if (user) {
+      return "/profil";
+    }
+    return "/connection";
+  };
   return (
     <div className="navbar">
       <div className="nav-icon-container">
@@ -22,7 +34,7 @@ function NavBar() {
         </NavLink>
       </div>
       <div className="nav-icon-container">
-        <NavLink to="/Connection" className="profile-icon">
+        <NavLink to={changeProfile()} className="profile-icon">
           <img
             className="icon"
             src="/src/assets/icons/avatar.svg"
