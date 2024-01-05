@@ -14,7 +14,11 @@ function NavBarDesktop() {
           </NavLink>
         </div>
         <NavLink className="link" to="/Connection">
-          <p className="link-text">Connexion</p>
+          <img
+            className="icon"
+            src="/src/assets/icons/avatardesktop.svg"
+            alt="connexion"
+          />
         </NavLink>
       </div>
     </div>
