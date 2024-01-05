@@ -4,7 +4,7 @@ class EnTendanceFilmManager extends AbstractManager {
   constructor() {
     // Call the constructor of the parent class (AbstractManager)
     // and pass the table name "En_Tendance_Film" as configuration
-    super({ table: "En_Tendance_Film" });
+    super({ table: "en_tendance_film" });
   }
 
   // The C of CRUD - Create operation
@@ -25,7 +25,7 @@ class EnTendanceFilmManager extends AbstractManager {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
       `SELECT u.id, f.id, f.title
-       FROM En_tendance_film tf
+       FROM ${this.table} tf
        INNER JOIN user u on tf.userId = u.id
        INNER JOIN film f on tf.filmId = f.id
        where tf.userId = ?`,

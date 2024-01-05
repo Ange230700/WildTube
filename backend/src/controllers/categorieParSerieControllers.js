@@ -3,7 +3,7 @@ const tables = require("../tables");
 
 const browse = async (req, res, next) => {
   try {
-    const categorieParSerie = await tables.Categorie_par_serie.readAll();
+    const categorieParSerie = await tables.categorie_par_serie.readAll();
     res.json(categorieParSerie);
   } catch (err) {
     next(err);
@@ -15,7 +15,7 @@ const browseCategoriesForSpecificSerie = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const categories =
-      await tables.Categorie_par_serie.readAllCategoriesForSpecificSerie(
+      await tables.categorie_par_serie.readAllCategoriesForSpecificSerie(
         request.params.id
       );
 
@@ -31,7 +31,7 @@ const browseSeriesForSpecificCategorie = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const series =
-      await tables.Categorie_par_serie.readAllSeriesForSpecificCategorie(
+      await tables.categorie_par_serie.readAllSeriesForSpecificCategorie(
         request.params.id
       );
 
@@ -49,14 +49,14 @@ const add = async (request, response, next) => {
 
   try {
     // Insert the new item into the database
-    const result = await tables.Categorie_par_serie.create({
+    const result = await tables.categorie_par_serie.create({
       serieId,
       categorieId,
     });
 
     if (result.affectedRows) {
       const categorieParSerie =
-        await tables.Categorie_par_serie.readAllSeriesForSpecificCategorie(
+        await tables.categorie_par_serie.readAllSeriesForSpecificCategorie(
           categorieId
         );
       response.status(200).json(categorieParSerie);
@@ -81,7 +81,7 @@ const destroy = async (req, response, next) => {
   const { categorieId } = req.body;
   try {
     // Delete the item from the database
-    const result = await tables.Categorie_par_serie.delete({
+    const result = await tables.categorie_par_serie.delete({
       serieId,
       categorieId,
     });
