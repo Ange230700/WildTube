@@ -35,17 +35,9 @@ function NavBar() {
         </NavLink>
       </div>
       <div className="nav-icon-container">
-        <NavLink to={changeProfile()} className="profile-icon">
+        <NavLink to={changeProfile()} className="div-icon">
           {user ? (
-            <img
-              className="icon"
-              src={
-                user.civility === 0
-                  ? "/src/assets/icons/avatar1.svg"
-                  : "/src/assets/icons/FemaleAvatar.svg"
-              }
-              alt="avatar"
-            />
+            <img className="icon avatar" src={user.avatar} alt="avatar" />
           ) : (
             <img
               className="icon"

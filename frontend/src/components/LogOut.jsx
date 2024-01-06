@@ -18,7 +18,7 @@ function LogOut() {
       <button type="button" className="logOut" onClick={handleLogOut}>
         Déconnexion
       </button>
-      <Link className="logOut" to="/favorites">
+      <Link className="logOut" to="/favorites" style={{ color: "white" }}>
         See favorites
       </Link>
     </div>

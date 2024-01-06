@@ -8,17 +8,15 @@ import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
+import Watchlist from "./pages/Watchlist";
 import Categories from "./pages/Categories";
 import Movie from "./pages/Movie";
-import Serie from "./pages/Serie";
 import MoviePlayer from "./pages/MoviePlayer";
 import Inscription from "./pages/Inscription";
 import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
-import PlusTard from "./pages/PlusTard";
-import "./sass/index.scss";
-import { SerieProvider } from "./contexts/SerieContext";
 import UserProfil from "./pages/UserProfil";
+import "./sass/index.scss";
 
 const router = createBrowserRouter([
   {
@@ -38,20 +36,16 @@ const router = createBrowserRouter([
         element: <Favorites />,
       },
       {
+        path: "watchlist/",
+        element: <Watchlist />,
+      },
+      {
         path: "category/:catId",
         element: <Categories />,
       },
-      // {
-      //   path: "profile",
-      //   element: <h1>Profile</h1>,
-      // },
       {
         path: "/movies/:movieId",
         element: <Movie />,
-      },
-      {
-        path: "/series/:serieId",
-        element: <Serie />,
       },
       {
         path: "/moviePlayer/:movieId",
@@ -70,10 +64,6 @@ const router = createBrowserRouter([
         element: <ParametreAdmin />,
       },
       {
-        path: "/AregarderPlusTard",
-        element: <PlusTard />,
-      },
-      {
         path: "/profil",
         element: <UserProfil />,
       },
@@ -86,11 +76,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UserProvider>
-      <SerieProvider>
-        <MovieProvider>
-          <RouterProvider router={router} />
-        </MovieProvider>
-      </SerieProvider>
+      <MovieProvider>
+        <RouterProvider router={router} />
+      </MovieProvider>
     </UserProvider>
   </React.StrictMode>
 );

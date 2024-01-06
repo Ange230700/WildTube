@@ -22,12 +22,9 @@ function Categories() {
     try {
       const result = await axios.all([
         axios.get(`http://localhost:3310/api/films/category/${catId}`),
-        // axios.get(`http://localhost:3310/api/series/category/${catId}`),
       ]);
       const resFilms = result[0].data;
-      // const resSeries = result[1].data;
       setReqOneCount(resFilms);
-      // setReqTwoCount(resSeries);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -74,7 +71,7 @@ function Categories() {
         </div> */}
 
         <MovieGenreTabsContainer categories={categories} />
-        <div>
+        <div className="display-container">
           <div className="display">
             {searchValue.length > 0 ? (
               <>
@@ -85,7 +82,7 @@ function Categories() {
                       .includes(searchValue.toLowerCase())
                   )
                   .map((movie) => (
-                    <MovieLink movie={movie} />
+                    <MovieLink movie={movie} key={movie.id} />
                   ))}
               </>
             ) : (

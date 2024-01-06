@@ -8,101 +8,41 @@ const router = express.Router();
 
 // Import itemControllers module for handling item-related operations
 const categorieControllers = require("./controllers/categorieControllers");
-const categorieParSerieControllers = require("./controllers/categorieParSerieControllers");
 const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 const filmControllers = require("./controllers/filmControllers");
 const userControllers = require("./controllers/userControllers");
-const serieControllers = require("./controllers/serieControllers");
-const enTendanceFilmControllers = require("./controllers/enTendanceFilmControllers");
-const enTendanceSerieControllers = require("./controllers/enTendanceSerieControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
-const favoriSerieControllers = require("./controllers/favoriSerieControllers");
-const commentaireParFilmControllers = require("./controllers/commentaireParFilmControllers");
-const commentaireParSerieControllers = require("./controllers/commentaireParSerieControllers");
+const watchlistControllers = require("./controllers/watchlistControllers");
 const authControllers = require("./controllers/authControllers");
-// const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 
 // Route to get a list of items
-router.get("/categories", categorieControllers.browse);
-router.get("/categoriesParSerie", categorieParSerieControllers.browse);
-router.get("/categoriesParFilm", categorieParFilmControllers.browse);
-router.get(
-  "/series/category/:id",
-  categorieParSerieControllers.browseSeriesForSpecificCategorie
-);
+router.get("/films", filmControllers.browse);
 router.get(
   "/films/category/:id",
   categorieParFilmControllers.browseFilmsForSpecificCategorie
 );
-router.get(
-  "/categories/film/:id",
-  categorieParFilmControllers.browseCategoriesForSpecificFilm
-);
-router.get(
-  "/categories/serie/:id",
-  categorieParSerieControllers.browseCategoriesForSpecificSerie
-);
-router.get("/films", filmControllers.browse);
-router.get("/series", serieControllers.browse);
+router.get("/categories", categorieControllers.browse);
 router.get("/users", userControllers.browse);
-router.get("/favorites/film", favoriFilmControllers.readAllFavoriteMovies);
-router.get("/favorites/serie", favoriSerieControllers.browse);
-router.get("/FilmsEnTendance", enTendanceFilmControllers.browse);
-router.get("/SeriesEnTendance", enTendanceSerieControllers.browse);
+router.get(
+  "/favorites/film/:userId",
+  favoriFilmControllers.browseFavoriteMoviesByUserId
+);
+router.get(
+  "/watchlist/film/:userId",
+  watchlistControllers.browseWatchlistMoviesByUserId
+);
 
 // Route to get a specific item by ID
-router.get("/categories/:id", categorieControllers.read);
-// router.get("/categoriesParSerie/:id", categorieParSerieControllers.read);
-router.get("/films/:id", filmControllers.read);
-router.get("/series/:id", serieControllers.read);
-router.get("/users/:id", userControllers.read);
-router.get("/favorites/film/:id", favoriFilmControllers.read);
-router.get("/favorites/serie/:id", favoriSerieControllers.read);
-router.get("/FilmsEnTendance/:id", enTendanceFilmControllers.read);
-router.get("/SeriesEnTendance/:id", enTendanceSerieControllers.read);
-router.get("/favorites/:id", favoriFilmControllers.read);
-router.get("/commentaires/film/:id", commentaireParFilmControllers.read);
-router.get("/commentaires/serie/:id", commentaireParSerieControllers.read);
+
 // Route to edit a specific item by ID
-router.put("/categories/:id", categorieControllers.edit);
-// router.put("/categoriesParSerie/:id", categorieParSerieControllers.edit);
-// router.put("/categoriesParFilm/:id", categorieParFilmControllers.edit);
-router.put("/films/:id", filmControllers.edit);
-router.put("/series/:id", serieControllers.edit);
-router.put("/users/:id", userControllers.edit);
-router.put("/commentaire/film/:id", commentaireParFilmControllers.edit);
-router.put("/commentaire/serie/:id", commentaireParSerieControllers.edit);
 
 // Route to add a new item
-router.post("/categories", categorieControllers.add);
-router.post("/categoriesParSerie", categorieParSerieControllers.add);
-router.post("/categoriesParFilm", categorieParFilmControllers.add);
-router.post("/films", filmControllers.add);
-router.post("/series", serieControllers.add);
-router.post("/users", userControllers.add);
-router.post("/favorites/film", favoriFilmControllers.add);
-router.post("/favorites/serie", favoriSerieControllers.add);
-router.post("/FilmsEnTendance", enTendanceFilmControllers.add);
-router.post("/SeriesEnTendance", enTendanceSerieControllers.add);
-router.post("/favorites", favoriFilmControllers.add);
-router.post("/commentaire/film", commentaireParFilmControllers.add);
-router.post("/commentaire/serie", commentaireParSerieControllers.add);
+router.post("/login", authControllers.login);
+router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
+router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 
 // Route to delete a specific item by ID
-router.delete("/categories/:id", categorieControllers.destroy);
-router.delete("/categoriesParSerie/:id", categorieParSerieControllers.destroy);
-router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
-router.delete("/films/:id", filmControllers.destroy);
-router.delete("/series/:id", serieControllers.destroy);
-router.delete("/users/:id", userControllers.destroy);
-router.delete("/favorites/film/:filmId/:userId", favoriFilmControllers.destroy);
-router.delete("/favorites/serie/:id", favoriSerieControllers.destroy);
-router.delete("/FilmsEnTendance/:id", enTendanceFilmControllers.destroy);
-router.delete("/SeriesEnTendance/:id", enTendanceSerieControllers.destroy);
-router.delete("/favorites/:id", favoriFilmControllers.destroy);
-router.delete("/commentaire/film/:id", commentaireParFilmControllers.destroy);
-router.delete("/commentaire/serie/:id", commentaireParSerieControllers.destroy);
-
-router.post("/login", authControllers.login);
+router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
+router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);
 
 module.exports = router;

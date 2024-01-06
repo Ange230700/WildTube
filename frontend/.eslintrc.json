@@ -34,5 +34,9 @@
         "assert": "either"
       }
     ]
+    // "import/no-extraneous-dependencies": [
+    //   "error",
+    //   { "devDependencies": ["**/src/components/MovieGenreTabsContainer.jsx"] }
+    // ]
   }
 }

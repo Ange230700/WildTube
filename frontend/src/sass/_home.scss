@@ -50,18 +50,18 @@
           calc(var(--spacing-constant) * 2)
         );
         display: flex;
-        overflow-x: scroll;
+        overflow-x: hidden;
       }
 
-      .static-slider-container::-webkit-scrollbar {
-        height: 4px;
-        width: 0;
-      }
+      // .static-slider-container::-webkit-scrollbar {
+      //   height: 4px;
+      //   width: 0;
+      // }
 
-      .static-slider-container::-webkit-scrollbar-thumb {
-        background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));
-        border-radius: 10px;
-      }
+      // .static-slider-container::-webkit-scrollbar-thumb {
+      //   background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));
+      //   border-radius: 10px;
+      // }
     }
   }
 }

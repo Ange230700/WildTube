@@ -3,6 +3,17 @@ import { useUser } from "../contexts/UserContext";
 
 function NavBarDesktop() {
   const { user } = useUser();
+
+  const changeProfile = () => {
+    if (user && user.IsAdmin) {
+      return "/Parametre";
+    }
+    if (user) {
+      return "/profil";
+    }
+    return "/connection";
+  };
+
   return (
     <div className="navbar-desktop">
       <img className="logo" src="/src/assets/icons/logo.svg" alt="logo" />
@@ -15,16 +26,20 @@ function NavBarDesktop() {
             <p className="link-text">Recherche</p>
           </NavLink>
         </div>
-        <NavLink className="link" to="/Connection">
+        <NavLink className="link" to={changeProfile()}>
           {user ? (
             <img
               className="icon"
               src={
-                user.civility === 0
+                !user.civility
                   ? "/src/assets/icons/avatar1.svg"
                   : "/src/assets/icons/FemaleAvatar.svg"
               }
               alt="avatar"
+              style={{
+                width: 66,
+                height: 66,
+              }}
             />
           ) : (
             <img
