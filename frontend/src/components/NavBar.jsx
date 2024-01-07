@@ -37,7 +37,15 @@ function NavBar() {
       <div className="nav-icon-container">
         <NavLink to={changeProfile()} className="div-icon">
           {user ? (
-            <img className="icon avatar" src={user.avatar} alt="avatar" />
+            <img
+              className="icon avatar"
+              src={
+                user.avatar
+                  ? user.avatar
+                  : "https://avatars.githubusercontent.com/u/97165289"
+              }
+              alt="avatar"
+            />
           ) : (
             <img
               className="icon"

@@ -77,15 +77,18 @@ function Connection() {
               </div>
             </div>
             <div className="signUpText">
-              <div className="tuNAsPasDeCompte">Tu n’as pas de compte ?</div>
-              <div className="signupInviteContainer">
-                <NavLink to="/Inscription">
-                  <p className="inscrisToiIci">Inscris toi ici </p>
-                </NavLink>
-                <p className="catalogue">
+              <p className="tuNAsPasDeCompte">
+                Tu n’as pas de compte ?<span> </span>
+                <span>
+                  <NavLink to="/Inscription" className="inscrisToiIci">
+                    Inscris toi ici
+                  </NavLink>
+                </span>
+                <span> </span>
+                <span className="catalogue">
                   pour débloquer l’entièreté du catalogue.
-                </p>
-              </div>
+                </span>
+              </p>
             </div>
           </div>
         </>

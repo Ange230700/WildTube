@@ -53,7 +53,7 @@ const seed = async () => {
             faker.number.binary({ min: 0, max: 1 }),
             faker.internet.password(),
             0,
-            faker.internet.avatar(),
+            faker.image.avatarGitHub(),
           ]
         )
       );

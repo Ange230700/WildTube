@@ -1,0 +1,275 @@
+.CommentsSection {
+  align-self: stretch;
+  //   height: 201px;
+  flex: 1;
+  //   padding-left: 10px;
+  //   padding-right: 10px;
+  padding: 0
+    clamp(
+      calc(var(--spacing-constant) * 1),
+      2.5vw,
+      calc(var(--spacing-constant) * 1.5)
+    );
+  flex-direction: column;
+  justify-content: space-between;
+  //   align-items: flex-start;
+  display: flex;
+
+  .CommentsSectionTitle {
+    align-self: stretch;
+    // padding-left: 10px;
+    // padding-right: 10px;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      2.5vw,
+      calc(var(--spacing-constant) * 1.5)
+    );
+    display: flex;
+    color: var(--neutral-color);
+
+    .Commentaires {
+      font-family: var(--main-font);
+      font-weight: var(--font-weight-semi-bold);
+    }
+  }
+
+  .CommentsWrapper {
+    flex: 1;
+    // width: 300px;
+    flex-direction: column;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      2.5vw,
+      calc(var(--spacing-constant) * 1.5)
+    );
+    display: flex;
+    overflow-y: scroll;
+
+    .CommentContainer {
+      //   width: 300px;
+      //   justify-content: flex-start;
+      //   align-items: flex-start;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        2.5vw,
+        calc(var(--spacing-constant) * 1.5)
+      );
+      display: flex;
+
+      .UserInfo {
+        flex-direction: column;
+        // justify-content: flex-start;
+        align-items: center;
+        gap: clamp(
+          calc(var(--spacing-constant) * 1 / 2),
+          calc(2.5vw / 2),
+          calc(var(--spacing-constant) * 1.5 / 2)
+        );
+        display: flex;
+
+        .Avatar2 {
+          width: clamp(
+            calc(var(--comment-avatar-size, 48px) * 1),
+            15vw,
+            calc(var(--comment-avatar-size, 48px) * 1.5)
+          );
+          height: clamp(
+            calc(var(--comment-avatar-size, 48px) * 1),
+            15vw,
+            calc(var(--comment-avatar-size, 48px) * 1.5)
+          );
+          object-fit: cover;
+        }
+
+        .Username {
+          color: var(--neutral-color);
+          font-family: var(--main-font);
+          font-weight: var(--font-weight-semi-bold);
+        }
+      }
+
+      .FrameContainer {
+        display: flex;
+        flex-direction: column;
+
+        .Frame1 {
+          flex: 1 1 0;
+          height: clamp(
+            calc(var(--posted-comment-textarea-height, 56px) * 1),
+            17.5vw,
+            calc(var(--posted-comment-textarea-height, 56px) * 1.5)
+          );
+          // padding-left: 7px;
+          // padding-right: 7px;
+          // padding-top: 4px;
+          // padding-bottom: 4px;
+          padding: clamp(
+              calc(var(--spacing-constant) * 1 / 2),
+              calc(2.5vw / 2),
+              calc(var(--spacing-constant) * 1.5 / 2)
+            )
+            clamp(
+              calc(var(--spacing-constant) * 1),
+              calc(2.5vw),
+              calc(var(--spacing-constant) * 1.5)
+            );
+          background: var(--text-field-background-color);
+          border-radius: clamp(
+            calc(var(--border-radius-constant) * 1),
+            calc(2.5vw),
+            calc(var(--border-radius-constant) * 1.5)
+          );
+          overflow: hidden;
+          // justify-content: flex-start;
+          // align-items: flex-start;
+          gap: clamp(
+            calc(var(--spacing-constant) * 1),
+            calc(2.5vw),
+            calc(var(--spacing-constant) * 1.5)
+          );
+          display: flex;
+
+          .CommentText {
+            color: var(--background-color);
+          }
+        }
+
+        .CommentDateContainer {
+          display: flex;
+          justify-content: flex-end;
+
+          .CommentDate {
+            color: var(--secondary-font-color);
+            font-family: var(--main-font);
+            font-weight: var(--font-weight-semi-bold);
+          }
+        }
+      }
+    }
+  }
+
+  .CommentsInput {
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(var(--spacing-constant) * 100 / 320 * 1vw),
+      calc(var(--spacing-constant) * 1.5)
+    );
+    display: flex;
+
+    .CommentContainer {
+      height: clamp(
+        calc(var(--comment-container-height, 48px) * 1),
+        calc(var(--comment-container-height, 48px) * 100 / 320 * 1vw),
+        calc(var(--comment-container-height, 48px) * 1.5)
+      );
+      //   justify-content: flex-start;
+      align-items: center;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(var(--spacing-constant) * 100 / 320 * 1vw),
+        calc(var(--spacing-constant) * 1.5)
+      );
+      display: flex;
+      flex: 1;
+
+      .CommentInput {
+        flex: 1;
+        height: 100%;
+        width: 100%;
+        // padding-left: 7px;
+        // padding-right: 7px;
+        // padding-top: 4px;
+        // padding-bottom: 4px;
+        padding: clamp(
+            calc(var(--spacing-constant) * 1 / 2),
+            calc(var(--spacing-constant) * 100 / 320 * 1vw / 2),
+            calc(var(--spacing-constant) * 1.5 / 2)
+          )
+          clamp(
+            calc(var(--spacing-constant) * 1),
+            calc(var(--spacing-constant) * 100 / 320 * 1vw),
+            calc(var(--spacing-constant) * 1.5)
+          );
+        background: var(--text-field-background-color);
+        border-radius: clamp(
+          calc(var(--border-radius-constant) * 1),
+          calc(var(--border-radius-constant) * 100 / 320 * 1vw),
+          calc(var(--border-radius-constant) * 1.5)
+        );
+        // overflow: hidden;
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+      }
+
+      .SendSvgrepoCom2 {
+        width: clamp(
+          calc(var(--comment-input-height, 24px) * 1),
+          calc(var(--comment-input-height, 24px) * 100 / 320 * 1vw),
+          calc(var(--comment-input-height, 24px) * 1.5)
+        );
+        height: clamp(
+          calc(var(--comment-input-height, 24px) * 1),
+          calc(var(--comment-input-height, 24px) * 100 / 320 * 1vw),
+          calc(var(--comment-input-height, 24px) * 1.5)
+        );
+        // position: relative;
+        // transform: rotate(45deg);
+        // transform-origin: 0 0;
+
+        .Vector {
+          // width: 17px;
+          height: 100%;
+          aspect-ratio: 1 / 1;
+          object-fit: cover;
+          //   left: 0px;
+          //   top: -0px;
+          //   position: absolute;
+          //   background: var(--secondary-font-color);
+        }
+      }
+
+      .UserInfo {
+        // width: 50px;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(
+          calc(var(--spacing-constant) * 1 / 2),
+          calc(var(--spacing-constant) * 100 / 320 / 2 * 1vw),
+          calc(var(--spacing-constant) * 1.5 / 2)
+        );
+        display: flex;
+
+        .Avatar2 {
+          //   width: 32px;
+          //   height: 32px;
+          width: clamp(
+            calc(var(--comment-input-height, 32px) * 1),
+            calc(var(--comment-input-height, 32px) * 100 / 320 * 1vw),
+            calc(var(--comment-input-height, 32px) * 1.5)
+          );
+          height: clamp(
+            calc(var(--comment-input-height, 32px) * 1),
+            calc(var(--comment-input-height, 32px) * 100 / 320 * 1vw),
+            calc(var(--comment-input-height, 32px) * 1.5)
+          );
+        }
+
+        .Username {
+          color: var(--neutral-color);
+          //   font-size: 10px;
+          font-family: var(--main-font);
+          font-weight: var(--font-weight-semi-bold);
+        }
+      }
+    }
+  }
+}

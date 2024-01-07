@@ -38,6 +38,7 @@ router.get(
 
 // Route to add a new item
 router.post("/login", authControllers.login);
+router.post("/users", userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 

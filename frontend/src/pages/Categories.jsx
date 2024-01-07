@@ -88,7 +88,7 @@ function Categories() {
             ) : (
               <>
                 {reqOneCount.map((film) => {
-                  return <MovieLink movie={film} />;
+                  return <MovieLink movie={film} key={film.id} />;
                 })}
                 {/* {reqTwoCount.map((serie) => {
                   return (

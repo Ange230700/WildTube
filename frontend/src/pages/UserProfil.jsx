@@ -14,7 +14,15 @@ function UserProfil() {
   return (
     <div className="ProfileDisplaySection">
       <div className="Profilepicturecontainer">
-        <img className="Avatar1" src={user.avatar} alt="Avatar1" />
+        <img
+          className="Avatar1"
+          src={
+            user.avatar
+              ? user.avatar
+              : "https://avatars.githubusercontent.com/u/97165289"
+          }
+          alt="Avatar1"
+        />
         <div className="User">{user.name}</div>
       </div>
       {/* <div className="Editbuttoncontainer">

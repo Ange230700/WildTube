@@ -9,7 +9,7 @@ CREATE TABLE
         `civility` BOOLEAN NOT NULL,
         `password` VARCHAR(50) NOT NULL,
         `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
-        `avatar` VARCHAR(255) NOT NULL
+        `avatar` VARCHAR(255)
     );
 
 DROP TABLE IF EXISTS `Film`;
