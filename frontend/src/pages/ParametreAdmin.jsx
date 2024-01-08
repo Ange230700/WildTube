@@ -11,13 +11,13 @@ function ParametreAdmin() {
   return (
     <div className="parametreAdmin">
       <div className="profilPicture">
-        <img src="" alt="" />
+        <img className="Avatar1" src={updateUser.avatar} alt="Avatar1" />
       </div>
-      <div className="parametre">
+      {/* <div className="parametre">
         <h2>Paramètres</h2>
-      </div>
+      </div> */}
       <section className="containerDisplayParametre">
-        <div className="params">
+        {/* <div className="params">
           <h3>Ajouter des videos</h3>
         </div>
         <div className="params">
@@ -28,7 +28,7 @@ function ParametreAdmin() {
         </div>
         <div className="params">
           <h3>Gérer les catégories</h3>
-        </div>
+        </div> */}
         <div className="params">
           <button type="button" onClick={handleLogOut}>
             <h3>Déconnexion</h3>

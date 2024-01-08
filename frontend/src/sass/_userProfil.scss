@@ -19,6 +19,14 @@
     .Avatar1 {
       width: 100px;
       height: 100px;
+      border-radius: clamp(
+        var(--nav-icon-container-border-radius, 40px),
+        var(--nav-icon-container-border-radius, 15vw),
+        var(
+          --nav-icon-container-border-radius,
+          calc(var(--nav-icon-container-border-radius, 40px) * 1.5)
+        )
+      );
     }
 
     .User {

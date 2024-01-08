@@ -46,10 +46,21 @@
 
       .link {
         text-decoration: none;
+        height: 100%;
 
         .link-text {
-          color: white;
-          font-size: 28px;
+          color: var(--neutral-color);
+          // font-size: 28px;
+          font-size: clamp(
+            calc(var(--font-size-constant) * 2.8),
+            calc(var(--preferred-font-size-constant, 8.75vw)),
+            calc(var(--font-size-constant) * 2.8 * 1.5)
+          );
+        }
+
+        .icon {
+          height: 100%;
+          aspect-ratio: 1/1;
         }
       }
     }
