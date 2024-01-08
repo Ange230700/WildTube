@@ -2,7 +2,7 @@ function CommentsSection() {
   return (
     <section className="CommentsSection">
       <div className="CommentsSectionTitle">
-        <div className="Commentaires">Commentaires</div>
+        <h3 className="Commentaires">Commentaires</h3>
       </div>
       <div className="CommentsWrapper">
         <div className="CommentContainer">
@@ -12,7 +12,7 @@ function CommentsSection() {
               className="Avatar2"
               src="https://via.placeholder.com/46x46"
             />
-            <div className="Username">username</div>
+            <h6 className="Username">username</h6>
           </div>
           <div className="FrameContainer">
             <div className="Frame1">
@@ -26,12 +26,15 @@ function CommentsSection() {
       </div>
       <div className="CommentsInput">
         <div className="CommentContainer">
-          <input
-            className="CommentInput"
-            placeholder="ajouter votre commentaire..."
-          />
-          <div className="SendSvgrepoCom2">
-            <img alt="" className="Vector" />
+          <div className="CommentInputContainer">
+            <textarea className="CommentInput" />
+            <button type="button" className="SendSvgrepoCom2">
+              <img
+                alt="Send"
+                className="Vector"
+                src="/src/assets/icons/vector.svg"
+              />
+            </button>
           </div>
           <div className="UserInfo">
             <img
@@ -39,7 +42,7 @@ function CommentsSection() {
               className="Avatar2"
               src="https://via.placeholder.com/32x32"
             />
-            <p className="Username">username</p>
+            <h6 className="Username">username</h6>
           </div>
         </div>
       </div>

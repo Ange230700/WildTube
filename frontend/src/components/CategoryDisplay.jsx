@@ -56,7 +56,6 @@ function CategoryDisplay({ categorie }) {
       <section className="category-movie-display-container">
         <div className="category-title-container">
           <div className="category-title">{categorie.name}</div>
-          {/* <div className="category-page-link">Show all</div> */}
         </div>
         <Carousel
           additionalTransfrom={0}

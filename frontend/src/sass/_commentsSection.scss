@@ -1,68 +1,67 @@
 .CommentsSection {
   align-self: stretch;
   //   height: 201px;
-  flex: 1;
+  //   flex: 1;
+  height: clamp(
+    calc(var(--comments-wrapper-height, 338px) * 1),
+    calc(105.625vw * 1),
+    calc(var(--comments-wrapper-height, 338px) * 1.5)
+  );
+  // overflow-y: scroll;
   //   padding-left: 10px;
   //   padding-right: 10px;
   padding: 0
     clamp(
       calc(var(--spacing-constant) * 1),
-      2.5vw,
+      calc(2.5vw * 1),
       calc(var(--spacing-constant) * 1.5)
     );
   flex-direction: column;
   justify-content: space-between;
   //   align-items: flex-start;
   display: flex;
+  gap: clamp(
+    calc(var(--spacing-constant) * 1),
+    calc(2.5vw * 1),
+    calc(var(--spacing-constant) * 1 * 1.5)
+  );
 
   .CommentsSectionTitle {
     align-self: stretch;
-    // padding-left: 10px;
-    // padding-right: 10px;
-    // justify-content: flex-start;
-    // align-items: flex-start;
     gap: clamp(
       calc(var(--spacing-constant) * 1),
-      2.5vw,
+      calc(2.5vw * 1),
       calc(var(--spacing-constant) * 1.5)
     );
     display: flex;
     color: var(--neutral-color);
-
-    .Commentaires {
-      font-family: var(--main-font);
-      font-weight: var(--font-weight-semi-bold);
-    }
   }
 
   .CommentsWrapper {
-    flex: 1;
-    // width: 300px;
     flex-direction: column;
-    // justify-content: flex-start;
-    // align-items: flex-start;
     gap: clamp(
       calc(var(--spacing-constant) * 1),
-      2.5vw,
+      calc(2.5vw * 1),
       calc(var(--spacing-constant) * 1.5)
     );
     display: flex;
+    height: clamp(
+      calc(var(--comments-wrapper-height, 246px) * 1),
+      calc(76.875vw * 1),
+      calc(var(--comments-wrapper-height, 246px) * 1.5)
+    );
     overflow-y: scroll;
 
     .CommentContainer {
-      //   width: 300px;
-      //   justify-content: flex-start;
-      //   align-items: flex-start;
       gap: clamp(
         calc(var(--spacing-constant) * 1),
-        2.5vw,
+        calc(2.5vw * 1),
         calc(var(--spacing-constant) * 1.5)
       );
       display: flex;
 
       .UserInfo {
         flex-direction: column;
-        // justify-content: flex-start;
         align-items: center;
         gap: clamp(
           calc(var(--spacing-constant) * 1 / 2),
@@ -83,30 +82,30 @@
             calc(var(--comment-avatar-size, 48px) * 1.5)
           );
           object-fit: cover;
+          border-radius: clamp(
+            calc(var(--border-radius-constant) * 3),
+            calc(3.125vw * 3),
+            calc(var(--border-radius-constant) * 3 * 1.5)
+          );
         }
 
         .Username {
           color: var(--neutral-color);
-          font-family: var(--main-font);
-          font-weight: var(--font-weight-semi-bold);
         }
       }
 
       .FrameContainer {
         display: flex;
         flex-direction: column;
+        flex: 1;
+        gap: clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        );
 
         .Frame1 {
           flex: 1 1 0;
-          height: clamp(
-            calc(var(--posted-comment-textarea-height, 56px) * 1),
-            17.5vw,
-            calc(var(--posted-comment-textarea-height, 56px) * 1.5)
-          );
-          // padding-left: 7px;
-          // padding-right: 7px;
-          // padding-top: 4px;
-          // padding-bottom: 4px;
           padding: clamp(
               calc(var(--spacing-constant) * 1 / 2),
               calc(2.5vw / 2),
@@ -124,8 +123,6 @@
             calc(var(--border-radius-constant) * 1.5)
           );
           overflow: hidden;
-          // justify-content: flex-start;
-          // align-items: flex-start;
           gap: clamp(
             calc(var(--spacing-constant) * 1),
             calc(2.5vw),
@@ -135,6 +132,7 @@
 
           .CommentText {
             color: var(--background-color);
+            flex: 1;
           }
         }
 
@@ -144,20 +142,25 @@
 
           .CommentDate {
             color: var(--secondary-font-color);
-            font-family: var(--main-font);
-            font-weight: var(--font-weight-semi-bold);
           }
         }
       }
     }
   }
 
+  .CommentsWrapper::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .CommentsWrapper::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));
+    border-radius: 10px;
+  }
+
   .CommentsInput {
-    // justify-content: flex-start;
-    // align-items: flex-start;
     gap: clamp(
       calc(var(--spacing-constant) * 1),
-      calc(var(--spacing-constant) * 100 / 320 * 1vw),
+      calc(2.5vw * 1),
       calc(var(--spacing-constant) * 1.5)
     );
     display: flex;
@@ -165,73 +168,78 @@
     .CommentContainer {
       height: clamp(
         calc(var(--comment-container-height, 48px) * 1),
-        calc(var(--comment-container-height, 48px) * 100 / 320 * 1vw),
+        calc(15vw * 1),
         calc(var(--comment-container-height, 48px) * 1.5)
       );
-      //   justify-content: flex-start;
       align-items: center;
       gap: clamp(
         calc(var(--spacing-constant) * 1),
-        calc(var(--spacing-constant) * 100 / 320 * 1vw),
-        calc(var(--spacing-constant) * 1.5)
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
       );
       display: flex;
       flex: 1;
 
-      .CommentInput {
+      .CommentInputContainer {
         flex: 1;
-        height: 100%;
-        width: 100%;
-        // padding-left: 7px;
-        // padding-right: 7px;
-        // padding-top: 4px;
-        // padding-bottom: 4px;
-        padding: clamp(
-            calc(var(--spacing-constant) * 1 / 2),
-            calc(var(--spacing-constant) * 100 / 320 * 1vw / 2),
-            calc(var(--spacing-constant) * 1.5 / 2)
-          )
-          clamp(
+        position: relative;
+
+        .CommentInput {
+          height: 100%;
+          width: 100%;
+          padding: clamp(
+              calc(var(--spacing-constant) * 1 / 2),
+              calc(2.5vw / 2),
+              calc(var(--spacing-constant) * 1.5 / 2)
+            )
+            clamp(
+              calc(var(--spacing-constant) * 1),
+              calc(2.5vw * 1),
+              calc(var(--spacing-constant) * 1.5)
+            );
+          background: var(--text-field-background-color);
+          border-radius: clamp(
+            calc(var(--border-radius-constant) * 1),
+            calc(3.125vw * 1),
+            calc(var(--border-radius-constant) * 1 * 1.5)
+          );
+          border: none;
+          justify-content: space-between;
+          align-items: center;
+          display: flex;
+        }
+
+        .CommentInput:focus {
+          outline: none;
+        }
+
+        .SendSvgrepoCom2 {
+          width: clamp(
+            calc(var(--comment-input-height, 24px) * 1),
+            calc(7.5vw * 1),
+            calc(var(--comment-input-height, 24px) * 1.5)
+          );
+          height: clamp(
+            calc(var(--comment-input-height, 24px) * 1),
+            calc(7.5vw * 1),
+            calc(var(--comment-input-height, 24px) * 1.5)
+          );
+          border: none;
+          background: none;
+          position: absolute;
+          right: clamp(
             calc(var(--spacing-constant) * 1),
-            calc(var(--spacing-constant) * 100 / 320 * 1vw),
+            calc(2.5vw * 1),
             calc(var(--spacing-constant) * 1.5)
           );
-        background: var(--text-field-background-color);
-        border-radius: clamp(
-          calc(var(--border-radius-constant) * 1),
-          calc(var(--border-radius-constant) * 100 / 320 * 1vw),
-          calc(var(--border-radius-constant) * 1.5)
-        );
-        // overflow: hidden;
-        justify-content: space-between;
-        align-items: center;
-        display: flex;
-      }
+          top: 50%;
+          transform: translateY(-50%);
 
-      .SendSvgrepoCom2 {
-        width: clamp(
-          calc(var(--comment-input-height, 24px) * 1),
-          calc(var(--comment-input-height, 24px) * 100 / 320 * 1vw),
-          calc(var(--comment-input-height, 24px) * 1.5)
-        );
-        height: clamp(
-          calc(var(--comment-input-height, 24px) * 1),
-          calc(var(--comment-input-height, 24px) * 100 / 320 * 1vw),
-          calc(var(--comment-input-height, 24px) * 1.5)
-        );
-        // position: relative;
-        // transform: rotate(45deg);
-        // transform-origin: 0 0;
-
-        .Vector {
-          // width: 17px;
-          height: 100%;
-          aspect-ratio: 1 / 1;
-          object-fit: cover;
-          //   left: 0px;
-          //   top: -0px;
-          //   position: absolute;
-          //   background: var(--secondary-font-color);
+          .Vector {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+          }
         }
       }
 
@@ -243,7 +251,7 @@
         align-items: center;
         gap: clamp(
           calc(var(--spacing-constant) * 1 / 2),
-          calc(var(--spacing-constant) * 100 / 320 / 2 * 1vw),
+          calc(2.5vw / 2),
           calc(var(--spacing-constant) * 1.5 / 2)
         );
         display: flex;
@@ -253,13 +261,19 @@
           //   height: 32px;
           width: clamp(
             calc(var(--comment-input-height, 32px) * 1),
-            calc(var(--comment-input-height, 32px) * 100 / 320 * 1vw),
+            calc(10vw * 1),
             calc(var(--comment-input-height, 32px) * 1.5)
           );
           height: clamp(
             calc(var(--comment-input-height, 32px) * 1),
-            calc(var(--comment-input-height, 32px) * 100 / 320 * 1vw),
+            calc(10vw * 1),
             calc(var(--comment-input-height, 32px) * 1.5)
+          );
+          object-fit: cover;
+          border-radius: clamp(
+            calc(var(--border-radius-constant) * 3),
+            calc(3.125vw * 3),
+            calc(var(--border-radius-constant) * 3 * 1.5)
           );
         }
 

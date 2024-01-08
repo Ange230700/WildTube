@@ -79,9 +79,9 @@
   width: 5px;
 }
 
-.search::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-color, rgba(255, 82, 154, 0.502));
-}
+// .search::-webkit-scrollbar-track {
+//   background: var(--scrollbar-track-color, rgba(255, 82, 154, 0.502));
+// }
 
 .search::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));
