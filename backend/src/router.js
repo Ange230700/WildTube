@@ -7,6 +7,7 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import itemControllers module for handling item-related operations
+const { hashPassword } = require("./services/auth");
 const categorieControllers = require("./controllers/categorieControllers");
 const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 const filmControllers = require("./controllers/filmControllers");
@@ -39,7 +40,7 @@ router.get("/commentaires/film/:id", commentaireParFilmControllers.read);
 router.put("/commentaire/film/:id", commentaireParFilmControllers.edit);
 // Route to add a new item
 router.post("/login", authControllers.login);
-router.post("/users", userControllers.add);
+router.post("/users", hashPassword, userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 router.post("/commentaire/film", commentaireParFilmControllers.add);
