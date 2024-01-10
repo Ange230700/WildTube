@@ -69,6 +69,20 @@ CREATE TABLE
         PRIMARY KEY (`filmId`, `categorieId`)
     );
 
+DROP TABLE IF EXISTS `Commentaire_film`;
+
+CREATE TABLE
+    `Commentaire_film` (
+        `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        `userId` INT NOT NULL,
+        `filmId` INT NOT NULL,
+        `content` VARCHAR(500) NOT NULL,
+        `date` DATETIME NOT NULL,
+        `unique_key` VARCHAR(255) NOT NULL,
+        CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
+        CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`)
+    );
+
 INSERT INTO
     `Categorie` (`name`, `position`)
 VALUES

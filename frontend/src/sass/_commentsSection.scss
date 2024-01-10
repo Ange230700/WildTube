@@ -116,7 +116,6 @@
             calc(2.5vw),
             calc(var(--border-radius-constant) * 1.5)
           );
-          overflow: hidden;
           gap: clamp(
             calc(var(--spacing-constant) * 1),
             calc(2.5vw),

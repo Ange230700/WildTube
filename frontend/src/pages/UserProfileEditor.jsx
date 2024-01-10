@@ -10,7 +10,6 @@ function UserProfileEditor() {
     naissance: user.naissance,
     avatar: user.avatar,
   });
-  const [previewImage, setPreviewImage] = useState(undefined);
 
   useEffect(() => {
     setFormData({
@@ -29,7 +28,6 @@ function UserProfileEditor() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, avatar: file });
-    setPreviewImage(file);
   };
 
   const handleSubmit = async (e) => {
@@ -107,7 +105,6 @@ function UserProfileEditor() {
           onChange={handleInputChange}
         />
         <input type="file" name="avatar" onChange={handleImageChange} />
-        {previewImage && <img src={previewImage} alt="Preview" />}
         <button type="submit">Update Profile</button>
       </form>
     </div>

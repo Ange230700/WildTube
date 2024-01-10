@@ -43,6 +43,7 @@ const userControllers = require("./controllers/userControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
 const watchlistControllers = require("./controllers/watchlistControllers");
 const authControllers = require("./controllers/authControllers");
+const commentaireFilmControllers = require("./controllers/commentaireFilmControllers");
 
 // Route to get a list of items
 router.get("/films", filmControllers.browse);
@@ -60,6 +61,11 @@ router.get(
   "/watchlist/film/:userId",
   watchlistControllers.browseWatchlistMoviesByUserId
 );
+router.get("/comments", commentaireFilmControllers.browse);
+router.get(
+  "/comments/film/:filmId",
+  commentaireFilmControllers.browseCommentsByFilmId
+);
 
 // Route to get a specific item by ID
 
@@ -71,6 +77,7 @@ router.post("/login", authControllers.login);
 router.post("/users", userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
+router.post("/comments", commentaireFilmControllers.addComment);
 
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);

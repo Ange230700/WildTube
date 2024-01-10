@@ -11,7 +11,11 @@ function ParametreAdmin() {
   return (
     <div className="parametreAdmin">
       <div className="profilPicture">
-        <img className="Avatar1" src={updateUser.avatar} alt="Avatar1" />
+        <img
+          className="Avatar1"
+          src="https://avatars.githubusercontent.com/u/97165289"
+          alt="Avatar1"
+        />
       </div>
       {/* <div className="parametre">
         <h2>Paramètres</h2>

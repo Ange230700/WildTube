@@ -5,15 +5,17 @@ import axios from "axios";
 import MovieLink from "./MovieLink";
 
 const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 1601 },
+    items: 7,
+  },
   desktop: {
     breakpoint: { max: 1600, min: 1025 },
     items: 6,
-    // partialVisibilityGutter: 0,
   },
   landscapeTablet: {
     breakpoint: { max: 1024, min: 835 },
     items: 5,
-    // partialVisibilityGutter: 0,
   },
   tablet: {
     breakpoint: {
@@ -21,12 +23,10 @@ const responsive = {
       min: 769,
     },
     items: 5,
-    // partialVisibilityGutter: 30,
   },
   landscapeMobile: {
     breakpoint: { max: 768, min: 481 },
     items: 4,
-    // partialVisibilityGutter: 40,
   },
   mobile: {
     breakpoint: {
@@ -34,7 +34,6 @@ const responsive = {
       min: 320,
     },
     items: 4,
-    // partialVisibilityGutter: 40,
   },
 };
 
@@ -42,7 +41,9 @@ function CategoryDisplay({ categorie }) {
   const [allMoviesForOneCategorie, setAllMoviesForOneCategorie] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3310/api/films/category/${categorie.id}`)
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${categorie.id}`
+      )
       .then((response) => {
         setAllMoviesForOneCategorie(response.data);
       })

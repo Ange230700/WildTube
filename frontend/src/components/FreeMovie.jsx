@@ -210,7 +210,7 @@ function FreeMovie({ movie }) {
           <p className="movie-title">{movie.title}</p>
           <p className="movie-description">{movie.description}</p>
         </div>
-        <CommentsSection />
+        <CommentsSection filmId={movie.id} user={user} />
       </div>
     </div>
   );

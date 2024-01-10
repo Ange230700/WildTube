@@ -30,11 +30,7 @@ function NavBarDesktop() {
           {user ? (
             <img
               className="icon avatar"
-              src={
-                user.avatar
-                  ? `${import.meta.env.VITE_BACKEND_URL}/${user.avatar}`
-                  : "https://avatars.githubusercontent.com/u/97165289"
-              }
+              src="https://avatars.githubusercontent.com/u/97165289"
               alt="avatar"
             />
           ) : (

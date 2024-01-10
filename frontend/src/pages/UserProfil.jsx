@@ -16,11 +16,7 @@ function UserProfil() {
       <div className="Profilepicturecontainer">
         <img
           className="Avatar1"
-          src={
-            user.avatar
-              ? `${import.meta.env.VITE_BACKEND_URL}/${user.avatar}`
-              : "https://avatars.githubusercontent.com/u/97165289"
-          }
+          src="https://avatars.githubusercontent.com/u/97165289"
           alt="Avatar1"
         />
         <h2 className="User">{user.name}</h2>
