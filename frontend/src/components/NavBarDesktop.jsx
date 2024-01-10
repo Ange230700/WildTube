@@ -32,8 +32,8 @@ function NavBarDesktop() {
               className="icon"
               src={
                 !user.civility
-                  ? "/src/assets/icons/avatar1.svg"
-                  : "/src/assets/icons/FemaleAvatar.svg"
+                  ? "/src/assets/icons/FemaleAvatar.svg"
+                  : "/src/assets/icons/avatar1.svg"
               }
               alt="avatar"
               style={{
