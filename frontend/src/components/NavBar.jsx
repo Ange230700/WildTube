@@ -35,14 +35,14 @@ function NavBar() {
         </NavLink>
       </div>
       <div className="nav-icon-container">
-        <NavLink to={changeProfile()} className="profile-icon">
+        <NavLink to={changeProfile()} className="div-icon">
           {user ? (
             <img
-              className="icon"
+              className="icon avatar"
               src={
-                user.civility === 0
-                  ? "/src/assets/icons/avatar1.svg"
-                  : "/src/assets/icons/FemaleAvatar.svg"
+                user.avatar
+                  ? user.avatar
+                  : "https://avatars.githubusercontent.com/u/97165289"
               }
               alt="avatar"
             />

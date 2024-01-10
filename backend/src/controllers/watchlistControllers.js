@@ -1,31 +1,31 @@
 const tables = require("../tables");
 
-const browseFavoriteMoviesByUserId = async (req, res, next) => {
+const browseWatchlistMoviesByUserId = async (req, res, next) => {
   const { userId } = req.params;
   console.warn(req.params);
 
   try {
-    const favorites = await tables.Favori_film.readFavoriteMoviesByUserId(
+    const watchlist = await tables.Watchlist.readWatchlistMoviesByUserId(
       userId
     );
-    console.warn(favorites);
+    console.warn(watchlist);
 
-    if (favorites == null) {
+    if (watchlist == null) {
       res.sendStatus(404);
     } else {
-      res.json(favorites);
+      res.json(watchlist);
     }
   } catch (err) {
     next(err);
   }
 };
 
-const addMovieToFavorite = async (req, res, next) => {
+const addMovieToWatchlist = async (req, res, next) => {
   const { userId, filmId } = req.body;
   console.warn(req.body);
 
   try {
-    const result = await tables.Favori_film.createMovieInFavorites(
+    const result = await tables.Watchlist.createMovieInWatchlist(
       userId,
       filmId
     );
@@ -46,7 +46,7 @@ const destroy = async (req, res, next) => {
   console.warn("req.params", req.params);
 
   try {
-    const result = await tables.Favori_film.delete(userId, filmId);
+    const result = await tables.Watchlist.delete(userId, filmId);
     console.warn(result);
 
     if (result.affectedRows) {
@@ -60,7 +60,7 @@ const destroy = async (req, res, next) => {
 };
 
 module.exports = {
-  browseFavoriteMoviesByUserId,
-  addMovieToFavorite,
+  browseWatchlistMoviesByUserId,
+  addMovieToWatchlist,
   destroy,
 };

@@ -6,30 +6,17 @@
 const CategorieManager = require("./models/CategorieManager");
 const UserManager = require("./models/UserManager");
 const FilmManager = require("./models/FilmManager");
-const SerieManager = require("./models/SerieManager");
-const EnTendanceFilmManager = require("./models/EnTendanceFilmManager");
 const FavoriFilmManager = require("./models/FavoriFilmManager");
-const FavoriSerieManager = require("./models/FavoriSerieManager");
 const CategorieParFilmManager = require("./models/CategorieParFilmManager");
-const CategorieParSerieManager = require("./models/CategorieParSerieManager");
-const EnTendanceSerieManager = require("./models/EnTendanceSerieManager");
-const CommentaireParFilmManager = require("./models/CommentaireParFilmManager");
-const CommentaireParSerieManager = require("./models/CommentaireParSerieManager");
+const WatchlistManager = require("./models/WatchlistManager");
 
 const managers = [
   CategorieManager,
   UserManager,
   FilmManager,
-  SerieManager,
-  EnTendanceFilmManager,
   FavoriFilmManager,
-  FavoriSerieManager,
   CategorieParFilmManager,
-  CategorieParSerieManager,
-  CommentaireParFilmManager,
-  CommentaireParSerieManager,
-  EnTendanceSerieManager,
-  // S1_tableJointure,
+  WatchlistManager,
   // Add other managers here
 ];
 
@@ -43,7 +30,7 @@ managers.forEach((ManagerClass) => {
   tables[manager.table] = manager;
 });
 
-console.info("Registered tables:", Object.keys(tables));
+// console.info("Registered tables:", Object.keys(tables));
 
 /* ************************************************************************* */
 

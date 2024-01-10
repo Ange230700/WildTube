@@ -7,10 +7,9 @@ function Inscription() {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    password: "",
-    // confirmPassword: "",
-    civility: "",
     naissance: "",
+    civility: "",
+    password: "",
   });
 
   // const { updateUser, user: connectedUser } = useUser();
@@ -37,7 +36,10 @@ function Inscription() {
     }
 
     try {
-      const result = await axios.post("http://localhost:3310/api/users", user);
+      const result = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+        user
+      );
       // console.log(user);
       if (result.status === 201) {
         toggleModal(); // Afficher la modale en cas de succès

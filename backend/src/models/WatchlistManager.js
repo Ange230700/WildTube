@@ -1,11 +1,11 @@
 const AbstractManager = require("./AbstractManager");
 
-class FavoriFilmManager extends AbstractManager {
+class WatchlistManager extends AbstractManager {
   constructor() {
-    super({ table: "Favori_film" });
+    super({ table: "Watchlist" });
   }
 
-  async createMovieInFavorites(userId, filmId) {
+  async createMovieInWatchlist(userId, filmId) {
     const [result] = await this.database.query(
       `INSERT INTO ${this.table} (userId, filmId) VALUES (?, ?)`,
       [userId, filmId]
@@ -13,7 +13,7 @@ class FavoriFilmManager extends AbstractManager {
     return result;
   }
 
-  async readFavoriteMoviesByUserId(userId) {
+  async readWatchlistMoviesByUserId(userId) {
     const [result] = await this.database.query(
       `SELECT * FROM ${this.table} JOIN User ON ${this.table}.userId = User.id JOIN Film ON ${this.table}.filmId = Film.id WHERE userId = ?`,
       [userId]
@@ -29,4 +29,5 @@ class FavoriFilmManager extends AbstractManager {
     return result;
   }
 }
-module.exports = FavoriFilmManager;
+
+module.exports = WatchlistManager;

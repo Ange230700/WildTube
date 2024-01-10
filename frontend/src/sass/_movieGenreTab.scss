@@ -1,0 +1,25 @@
+.embla__slide {
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: 100%;
+  margin-right: clamp(
+    var(--minimum-spacing-constant),
+    var(--spacing-constant),
+    calc(var(--minimum-spacing-constant) * --enlargement-factor)
+  );
+  list-style: none;
+
+  .movie-genre {
+    width: 100%;
+    font-weight: var(--font-weight-semi-bold);
+    text-wrap: nowrap;
+    color: var(--selected-movie-genre-tab-color, hsla(0, 0%, 100%, 1));
+    text-decoration: none;
+    // height: auto;
+    // object-fit: cover;
+  }
+
+  .movie-genre:hover {
+    color: var(--selected-movie-genre-tab-color, hsla(335, 100%, 66%, 1));
+  }
+}
