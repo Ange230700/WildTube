@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
@@ -10,21 +10,16 @@ function FreeMovie({ movie }) {
   const { user } = useUser();
   const [isFavorited, setIsFavorited] = useState(false);
   const [isWatchlisted, setIsWatchlisted] = useState(false);
+  const location = useLocation();
 
   // Implement this function to check favorited state
   const checkIfFavorited = async (myMovieId) => {
     try {
-      console.warn("user id", user.id, "movie id", myMovieId);
       const url = `${import.meta.env.VITE_BACKEND_URL}/api/favorites/film/${
         user.id
       }`;
 
       const response = await axios.get(url);
-      console.warn("response.data", response.data);
-      console.warn(
-        "response.data.some",
-        response.data.some((fav) => fav.filmId === myMovieId)
-      );
 
       if (response.data.some((fav) => fav.filmId === myMovieId)) {
         setIsFavorited(true);
@@ -52,7 +47,6 @@ function FreeMovie({ movie }) {
     };
 
     const isFavorite = await checkIfFavorited(myMovieId);
-    console.warn("isFavorite", isFavorite);
 
     if (isFavorite) {
       axios
@@ -78,17 +72,11 @@ function FreeMovie({ movie }) {
   // Implement this function to handle watchlist click
   const checkIfWatchlisted = async (myMovieId) => {
     try {
-      console.warn("user id", user.id, "movie id", myMovieId);
       const url = `${import.meta.env.VITE_BACKEND_URL}/api/watchlist/film/${
         user.id
       }`;
 
       const response = await axios.get(url);
-      console.warn("response.data", response.data);
-      console.warn(
-        "response.data.some",
-        response.data.some((fav) => fav.filmId === myMovieId)
-      );
 
       if (response.data.some((fav) => fav.filmId === myMovieId)) {
         setIsWatchlisted(true);
@@ -116,7 +104,6 @@ function FreeMovie({ movie }) {
     };
 
     const isWatchlistedStatement = await checkIfWatchlisted(myMovieId);
-    console.warn("isWatchlisted", isWatchlistedStatement);
 
     if (isWatchlistedStatement) {
       axios
@@ -153,7 +140,16 @@ function FreeMovie({ movie }) {
 
   return (
     <div className="movie-page-details" key={parseInt(movieId, 10)}>
-      <div className="movie-information-display">
+      <div
+        className="movie-information-display"
+        style={
+          location.pathname.includes("/movies/")
+            ? {
+                paddingBottom: "9.375vw",
+              }
+            : {}
+        }
+      >
         <div className="thumbnail-container">
           <img className="movie-cover" src={movie.cover} alt={movie.title} />
           <div className="upper-layer">

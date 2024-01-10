@@ -4,7 +4,7 @@ import { useUser } from "../contexts/UserContext";
 function UserProfil() {
   const { user } = useUser();
   const { updateUser } = useUser();
-  console.warn(updateUser, user);
+  // console.warn(updateUser, user);
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -18,12 +18,12 @@ function UserProfil() {
           className="Avatar1"
           src={
             user.avatar
-              ? user.avatar
+              ? `${import.meta.env.VITE_BACKEND_URL}/${user.avatar}`
               : "https://avatars.githubusercontent.com/u/97165289"
           }
           alt="Avatar1"
         />
-        <div className="User">{user.name}</div>
+        <h2 className="User">{user.name}</h2>
       </div>
       {/* <div className="Editbuttoncontainer">
         <div className="Editbutton">
@@ -33,27 +33,19 @@ function UserProfil() {
       <div className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link
-              to="/favorites"
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              Favoris
-            </Link>
+            <Link to="/favorites">Favoris</Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link
-              to="/watchlist"
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              À regarder plus tard
-            </Link>
+            <Link to="/watchlist">À regarder plus tard</Link>
           </div>
         </div>
-        {/* <div className="Useroption">
-          <div className="RegarderPlusTard">Informations du compte</div>
-        </div> */}
+        <div className="Useroption">
+          <div className="RegarderPlusTard">
+            <Link to="/profileEditor">Informations du compte</Link>
+          </div>
+        </div>
         <div className="Useroption">
           <button
             className="RegarderPlusTardButton"

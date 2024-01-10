@@ -1,15 +1,10 @@
 .CommentsSection {
   align-self: stretch;
-  //   height: 201px;
-  //   flex: 1;
   height: clamp(
     calc(var(--comments-wrapper-height, 338px) * 1),
     calc(105.625vw * 1),
     calc(var(--comments-wrapper-height, 338px) * 1.5)
   );
-  // overflow-y: scroll;
-  //   padding-left: 10px;
-  //   padding-right: 10px;
   padding: 0
     clamp(
       calc(var(--spacing-constant) * 1),
@@ -18,7 +13,6 @@
     );
   flex-direction: column;
   justify-content: space-between;
-  //   align-items: flex-start;
   display: flex;
   gap: clamp(
     calc(var(--spacing-constant) * 1),
@@ -244,7 +238,6 @@
       }
 
       .UserInfo {
-        // width: 50px;
         height: 100%;
         flex-direction: column;
         justify-content: center;
@@ -257,8 +250,6 @@
         display: flex;
 
         .Avatar2 {
-          //   width: 32px;
-          //   height: 32px;
           width: clamp(
             calc(var(--comment-input-height, 32px) * 1),
             calc(10vw * 1),
@@ -279,7 +270,6 @@
 
         .Username {
           color: var(--neutral-color);
-          //   font-size: 10px;
           font-family: var(--main-font);
           font-weight: var(--font-weight-semi-bold);
         }

@@ -7,12 +7,12 @@ import MovieLink from "./MovieLink";
 const responsive = {
   desktop: {
     breakpoint: { max: 1600, min: 1025 },
-    items: 4,
+    items: 6,
     // partialVisibilityGutter: 0,
   },
   landscapeTablet: {
     breakpoint: { max: 1024, min: 835 },
-    items: 4,
+    items: 5,
     // partialVisibilityGutter: 0,
   },
   tablet: {
@@ -20,7 +20,7 @@ const responsive = {
       max: 834,
       min: 769,
     },
-    items: 4,
+    items: 5,
     // partialVisibilityGutter: 30,
   },
   landscapeMobile: {

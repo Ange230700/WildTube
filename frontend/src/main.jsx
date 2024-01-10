@@ -1,4 +1,3 @@
-/*eslint-disable */
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,6 +15,7 @@ import Inscription from "./pages/Inscription";
 import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
+import UserProfileEditor from "./pages/UserProfileEditor";
 import "./sass/index.scss";
 
 const router = createBrowserRouter([
@@ -66,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/profil",
         element: <UserProfil />,
+      },
+      {
+        path: "/profileEditor",
+        element: <UserProfileEditor />,
       },
     ],
   },

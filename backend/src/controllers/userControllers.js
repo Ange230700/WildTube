@@ -18,9 +18,38 @@ const browse = async (req, res, next) => {
 // The R of BREAD - Read operation
 
 // The E of BREAD - Edit (Update) operation
-// This operation is not yet implemented
+const edit = async (req, res, next) => {
+  // Get the ID of the item to be updated from the request parameters
+  const { id } = req.params;
+  // Get the new data from the request body
+  const { name, email, naissance } = req.body;
+  const avatar = req.file ? req.file.path : null;
 
-// eslint-disable-next-line consistent-return
+  let formattedDate = naissance;
+  if (!Number.isNaN(Date.parse(naissance))) {
+    formattedDate = new Date(naissance).toISOString().slice(0, 10);
+  }
+
+  try {
+    // Update the item in the database
+    const updatedUser = await tables.User.update(id, {
+      name,
+      email,
+      naissance: formattedDate,
+      avatar,
+    });
+
+    // Respond with the updated item in JSON format
+    if (!updatedUser) {
+      res.status(400).json({ message: "Bad Request" });
+    } else {
+      res.json(updatedUser);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The A of BREAD - Add (Create) operation
 
@@ -56,5 +85,6 @@ const add = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
+  edit,
   add,
 };

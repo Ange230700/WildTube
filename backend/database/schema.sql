@@ -237,7 +237,7 @@ VALUES
     ),
     (
         'https://i.ebayimg.com/images/g/qisAAOSwDvVkuA-M/s-l1600.jpg',
-        'https://4kwallpapers.com/images/wallpapers/justice-league-3840x2160-11805.jpg',
+        'https://4k wallpapers.com/images/wallpapers/justice-league-3840x2160-11805.jpg',
         'Justice League War World',
         'https://www.youtube.com/watch?v=IPDLodUE9gg&ab',
         79,
