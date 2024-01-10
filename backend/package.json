@@ -6,7 +6,8 @@
     "build": "node migrate.js",
     "start": "node index.js",
     "test": "jest",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write .",
+    "lint": "npx eslint . --fix"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",

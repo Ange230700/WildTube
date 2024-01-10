@@ -11,7 +11,7 @@
     flex: 1;
     padding-top: calc(var(--spacing-constant) * 2);
     flex-direction: column;
-    gap: calc(var(--spacing-constant) * 1);
+    gap: calc(var(--spacing-constant) * 2);
     display: flex;
 
     .search-bar-container {
@@ -60,9 +60,9 @@
 
     .search-result-container {
       align-self: stretch;
-      flex: 1;
+      // flex: 1;
       justify-content: center;
-      align-items: center;
+      // align-items: center;
       gap: calc(var(--spacing-constant) * 1);
       display: flex;
       flex-wrap: wrap;
@@ -79,9 +79,9 @@
   width: 5px;
 }
 
-.search::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-color, rgba(255, 82, 154, 0.502));
-}
+// .search::-webkit-scrollbar-track {
+//   background: var(--scrollbar-track-color, rgba(255, 82, 154, 0.502));
+// }
 
 .search::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));

@@ -22,6 +22,17 @@
           calc(var(--nav-icon-container-height, 18px) * 1.5)
         )
       );
+
+      .avatar {
+        border-radius: clamp(
+          var(--nav-icon-container-border-radius, 16px),
+          var(--nav-icon-container-border-radius, 5vw),
+          var(
+            --nav-icon-container-border-radius,
+            calc(var(--nav-icon-container-border-radius, 16px) * 1.5)
+          )
+        );
+      }
     }
   }
 }

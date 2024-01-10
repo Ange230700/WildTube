@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function LogOut() {
@@ -11,10 +11,16 @@ function LogOut() {
   };
 
   return (
-    <div className="containerButton">
+    <div
+      className="containerButton"
+      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+    >
       <button type="button" className="logOut" onClick={handleLogOut}>
         Déconnexion
       </button>
+      <Link className="logOut" to="/favorites" style={{ color: "white" }}>
+        See favorites
+      </Link>
     </div>
   );
 }

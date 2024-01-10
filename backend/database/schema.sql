@@ -1,47 +1,97 @@
-DROP TABLE IF EXISTS `Serie`;
-
-CREATE TABLE
-    `Serie` (
-        `id` int primary key auto_increment not null,
-        `miniature` varchar(255) not null,
-        `cover` VARCHAR(255) NOT NULL,
-        `title` VARCHAR(50) not NULL,
-        `videoUrl` VARCHAR(255),
-        `duration` INT not NULL,
-        `year` VARCHAR(4) not NULL,
-        `description` VARCHAR(700) not NULL,
-        `isAvailable` BOOLEAN not NULL,
-        `episodesNumber` INT not NULL,
-        `seasonsNumber` INT not NULL
-    );
-
 DROP TABLE IF EXISTS `User`;
 
 CREATE TABLE
     `User` (
-        `id` int primary key auto_increment not null,
-        `name` varchar(50) not null,
-        `email` varchar(50) not null,
+        `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        `name` VARCHAR(50) NOT NULL,
+        `email` VARCHAR(50) NOT NULL,
         `naissance` DATE NOT NULL,
         `civility` BOOLEAN NOT NULL,
-        `password` varchar(50) not null,
-        `IsAdmin` bool not null
+        `password` VARCHAR(50) NOT NULL,
+        `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
+        `avatar` VARCHAR(255)
     );
 
 DROP TABLE IF EXISTS `Film`;
 
 CREATE TABLE
     `Film` (
-        `id` int primary key auto_increment not null,
-        `miniature` VARCHAR(255) not null,
+        `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        `miniature` VARCHAR(255) NOT NULL,
         `cover` VARCHAR(255) NOT NULL,
-        `title` VARCHAR(255) not null,
+        `title` VARCHAR(255) NOT NULL,
         `videoUrl` VARCHAR(255),
-        `duration` INT not null,
+        `duration` INT NOT NULL,
         `year` VARCHAR(4) NOT NULL,
-        `description` VARCHAR(700) not null,
+        `description` VARCHAR(700) NOT NULL,
         `IsAvailable` BOOLEAN NOT NULL
     );
+
+DROP TABLE IF EXISTS `Categorie`;
+
+CREATE TABLE
+    `Categorie` (
+        `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        `name` VARCHAR(255) not null,
+        `position` INT
+    );
+
+DROP TABLE IF EXISTS `Watchlist`;
+
+CREATE TABLE
+    `Watchlist` (
+        `userId` INT NOT NULL,
+        `filmId` INT NOT NULL,
+        CONSTRAINT FK_Watchlist_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
+        CONSTRAINT FK_Watchlist_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        PRIMARY KEY (`userId`, `filmId`)
+    );
+
+DROP TABLE IF EXISTS `Favori_film`;
+
+CREATE TABLE
+    `Favori_film` (
+        `userId` INT NOT NULL,
+        `filmId` INT NOT NULL,
+        CONSTRAINT FK_Favori_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
+        CONSTRAINT FK_Favori_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        PRIMARY KEY (`userId`, `filmId`)
+    );
+
+DROP TABLE IF EXISTS `Categorie_par_film`;
+
+CREATE TABLE
+    `Categorie_par_film` (
+        `filmId` INT NOT NULL,
+        `categorieId` INT NOT NULL,
+        CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`),
+        PRIMARY KEY (`filmId`, `categorieId`)
+    );
+
+INSERT INTO
+    `Categorie` (`name`, `position`)
+VALUES
+    ('Action', 1),
+    ('Adventure', 2),
+    ('Sci-Fi', 3),
+    ('Drama', 4),
+    ('Thriller', 5),
+    ('Comedy', 6),
+    ('Crime', 7),
+    ('Fantasy', 8),
+    ('Mystery', 9),
+    ('Animation', 10),
+    ('Family', 11),
+    ('Biography', 12),
+    ('History', 13),
+    ('Horror', 14),
+    ('Music', 15),
+    ('Musical', 16),
+    ('Romance', 17),
+    ('Sport', 18),
+    ('War', 19),
+    ('Western', 20);
 
 INSERT INTO
     `Film` (
@@ -228,7 +278,7 @@ VALUES
     (
         'https://fr.web.img5.acsta.net/medias/nmedia/18/63/95/41/18927494.jpg',
         'https://www.fsa.uliege.be/upload/docs/image/jpeg/2023-06/indiana.jpg',
-        'Indina Jones et le cadran de la destinée',
+        'Indiana Jones et le cadran de la destinée',
         'https://www.youtube.com/watch?v=4tvtYAMPsxI',
         154,
         '2023',
@@ -258,7 +308,7 @@ VALUES
     (
         'https://musicart.xboxlive.com/7/687d6400-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080',
         'https://res.cloudinary.com/jerrick/image/upload/v1667350087/6361be46da5a81001da26b55.jpg',
-        'Black Panter',
+        'Black Panther',
         'https://www.youtube.com/watch?v=DlGIWM_e9vg',
         162,
         '2022',
@@ -326,197 +376,6 @@ VALUES
         0
     );
 
-INSERT INTO 
-    `Serie` (`miniature`, `cover`, `title`, `duration`, `year`, `description`, `IsAvailable`, `episodesNumber`, `seasonsNumber`) 
-VALUES 
-    (
-        "https://fr.web.img6.acsta.net/r_1280_720/pictures/23/01/30/15/02/5217749.jpg",
-        "https://i.ytimg.com/vi/gJIHLGHckzk/hq720.jpg",
-        'One Piece',
-        55,
-        '2023',
-        'Monkey D. Luffy is a young adventurer who has always dreamed of a life of freedom. Leaving his village, he embarks on a perilous journey in search of a mythical treasure, the One Piece, in order to become the king of the pirates! But to find this famous loot, Luffy will have to assemble the crew of his dreams then find a ship, crisscross the oceans, get rid of the Navy on his heels and prove himself to be a better strategist than the dangerous rivals who await him at every step.',
-        0,
-        9,
-        1
-    ), (
-        "https://fr.web.img2.acsta.net/pictures/19/08/02/15/12/4423178.jpg",
-        "https://fr.web.img6.acsta.net/r_654_368/newsv7/19/01/17/15/43/1457863.jpg",
-        "Naruto",
-        22,
-        "2002",
-        "In the village of Konoha lives Naruto, a young boy hated and feared by the villagers, due to the fact that he holds within him Kyuubi (nine-tailed fox demon) of incredible strength, who has killed a large number of people. Konoha's most powerful ninja at the time, Minato Namikaze, managed to seal this demon in Naruto's body. This is how twelve years later, Naruto dreams of becoming the greatest Hokage of Konoha so that everyone will recognize his true worth. But the road to becoming Hokage is very long.",
-        1,
-        224,
-        9
-    );
-
-DROP TABLE IF EXISTS `Categorie`;
-
-CREATE TABLE
-    `Categorie` (
-        `id` int primary key auto_increment not null,
-        `name` VARCHAR(255) not null,
-        `position` INT
-    );
-
-DROP TABLE IF EXISTS `Favori_film`;
-
-CREATE TABLE
-    `Favori_film` (
-        `userId` INT NOT NULL,
-        `filmId` INT NOT NULL,
-        CONSTRAINT FK_Favori_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Favori_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        PRIMARY KEY (`userId`, `filmId`)
-    );
-
-DROP TABLE IF EXISTS `Favori_serie`;
-
-CREATE TABLE
-    `Favori_serie` (
-        `userId` INT NOT NULL,
-        `serieId` INT NOT NULL,
-        CONSTRAINT FK_Favori_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Favori_Serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
-        PRIMARY KEY (`userId`, `serieId`)
-    );
-
-DROP TABLE IF EXISTS `En_tendance_film`;
-
-CREATE TABLE
-    `En_tendance_film` (
-        `userId` INT NOT NULL,
-        `filmId` INT NOT NULL,
-        CONSTRAINT FK_En_tendance_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_En_tendance_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        PRIMARY KEY (`userId`, `filmId`)
-    );
-
-DROP TABLE IF EXISTS ` En_tendance_serie`;
-
-CREATE TABLE
-    `En_tendance_serie` (
-        `userId` INT NOT NULL,
-        `serieId` INT NOT NULL,
-        CONSTRAINT FK_En_tendance_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_En_tendance_Serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
-        PRIMARY KEY (`userId`, `serieId`)
-    );
-
-DROP TABLE IF EXISTS `Commentaire_serie`;
-
-CREATE TABLE
-    `Commentaire_serie` (
-        `userId` INT NOT NULL,
-        `serieId` INT NOT NULL,
-        CONSTRAINT FK_Commentaire_Serie_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Commentaire_serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
-        PRIMARY KEY (`userId`, `serieId`)
-    );
-
-DROP TABLE IF EXISTS `Commentaire_film`;
-
-CREATE TABLE
-    `Commentaire_film` (
-        `userId` INT NOT NULL,
-        `filmId` INT NOT NULL,
-        CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        PRIMARY KEY (`userId`, `filmId`)
-    );
-
-DROP TABLE IF EXISTS `Categorie_par_serie`;
-
-CREATE TABLE
-    `Categorie_par_serie` (
-        `serieId` INT NOT NULL,
-        `categorieId` INT NOT NULL,
-        CONSTRAINT FK_Categorie_Par_Serie_serie_id FOREIGN KEY (`serieId`) REFERENCES `Serie` (`id`),
-        CONSTRAINT FK_Categorie_Par_Serie_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`),
-        PRIMARY KEY (`serieId`, `categorieId`)
-    );
-
-DROP TABLE IF EXISTS `Categorie_par_film`;
-
-CREATE TABLE
-    `Categorie_par_film` (
-        `filmId` INT NOT NULL,
-        `categorieId` INT NOT NULL,
-        CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`),
-        PRIMARY KEY (`filmId`, `categorieId`)
-    );
-
-INSERT INTO
-    `Categorie` (`name`, `position`)
-VALUES
-    ('Action', 1),
-    ('Adventure', 2),
-    ('Sci-Fi', 3),
-    ('Drama', 4),
-    ('Thriller', 5),
-    ('Comedy', 6),
-    ('Crime', 7),
-    ('Fantasy', 8),
-    ('Mystery', 9),
-    ('Animation', 10),
-    ('Family', 11),
-    ('Biography', 12),
-    ('History', 13),
-    ('Horror', 14),
-    ('Music', 15),
-    ('Musical', 16),
-    ('Romance', 17),
-    ('Sport', 18),
-    ('War', 19),
-    ('Western', 20);
-
-INSERT INTO
-    `User` (
-        `name`,
-        `email`,
-        `naissance`,
-        `civility`,
-        `password`,
-        `IsAdmin`
-    )
-VALUES
-    (
-        'Aurel',
-        'aurelien.emeriau@wcs.com',
-        '1983/06/10',
-        '0',
-        'ggfd4554',
-        '0'
-    ),
-    (
-        'Alex',
-        'alex@wcs.com',
-        '1998/03/19',
-        '0',
-        'ggfd455',
-        '0'
-    );
-
-INSERT INTO
-    `En_tendance_film` (`userId`, `filmId`)
-VALUES
-    (1, 1),
-    (1, 2);
-
-INSERT INTO
-    `Favori_film` (`userId`, `filmId`)
-    VALUES
-    (1, 1),
-    (1, 2);
-
-INSERT INTO
-    `En_tendance_serie` (`userId`, `serieId`)
-    VALUES
-    (1, 1),
-    (1, 2);
-
 INSERT INTO
     `Categorie_par_film` (`filmId`, `categorieId`)
 VALUES
@@ -546,9 +405,3 @@ VALUES
     (25, 20),
     (26, 20),
     (27, 20);
-
-INSERT INTO
-    `Categorie_par_serie` (`serieId`, `categorieId`)
-VALUES
-    (1, 10),
-    (2, 10);
