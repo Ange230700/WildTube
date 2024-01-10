@@ -1,14 +1,27 @@
+const argon2 = require("argon2");
 const tables = require("../tables");
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
+const login = async (req, res, next) => {
+  try {
+    const user = await tables.User.readByEmail(req.body.email);
 
-  const user = await tables.User.readByEmail(email);
+    if (user == null) {
+      res.sendStatus(422);
+      return;
+    }
+    const verfied = await argon2.verify(
+      user.hashed_password,
+      req.body.password
+    );
 
-  if (user && user.password === password) {
-    res.status(200).send(user);
-  } else {
-    res.status(400).send("incorrect email or password");
+    if (verfied) {
+      delete user.hashed_password;
+      res.status(200).json(user);
+    } else {
+      res.sendStatus(422).json({ message: " Invalid email or password " });
+    }
+  } catch (err) {
+    next(err);
   }
 };
 

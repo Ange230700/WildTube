@@ -27,7 +27,7 @@ const browse = async (req, res, next) => {
 const add = async (req, res, next) => {
   try {
     // Get the data submitted by the user in the request body
-    const { name, email, naissance, civility, password } = req.body;
+    const { name, email, naissance, civility, hashedPassword } = req.body;
 
     // Add the new item to the database
     const newUser = await tables.User.create({
@@ -35,7 +35,7 @@ const add = async (req, res, next) => {
       email,
       naissance,
       civility,
-      password,
+      hashedPassword,
     });
 
     // Respond with the newly added item in JSON format

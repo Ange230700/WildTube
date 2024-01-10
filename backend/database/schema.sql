@@ -7,8 +7,8 @@ CREATE TABLE
         `email` VARCHAR(50) NOT NULL,
         `naissance` DATE NOT NULL,
         `civility` BOOLEAN NOT NULL,
-        `password` VARCHAR(50) NOT NULL,
-        `IsAdmin` BOOLEAN NOT NULL,
+        `hashed_password` VARCHAR(150) NOT NULL,
+        `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
         `avatar` VARCHAR(255)
     );
 
@@ -18,7 +18,7 @@ INSERT INTO
         `email`,
         `naissance`,
         `civility`,
-        `password`,
+        `hashed_password`,
         `IsAdmin`
     )
 VALUES (
