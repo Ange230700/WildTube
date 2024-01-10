@@ -9,6 +9,7 @@ const FilmManager = require("./models/FilmManager");
 const FavoriFilmManager = require("./models/FavoriFilmManager");
 const CategorieParFilmManager = require("./models/CategorieParFilmManager");
 const WatchlistManager = require("./models/WatchlistManager");
+const CommentaireParFilmManager = require("./models/CommentaireParFilmManager");
 
 const managers = [
   CategorieManager,
@@ -17,6 +18,7 @@ const managers = [
   FavoriFilmManager,
   CategorieParFilmManager,
   WatchlistManager,
+  CommentaireParFilmManager,
   // Add other managers here
 ];
 
