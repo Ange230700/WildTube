@@ -42,7 +42,9 @@ function CategoryDisplay({ categorie }) {
   const [allMoviesForOneCategorie, setAllMoviesForOneCategorie] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3310/api/films/category/${categorie.id}`)
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${categorie.id}`
+      )
       .then((response) => {
         setAllMoviesForOneCategorie(response.data);
       })
