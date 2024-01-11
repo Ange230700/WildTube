@@ -10,6 +10,7 @@ CREATE TABLE
         `password` VARCHAR(50) NOT NULL,
         `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
         `avatar` VARCHAR(255)
+        
     );
 
 DROP TABLE IF EXISTS `Film`;

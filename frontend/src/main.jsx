@@ -7,7 +7,7 @@ import { UserProvider } from "./contexts/UserContext";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import Favorites from "./pages/Favorites";
+import Favoris from "./pages/Favoris";
 import Watchlist from "./pages/Watchlist";
 import Categories from "./pages/Categories";
 import Movie from "./pages/Movie";
@@ -16,6 +16,7 @@ import Inscription from "./pages/Inscription";
 import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
+import AccountInfo from "./pages/AccountInfo";
 import "./sass/index.scss";
 
 const router = createBrowserRouter([
@@ -32,12 +33,16 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "favorites/",
-        element: <Favorites />,
+        path: "favoris/",
+        element: <Favoris />,
       },
       {
         path: "watchlist/",
         element: <Watchlist />,
+      },
+      {
+        path: "accountinfo/",
+        element: <AccountInfo />,
       },
       {
         path: "category/:catId",
