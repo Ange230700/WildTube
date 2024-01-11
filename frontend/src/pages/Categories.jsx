@@ -1,14 +1,12 @@
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import SerieSlide from "../components/SerieSlide";
 import MovieLink from "../components/MovieLink";
 import MovieGenreTabsContainer from "../components/MovieGenreTabsContainer";
 
 function Categories() {
   const [searchValue, setSearchValue] = useState("");
   const [reqOneCount, setReqOneCount] = useState([]);
-  // const [reqTwoCount, setReqTwoCount] = useState([]);
   const [categories, setCategories] = useState([]);
 
   const { pathname } = useLocation();
@@ -21,7 +19,9 @@ function Categories() {
   const fetchData = async () => {
     try {
       const result = await axios.all([
-        axios.get(`http://localhost:3310/api/films/category/${catId}`),
+        axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${catId}`
+        ),
       ]);
       const resFilms = result[0].data;
       setReqOneCount(resFilms);
@@ -37,7 +37,7 @@ function Categories() {
   const getcategories = () => {
     axios
 
-      .get("http://localhost:3310/api/categories")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/categories`)
 
       .then((response) => {
         setCategories(response.data);
@@ -90,13 +90,6 @@ function Categories() {
                 {reqOneCount.map((film) => {
                   return <MovieLink movie={film} key={film.id} />;
                 })}
-                {/* {reqTwoCount.map((serie) => {
-                  return (
-                    <Link key={serie.serieId} to={`/series/${serie.serieId}`}>
-                      <SerieSlide serie={serie} />
-                    </Link>
-                  );
-                })} */}
               </>
             )}
           </div>

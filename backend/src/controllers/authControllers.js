@@ -9,12 +9,12 @@ const login = async (req, res, next) => {
       res.sendStatus(422);
       return;
     }
-    const verfied = await argon2.verify(
+    const verified = await argon2.verify(
       user.hashed_password,
       req.body.password
     );
 
-    if (verfied) {
+    if (verified) {
       delete user.hashed_password;
       res.status(200).json(user);
     } else {

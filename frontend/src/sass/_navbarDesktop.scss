@@ -50,7 +50,6 @@
 
         .link-text {
           color: var(--neutral-color);
-          // font-size: 28px;
           font-size: clamp(
             calc(var(--font-size-constant) * 2.8),
             calc(var(--preferred-font-size-constant, 8.75vw)),
@@ -61,6 +60,14 @@
         .icon {
           height: 100%;
           aspect-ratio: 1/1;
+          border-radius: clamp(
+            var(--nav-icon-container-border-radius, 32px),
+            var(--nav-icon-container-border-radius, 10vw),
+            var(
+              --nav-icon-container-border-radius,
+              calc(var(--nav-icon-container-border-radius, 32px) * 1.5)
+            )
+          );
         }
       }
     }

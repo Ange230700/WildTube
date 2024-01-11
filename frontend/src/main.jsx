@@ -1,4 +1,3 @@
-/*eslint-disable */
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,6 +15,8 @@ import Inscription from "./pages/Inscription";
 import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
+import UserProfileEditor from "./pages/UserProfileEditor";
+import AccountInfo from "./pages/AccountInfo";
 import "./sass/index.scss";
 import AjoutAdmin from "./pages/AjoutAdmin";
 
@@ -33,12 +34,16 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "favorites/",
+        path: "favoris/",
         element: <Favorites />,
       },
       {
         path: "watchlist/",
         element: <Watchlist />,
+      },
+      {
+        path: "accountinfo/",
+        element: <AccountInfo />,
       },
       {
         path: "category/:catId",
@@ -69,10 +74,13 @@ const router = createBrowserRouter([
         element: <UserProfil />,
       },
       {
+        path: "/profileEditor",
+        element: <UserProfileEditor />,
+      },
+      {
         path: "/AjoutAdmin",
         element: <AjoutAdmin />,
       },
-
     ],
   },
 ]);
