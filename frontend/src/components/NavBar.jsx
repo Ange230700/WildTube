@@ -19,7 +19,8 @@ function NavBar() {
     <nav
       className="navbar"
       style={
-        location.pathname.includes("/movies/")
+        location.pathname.includes("/movies/") ||
+        location.pathname.includes("/profil")
           ? {
               position: "fixed",
               bottom: "0",

@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
@@ -6,13 +6,23 @@ function UserProfil() {
   console.warn(user.avatar);
   const { updateUser } = useUser();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogOut = () => {
     updateUser(null);
     navigate("/");
   };
   return (
-    <div className="ProfileDisplaySection">
+    <div
+      className="ProfileDisplaySection"
+      style={
+        location.pathname.includes("/profil")
+          ? {
+              marginBottom: "9.375vw",
+            }
+          : {}
+      }
+    >
       <div className="Profilepicturecontainer">
         <img
           className="Avatar1"
@@ -44,11 +54,6 @@ function UserProfil() {
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/profileEditor">Informations du compte</Link>
-          </div>
-        </div>
-        <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to="/accountinfo">Information de compte 2</Link>
           </div>
         </div>
         <div className="Useroption">
