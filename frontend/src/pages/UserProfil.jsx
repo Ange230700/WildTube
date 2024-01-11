@@ -39,6 +39,11 @@ function UserProfil() {
           </div>
         </div>
         <div className="Useroption">
+          <div className="RegarderPlusTard">
+            <Link to="/accountinfo">Information de compte 2</Link>
+          </div>
+        </div>
+        <div className="Useroption">
           <button
             className="RegarderPlusTardButton"
             type="button"

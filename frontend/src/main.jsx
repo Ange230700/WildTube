@@ -16,6 +16,7 @@ import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
 import UserProfileEditor from "./pages/UserProfileEditor";
+import AccountInfo from "./pages/AccountInfo";
 import "./sass/index.scss";
 
 const router = createBrowserRouter([
@@ -32,12 +33,16 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "favorites/",
+        path: "favoris/",
         element: <Favorites />,
       },
       {
         path: "watchlist/",
         element: <Watchlist />,
+      },
+      {
+        path: "accountinfo/",
+        element: <AccountInfo />,
       },
       {
         path: "category/:catId",

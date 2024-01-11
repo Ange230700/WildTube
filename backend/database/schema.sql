@@ -10,6 +10,7 @@ CREATE TABLE
         `hashed_password` VARCHAR(150) NOT NULL,
         `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
         `avatar` VARCHAR(255)
+        
     );
 
 DROP TABLE IF EXISTS `Film`;
