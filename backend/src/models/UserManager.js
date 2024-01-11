@@ -32,7 +32,28 @@ class UserManager extends AbstractManager {
     return rows;
   }
 
+  async read(id) {
+    // Execute the SQL SELECT query to retrieve a specific item by its ID
+    const [rows] = await this.database.query(
+      `select * from ${this.table} where id = ?`,
+      [id]
+    );
+
+    // Return the first row of the result, which represents the item
+    return rows;
+  }
+
   // The U of CRUD - Update operation
+  async update({ name, email, naissance, civility, IsAdmin, id }) {
+    // Execute the SQL UPDATE query to update a item to the "user" table
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET name=?, email=?, naissance=?, civility=?, IsAdmin=?  WHERE id=?`,
+      [name, email, new Date(naissance), civility, IsAdmin, id]
+    );
+
+    // Return the ID of the newly inserted item
+    return result;
+  }
 
   // The D of CRUD - Delete operation
 

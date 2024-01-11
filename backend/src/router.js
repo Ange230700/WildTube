@@ -31,10 +31,12 @@ router.get(
   "/watchlist/film/:userId",
   watchlistControllers.browseWatchlistMoviesByUserId
 );
+router.get("/users/:id", userControllers.read);
 
 // Route to get a specific item by ID
 
 // Route to edit a specific item by ID
+router.put("/users/:id", userControllers.edit);
 
 // Route to add a new item
 router.post("/login", authControllers.login);

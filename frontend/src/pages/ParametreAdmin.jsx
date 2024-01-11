@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function ParametreAdmin() {
@@ -17,7 +17,7 @@ function ParametreAdmin() {
         <h2>Paramètres</h2>
       </div> */}
       <section className="containerDisplayParametre">
-        {/* <div className="params">
+        <div className="params">
           <h3>Ajouter des videos</h3>
         </div>
         <div className="params">
@@ -28,7 +28,12 @@ function ParametreAdmin() {
         </div>
         <div className="params">
           <h3>Gérer les catégories</h3>
-        </div> */}
+        </div>
+        <div className="params">
+          <NavLink to="/AjoutAdmin">
+            <h3>Ajouter des Administrateurs</h3>
+          </NavLink>
+        </div>
         <div className="params">
           <button type="button" onClick={handleLogOut}>
             <h3>Déconnexion</h3>

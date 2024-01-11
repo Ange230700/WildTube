@@ -17,6 +17,7 @@ import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
 import "./sass/index.scss";
+import AjoutAdmin from "./pages/AjoutAdmin";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,11 @@ const router = createBrowserRouter([
         path: "/profil",
         element: <UserProfil />,
       },
+      {
+        path: "/AjoutAdmin",
+        element: <AjoutAdmin />,
+      },
+
     ],
   },
 ]);
