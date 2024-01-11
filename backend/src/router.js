@@ -4,33 +4,6 @@ const router = express.Router();
 
 const path = require("path"); // eslint-disable-line
 
-const multer = require("multer"); // eslint-disable-line
-
-const { v4: uuidv4 } = require("uuid"); // eslint-disable-line
-
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    console.warn("file :", file);
-    console.warn("path :", path.join(__dirname, "/../public/"));
-    cb(null, path.join(__dirname, "/../public/")); // Make sure this directory exists
-  },
-  filename(req, file, cb) {
-    const fileExtension = file.originalname.split(".").pop().toLowerCase();
-    const fileName = uuidv4();
-    console.warn(
-      "fileName and fileExtension :",
-      `${fileName}.${fileExtension}`
-    );
-    req.body.avatar = `${fileName}.${fileExtension}`;
-    cb(null, `${fileName}.${fileExtension}`);
-  },
-  limits: {
-    fileSize: 1024 * 1024 * 5, // Max file size: 5MB
-  },
-});
-
-const upload = multer({ storage });
-
 /* ************************************************************************* */
 // Define Your API Routes Here
 /* ************************************************************************* */
@@ -70,7 +43,7 @@ router.get(
 // Route to get a specific item by ID
 
 // Route to edit a specific item by ID
-router.put("/users/:id", upload.single("avatar"), userControllers.edit);
+router.put("/users/:id", userControllers.edit);
 
 // Route to add a new item
 router.post("/login", authControllers.login);

@@ -34,10 +34,8 @@ class UserManager extends AbstractManager {
 
   // The U of CRUD - Update operation
   async update(id, { name, email, naissance, avatar }) {
-    const avatarPath = avatar ? avatar.replace("public", "") : null;
-
     console.warn("Updating user with ID:", id); // Log the ID
-    console.warn("Data to update:", { name, email, naissance, avatarPath }); // Log the data
+    console.warn("Data to update:", { name, email, naissance, avatar }); // Log the data
 
     // Make sure id is not undefined and is a number
     if (id === undefined || Number.isNaN(id)) {
@@ -47,7 +45,7 @@ class UserManager extends AbstractManager {
     // Execute the SQL UPDATE query to update an existing item
     const [result] = await this.database.query(
       `UPDATE ${this.table} SET name = ?, email = ?, naissance = ?, avatar = ? WHERE id = ?`,
-      [name, email, naissance, avatarPath, id]
+      [name, email, naissance, avatar, id]
     );
 
     console.warn("Result:", result); // Log the result

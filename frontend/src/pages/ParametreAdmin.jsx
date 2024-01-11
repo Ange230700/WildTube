@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function ParametreAdmin() {
+  const { user } = useUser();
   const { updateUser } = useUser();
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -11,11 +12,7 @@ function ParametreAdmin() {
   return (
     <div className="parametreAdmin">
       <div className="profilPicture">
-        <img
-          className="Avatar1"
-          src="https://avatars.githubusercontent.com/u/97165289"
-          alt="Avatar1"
-        />
+        <img className="Avatar1" src={user.avatar} alt="Avatar1" />
       </div>
       {/* <div className="parametre">
         <h2>Paramètres</h2>

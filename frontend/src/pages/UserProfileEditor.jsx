@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
+import LogoContainer from "../components/LogoContainer";
 
 function UserProfileEditor() {
   const { user, updateUser } = useUser();
@@ -8,6 +9,8 @@ function UserProfileEditor() {
     name: user.name,
     email: user.email,
     naissance: user.naissance,
+    civility: user.civility,
+    password: user.password,
     avatar: user.avatar,
   });
 
@@ -17,17 +20,14 @@ function UserProfileEditor() {
       name: user.name,
       email: user.email,
       naissance: user.naissance,
+      civility: user.civility,
+      password: user.password,
       avatar: user.avatar,
     });
   }, [user]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({ ...formData, avatar: file });
   };
 
   const handleSubmit = async (e) => {
@@ -62,12 +62,7 @@ function UserProfileEditor() {
 
       const result = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
-        updateData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        updateData
       );
 
       if (result.status === 200) {
@@ -80,33 +75,71 @@ function UserProfileEditor() {
   };
 
   return !user ? null : (
-    <div className="edit-profile-form">
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <input
-          type="text"
-          name="name"
-          value={formData.name || ""}
-          onChange={handleInputChange}
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email || ""}
-          onChange={handleInputChange}
-        />
-        <input
-          type="date"
-          name="naissance"
-          value={
-            formData.naissance
-              ? new Date(formData.naissance).toISOString().split("T")[0]
-              : ""
-          }
-          onChange={handleInputChange}
-        />
-        <input type="file" name="avatar" onChange={handleImageChange} />
-        <button type="submit">Update Profile</button>
-      </form>
+    <div className="signUpPageMockupGuest">
+      <div className="searchDisplaySection">
+        <LogoContainer />
+        <form onSubmit={handleSubmit} className="form">
+          <div className="inputs">
+            <div className="inputContainer">
+              <input
+                type="text"
+                name="name"
+                className="input"
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="email"
+                name="email"
+                className="input"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="password"
+                name="password"
+                className="input"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="date"
+                name="naissance"
+                className="input"
+                value={
+                  formData.naissance
+                    ? new Date(formData.naissance).toISOString().split("T")[0]
+                    : ""
+                }
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="text"
+                name="avatar"
+                className="input"
+                value={formData.avatar}
+              />
+            </div>
+            <div className="buttonContainer">
+              <button
+                className="signUpButton"
+                onClick={handleSubmit}
+                type="submit"
+              >
+                <p className="inscription">Update Profile</p>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

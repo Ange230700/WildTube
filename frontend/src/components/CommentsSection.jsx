@@ -1,10 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
 function CommentsSection({ filmId, user }) {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
+  const commentsWrapperRef = useRef(null); // Ref for the comments wrapper
+
+  const scrollToBottom = () => {
+    if (commentsWrapperRef.current) {
+      commentsWrapperRef.current.scrollTop =
+        commentsWrapperRef.current.scrollHeight;
+    }
+  };
 
   const addComment = async (content) => {
     const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/`;
@@ -26,6 +34,9 @@ function CommentsSection({ filmId, user }) {
     } catch (error) {
       console.error("Error adding comment", error);
     }
+
+    // After adding comment, scroll to bottom
+    scrollToBottom();
   };
 
   const handleCommentSubmit = () => {
@@ -55,12 +66,17 @@ function CommentsSection({ filmId, user }) {
     fetchComments();
   }, [filmId]);
 
+  useEffect(() => {
+    // Scroll to bottom whenever comments are updated
+    scrollToBottom();
+  }, [comments]);
+
   return (
     <section className="CommentsSection">
       <div className="CommentsSectionTitle">
         <h3 className="Commentaires">Commentaires</h3>
       </div>
-      <div className="CommentsWrapper">
+      <div className="CommentsWrapper" ref={commentsWrapperRef}>
         {comments.length === 0 ? (
           <h4>Soyez le premier à commenter ce film !</h4>
         ) : (
@@ -74,7 +90,7 @@ function CommentsSection({ filmId, user }) {
                   <img
                     alt={comment.username}
                     className="Avatar2"
-                    src="https://avatars.githubusercontent.com/u/97165289"
+                    src={comment.avatar}
                   />
                   <h6 className="Username">{comment.name}</h6>
                 </div>
@@ -103,7 +119,6 @@ function CommentsSection({ filmId, user }) {
               type="button"
               className="SendSvgrepoCom2"
               onClick={handleCommentSubmit}
-              style={{ border: "2px brown solid", background: "none" }}
             >
               <img
                 alt="Send"
@@ -113,12 +128,8 @@ function CommentsSection({ filmId, user }) {
             </button>
           </div>
           <div className="UserInfo">
-            <img
-              alt="avatar"
-              className="Avatar2"
-              src="https://avatars.githubusercontent.com/u/97165289"
-            />
-            <h6 className="Username">{user?.name}</h6>
+            <img alt="avatar" className="Avatar2" src={user.avatar} />
+            <h6 className="Username">{user.name}</h6>
           </div>
         </div>
       </div>
@@ -133,6 +144,7 @@ CommentsSection.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
   }).isRequired,
 };
 

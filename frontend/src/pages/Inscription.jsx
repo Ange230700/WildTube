@@ -10,6 +10,7 @@ function Inscription() {
     naissance: "",
     civility: "",
     password: "",
+    avatar: "",
   });
 
   // const { updateUser, user: connectedUser } = useUser();
@@ -145,7 +146,7 @@ function Inscription() {
               onClick={handleSubmit}
               type="button"
             >
-              <div className="inscription">Inscription</div>
+              <p className="inscription">Inscription</p>
             </button>
           </div>
           {showModal && (

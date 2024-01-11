@@ -9,6 +9,9 @@ const { faker } = require("@faker-js/faker");
 // Import database client
 const database = require("./database/client");
 
+const films = require("./src/services/films");
+const categories = require("./src/services/categories");
+
 async function insertUsers() {
   try {
     const queries = [];
@@ -40,10 +43,56 @@ async function insertUsers() {
   }
 }
 
+async function insertFilms() {
+  // Similar to insertUsers, but for the Film table
+  try {
+    const queries = [];
+    for (let i = 0; i < films.length; i += 1) {
+      queries.push(
+        database.query(
+          "INSERT INTO `Film` (`miniature`, `cover`, `title`, `videoUrl`, `duration`, `year`, `description`, `IsAvailable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+          [
+            films[i].miniature,
+            films[i].cover,
+            films[i].title,
+            films[i].videoUrl,
+            films[i].duration,
+            films[i].year,
+            films[i].description,
+            films[i].IsAvailable,
+          ]
+        )
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting films:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+async function insertCategories() {
+  // Similar to insertUsers, but for the Categorie table
+  try {
+    const queries = [];
+    for (let i = 0; i < categories.length; i += 1) {
+      queries.push(
+        database.query("INSERT INTO `Categorie` (`name`) VALUES (?)", [
+          categories[i].name,
+        ])
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting categories:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
 async function insertCommentaires() {
   try {
     const queries = [];
-    for (let i = 0; i < 400; i += 1) {
+    for (let i = 0; i < 1000; i += 1) {
       const randomDate = faker.date
         .past()
         .toISOString()
@@ -69,23 +118,57 @@ async function insertCommentaires() {
   }
 }
 
+async function insertFilmCategorie() {
+  try {
+    const queries = [];
+    for (let i = 0; i < films.length; i += 1) {
+      queries.push(
+        database.query(
+          "INSERT INTO `Categorie_par_film` (`filmId`, `categorieId`) VALUES (?, ?)",
+          [i + 1, faker.number.int({ min: 1, max: categories.length })]
+        )
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting film_categorie:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
 async function seed() {
   try {
     await database.query("SET FOREIGN_KEY_CHECKS = 0");
     await database.query("TRUNCATE `User`");
+    await database.query("TRUNCATE `Film`");
+    await database.query("TRUNCATE `Categorie`");
+    await database.query("TRUNCATE `Categorie_par_film`");
     await database.query("TRUNCATE `Commentaire_film`");
 
     await insertUsers();
+    await insertFilms();
+    await insertCategories();
 
     // Verify the insertions
+    const [movies] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Film`"
+    );
+    const [genres] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Categorie`"
+    );
     const [users] = await database.query(
       "SELECT COUNT(*) AS count FROM `User`"
     );
-    const [films] = await database.query(
-      "SELECT COUNT(*) AS count FROM `Film`"
-    );
 
-    if (users[0].count >= 5 && films[0].count >= 27) {
+    if (movies[0].count >= films.length && genres[0].count >= genres.length) {
+      await insertFilmCategorie();
+    } else {
+      throw new Error(
+        "Not enough data in Film or Categorie tables for seeding Categorie_par_film"
+      );
+    }
+
+    if (users[0].count >= 5 && movies[0].count >= films.length) {
       await insertCommentaires();
     } else {
       throw new Error(

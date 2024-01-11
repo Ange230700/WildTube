@@ -53,6 +53,12 @@
         calc(var(--spacing-constant) * 1.5)
       );
       display: flex;
+      padding: 0
+        clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        );
 
       .UserInfo {
         flex-direction: column;
