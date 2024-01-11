@@ -3,8 +3,8 @@ import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
   const { user } = useUser();
+  console.warn(user.avatar);
   const { updateUser } = useUser();
-  // console.warn(updateUser, user);
   const navigate = useNavigate();
 
   const handleLogOut = () => {
