@@ -41,7 +41,7 @@ router.post("/login", authControllers.login);
 router.post("/users", userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
-
+router.put("/update-avatar/:userId", userControllers.updateAvatar);
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
 router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);

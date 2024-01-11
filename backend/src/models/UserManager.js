@@ -8,38 +8,75 @@ class UserManager extends AbstractManager {
   }
 
   // The C of CRUD - Create operation
-  async create({ name, email, naissance, civility, password }) {
-    // Execute the SQL INSERT query to insert a new item into the "user" table
+
+  async create({
+    name,
+    email,
+    naissance,
+    civility,
+    password,
+    IsAdmin = false,
+  }) {
+    // Execute the SQL INSERT query to add a new item to the "user" table
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (name, email, naissance, civility, password) VALUES (?, ?, ?, ?, ?)`,
-      [name, email, naissance, civility, password]
+      `insert into ${this.table} (name, email, naissance, civility, password, IsAdmin) values (?, ?, ?, ?, ?, ?)`,
+      [name, email, naissance, civility, password, IsAdmin]
     );
 
-    // Get the ID of the newly inserted item
-    const createdId = result.insertId;
-
-    // Return the newly created item
-    return { id: createdId, name, email, naissance, civility, password };
+    // Return the ID of the newly inserted item
+    return result;
   }
-
   // The Rs of CRUD - Read operations
+
+  async read(id) {
+    // Execute the SQL SELECT query to retrieve a specific item by its ID
+    const [rows] = await this.database.query(
+      `select * from ${this.table} where id = ?`,
+      [id]
+    );
+
+    // Return the first row of the result, which represents the item
+    return rows;
+  }
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "user" table
-    const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
+    const [rows] = await this.database.query(`select * from ${this.table}`);
 
     // Return the array of items
     return rows;
   }
-
   // The U of CRUD - Update operation
+  // TODO: Implement the update operation to modify an existing item
+
+  async updateAvatar(id, avatar) {
+    // Execute the SQL UPDATE query to update a item to the "user" table
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET avatar = ? WHERE id = ?`,
+      [avatar, id]
+    );
+
+    // Return the ID of the newly inserted item
+    return result;
+  }
 
   // The D of CRUD - Delete operation
+  // TODO: Implement the delete operation to remove an item by its ID
+
+  async delete(id) {
+    const [rows] = await this.database.query(
+      `DELETE from ${this.table} where id = ?`,
+      [id]
+    );
+
+    // Return the first row of the result, which represents the item
+    return rows;
+  }
 
   async readByEmail(email) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [result] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE email = ?`,
+      `select * from ${this.table} where email = ?`,
       [email]
     );
 
