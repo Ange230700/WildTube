@@ -6,7 +6,7 @@ import MovieLink from "./MovieLink";
 
 const responsive = {
   desktop: {
-    breakpoint: { max: 1600, min: 1025 },
+    breakpoint: { max: 4000, min: 1025 },
     items: 4,
     // partialVisibilityGutter: 0,
   },
