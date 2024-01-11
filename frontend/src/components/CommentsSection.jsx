@@ -90,7 +90,11 @@ function CommentsSection({ filmId, user }) {
                   <img
                     alt={comment.username}
                     className="Avatar2"
-                    src={comment.avatar}
+                    src={
+                      comment.avatar
+                        ? comment.avatar
+                        : "https://avatars.githubusercontent.com/u/97165289"
+                    }
                   />
                   <h6 className="Username">{comment.name}</h6>
                 </div>
@@ -128,7 +132,15 @@ function CommentsSection({ filmId, user }) {
             </button>
           </div>
           <div className="UserInfo">
-            <img alt="avatar" className="Avatar2" src={user.avatar} />
+            <img
+              alt="avatar"
+              className="Avatar2"
+              src={
+                user.avatar
+                  ? user.avatar
+                  : "https://avatars.githubusercontent.com/u/97165289"
+              }
+            />
             <h6 className="Username">{user.name}</h6>
           </div>
         </div>
