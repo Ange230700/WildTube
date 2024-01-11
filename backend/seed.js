@@ -5,6 +5,7 @@ require("dotenv").config();
 
 // Import Faker library for generating fake data
 const { faker } = require("@faker-js/faker");
+const argon2 = require("argon2");
 
 // Import database client
 const database = require("./database/client");
@@ -21,18 +22,25 @@ async function insertUsers() {
         .toISOString()
         .slice(0, 19)
         .replace("T", " ");
+      const password = faker.internet.password(); // Generate a random password
+      const hashedPassword = argon2.hash(password); // Hash the password
+
       queries.push(
-        database.query(
-          "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-          [
-            faker.person.firstName(),
-            faker.internet.email(),
-            randomDate,
-            faker.number.binary({ min: 0, max: 1 }),
-            faker.internet.password(),
-            0,
-            faker.image.avatarGitHub(),
-          ]
+        queries.push(
+          hashedPassword.then((hashed) => {
+            return database.query(
+              "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+              [
+                faker.person.firstName(),
+                faker.internet.email(),
+                randomDate,
+                faker.number.binary({ min: 0, max: 1 }),
+                hashed,
+                0,
+                faker.image.avatarGitHub(),
+              ]
+            );
+          })
         )
       );
     }
