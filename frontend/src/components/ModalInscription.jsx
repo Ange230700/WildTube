@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function ModalInscription() {
-  const toggleModal = ({ showModal, setShowModal }) => {
+function ModalInscription({ showModal, setShowModal }) {
+  const toggleModal = () => {
     setShowModal(!showModal);
   };
 
@@ -17,5 +18,10 @@ function ModalInscription() {
     </div>
   );
 }
+
+ModalInscription.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+};
 
 export default ModalInscription;
