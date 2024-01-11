@@ -38,6 +38,7 @@ router.get(
   "/comments/film/:filmId",
   commentaireFilmControllers.browseCommentsByFilmId
 );
+router.get("/users/:id", userControllers.read);
 
 // Route to get a specific item by ID
 

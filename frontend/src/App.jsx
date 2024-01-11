@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import NavBar from "./components/NavBar";
 import NavBarDesktop from "./components/NavBarDesktop";
 
@@ -7,6 +8,7 @@ function App() {
 
   return (
     <div className="app">
+      <Toaster />
       {!location.pathname.includes("/moviePlayer/") && <NavBarDesktop />}
       <Outlet />
       {!location.pathname.includes("/moviePlayer/") && <NavBar />}
