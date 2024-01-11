@@ -14,10 +14,42 @@ const browse = async (req, res, next) => {
     next(err);
   }
 };
+const read = async (req, res, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
+    const user = await tables.user.read(req.params.id);
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (user == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The R of BREAD - Read operation
 
 // The E of BREAD - Edit (Update) operation
+const edit = async (req, res, next) => {
+  const { id } = req.params;
+  req.body.id = id;
+  try {
+    const result = await tables.User.update(req.body);
+    if (result) {
+      res.json(result);
+      res.status(204);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 // This operation is not yet implemented
 
 // eslint-disable-next-line consistent-return
@@ -57,4 +89,6 @@ const add = async (req, res, next) => {
 module.exports = {
   browse,
   add,
+  edit,
+  read,
 };

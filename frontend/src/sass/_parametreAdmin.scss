@@ -19,13 +19,18 @@
     flex-direction: column;
     padding-left: 15px;
     .params {
-      // border: 1px solid red;
+      cursor: pointer;
       display: flex;
       align-items: center;
       width: 90vw;
       height: 8vh;
       border-bottom: 1px solid var(--text-field-background-color);
+      a {
+        text-decoration: none;
+        color: var(--text-field-background-color);
+      }
       button {
+        cursor: pointer;
         border: none;
         background: none;
         color: var(--text-field-background-color);

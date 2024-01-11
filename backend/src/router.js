@@ -33,11 +33,17 @@ router.get(
   "/watchlist/film/:userId",
   watchlistControllers.browseWatchlistMoviesByUserId
 );
+router.get("/users/:id", userControllers.read);
 
 // Route to get a specific item by ID
 router.get("/commentaires/film/:id", commentaireParFilmControllers.read);
 // Route to edit a specific item by ID
+
+router.put("/users/:id", userControllers.edit);
+
+
 router.put("/commentaire/film/:id", commentaireParFilmControllers.edit);
+
 // Route to add a new item
 router.post("/login", authControllers.login);
 router.post("/users", hashPassword, userControllers.add);

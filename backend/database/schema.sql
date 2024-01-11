@@ -11,6 +11,32 @@ CREATE TABLE
         `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
         `avatar` VARCHAR(255)
     );
+    INSERT INTO
+    `User` (
+        `name`,
+        `email`,
+        `naissance`,
+        `civility`,
+        `password`,
+        `IsAdmin`
+    )
+VALUES
+    (
+        'Aurel',
+        'aurelien.emeriau@wcs.com',
+        '1983/06/10',
+        '0',
+        'ggfd4554',
+        '1'
+    ),
+    (
+        'Alex',
+        'alex@wcs.com',
+        '1998/03/19',
+        '0',
+        'ggfd455',
+        '0'
+    );
 
 INSERT INTO
     `User` (
