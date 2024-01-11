@@ -10,7 +10,50 @@ CREATE TABLE
         `hashed_password` VARCHAR(150) NOT NULL,
         `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
         `avatar` VARCHAR(255)
-        
+    );
+    INSERT INTO
+    `User` (
+        `name`,
+        `email`,
+        `naissance`,
+        `civility`,
+        `password`,
+        `IsAdmin`
+    )
+VALUES
+    (
+        'Aurel',
+        'aurelien.emeriau@wcs.com',
+        '1983/06/10',
+        '0',
+        'ggfd4554',
+        '1'
+    ),
+    (
+        'Alex',
+        'alex@wcs.com',
+        '1998/03/19',
+        '0',
+        'ggfd455',
+        '0'
+    );
+
+INSERT INTO
+    `User` (
+        `name`,
+        `email`,
+        `naissance`,
+        `civility`,
+        `hashed_password`,
+        `IsAdmin`
+    )
+VALUES (
+        'admin',
+        'admin@example.com',
+        '1996-11-12',
+        1,
+        12345,
+        1
     );
 
 DROP TABLE IF EXISTS `Film`;

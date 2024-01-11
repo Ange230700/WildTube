@@ -18,6 +18,7 @@ import UserProfil from "./pages/UserProfil";
 import UserProfileEditor from "./pages/UserProfileEditor";
 import AccountInfo from "./pages/AccountInfo";
 import "./sass/index.scss";
+import AjoutAdmin from "./pages/AjoutAdmin";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/profileEditor",
         element: <UserProfileEditor />,
+      },
+      {
+        path: "/AjoutAdmin",
+        element: <AjoutAdmin />,
       },
     ],
   },

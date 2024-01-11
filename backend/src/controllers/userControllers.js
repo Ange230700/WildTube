@@ -14,6 +14,23 @@ const browse = async (req, res, next) => {
     next(err);
   }
 };
+const read = async (req, res, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
+    const user = await tables.user.read(req.params.id);
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (user == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The R of BREAD - Read operation
 
@@ -23,7 +40,6 @@ const edit = async (req, res, next) => {
   const { id } = req.params;
   // Get the new data from the request body
   const { name, email, naissance } = req.body;
-  const avatar = req.file ? req.file.path : null;
 
   let formattedDate = naissance;
   if (!Number.isNaN(Date.parse(naissance))) {
@@ -38,6 +54,11 @@ const edit = async (req, res, next) => {
       naissance: formattedDate,
       avatar,
     });
+  } catch (err) {
+    next(err);
+  }
+};
+// This operation is not yet implemented
 
     // Respond with the updated item in JSON format
     if (!updatedUser) {
@@ -87,4 +108,6 @@ module.exports = {
   browse,
   edit,
   add,
+  edit,
+  read,
 };
