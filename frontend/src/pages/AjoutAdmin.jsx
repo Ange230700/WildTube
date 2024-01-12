@@ -8,7 +8,9 @@ function AjoutAdmin() {
 
   const fetch = async () => {
     try {
-      const response = await axios.get("http://localhost:3310/api/users");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`
+      );
       setUsers(response.data);
     } catch (err) {
       console.error("Error getting user");
@@ -18,10 +20,13 @@ function AjoutAdmin() {
   const handleClick = async (user) => {
     if (user !== null) {
       try {
-        await axios.put(`http://localhost:3310/api/users/${user.id}`, {
-          ...user,
-          IsAdmin: !user.IsAdmin,
-        });
+        await axios.put(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
+          {
+            ...user,
+            IsAdmin: !user.IsAdmin,
+          }
+        );
         if (user.IsAdmin) {
           toast.success("Admin supprimé");
         } else {
