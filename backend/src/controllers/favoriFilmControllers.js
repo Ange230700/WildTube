@@ -1,44 +1,36 @@
 const tables = require("../tables");
 
-const browse = async (req, res, next) => {
-  try {
-    const favorites = await tables.favori_film.readAll();
-    res.json(favorites);
-  } catch (err) {
-    next(err);
-  }
-};
+const browseFavoriteMoviesByUserId = async (req, res, next) => {
+  const { userId } = req.params;
+  // console.warn(req.params);
 
-const read = async (req, res, next) => {
   try {
-    const favorite = await tables.favori_film.read(req.params.id);
-    if (favorite == null) {
+    const favorites = await tables.Favori_film.readFavoriteMoviesByUserId(
+      userId
+    );
+    // console.warn(favorites);
+
+    if (favorites == null) {
       res.sendStatus(404);
     } else {
-      res.json(favorite);
+      res.json(favorites);
     }
   } catch (err) {
     next(err);
   }
 };
 
-const add = async (req, res, next) => {
-  const favorite = req.body;
+const addMovieToFavorite = async (req, res, next) => {
+  const { userId, filmId } = req.body;
+  // console.warn(req.body);
 
   try {
-    const insertId = await tables.favori_film.create(favorite);
-    res.status(200).json({ insertId });
-  } catch (err) {
-    next(err);
-  }
-};
+    const result = await tables.Favori_film.createMovieInFavorites(
+      userId,
+      filmId
+    );
+    // console.warn(result);
 
-const destroy = async (req, res, next) => {
-  const { id: userId } = req.params;
-  const { filmId } = req.body;
-
-  try {
-    const [result] = await tables.favori_film.delete(userId, filmId);
     if (result.affectedRows) {
       res.sendStatus(200);
     } else {
@@ -48,9 +40,27 @@ const destroy = async (req, res, next) => {
     next(err);
   }
 };
+
+const destroy = async (req, res, next) => {
+  const { userId, filmId } = req.params;
+  // console.warn("req.params", req.params);
+
+  try {
+    const result = await tables.Favori_film.delete(userId, filmId);
+    // console.warn(result);
+
+    if (result.affectedRows) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
-  browse,
-  read,
-  add,
+  browseFavoriteMoviesByUserId,
+  addMovieToFavorite,
   destroy,
 };

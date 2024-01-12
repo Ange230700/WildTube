@@ -4,59 +4,218 @@
 require("dotenv").config();
 
 // Import Faker library for generating fake data
-// const { faker } = require("@faker-js/faker");
+const { faker } = require("@faker-js/faker");
+const argon2 = require("argon2");
 
 // Import database client
 const database = require("./database/client");
 
-const seed = async () => {
+const films = require("./src/services/films");
+const categories = require("./src/services/categories");
+
+async function insertAdmin() {
   try {
-    // Declare an array to store the query promises
-    // See why here: https://eslint.org/docs/latest/rules/no-await-in-loop
+    const password = "admin";
+    const hashedPassword = argon2.hash(password); // Hash the password
+
+    hashedPassword.then((hashed) => {
+      return database.query(
+        "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [
+          "Admin",
+          "admin@admin.admin",
+          "2000-01-01 00:00:00",
+          1,
+          hashed,
+          1,
+          "https://avatars.githubusercontent.com/u/97165289",
+        ]
+      );
+    });
+  } catch (err) {
+    console.error("Error inserting admin:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+async function insertUsers() {
+  try {
     const queries = [];
+    for (let i = 0; i < 5; i += 1) {
+      const randomDate = faker.date
+        .past()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
+      const password = faker.internet.password(); // Generate a random password
+      const hashedPassword = argon2.hash(password); // Hash the password
 
-    /* ************************************************************************* */
+      queries.push(
+        hashedPassword.then((hashed) => {
+          return database.query(
+            "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [
+              faker.person.firstName(),
+              faker.internet.email(),
+              randomDate,
+              faker.number.binary({ min: 0, max: 1 }),
+              hashed,
+              0,
+              faker.image.avatarGitHub(),
+            ]
+          );
+        })
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting users:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
 
-    // Generating Seed Data
+async function insertFilms() {
+  // Similar to insertUsers, but for the Film table
+  try {
+    const queries = [];
+    for (let i = 0; i < films.length; i += 1) {
+      queries.push(
+        database.query(
+          "INSERT INTO `Film` (`miniature`, `cover`, `title`, `videoUrl`, `duration`, `year`, `description`, `IsAvailable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+          [
+            films[i].miniature,
+            films[i].cover,
+            films[i].title,
+            films[i].videoUrl,
+            films[i].duration,
+            films[i].year,
+            films[i].description,
+            films[i].IsAvailable,
+          ]
+        )
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting films:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
 
-    // // Optional: Truncate tables (remove existing data)
-    // await database.query("truncate item");
-    await database.query("TRUNCATE Categorie_par_film");
+async function insertCategories() {
+  // Similar to insertUsers, but for the Categorie table
+  try {
+    const queries = [];
+    for (let i = 0; i < categories.length; i += 1) {
+      queries.push(
+        database.query("INSERT INTO `Categorie` (`name`) VALUES (?)", [
+          categories[i].name,
+        ])
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting categories:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
 
-    // // Insert fake data into the 'item' table
-    // for (let i = 0; i < 10; i += 1) {
-    //   queries.push(
-    //     database.query("insert into item(title) values (?)", [
-    //       faker.lorem.word(),
-    //     ])
-    //   );
-    // }
+async function insertCommentaires() {
+  try {
+    const queries = [];
+    for (let i = 0; i < 1000; i += 1) {
+      const randomDate = faker.date
+        .past()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
+      queries.push(
+        database.query(
+          "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `content`, `date`, `unique_key`) VALUES (?, ?, ?, ?, ?)",
+          [
+            faker.number.int({ min: 1, max: 5 }),
+            faker.number.int({ min: 1, max: 27 }),
+            faker.lorem.paragraph(),
+            randomDate,
+            faker.string.uuid(),
+          ]
+        )
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting commentaires:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
 
-    // Insert fake data into the 'Categorie_par_film' table
-    for (let categorieIndex = 0; categorieIndex < 20; categorieIndex += 1) {
-      for (let filmIndex = 0; filmIndex < 20; filmIndex += 1) {
-        queries.push(
-          database.query(
-            "insert into Categorie_par_film(id_categorie,id_film) values (?,?)",
-            [categorieIndex, filmIndex]
-          )
-        );
-      }
+async function insertFilmCategorie() {
+  try {
+    const queries = [];
+    for (let i = 0; i < films.length; i += 1) {
+      queries.push(
+        database.query(
+          "INSERT INTO `Categorie_par_film` (`filmId`, `categorieId`) VALUES (?, ?)",
+          [i + 1, faker.number.int({ min: 1, max: categories.length })]
+        )
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting film_categorie:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+async function seed() {
+  try {
+    await database.query("SET FOREIGN_KEY_CHECKS = 0");
+    await database.query("TRUNCATE `User`");
+    await database.query("TRUNCATE `Film`");
+    await database.query("TRUNCATE `Categorie`");
+    await database.query("TRUNCATE `Categorie_par_film`");
+    await database.query("TRUNCATE `Commentaire_film`");
+
+    await insertAdmin();
+    await insertUsers();
+    await insertFilms();
+    await insertCategories();
+
+    // Verify the insertions
+    const [movies] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Film`"
+    );
+    const [genres] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Categorie`"
+    );
+    const [users] = await database.query(
+      "SELECT COUNT(*) AS count FROM `User`"
+    );
+
+    if (movies[0].count >= films.length && genres[0].count >= genres.length) {
+      await insertFilmCategorie();
+    } else {
+      throw new Error(
+        "Not enough data in Film or Categorie tables for seeding Categorie_par_film"
+      );
     }
 
-    /* ************************************************************************* */
-
-    // Wait for all the insertion queries to complete
-    await Promise.all(queries);
-
-    // Close the database connection
-    database.end();
+    if (users[0].count >= 5 && movies[0].count >= films.length) {
+      await insertCommentaires();
+    } else {
+      throw new Error(
+        "Not enough data in User or Film tables for seeding Commentaire_film"
+      );
+    }
+    await database.query("SET FOREIGN_KEY_CHECKS = 1");
 
     console.info(`${database.databaseName} filled from ${__filename} 🌱`);
   } catch (err) {
-    console.error("Error filling the database:", err.message);
+    console.error("Error during database seeding:", err.message);
+  } finally {
+    database.end();
   }
-};
+}
 
 // Run the seed function
 seed();

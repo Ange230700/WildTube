@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import LogoContainer from "../components/LogoContainer";
+import ModalInscription from "../components/ModalInscription";
 
 function Inscription() {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    password: "",
-    // confirmPassword: "",
-    civility: "",
     naissance: "",
+    civility: "",
+    password: "",
+    avatar: "",
   });
-  const [error, setError] = useState(false);
-  const [succes, setSucces] = useState(false);
+
+  // const { updateUser, user: connectedUser } = useUser();
+  const [showModal, setShowModal] = useState(false);
+  // const navigate = useNavigate();
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,56 +37,56 @@ function Inscription() {
     }
 
     try {
-      const result = await axios.post("http://localhost:3310/api/users", user);
+      const result = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+        user
+      );
       // console.log(user);
       if (result.status === 201) {
-        setSucces(true);
-      } else {
-        setError(true);
+        toggleModal(); // Afficher la modale en cas de succès
+        // updateUser(result.data);
+        // navigate("/");
       }
 
       // console.log("Request URL:", url);
       // console.log("User registered successfully");
     } catch (someError) {
-      setError(true);
       console.error("Error during registration:", someError);
     }
   };
   return (
     <div className="signUpPageMockupGuest">
-      {error && <h1 style={{ color: "red", fontSize: 12 }}>Error</h1>}
-      {succes && <h1 style={{ color: "green", fontSize: 12 }}>Sicces</h1>}
       <div className="searchDisplaySection">
         <LogoContainer />
-        <div className="form">
+        <form className="form">
           <div className="inputs">
             <div className="inputContainer">
               <input
                 type="text"
-                value={user.name}
-                placeholder="Nom"
                 name="name"
                 className="input"
+                value={user.name}
                 onChange={handleInputChange}
+                placeholder="Nom"
               />
             </div>
             <div className="inputContainer">
               <input
-                type="text"
-                value={user.email}
+                type="email"
                 name="email"
+                className="input"
+                value={user.email}
                 onChange={handleInputChange}
                 placeholder="Adresse Mail"
-                className="input"
               />
             </div>
             <div className="inputContainer">
               <input
                 type="password"
-                value={user.password}
                 name="password"
-                onChange={handleInputChange}
                 className="input"
+                value={user.password}
+                onChange={handleInputChange}
                 placeholder="Mot de passe"
               />
             </div>
@@ -122,7 +129,7 @@ function Inscription() {
                 </label>
               </div>
             </div>
-            <section className="birthday">Date de naissance :</section>
+            <div className="birthday">Date de naissance :</div>
             <div className="orientationContainer">
               <input
                 className="inputDate"
@@ -139,10 +146,16 @@ function Inscription() {
               onClick={handleSubmit}
               type="button"
             >
-              <div className="inscription">Inscription</div>
+              <p className="inscription">Inscription</p>
             </button>
           </div>
-        </div>
+          {showModal && (
+            <ModalInscription
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          )}
+        </form>
       </div>
     </div>
   );

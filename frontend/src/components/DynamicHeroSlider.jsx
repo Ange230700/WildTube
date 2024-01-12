@@ -8,7 +8,7 @@ const responsive = {
   desktop: {
     breakpoint: { max: 1600, min: 1025 },
     items: 1,
-    // partialVisibilityGutter: 0,
+    // partialVisible: true,
   },
   landscapeTablet: {
     breakpoint: { max: 1024, min: 835 },
@@ -39,12 +39,14 @@ function DynamicHeroSlider({ movies }) {
       arrows
       autoPlay
       autoPlaySpeed={3000}
+      // centerMode
       containerClass="dynamic-hero-slider-container"
       draggable
       infinite
       itemClass="slider-item"
       keyBoardControl
       minimumTouchDrag={80}
+      // partialVisible
       removeArrowOnDeviceType={["landscapeMobile", "mobile"]}
       responsive={responsive}
       sliderClass="inner-slider-container"

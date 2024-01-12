@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import CommentsSection from "./CommentsSection";
 
 function MovieLoginRequired({ movie }) {
   const { movieId } = useParams();
@@ -34,18 +35,7 @@ function MovieLoginRequired({ movie }) {
             <p className="movie-title">{movie.title}</p>
             <p className="movie-description">{movie.description}</p>
           </div>
-          {/* <div className="comments-section">
-            <div className="comments-section-title">
-              <p className="comments-section-title-text">Commentaires</p>
-            </div>
-            <div className="comments-section-content">
-              <div className="registration-invitation-container">
-                <p className="registration-invitation">
-                  Connectez-vous pour laisser un commentaire.
-                </p>
-              </div>
-            </div>
-          </div> */}
+          <CommentsSection />
         </div>
         <div className="upper-layer">
           <div className="registration-invitation-container">

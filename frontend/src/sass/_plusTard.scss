@@ -1,0 +1,129 @@
+.SearchDisplaySection {
+  width: 100%;
+  height: 100%;
+  padding-top: clamp(calc(20px * 1), calc(6.25vw * 1), calc(20px * 1 * 1.5));
+  flex-direction: column;
+  gap: clamp(
+    calc(var(--spacing-constant) * 1),
+    calc(2.5vw * 1),
+    calc(var(--spacing-constant) * 1 * 1.5)
+  );
+  display: flex;
+
+  .SearchBarContainer {
+    align-self: stretch;
+    padding: 0
+      clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+    justify-content: center;
+    align-items: center;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    display: flex;
+
+    .RegarderPlusTard {
+      text-align: center;
+      color: var(--neutral-color);
+      font-size: 18px;
+      font-weight: var(--font-weight-semi-bold);
+    }
+  }
+  .SortContainer {
+    align-self: stretch;
+    height: clamp(calc(29px * 1), calc(9.0625vw * 1), calc(29px * 1 * 1.5));
+    padding: 0
+      clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    display: flex;
+
+    .SortButton {
+      height: clamp(calc(25px * 1), calc(7.8125vw * 1), calc(25px * 1 * 1.5));
+      padding: 0
+        clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        );
+      background: var(--neutral-color);
+      border-radius: clamp(
+        calc(var(--border-radius-constant) * 1),
+        calc(3.125vw * 1),
+        calc(var(--border-radius-constant) * 1 * 1.5)
+      );
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      display: flex;
+
+      .Trier {
+        text-align: center;
+        color: var(--background-color);
+      }
+
+      .Sorticon1 {
+        width: clamp(calc(18px * 1), calc(5.625vw * 1), calc(18px * 1 * 1.5));
+        height: clamp(calc(18px * 1), calc(5.625vw * 1), calc(18px * 1 * 1.5));
+        position: relative;
+
+        .Vector {
+          width: clamp(
+            calc(17.75px * 1),
+            calc(5.546875vw * 1),
+            calc(17.75px * 1 * 1.5)
+          );
+          height: clamp(
+            calc(14px * 1),
+            calc(4.375vw * 1),
+            calc(14px * 1 * 1.5)
+          );
+          left: clamp(
+            calc(0.25px * 1),
+            calc(0.078125vw * 1),
+            calc(0.25px * 1 * 1.5)
+          );
+          top: clamp(calc(1px * 1), calc(0.3125vw * 1), calc(1px * 1 * 1.5));
+          position: absolute;
+          background: var(--background-color);
+        }
+      }
+    }
+  }
+
+  .Movies {
+    align-self: stretch;
+    height: clamp(calc(382px * 1), calc(119.375vw * 1), calc(382px * 1 * 1.5));
+    padding: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    display: flex;
+  }
+}
