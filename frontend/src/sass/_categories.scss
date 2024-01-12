@@ -4,8 +4,6 @@
   .display {
     align-self: stretch;
     flex: 1;
-    // justify-content: center;
-    // align-items: center;
     gap: calc(var(--spacing-constant) * 1);
     display: flex;
     flex-wrap: wrap;

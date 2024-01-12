@@ -15,7 +15,7 @@ const userControllers = require("./controllers/userControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
 const watchlistControllers = require("./controllers/watchlistControllers");
 const authControllers = require("./controllers/authControllers");
-const commentaireParFilmControllers = require("./controllers/commentaireParFilmControllers");
+const commentaireFilmControllers = require("./controllers/commentaireFilmControllers");
 
 // Route to get a list of items
 router.get("/films", filmControllers.browse);
@@ -33,27 +33,27 @@ router.get(
   "/watchlist/film/:userId",
   watchlistControllers.browseWatchlistMoviesByUserId
 );
+router.get("/comments", commentaireFilmControllers.browse);
+router.get(
+  "/comments/film/:filmId",
+  commentaireFilmControllers.browseCommentsByFilmId
+);
 router.get("/users/:id", userControllers.read);
 
 // Route to get a specific item by ID
-router.get("/commentaires/film/:id", commentaireParFilmControllers.read);
+
 // Route to edit a specific item by ID
-
 router.put("/users/:id", userControllers.edit);
-
-
-router.put("/commentaire/film/:id", commentaireParFilmControllers.edit);
 
 // Route to add a new item
 router.post("/login", authControllers.login);
 router.post("/users", hashPassword, userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
-router.post("/commentaire/film", commentaireParFilmControllers.add);
+router.post("/comments", commentaireFilmControllers.addComment);
 
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
 router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);
-router.delete("/commentaire/film/:id", commentaireParFilmControllers.destroy);
 
 module.exports = router;

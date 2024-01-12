@@ -1,151 +1,121 @@
 .ProfileDisplaySection {
   width: 100%;
   height: 100%;
-  padding-top: 20px;
+  padding-top: clamp(
+    calc(var(--spacing-constant) * 3),
+    calc(2.5vw * 3),
+    calc(var(--spacing-constant) * 3 * 1.5)
+  );
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  display: inline-flex;
+  display: flex;
 
   .Profilepicturecontainer {
-    align-self: stretch;
-    height: 129px;
+    height: clamp(calc(128px * 1), calc(40vw * 1), calc(128px * 1 * 1.5));
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
     display: flex;
 
     .Avatar1 {
-      width: 100px;
-      height: 100px;
+      width: clamp(calc(100px * 1), calc(31.25vw * 1), calc(100px * 1 * 1.5));
+      aspect-ratio: 1 / 1;
       border-radius: clamp(
-        var(--nav-icon-container-border-radius, 40px),
-        var(--nav-icon-container-border-radius, 15vw),
-        var(
-          --nav-icon-container-border-radius,
-          calc(var(--nav-icon-container-border-radius, 40px) * 1.5)
-        )
+        calc(var(--border-radius-constant) * 6),
+        calc(2.5vw * 6),
+        calc(var(--border-radius-constant) * 6 * 1.5)
       );
+      object-fit: cover;
     }
 
     .User {
-      color: white;
-      font-size: 16px;
-      font-family: Roboto Flex;
-      font-weight: 700;
-      word-wrap: break-word;
+      color: var(--neutral-color);
+      font-weight: var(--font-weight-semi-bold);
     }
   }
 
-  .Editbuttoncontainer {
-    align-self: stretch;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 10px;
-    display: inline-flex;
+  // .Editbuttoncontainer {
+  //   align-self: stretch;
+  //   justify-content: center;
+  //   gap: clamp(
+  //     calc(var(--spacing-constant) * 1),
+  //     calc(2.5vw * 1),
+  //     calc(var(--spacing-constant) * 1 * 1.5)
+  //   );
+  //   display: flex;
 
-    .Editbutton {
-      width: 140px;
-      height: 40px;
-      background: #ff509a;
-      border-radius: 8px;
-      overflow: hidden;
-      justify-content: center;
-      align-items: center;
-      display: flex;
+  //   .Editbutton {
+  //     width: 140px;
+  //     height: 40px;
+  //     background: #ff509a;
+  //     border-radius: 8px;
+  //     overflow: hidden;
+  //     justify-content: center;
+  //     align-items: center;
+  //     display: flex;
 
-      .ModifierProfil {
-        color: #021222;
-        font-size: 16px;
-        font-family: Roboto Flex;
-        font-weight: 700;
-        word-wrap: break-word;
-      }
-    }
-  }
+  //     .ModifierProfil {
+  //       color: #021222;
+  //       font-size: 16px;
+  //       font-family: Roboto Flex;
+  //       font-weight: 700;
+  //       word-wrap: break-word;
+  //     }
+  //   }
+  // }
 
   .Useroptionscontainer {
-    align-self: stretch;
-    height: 328px;
-    padding-left: 15px;
-    padding-right: 15px;
+    height: clamp(calc(328px * 1), calc(102.5vw * 1), calc(328px * 1 * 1.5));
+    padding: 0
+      clamp(
+        calc(var(--spacing-constant) * 2),
+        calc(2.5vw * 2),
+        calc(var(--spacing-constant) * 2 * 1.5)
+      );
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     display: flex;
 
     .Useroption {
-      align-self: stretch;
-      height: 50px;
-      border-bottom: 1px rgba(255, 255, 255, 0.45) solid;
-      justify-content: flex-start;
+      font-size: clamp(
+        calc(var(--font-size-constant) * 1.6),
+        calc(3.125vw * 1.6),
+        calc(var(--font-size-constant) * 1.6 * 1.5)
+      );
+      height: clamp(calc(50px * 1), calc(15.625vw * 1), calc(50px * 1 * 1.5));
+      border-bottom: 1px var(--text-field-background-color) solid;
       align-items: center;
-      gap: 10px;
-      display: inline-flex;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      display: flex;
 
       .RegarderPlusTard {
-        color: white;
-        font-size: 16px;
-        font-family: Roboto Flex;
-        font-weight: 700;
-        word-wrap: break-word;
+        color: var(--neutral-color);
+        font-weight: var(--font-weight-semi-bold);
+
+        a {
+          text-decoration: none;
+          color: var(--neutral-color);
+        }
       }
-    }
-
-    .Useroption {
-      align-self: stretch;
-      height: 50px;
-      border-bottom: 1px rgba(255, 255, 255, 0.45) solid;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      display: inline-flex;
-
-      .RegarderPlusTard {
-        color: white;
-        font-size: 16px;
-        font-family: Roboto Flex;
-        font-weight: 700;
-        word-wrap: break-word;
-      }
-    }
-
-    .Useroption {
-      align-self: stretch;
-      height: 50px;
-      border-bottom: 1px rgba(255, 255, 255, 0.45) solid;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      display: inline-flex;
-
-      .RegarderPlusTard {
-        color: white;
-        font-size: 16px;
-        font-family: Roboto Flex;
-        font-weight: 700;
-        word-wrap: break-word;
-      }
-    }
-
-    .Useroption {
-      align-self: stretch;
-      height: 50px;
-      border-bottom: 1px rgba(255, 255, 255, 0.45) solid;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      display: inline-flex;
 
       .RegarderPlusTardButton {
+        font-size: clamp(
+          calc(var(--font-size-constant) * 1.6),
+          calc(3.125vw * 1.6),
+          calc(var(--font-size-constant) * 1.6 * 1.5)
+        );
         background: none;
-        font-size: 16px;
-        font-family: Roboto Flex;
-        font-weight: 700;
-        word-wrap: break-word;
+        font-weight: var(--font-weight-semi-bold);
         border: none;
-        color: white;
+        color: var(--neutral-color);
       }
     }
   }

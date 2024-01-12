@@ -7,7 +7,7 @@ function Watchlist() {
   const { user } = useUser();
   const [watchlistItems, setWatchlistItems] = useState([]);
 
-  console.warn("user id", user.id);
+  // console.warn("user id", user.id);
 
   useEffect(() => {
     if (user) {

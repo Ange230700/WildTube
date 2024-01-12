@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
 import LogoContainer from "../components/LogoContainer";
+import ModalInscription from "../components/ModalInscription";
 
 function Inscription() {
   const [user, setUser] = useState({
@@ -10,6 +10,7 @@ function Inscription() {
     naissance: "",
     civility: "",
     password: "",
+    avatar: "",
   });
 
   // const { updateUser, user: connectedUser } = useUser();
@@ -57,7 +58,7 @@ function Inscription() {
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
-        <div className="form">
+        <form className="form">
           <div className="inputs">
             <div className="inputContainer">
               <input
@@ -145,21 +146,16 @@ function Inscription() {
               onClick={handleSubmit}
               type="button"
             >
-              <div className="inscription">Inscription</div>
+              <p className="inscription">Inscription</p>
             </button>
           </div>
           {showModal && (
-            <div className="modal">
-              <div className="modal-content">
-                <p>Votre inscription a été effectuée avec succès</p>
-
-                <button onClick={toggleModal} type="button">
-                  <NavLink to="/Connection">Fermer</NavLink>
-                </button>
-              </div>
-            </div>
+            <ModalInscription
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
           )}
-        </div>
+        </form>
       </div>
     </div>
   );
