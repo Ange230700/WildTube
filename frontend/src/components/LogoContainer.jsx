@@ -1,5 +1,5 @@
 import { useUser } from "../contexts/UserContext";
-import ToggleSwitch from "./ToggleSwitch";
+// import ToggleSwitch from "./ToggleSwitch";
 
 function LogoContainer() {
   const { user } = useUser();
@@ -19,7 +19,7 @@ function LogoContainer() {
         src="/src/assets/icons/logo.svg"
         alt="wildtube logo"
       />
-      <ToggleSwitch />
+      {/* <ToggleSwitch /> */}
     </div>
   );
 }
