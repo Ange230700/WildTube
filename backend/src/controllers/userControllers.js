@@ -1,6 +1,30 @@
 // Import access to database tables
 const tables = require("../tables");
 
+const updateAvatar = async (req, res) => {
+  const { userId } = req.params;
+  const { avatar } = req.body;
+
+  try {
+    // Vérifiez si l'utilisateur existe
+    const existingUser = await tables.User.read(userId);
+    if (!existingUser) {
+      res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+
+    // Mettez à jour l'avatar dans la base de données
+    const updatedUser = await tables.User.updateAvatar(userId, avatar);
+
+    // Répondre avec les informations mises à jour de l'utilisateur
+    res.json(updatedUser);
+  } catch (error) {
+    console.error("Error updating avatar:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la mise à jour de l'avatar" });
+  }
+};
+
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
@@ -103,4 +127,5 @@ module.exports = {
   read,
   edit,
   add,
+  updateAvatar,
 };

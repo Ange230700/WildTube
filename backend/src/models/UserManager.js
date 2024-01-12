@@ -21,16 +21,7 @@ class UserManager extends AbstractManager {
     // Return the newly created item
     return { id: createdId, name, email, naissance, civility, hashedPassword };
   }
-
   // The Rs of CRUD - Read operations
-
-  async readAll() {
-    // Execute the SQL SELECT query to retrieve all items from the "user" table
-    const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
-
-    // Return the array of items
-    return rows;
-  }
 
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
@@ -41,6 +32,27 @@ class UserManager extends AbstractManager {
 
     // Return the first row of the result, which represents the item
     return rows;
+  }
+
+  async readAll() {
+    // Execute the SQL SELECT query to retrieve all items from the "user" table
+    const [rows] = await this.database.query(`select * from ${this.table}`);
+
+    // Return the array of items
+    return rows;
+  }
+  // The U of CRUD - Update operation
+  // TODO: Implement the update operation to modify an existing item
+
+  async updateAvatar(id, avatar) {
+    // Execute the SQL UPDATE query to update a item to the "user" table
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET avatar = ? WHERE id = ?`,
+      [avatar, id]
+    );
+
+    // Return the ID of the newly inserted item
+    return result;
   }
 
   // The U of CRUD - Update operation
@@ -66,11 +78,22 @@ class UserManager extends AbstractManager {
   }
 
   // The D of CRUD - Delete operation
+  // TODO: Implement the delete operation to remove an item by its ID
+
+  async delete(id) {
+    const [rows] = await this.database.query(
+      `DELETE from ${this.table} where id = ?`,
+      [id]
+    );
+
+    // Return the first row of the result, which represents the item
+    return rows;
+  }
 
   async readByEmail(email) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [result] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE email = ?`,
+      `select * from ${this.table} where email = ?`,
       [email]
     );
 
