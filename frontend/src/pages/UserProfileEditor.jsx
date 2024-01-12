@@ -14,12 +14,58 @@ function UserProfileEditor() {
     password: "",
     avatar: "",
   });
+  // const avatars = [
+  //   "avatar1.svg",
+  //   "FemaleAvatar2.svg",
+  //   "FemaleAvatar.svg",
+  //   "MaleAvatar2.svg",
+  // ];
 
   const [showModal, setShowModal] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  // const [selectedAvatar, setSelectedAvatar] = useState(user.avatar); // Avatar principal
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
+  // Update these handlers to capture the new and old password inputs
+  const handleNewPasswordChange = (e) => {
+    setNewPassword(e.target.value);
   };
+
+  const handleOldPasswordChange = (e) => {
+    setOldPassword(e.target.value);
+  };
+
+  // const handleAvatarChange = async (newAvatar) => {
+  //   try {
+  //     // Mettez à jour l'avatar principal avec celui sélectionné
+  //     setSelectedAvatar(newAvatar);
+
+  //     // Envoyez la mise à jour au backend
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_BACKEND_URL}/api/update-avatar/${user.id}`,
+  //       {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           avatar: newAvatar,
+  //           // Ajoutez d'autres informations de compte si nécessaire (par exemple, un identifiant utilisateur)
+  //         }),
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       // Gérez les erreurs si nécessaire
+  //       console.error("Failed to update avatar on the server");
+  //     } else {
+  //       updateUser({ ...user, avatar: newAvatar });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating avatar:", error.message);
+  //     // Gérez les erreurs ici, par exemple, affichez un message à l'utilisateur
+  //   }
+  // };
 
   useEffect(() => {
     setFormData({
@@ -28,7 +74,7 @@ function UserProfileEditor() {
       naissance: user.naissance
         ? new Date(user.naissance).toISOString().split("T")[0]
         : "",
-      civility: user.civility || false,
+      civility: user.civility || "",
       password: user.password || "",
       avatar: user.avatar || "",
     });
@@ -40,23 +86,38 @@ function UserProfileEditor() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Create a new FormData instance
     const updateData = new FormData();
 
+    // Append modified fields to FormData
     Object.keys(formData).forEach((key) => {
       if (formData[key] !== user[key]) {
         updateData.append(key, formData[key]);
       }
     });
 
+    if (!updateData.password) delete updateData.password;
+
+    if (newPassword) {
+      updateData.append("newPassword", newPassword);
+      updateData.append("oldPassword", oldPassword);
+    }
+
     try {
       const result = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
-        updateData
+        updateData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       if (result.status === 200) {
         updateUser(result.data);
-        toggleModal();
+        setShowModal(true);
       }
     } catch (error) {
       // Handle error...
@@ -94,6 +155,8 @@ function UserProfileEditor() {
               <input
                 type="password"
                 className="input"
+                value={oldPassword}
+                onChange={handleOldPasswordChange}
                 placeholder="Ancien mot de passe"
               />
             </div>
@@ -102,18 +165,18 @@ function UserProfileEditor() {
                 type="password"
                 name="password"
                 className="input"
-                value={formData.password}
-                onChange={handleInputChange}
+                value={newPassword}
+                onChange={handleNewPasswordChange}
                 placeholder="Nouveau mot de passe"
               />
             </div>
-            <div className="inputContainer">
+            {/* <div className="inputContainer">
               <input
                 type="password"
                 className="input"
                 placeholder="Confirmation du nouveau mot de passe"
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="additionalInformation">
@@ -157,6 +220,23 @@ function UserProfileEditor() {
               />
             </div>
           </div>
+          {/* <h3>Choisissez un nouvel avatar :</h3> */}
+
+          {/* Afficher les options d'avatar */}
+          {/* {avatars.map((avatar) => (
+            <div className="choiceAvatar">
+              <button
+                key={avatar}
+                type="button"
+                onClick={() => handleAvatarChange(avatar)}
+              >
+                <img
+                  src={`${import.meta.env.VITE_BACKEND_URL}/avatars/${avatar}`}
+                  alt={`Avatar ${avatar}`}
+                />
+              </button>
+            </div>
+          ))} */}
           <div className="buttonContainer">
             <button
               className="signUpButton"

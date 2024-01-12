@@ -1,3 +1,5 @@
+const argon2 = require("argon2");
+
 const AbstractManager = require("./AbstractManager");
 
 class UserManager extends AbstractManager {
@@ -56,14 +58,27 @@ class UserManager extends AbstractManager {
   }
 
   // The U of CRUD - Update operation
-  async update({ name, email, naissance, civility, IsAdmin, id }) {
-    // Execute the SQL UPDATE query to update a item to the "user" table
+  async update({ name, email, naissance, civility, password, IsAdmin, id }) {
+    let hashedPassword;
+    if (password) {
+      hashedPassword = await argon2.hash(password);
+    }
+
+    // Format the date to YYYY-MM-DD
+    const [formattedDate] = new Date(naissance).toISOString().split("T");
+
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET name=?, email=?, naissance=?, civility=?, IsAdmin=?  WHERE id=?`,
-      [name, email, new Date(naissance), civility, IsAdmin, id]
+      `UPDATE ${this.table} SET 
+     name = COALESCE(?, name), 
+     email = COALESCE(?, email), 
+     naissance = COALESCE(?, naissance), 
+     civility = COALESCE(?, civility), 
+     hashed_password = COALESCE(?, hashed_password), 
+     IsAdmin = COALESCE(?, IsAdmin)
+     WHERE id = ?`,
+      [name, email, formattedDate, civility, hashedPassword, IsAdmin, id]
     );
 
-    // Return the ID of the newly inserted item
     return result;
   }
 

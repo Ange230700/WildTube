@@ -45,11 +45,11 @@ function UserProfil() {
             <Link to="/watchlist">À regarder plus tard</Link>
           </div>
         </div>
-        <div className="Useroption">
+        {/* <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/profileEditor">Informations du compte</Link>
           </div>
-        </div>
+        </div> */}
         <div className="Useroption">
           <button
             className="RegarderPlusTardButton"

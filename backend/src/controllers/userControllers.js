@@ -1,3 +1,5 @@
+const argon2 = require("argon2");
+
 // Import access to database tables
 const tables = require("../tables");
 
@@ -59,15 +61,30 @@ const read = async (req, res, next) => {
 };
 
 // The E of BREAD - Edit (Update) operation
+// Modify the edit function
 const edit = async (req, res, next) => {
   const { id } = req.params;
-  req.body.id = id;
+  const { newPassword, oldPassword } = req.body; // Capture new and old passwords
 
   try {
+    // Optional: Verify old password before updating to new one
+    if (oldPassword) {
+      const user = await tables.User.read(id);
+      const verified = await argon2.verify(user.hashed_password, oldPassword);
+      if (!verified) {
+        res.status(400).json({ error: "Incorrect old password" });
+        return;
+      }
+    }
+
+    if (newPassword) {
+      const hashedPassword = await argon2.hash(newPassword);
+      req.body.hashedPassword = hashedPassword;
+    }
+
     const result = await tables.User.update(req.body);
     if (result) {
-      res.json(result);
-      res.status(204);
+      res.status(204).end();
     } else {
       res.sendStatus(404);
     }
