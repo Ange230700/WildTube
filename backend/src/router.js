@@ -50,6 +50,7 @@ router.post("/login", authControllers.login);
 router.post("/users", hashPassword, userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
+router.put("/update-avatar/:userId", userControllers.updateAvatar);
 router.post("/comments", commentaireFilmControllers.addComment);
 
 // Route to delete a specific item by ID

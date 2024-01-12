@@ -1,0 +1,27 @@
+.selectionnedavatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-left: 500px;
+}
+
+.choiceAvatar {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 16px; /* Adjust the gap between images as needed */
+}
+
+.choiceAvatar button {
+  flex: 1 0 48%; /* Set the flex property for each button to create two columns */
+  max-width: 10%; /* Set the maximum width for each button */
+}
+
+.choiceAvatar img {
+  width: 100%;
+  height: auto;
+  max-width: 100%; /* Ensure the image doesn't exceed its container */
+}
