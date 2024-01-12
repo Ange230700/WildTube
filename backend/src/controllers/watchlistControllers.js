@@ -2,13 +2,13 @@ const tables = require("../tables");
 
 const browseWatchlistMoviesByUserId = async (req, res, next) => {
   const { userId } = req.params;
-  console.warn(req.params);
+  // console.warn(req.params);
 
   try {
     const watchlist = await tables.Watchlist.readWatchlistMoviesByUserId(
       userId
     );
-    console.warn(watchlist);
+    // console.warn(watchlist);
 
     if (watchlist == null) {
       res.sendStatus(404);
@@ -22,14 +22,14 @@ const browseWatchlistMoviesByUserId = async (req, res, next) => {
 
 const addMovieToWatchlist = async (req, res, next) => {
   const { userId, filmId } = req.body;
-  console.warn(req.body);
+  // console.warn(req.body);
 
   try {
     const result = await tables.Watchlist.createMovieInWatchlist(
       userId,
       filmId
     );
-    console.warn(result);
+    // console.warn(result);
 
     if (result.affectedRows) {
       res.sendStatus(200);
@@ -43,11 +43,11 @@ const addMovieToWatchlist = async (req, res, next) => {
 
 const destroy = async (req, res, next) => {
   const { userId, filmId } = req.params;
-  console.warn("req.params", req.params);
+  // console.warn("req.params", req.params);
 
   try {
     const result = await tables.Watchlist.delete(userId, filmId);
-    console.warn(result);
+    // console.warn(result);
 
     if (result.affectedRows) {
       res.sendStatus(200);

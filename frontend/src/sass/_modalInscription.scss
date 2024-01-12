@@ -1,0 +1,70 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px var(--secondary-font-color);
+  border-radius: clamp(
+    calc(var(--border-radius-constant) * 1),
+    calc(2.5vw * 1),
+    calc(var(--border-radius-constant) * 1 * 1.5)
+  );
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: var(--background-color);
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  padding: clamp(
+    calc(var(--spacing-constant) * 1),
+    calc(2.5vw * 1),
+    calc(var(--spacing-constant) * 1 * 1.5)
+  );
+
+  .modal-content {
+    width: clamp(calc(112px * 1), calc(35vw * 1), calc(112px * 1 * 1.5));
+    padding: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+
+    button {
+      padding: clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        )
+        clamp(
+          calc(var(--spacing-constant) * 2.5),
+          calc(2.5vw * 2.5),
+          calc(var(--spacing-constant) * 2.5 * 1.5)
+        );
+      border: none;
+      border-radius: clamp(
+        calc(var(--border-radius-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--border-radius-constant) * 1 * 1.5)
+      );
+      background-color: hsla(0, 26%, 91%, 0.1);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #ff509a;
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+}

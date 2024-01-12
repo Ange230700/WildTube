@@ -25,7 +25,10 @@ function Connection() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:3310/api/login", user);
+      const result = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/login`,
+        user
+      );
       if (result.status === 200) {
         updateUser(result.data);
         navigate("/");

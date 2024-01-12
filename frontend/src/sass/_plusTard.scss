@@ -1,75 +1,111 @@
 .SearchDisplaySection {
   width: 100%;
   height: 100%;
-  padding-top: 20px;
+  padding-top: clamp(calc(20px * 1), calc(6.25vw * 1), calc(20px * 1 * 1.5));
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
-  display: inline-flex;
+  gap: clamp(
+    calc(var(--spacing-constant) * 1),
+    calc(2.5vw * 1),
+    calc(var(--spacing-constant) * 1 * 1.5)
+  );
+  display: flex;
 
   .SearchBarContainer {
     align-self: stretch;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0
+      clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    display: inline-flex;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    display: flex;
 
     .RegarderPlusTard {
       text-align: center;
-      color: white;
+      color: var(--neutral-color);
       font-size: 18px;
-      font-family: Roboto Flex;
-      font-weight: 700;
-      word-wrap: break-word;
+      font-weight: var(--font-weight-semi-bold);
     }
   }
   .SortContainer {
     align-self: stretch;
-    height: 29px;
-    padding-left: 10px;
-    padding-right: 10px;
+    height: clamp(calc(29px * 1), calc(9.0625vw * 1), calc(29px * 1 * 1.5));
+    padding: 0
+      clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    gap: 10px;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
     display: flex;
 
     .SortButton {
-      height: 25px;
-      padding-left: 10px;
-      padding-right: 10px;
-      background: white;
-      border-radius: 13px;
+      height: clamp(calc(25px * 1), calc(7.8125vw * 1), calc(25px * 1 * 1.5));
+      padding: 0
+        clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        );
+      background: var(--neutral-color);
+      border-radius: clamp(
+        calc(var(--border-radius-constant) * 1),
+        calc(3.125vw * 1),
+        calc(var(--border-radius-constant) * 1 * 1.5)
+      );
       overflow: hidden;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      display: inline-flex;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      display: flex;
 
       .Trier {
         text-align: center;
-        color: black;
-        font-size: 13px;
-        font-family: Roboto Flex;
-        font-weight: 400;
-        word-wrap: break-word;
+        color: var(--background-color);
       }
 
       .Sorticon1 {
-        width: 18px;
-        height: 16px;
+        width: clamp(calc(18px * 1), calc(5.625vw * 1), calc(18px * 1 * 1.5));
+        height: clamp(calc(18px * 1), calc(5.625vw * 1), calc(18px * 1 * 1.5));
         position: relative;
 
         .Vector {
-          width: 17.75px;
-          height: 14px;
-          left: 0.25px;
-          top: 1px;
+          width: clamp(
+            calc(17.75px * 1),
+            calc(5.546875vw * 1),
+            calc(17.75px * 1 * 1.5)
+          );
+          height: clamp(
+            calc(14px * 1),
+            calc(4.375vw * 1),
+            calc(14px * 1 * 1.5)
+          );
+          left: clamp(
+            calc(0.25px * 1),
+            calc(0.078125vw * 1),
+            calc(0.25px * 1 * 1.5)
+          );
+          top: clamp(calc(1px * 1), calc(0.3125vw * 1), calc(1px * 1 * 1.5));
           position: absolute;
-          background: #1e3050;
+          background: var(--background-color);
         }
       }
     }
@@ -77,11 +113,17 @@
 
   .Movies {
     align-self: stretch;
-    height: 382px;
-    padding: 10px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 10px;
-    display: inline-flex;
+    height: clamp(calc(382px * 1), calc(119.375vw * 1), calc(382px * 1 * 1.5));
+    padding: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    display: flex;
   }
 }

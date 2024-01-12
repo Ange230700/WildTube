@@ -1,37 +1,45 @@
 .navbar {
-  padding: calc(var(--spacing-constant) * 0.7) calc(var(--spacing-constant) * 3);
-  justify-content: space-between;
   display: flex;
+  justify-content: center;
 
-  .nav-icon-container {
-    .div-icon {
-      display: flex;
-      width: clamp(
-        var(--nav-icon-container-width, 18px),
-        var(--nav-icon-container-width, 5.5vw),
-        var(
-          --nav-icon-container-width,
-          calc(var(--nav-icon-container-width, 18px) * 1.5)
-        )
-      );
-      height: clamp(
-        var(--nav-icon-container-height, 18px),
-        var(--nav-icon-container-height, 5.5vw),
-        var(
-          --nav-icon-container-height,
-          calc(var(--nav-icon-container-height, 18px) * 1.5)
-        )
-      );
+  .nav-icon-wrapper {
+    padding: calc(var(--spacing-constant) * 0.7)
+      calc(var(--spacing-constant) * 3);
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    max-width: 500px;
 
-      .avatar {
-        border-radius: clamp(
-          var(--nav-icon-container-border-radius, 16px),
-          var(--nav-icon-container-border-radius, 5vw),
+    .nav-icon-container {
+      .div-icon {
+        display: flex;
+        width: clamp(
+          var(--nav-icon-container-width, 18px),
+          var(--nav-icon-container-width, 5.5vw),
           var(
-            --nav-icon-container-border-radius,
-            calc(var(--nav-icon-container-border-radius, 16px) * 1.5)
+            --nav-icon-container-width,
+            calc(var(--nav-icon-container-width, 18px) * 1.5)
           )
         );
+        height: clamp(
+          var(--nav-icon-container-height, 18px),
+          var(--nav-icon-container-height, 5.5vw),
+          var(
+            --nav-icon-container-height,
+            calc(var(--nav-icon-container-height, 18px) * 1.5)
+          )
+        );
+
+        .avatar {
+          border-radius: clamp(
+            var(--nav-icon-container-border-radius, 16px),
+            var(--nav-icon-container-border-radius, 5vw),
+            var(
+              --nav-icon-container-border-radius,
+              calc(var(--nav-icon-container-border-radius, 16px) * 1.5)
+            )
+          );
+        }
       }
     }
   }

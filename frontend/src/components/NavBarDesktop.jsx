@@ -29,17 +29,13 @@ function NavBarDesktop() {
         <NavLink className="link" to={changeProfile()}>
           {user ? (
             <img
-              className="icon"
+              className="icon avatar"
               src={
-                !user.civility
-                  ? "/src/assets/icons/avatar1.svg"
-                  : "/src/assets/icons/FemaleAvatar.svg"
+                user.avatar
+                  ? user.avatar
+                  : "https://avatars.githubusercontent.com/u/97165289"
               }
               alt="avatar"
-              style={{
-                width: 66,
-                height: 66,
-              }}
             />
           ) : (
             <img

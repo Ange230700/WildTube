@@ -10,13 +10,15 @@
   list-style: none;
 
   .movie-genre {
-    width: 100%;
     font-weight: var(--font-weight-semi-bold);
     text-wrap: nowrap;
     color: var(--selected-movie-genre-tab-color, hsla(0, 0%, 100%, 1));
     text-decoration: none;
-    // height: auto;
-    // object-fit: cover;
+    font-size: clamp(
+      calc(var(--font-size-constant) * 1.2),
+      3.75vw,
+      calc(var(--font-size-constant) * 1.2 * 1.5)
+    );
   }
 
   .movie-genre:hover {

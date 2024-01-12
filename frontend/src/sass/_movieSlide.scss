@@ -17,6 +17,9 @@
   );
   border-radius: var(--border-radius-constant, 10px);
   object-fit: cover;
+  &:hover {
+    transform: scale(1.01); // Example hover effect
+  }
 }
 
 .movie-slide-requiring-registration {

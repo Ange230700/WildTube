@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 import LogoContainer from "../components/LogoContainer";
+import ModalInscription from "../components/ModalInscription";
 
 function Inscription() {
   const [user, setUser] = useState({
@@ -10,6 +10,7 @@ function Inscription() {
     naissance: "",
     civility: "",
     password: "",
+    avatar: "",
   });
 
   // const { updateUser, user: connectedUser } = useUser();
@@ -57,35 +58,35 @@ function Inscription() {
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
-        <div className="form">
+        <form className="form">
           <div className="inputs">
             <div className="inputContainer">
               <input
                 type="text"
-                value={user.name}
-                placeholder="Nom"
                 name="name"
                 className="input"
+                value={user.name}
                 onChange={handleInputChange}
+                placeholder="Nom"
               />
             </div>
             <div className="inputContainer">
               <input
-                type="text"
-                value={user.email}
+                type="email"
                 name="email"
+                className="input"
+                value={user.email}
                 onChange={handleInputChange}
                 placeholder="Adresse Mail"
-                className="input"
               />
             </div>
             <div className="inputContainer">
               <input
                 type="password"
-                value={user.password}
                 name="password"
-                onChange={handleInputChange}
                 className="input"
+                value={user.password}
+                onChange={handleInputChange}
                 placeholder="Mot de passe"
               />
             </div>
@@ -128,7 +129,7 @@ function Inscription() {
                 </label>
               </div>
             </div>
-            <section className="birthday">Date de naissance :</section>
+            <div className="birthday">Date de naissance :</div>
             <div className="orientationContainer">
               <input
                 className="inputDate"
@@ -145,21 +146,16 @@ function Inscription() {
               onClick={handleSubmit}
               type="button"
             >
-              <div className="inscription">Inscription</div>
+              <p className="inscription">Inscription</p>
             </button>
           </div>
           {showModal && (
-            <div className="modal">
-              <div className="modal-content">
-                <p>Votre inscription a été effectuée avec succès</p>
-
-                <button onClick={toggleModal} type="button">
-                  <NavLink to="/Connection">Fermer</NavLink>
-                </button>
-              </div>
-            </div>
+            <ModalInscription
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
           )}
-        </div>
+        </form>
       </div>
     </div>
   );

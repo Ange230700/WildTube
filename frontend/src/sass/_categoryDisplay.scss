@@ -1,0 +1,40 @@
+.category-movie-display-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(
+    calc(var(--spacing-constant) * 1 / 2),
+    calc(2.5vw * 1 / 2),
+    calc(var(--spacing-constant) * 1 / 2 * 1.5)
+  );
+
+  .category-title-container {
+    padding-left: clamp(
+      calc(var(--spacing-constant) * 2),
+      calc(2.5vw * 2),
+      calc(var(--spacing-constant) * 2 * 1.5)
+    );
+    align-items: center;
+    display: flex;
+
+    .category-title {
+      color: var(--primary-font-color);
+      font-weight: var(--font-weight-semi-bold);
+      font-size: clamp(
+        calc(var(--font-size-constant) * 1.4),
+        4.375vw,
+        calc(var(--font-size-constant) * 1.4 * 1.5)
+      );
+    }
+  }
+
+  .static-slider-container {
+    padding: 0 calc(var(--spacing-constant) * 1);
+    align-items: center;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      2.5vw,
+      calc(var(--spacing-constant) * 2)
+    );
+    display: flex;
+  }
+}
