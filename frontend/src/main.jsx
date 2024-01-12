@@ -18,6 +18,7 @@ import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
 import "./sass/index.scss";
 import AjoutAdmin from "./pages/AjoutAdmin";
+import EditVideo from "./pages/EditVideo";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/AjoutAdmin",
         element: <AjoutAdmin />,
+      },
+      {
+        path: "/EditVideo",
+        element: <EditVideo />,
       },
 
     ],

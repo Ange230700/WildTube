@@ -17,7 +17,7 @@ CREATE TABLE
         `email`,
         `naissance`,
         `civility`,
-        `password`,
+        `hashed_password`,
         `IsAdmin`
     )
 VALUES
@@ -26,7 +26,7 @@ VALUES
         'aurelien.emeriau@wcs.com',
         '1983/06/10',
         '0',
-        'ggfd4554',
+        '$argon2id$v=19$m=65536,t=3,p=4$HK43SCu/rOHeRD4iNUAAjQ$37eIMyYDLF5Xa3QUwEWn66o2OL1TeavudX6TDHLSokY',
         '1'
     ),
     (
