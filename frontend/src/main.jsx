@@ -1,4 +1,3 @@
-/*eslint-disable */
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,7 +6,7 @@ import { UserProvider } from "./contexts/UserContext";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import Favoris from "./pages/Favoris";
+import Favorites from "./pages/Favorites";
 import Watchlist from "./pages/Watchlist";
 import Categories from "./pages/Categories";
 import Movie from "./pages/Movie";
@@ -16,8 +15,11 @@ import Inscription from "./pages/Inscription";
 import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
+import UserProfileEditor from "./pages/UserProfileEditor";
 import AccountInfo from "./pages/AccountInfo";
 import "./sass/index.scss";
+import AjoutAdmin from "./pages/AjoutAdmin";
+import EditVideo from "./pages/EditVideo";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "favoris/",
-        element: <Favoris />,
+        element: <Favorites />,
       },
       {
         path: "watchlist/",
@@ -71,6 +73,18 @@ const router = createBrowserRouter([
       {
         path: "/profil",
         element: <UserProfil />,
+      },
+      {
+        path: "/profileEditor",
+        element: <UserProfileEditor />,
+      },
+      {
+        path: "/AjoutAdmin",
+        element: <AjoutAdmin />,
+      },
+      {
+        path: "/EditVideo",
+        element: <EditVideo />,
       },
     ],
   },

@@ -8,23 +8,18 @@ class UserManager extends AbstractManager {
   }
 
   // The C of CRUD - Create operation
-
-  async create({
-    name,
-    email,
-    naissance,
-    civility,
-    password,
-    IsAdmin = false,
-  }) {
-    // Execute the SQL INSERT query to add a new item to the "user" table
+  async create({ name, email, naissance, civility, hashedPassword }) {
+    // Execute the SQL INSERT query to insert a new item into the "user" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (name, email, naissance, civility, password, IsAdmin) values (?, ?, ?, ?, ?, ?)`,
-      [name, email, naissance, civility, password, IsAdmin]
+      `INSERT INTO ${this.table} (name, email, naissance, civility, hashed_password) VALUES (?, ?, ?, ?, ?)`,
+      [name, email, naissance, civility, hashedPassword]
     );
 
-    // Return the ID of the newly inserted item
-    return result;
+    // Get the ID of the newly inserted item
+    const createdId = result.insertId;
+
+    // Return the newly created item
+    return { id: createdId, name, email, naissance, civility, hashedPassword };
   }
   // The Rs of CRUD - Read operations
 
@@ -57,6 +52,29 @@ class UserManager extends AbstractManager {
     );
 
     // Return the ID of the newly inserted item
+    return result;
+  }
+
+
+  // The U of CRUD - Update operation
+  async update(id, { name, email, naissance, avatar }) {
+    console.warn("Updating user with ID:", id); // Log the ID
+    console.warn("Data to update:", { name, email, naissance, avatar }); // Log the data
+
+    // Make sure id is not undefined and is a number
+    if (id === undefined || Number.isNaN(id)) {
+      throw new Error("Invalid user ID");
+    }
+
+    // Execute the SQL UPDATE query to update an existing item
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET name = ?, email = ?, naissance = ?, avatar = ? WHERE id = ?`,
+      [name, email, naissance, avatar, id]
+    );
+
+    console.warn("Result:", result); // Log the result
+
+    // Return the updated item
     return result;
   }
 

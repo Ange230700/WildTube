@@ -38,20 +38,70 @@ const browse = async (req, res, next) => {
     next(err);
   }
 };
+const read = async (req, res, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
+    const user = await tables.user.read(req.params.id);
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (user == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The R of BREAD - Read operation
 
 // The E of BREAD - Edit (Update) operation
+const edit = async (req, res, next) => {
+  // Get the ID of the item to be updated from the request parameters
+  const { id } = req.params;
+  // Get the new data from the request body
+  const { name, email, naissance } = req.body;
+
+  let formattedDate = naissance;
+  if (!Number.isNaN(Date.parse(naissance))) {
+    formattedDate = new Date(naissance).toISOString().slice(0, 10);
+  }
+
+  try {
+    // Update the item in the database
+    const updatedUser = await tables.User.update(id, {
+      name,
+      email,
+      naissance: formattedDate,
+      avatar,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 // This operation is not yet implemented
 
-// eslint-disable-next-line consistent-return
+    // Respond with the updated item in JSON format
+    if (!updatedUser) {
+      res.status(400).json({ message: "Bad Request" });
+    } else {
+      res.json(updatedUser);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The A of BREAD - Add (Create) operation
 
 const add = async (req, res, next) => {
   try {
     // Get the data submitted by the user in the request body
-    const { name, email, naissance, civility, password } = req.body;
+    const { name, email, naissance, civility, hashedPassword } = req.body;
 
     // Add the new item to the database
     const newUser = await tables.User.create({
@@ -59,7 +109,7 @@ const add = async (req, res, next) => {
       email,
       naissance,
       civility,
-      password,
+      hashedPassword,
     });
 
     // Respond with the newly added item in JSON format
@@ -80,6 +130,8 @@ const add = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
+  edit,
   add,
   updateAvatar,
+  read,
 };
