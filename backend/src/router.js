@@ -9,12 +9,12 @@ const router = express.Router();
 // Import itemControllers module for handling item-related operations
 const { hashPassword } = require("./services/auth");
 const categorieControllers = require("./controllers/categorieControllers");
-const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 const filmControllers = require("./controllers/filmControllers");
 const userControllers = require("./controllers/userControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
 const watchlistControllers = require("./controllers/watchlistControllers");
 const authControllers = require("./controllers/authControllers");
+const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 const commentaireFilmControllers = require("./controllers/commentaireFilmControllers");
 
 // Route to get a list of items

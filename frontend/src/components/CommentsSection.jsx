@@ -71,6 +71,85 @@ function CommentsSection({ filmId, user }) {
     scrollToBottom();
   }, [comments]);
 
+  if (user) {
+    return (
+      <section className="CommentsSection">
+        <div className="CommentsSectionTitle">
+          <h3 className="Commentaires">Commentaires</h3>
+        </div>
+        <div className="CommentsWrapper" ref={commentsWrapperRef}>
+          {comments.length === 0 ? (
+            <h4>Soyez le premier à commenter ce film !</h4>
+          ) : (
+            comments.map((comment) => {
+              const formattedDate = comment.date.slice(0, 19).replace("T", " ");
+
+              return (
+                <div className="CommentContainer" key={comment.unique_key}>
+                  {" "}
+                  <div className="UserInfo">
+                    <img
+                      alt={comment.username}
+                      className="Avatar2"
+                      src={
+                        comment.avatar
+                          ? comment.avatar
+                          : "https://avatars.githubusercontent.com/u/97165289"
+                      }
+                    />
+                    <h6 className="Username">{comment.name}</h6>
+                  </div>
+                  <div className="FrameContainer">
+                    <div className="Frame1">
+                      <p className="CommentText">{comment.content}</p>
+                    </div>
+                    <div className="CommentDateContainer">
+                      <h6 className="CommentDate">{formattedDate}</h6>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+        <div className="CommentsInput">
+          <div className="CommentContainer">
+            <div className="CommentInputContainer">
+              <textarea
+                className="CommentInput"
+                value={commentContent} // Bind textarea to state
+                onChange={handleTextareaChange} // Handle change
+              />
+              <button
+                type="button"
+                className="SendSvgrepoCom2"
+                onClick={handleCommentSubmit}
+              >
+                <img
+                  alt="Send"
+                  className="Vector"
+                  src="/src/assets/icons/vector.svg"
+                />
+              </button>
+            </div>
+            <div className="UserInfo">
+              <img
+                alt="avatar"
+                className="Avatar2"
+                src={
+                  user.avatar
+                    ? user.avatar
+                    : "https://avatars.githubusercontent.com/u/97165289"
+                }
+              />
+              <h6 className="Username">{user.name}</h6>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="CommentsSection">
       <div className="CommentsSectionTitle">
@@ -78,7 +157,7 @@ function CommentsSection({ filmId, user }) {
       </div>
       <div className="CommentsWrapper" ref={commentsWrapperRef}>
         {comments.length === 0 ? (
-          <h4>Soyez le premier à commenter ce film !</h4>
+          <h4>Connectez-vous pour laisser un commentaires.</h4>
         ) : (
           comments.map((comment) => {
             const formattedDate = comment.date.slice(0, 19).replace("T", " ");
@@ -111,19 +190,17 @@ function CommentsSection({ filmId, user }) {
           })
         )}
       </div>
+
+      {/* Let know the guest that they should log in to write comments */}
       <div className="CommentsInput">
         <div className="CommentContainer">
           <div className="CommentInputContainer">
             <textarea
               className="CommentInput"
-              value={commentContent} // Bind textarea to state
-              onChange={handleTextareaChange} // Handle change
+              placeholder="Connectez-vous pour laisser un commentaire"
+              disabled
             />
-            <button
-              type="button"
-              className="SendSvgrepoCom2"
-              onClick={handleCommentSubmit}
-            >
+            <button type="button" className="SendSvgrepoCom2" disabled>
               <img
                 alt="Send"
                 className="Vector"
@@ -131,7 +208,7 @@ function CommentsSection({ filmId, user }) {
               />
             </button>
           </div>
-          <div className="UserInfo">
+          {/* <div className="UserInfo">
             <img
               alt="avatar"
               className="Avatar2"
@@ -142,7 +219,7 @@ function CommentsSection({ filmId, user }) {
               }
             />
             <h6 className="Username">{user.name}</h6>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
@@ -150,14 +227,17 @@ function CommentsSection({ filmId, user }) {
 }
 
 CommentsSection.propTypes = {
-  filmId: PropTypes.number.isRequired,
+  filmId: PropTypes.number,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
-  }).isRequired,
+    avatar: PropTypes.string,
+  }),
+};
+
+CommentsSection.defaultProps = {
+  filmId: null,
+  user: null,
 };
 
 export default CommentsSection;

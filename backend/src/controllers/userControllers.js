@@ -38,6 +38,8 @@ const browse = async (req, res, next) => {
     next(err);
   }
 };
+
+// The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
@@ -56,42 +58,20 @@ const read = async (req, res, next) => {
   }
 };
 
-// The R of BREAD - Read operation
-
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
-  // Get the ID of the item to be updated from the request parameters
   const { id } = req.params;
-  // Get the new data from the request body
-  const { name, email, naissance } = req.body;
-
-  let formattedDate = naissance;
-  if (!Number.isNaN(Date.parse(naissance))) {
-    formattedDate = new Date(naissance).toISOString().slice(0, 10);
-  }
+  req.body.id = id;
 
   try {
-    // Update the item in the database
-    const updatedUser = await tables.User.update(id, {
-      name,
-      email,
-      naissance: formattedDate,
-      avatar,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-// This operation is not yet implemented
-
-    // Respond with the updated item in JSON format
-    if (!updatedUser) {
-      res.status(400).json({ message: "Bad Request" });
+    const result = await tables.User.update(req.body);
+    if (result) {
+      res.json(result);
+      res.status(204);
     } else {
-      res.json(updatedUser);
+      res.sendStatus(404);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
@@ -130,8 +110,8 @@ const add = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
+  read,
   edit,
   add,
   updateAvatar,
-  read,
 };

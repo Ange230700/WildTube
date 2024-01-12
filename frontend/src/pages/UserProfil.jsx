@@ -3,7 +3,6 @@ import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
   const { user } = useUser();
-  console.warn(user.avatar);
   const { updateUser } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,12 +34,7 @@ function UserProfil() {
         />
         <h2 className="User">{user.name}</h2>
       </div>
-      {/* <div className="Editbuttoncontainer">
-        <div className="Editbutton">
-          <div className="ModifierProfil">Modifier profil</div>
-        </div>
-      </div> */}
-      <div className="Useroptionscontainer">
+      <section className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/favorites">Favoris</Link>
@@ -62,10 +56,10 @@ function UserProfil() {
             type="button"
             onClick={handleLogOut}
           >
-            Se déconnecter
+            Déconnexion
           </button>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

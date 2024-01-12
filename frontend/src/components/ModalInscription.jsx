@@ -1,11 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function ModalInscription() {
-  const toggleModal = ({ showModal, setShowModal }) => {
+function ModalInscription({ showModal, setShowModal }) {
+  const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-  return (
+  const location = useLocation();
+
+  return location.pathname.includes("/Inscription") ? (
     <div className="modal">
       <div className="modal-content">
         <p>Votre inscription a été effectuée avec succès</p>
@@ -15,7 +18,22 @@ function ModalInscription() {
         </button>
       </div>
     </div>
+  ) : (
+    <div className="modal">
+      <div className="modal-content">
+        <p>Votre compte a été modifié avec succès</p>
+
+        <button onClick={toggleModal} type="button">
+          <NavLink to="/UserProfil">Fermer</NavLink>
+        </button>
+      </div>
+    </div>
   );
 }
+
+ModalInscription.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+};
 
 export default ModalInscription;

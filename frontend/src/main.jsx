@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "favoris/",
+        path: "favorites/",
         element: <Favorites />,
       },
       {

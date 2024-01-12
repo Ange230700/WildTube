@@ -11,50 +11,6 @@ CREATE TABLE
         `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
         `avatar` VARCHAR(255)
     );
-    INSERT INTO
-    `User` (
-        `name`,
-        `email`,
-        `naissance`,
-        `civility`,
-        `hashed_password`,
-        `IsAdmin`
-    )
-VALUES
-    (
-        'Aurel',
-        'aurelien.emeriau@wcs.com',
-        '1983/06/10',
-        '0',
-        '$argon2id$v=19$m=65536,t=3,p=4$HK43SCu/rOHeRD4iNUAAjQ$37eIMyYDLF5Xa3QUwEWn66o2OL1TeavudX6TDHLSokY',
-        '1'
-    ),
-    (
-        'Alex',
-        'alex@wcs.com',
-        '1998/03/19',
-        '0',
-        'ggfd455',
-        '0'
-    );
-
-INSERT INTO
-    `User` (
-        `name`,
-        `email`,
-        `naissance`,
-        `civility`,
-        `hashed_password`,
-        `IsAdmin`
-    )
-VALUES (
-        'admin',
-        'admin@example.com',
-        '1996-11-12',
-        1,
-        12345,
-        1
-    );
 
 DROP TABLE IF EXISTS `Film`;
 
