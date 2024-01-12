@@ -1,28 +1,36 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import LogoContainer from "../components/LogoContainer";
+import ModalInscription from "../components/ModalInscription";
 
 function UserProfileEditor() {
   const { user, updateUser } = useUser();
   const [formData, setFormData] = useState({
-    name: user.name,
-    email: user.email,
-    naissance: user.naissance,
-    civility: user.civility,
-    password: user.password,
-    avatar: user.avatar,
+    name: "",
+    email: "",
+    naissance: "",
+    civility: "",
+    password: "",
+    avatar: "",
   });
+
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   useEffect(() => {
     setFormData({
-      ...formData,
-      name: user.name,
-      email: user.email,
-      naissance: user.naissance,
-      civility: user.civility,
-      password: user.password,
-      avatar: user.avatar,
+      name: user.name || "",
+      email: user.email || "",
+      naissance: user.naissance
+        ? new Date(user.naissance).toISOString().split("T")[0]
+        : "",
+      civility: user.civility || false,
+      password: user.password || "",
+      avatar: user.avatar || "",
     });
   }, [user]);
 
@@ -34,32 +42,13 @@ function UserProfileEditor() {
     e.preventDefault();
     const updateData = new FormData();
 
-    updateData.append("id", user.id);
-
     Object.keys(formData).forEach((key) => {
-      if (formData[key]) {
+      if (formData[key] !== user[key]) {
         updateData.append(key, formData[key]);
-      } else {
-        if (typeof formData[key] === "boolean") {
-          updateData.append(key, false);
-        }
-
-        if (typeof formData[key] === "number") {
-          updateData.append(key, 0);
-        }
-
-        if (typeof formData[key] === "string") {
-          updateData.append(key, "");
-        }
       }
     });
 
     try {
-      // Send formData to your backend
-      // const response = await axios.post('/api/update-profile', updateData);
-      // updateUser(response.data);
-      // Handle response...
-
       const result = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
         updateData
@@ -67,6 +56,7 @@ function UserProfileEditor() {
 
       if (result.status === 200) {
         updateUser(result.data);
+        toggleModal();
       }
     } catch (error) {
       // Handle error...
@@ -78,7 +68,7 @@ function UserProfileEditor() {
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
-        <form onSubmit={handleSubmit} className="form">
+        <form className="form">
           <div className="inputs">
             <div className="inputContainer">
               <input
@@ -87,6 +77,7 @@ function UserProfileEditor() {
                 className="input"
                 value={formData.name}
                 onChange={handleInputChange}
+                placeholder="Nom"
               />
             </div>
             <div className="inputContainer">
@@ -96,6 +87,14 @@ function UserProfileEditor() {
                 className="input"
                 value={formData.email}
                 onChange={handleInputChange}
+                placeholder="Email"
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="password"
+                className="input"
+                placeholder="Ancien mot de passe"
               />
             </div>
             <div className="inputContainer">
@@ -105,39 +104,74 @@ function UserProfileEditor() {
                 className="input"
                 value={formData.password}
                 onChange={handleInputChange}
+                placeholder="Nouveau mot de passe"
               />
             </div>
             <div className="inputContainer">
               <input
+                type="password"
+                className="input"
+                placeholder="Confirmation du nouveau mot de passe"
+              />
+            </div>
+          </div>
+
+          <div className="additionalInformation">
+            <div className="orientation">Civilité :</div>
+            <div className="orientationContainer">
+              <div className="orientationOption">
+                <label className="orientationText">
+                  Madame
+                  <input
+                    name="civility"
+                    type="radio"
+                    value="Madame"
+                    className="radioButton"
+                    onChange={handleInputChange}
+                    checked={formData.civility === "Madame"}
+                  />
+                </label>
+              </div>
+              <div className="orientationOption">
+                <label className="orientationText">
+                  Monsieur
+                  <input
+                    name="civility"
+                    type="radio"
+                    className="radioButton"
+                    onChange={handleInputChange}
+                    value="Monsieur"
+                    checked={formData.civility === "Monsieur"}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="birthday">Date de naissance :</div>
+            <div className="orientationContainer">
+              <input
+                className="inputDate"
                 type="date"
                 name="naissance"
-                className="input"
-                value={
-                  formData.naissance
-                    ? new Date(formData.naissance).toISOString().split("T")[0]
-                    : ""
-                }
+                value={formData.naissance}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="inputContainer">
-              <input
-                type="text"
-                name="avatar"
-                className="input"
-                value={formData.avatar}
-              />
-            </div>
-            <div className="buttonContainer">
-              <button
-                className="signUpButton"
-                onClick={handleSubmit}
-                type="submit"
-              >
-                <p className="inscription">Update Profile</p>
-              </button>
-            </div>
           </div>
+          <div className="buttonContainer">
+            <button
+              className="signUpButton"
+              onClick={handleSubmit}
+              type="button"
+            >
+              <p className="inscription">Modifier</p>
+            </button>
+          </div>
+          {showModal && (
+            <ModalInscription
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          )}
         </form>
       </div>
     </div>

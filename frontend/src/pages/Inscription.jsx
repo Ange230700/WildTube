@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
@@ -63,30 +63,30 @@ function Inscription() {
             <div className="inputContainer">
               <input
                 type="text"
-                value={user.name}
-                placeholder="Nom"
                 name="name"
                 className="input"
+                value={user.name}
                 onChange={handleInputChange}
+                placeholder="Nom"
               />
             </div>
             <div className="inputContainer">
               <input
-                type="text"
-                value={user.email}
+                type="email"
                 name="email"
+                className="input"
+                value={user.email}
                 onChange={handleInputChange}
                 placeholder="Adresse Mail"
-                className="input"
               />
             </div>
             <div className="inputContainer">
               <input
                 type="password"
-                value={user.password}
                 name="password"
-                onChange={handleInputChange}
                 className="input"
+                value={user.password}
+                onChange={handleInputChange}
                 placeholder="Mot de passe"
               />
             </div>
@@ -129,7 +129,7 @@ function Inscription() {
                 </label>
               </div>
             </div>
-            <section className="birthday">Date de naissance :</section>
+            <div className="birthday">Date de naissance :</div>
             <div className="orientationContainer">
               <input
                 className="inputDate"
