@@ -1,5 +1,3 @@
-const argon2 = require("argon2");
-
 const AbstractManager = require("./AbstractManager");
 
 class UserManager extends AbstractManager {
@@ -28,7 +26,7 @@ class UserManager extends AbstractManager {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `SELECT id, name, email, naissance, civility, IsAdmin, avatar FROM ${this.table} WHERE id = ?`,
       [id]
     );
 
@@ -38,7 +36,9 @@ class UserManager extends AbstractManager {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "user" table
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `SELECT id, name, email, naissance, civility, IsAdmin, avatar FROM ${this.table}`
+    );
 
     // Return the array of items
     return rows;
@@ -58,28 +58,30 @@ class UserManager extends AbstractManager {
   }
 
   // The U of CRUD - Update operation
-  async update({ name, email, naissance, civility, password, IsAdmin, id }) {
-    let hashedPassword;
-    if (password) {
-      hashedPassword = await argon2.hash(password);
-    }
-
-    // Format the date to YYYY-MM-DD
-    const [formattedDate] = new Date(naissance).toISOString().split("T");
-
-    const [result] = await this.database.query(
+  async update(
+    id,
+    // eslint-disable-next-line camelcase
+    { name, email, naissance, civility, hashed_password, IsAdmin }
+  ) {
+    await this.database.query(
       `UPDATE ${this.table} SET 
-     name = COALESCE(?, name), 
-     email = COALESCE(?, email), 
-     naissance = COALESCE(?, naissance), 
-     civility = COALESCE(?, civility), 
-     hashed_password = COALESCE(?, hashed_password), 
-     IsAdmin = COALESCE(?, IsAdmin)
-     WHERE id = ?`,
-      [name, email, formattedDate, civility, hashedPassword, IsAdmin, id]
+          name = COALESCE(?, name), 
+          email = COALESCE(?, email), 
+          naissance = COALESCE(?, naissance), 
+          civility = COALESCE(?, civility), 
+          hashed_password = COALESCE(?, hashed_password), 
+          IsAdmin = COALESCE(?, IsAdmin)
+          WHERE id = ?`,
+      // eslint-disable-next-line camelcase
+      [name, email, naissance, civility, hashed_password, IsAdmin, id]
     );
 
-    return result;
+    const updatedRows = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+
+    return updatedRows.length > 0 ? updatedRows[0] : null;
   }
 
   // The D of CRUD - Delete operation

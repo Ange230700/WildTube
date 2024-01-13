@@ -6,7 +6,7 @@
     "start": "node index.js",
     "test": "jest",
     "prettier": "npx prettier --write .",
-    "lint": "npx eslint . --fix",
+    "lint": "npx eslint .",
     "build": "npm run db:migrate ; npm run db:seed"
   },
   "dependencies": {

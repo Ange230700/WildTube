@@ -11,6 +11,7 @@ function UserProfil() {
     updateUser(null);
     navigate("/");
   };
+
   return (
     <div
       className="ProfileDisplaySection"
@@ -37,19 +38,25 @@ function UserProfil() {
       <section className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to="/favorites">Favoris</Link>
+            <Link to="/favorites">
+              <h3>Favoris</h3>
+            </Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to="/watchlist">À regarder plus tard</Link>
+            <Link to="/watchlist">
+              <h3>À regarder plus tard</h3>
+            </Link>
           </div>
         </div>
-        {/* <div className="Useroption">
+        <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to="/profileEditor">Informations du compte</Link>
+            <Link to={`/account/${user.id}`}>
+              <h3>Informations du compte</h3>
+            </Link>
           </div>
-        </div> */}
+        </div>
         <div className="Useroption">
           <button
             className="RegarderPlusTardButton"

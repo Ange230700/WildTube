@@ -6,7 +6,7 @@ const login = async (req, res, next) => {
     const user = await tables.User.readByEmail(req.body.email);
 
     if (user == null) {
-      res.sendStatus(422);
+      res.sendStatus(422).json({ message: "Invalid email or password" });
       return;
     }
 
@@ -17,7 +17,8 @@ const login = async (req, res, next) => {
 
     if (verified) {
       delete user.hashed_password;
-      res.status(200).json(user);
+      res.status(200).json({ ...user, message: "Logged in successfully" });
+      res.json({ message: "Logged in successfully" });
     } else {
       res.sendStatus(422).json({ message: " Invalid email or password " });
     }

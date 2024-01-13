@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
 
@@ -15,7 +16,7 @@ function Inscription() {
 
   // const { updateUser, user: connectedUser } = useUser();
   const [showModal, setShowModal] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -23,42 +24,43 @@ function Inscription() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let civilityValue = value;
+
+    if (name === "civility") {
+      civilityValue = value === "Monsieur";
+    }
+
     setUser((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: civilityValue,
     }));
   };
 
-  const handleSubmit = async () => {
-    if (user.civility === "Monsieur") {
-      user.civility = true;
-    } else if (user.civility === "Madame") {
-      user.civility = false;
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/users`,
         user
       );
-      // console.log(user);
-      if (result.status === 201) {
-        toggleModal(); // Afficher la modale en cas de succès
-        // updateUser(result.data);
-        // navigate("/");
-      }
 
-      // console.log("Request URL:", url);
-      // console.log("User registered successfully");
+      if (result.status === 201) {
+        toggleModal();
+        setTimeout(() => {
+          navigate("/Connection");
+        }, 3000);
+      }
     } catch (someError) {
       console.error("Error during registration:", someError);
     }
   };
+
   return (
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <div className="inputs">
             <div className="inputContainer">
               <input
@@ -111,7 +113,7 @@ function Inscription() {
                     value="Madame"
                     className="radioButton"
                     onChange={handleInputChange}
-                    checked={user.civility === "Madame"}
+                    checked={user.civility === false}
                   />
                 </label>
               </div>
@@ -124,7 +126,7 @@ function Inscription() {
                     className="radioButton"
                     onChange={handleInputChange}
                     value="Monsieur"
-                    checked={user.civility === "Monsieur"}
+                    checked={user.civility === true}
                   />
                 </label>
               </div>
@@ -141,20 +143,11 @@ function Inscription() {
             </div>
           </div>
           <div className="buttonContainer">
-            <button
-              className="signUpButton"
-              onClick={handleSubmit}
-              type="button"
-            >
+            <button className="signUpButton" type="submit">
               <p className="inscription">Inscription</p>
             </button>
           </div>
-          {showModal && (
-            <ModalInscription
-              showModal={showModal}
-              setShowModal={setShowModal}
-            />
-          )}
+          {showModal && <ModalInscription />}
         </form>
       </div>
     </div>

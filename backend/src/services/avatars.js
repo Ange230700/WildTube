@@ -1,17 +1,14 @@
-// const fs = require("fs");
-// const path = require("path");
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 
-// const avatarsDirectory = path.join(__dirname, "../public/avatars"); // Adjust the path according to your directory structure
+const { faker } = require("@faker-js/faker");
 
-// // Asynchronously read directory contents
-// fs.readdir(avatarsDirectory, (err, files) => {
-//   if (err) {
-//     console.error("Error reading avatars directory:", err);
-//     return;
-//   }
+const avatars = [];
 
-//   const avatars = files.filter((file) => path.extname(file) === ".svg"); // Filter only .svg files if necessary
-//   console.log(avatars); // Do something with the avatars array
-// });
+for (let i = 0; i < 10; i += 1) {
+  avatars.push({
+    id: i + 1,
+    url: faker.image.avatarGitHub(),
+  });
+}
 
-// module.exports = avatars;
+module.exports = avatars;

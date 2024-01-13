@@ -45,7 +45,7 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
-    const user = await tables.user.read(req.params.id);
+    const user = await tables.User.read(req.params.id);
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
@@ -64,30 +64,40 @@ const read = async (req, res, next) => {
 // Modify the edit function
 const edit = async (req, res, next) => {
   const { id } = req.params;
-  const { newPassword, oldPassword } = req.body; // Capture new and old passwords
+  const { name, email, naissance, civility, password, IsAdmin } = req.body;
 
   try {
     // Optional: Verify old password before updating to new one
-    if (oldPassword) {
-      const user = await tables.User.read(id);
-      const verified = await argon2.verify(user.hashed_password, oldPassword);
-      if (!verified) {
-        res.status(400).json({ error: "Incorrect old password" });
-        return;
-      }
+    const currentUser = await tables.User.read(id);
+
+    if (!currentUser) {
+      res.status(404).json({ error: "User not found" });
+      return;
     }
 
-    if (newPassword) {
-      const hashedPassword = await argon2.hash(newPassword);
-      req.body.hashedPassword = hashedPassword;
+    if (password) {
+      const hashedNewPassword = await argon2.hash(password);
+      req.body.hashed_password = hashedNewPassword;
     }
 
-    const result = await tables.User.update(req.body);
-    if (result) {
-      res.status(204).end();
-    } else {
-      res.sendStatus(404);
+    // Update user data (excluding the password if no new password is provided)
+    const updatedUser = await tables.User.update(id, {
+      name,
+      email,
+      naissance,
+      civility,
+      hashed_password: req.body.hashed_password,
+      IsAdmin,
+    });
+
+    if (!updatedUser) {
+      res.status(404).json({ error: "User not found" });
+      return;
     }
+
+    // eslint-disable-next-line camelcase
+    const { hashed_password, ...userWithoutPassword } = updatedUser;
+    res.status(200).json(userWithoutPassword);
   } catch (err) {
     next(err);
   }
@@ -100,12 +110,14 @@ const add = async (req, res, next) => {
     // Get the data submitted by the user in the request body
     const { name, email, naissance, civility, hashedPassword } = req.body;
 
+    const civilityValue = civility === "Madame" ? 0 : 1;
+
     // Add the new item to the database
     const newUser = await tables.User.create({
       name,
       email,
       naissance,
-      civility,
+      civility: civilityValue,
       hashedPassword,
     });
 

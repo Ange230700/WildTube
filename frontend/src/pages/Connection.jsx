@@ -45,7 +45,7 @@ function Connection() {
       ) : (
         <>
           <LogoContainer />
-          <div className="form">
+          <form className="form" onSubmit={handleLogin}>
             <div className="inputs">
               <div className="inputContainer">
                 <input
@@ -69,11 +69,7 @@ function Connection() {
               </div>
               <div className="buttonContainer">
                 <div className="connectionButton">
-                  <button
-                    type="button"
-                    className="connexion"
-                    onClick={handleLogin}
-                  >
+                  <button type="submit" className="connexion">
                     connexion
                   </button>
                 </div>
@@ -93,7 +89,7 @@ function Connection() {
                 </span>
               </p>
             </div>
-          </div>
+          </form>
         </>
       )}
     </div>

@@ -34,26 +34,26 @@ function ParametreAdmin() {
         <h2 className="User">{user.name}</h2>
       </div>
       <section className="Useroptionscontainer">
-        {/* <div className="Useroption">
-          <NavLink className="RegarderPlusTard">
+        <div className="Useroption">
+          <Link className="RegarderPlusTard" to>
             <h3>Ajouter des videos</h3>
-          </NavLink>
+          </Link>
         </div>
         <div className="Useroption">
-          <NavLink className="RegarderPlusTard" to="/EditVideo">
+          <Link className="RegarderPlusTard" to="/EditVideo">
             <h3>Modifier / supprimer des videos</h3>
-          </NavLink>
-        </div> */}
-        {/* <div className="Useroption">
-          <NavLink className="RegarderPlusTard">
+          </Link>
+        </div>
+        <div className="Useroption">
+          <Link className="RegarderPlusTard" to>
             <h3>Modifier les sections</h3>
-          </NavLink>
-        </div> */}
-        {/* <div className="Useroption">
-          <NavLink className="RegarderPlusTard">
+          </Link>
+        </div>
+        <div className="Useroption">
+          <Link className="RegarderPlusTard" to>
             <h3>Gérer les catégories</h3>
-          </NavLink>
-        </div> */}
+          </Link>
+        </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/favorites">Favoris</Link>
@@ -65,19 +65,15 @@ function ParametreAdmin() {
           </div>
         </div>
         <div className="Useroption">
-          <Link
-            className="RegarderPlusTard"
-            to="/AjoutAdmin"
-            style={{ textDecoration: "none" }}
-          >
-            <h3>Ajouter des Administrateurs</h3>
+          <Link className="RegarderPlusTard" to="/AjoutAdmin">
+            Ajouter des Administrateurs
           </Link>
         </div>
 
-        {/* <div className="params">
-          <NavLink to="/EditVideo">
+        <div className="params">
+          <Link to="/EditVideo">
             <h3>Modifier / supprimer des videos</h3>
-          </NavLink>
+          </Link>
         </div>
         <div className="params">
           <h3>Modifier les sections</h3>
@@ -86,10 +82,10 @@ function ParametreAdmin() {
           <h3>Gérer les catégories</h3>
         </div>
         <div className="params">
-          <NavLink to="/AjoutAdmin">
+          <Link to="/AjoutAdmin">
             <h3>Ajouter des Administrateurs</h3>
-          </NavLink>
-        </div> */}
+          </Link>
+        </div>
         <div className="Useroption">
           <button
             className="RegarderPlusTardButton"

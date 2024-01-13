@@ -31,6 +31,8 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL, // keep this one, after checking the value in `backend/.env`
+      "http://192.168.0.17:3000",
+      "http://localhost:3000",
     ],
   })
 );

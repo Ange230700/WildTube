@@ -10,8 +10,10 @@ const argon2 = require("argon2");
 // Import database client
 const database = require("./database/client");
 
+const users = require("./src/services/users");
 const films = require("./src/services/films");
 const categories = require("./src/services/categories");
+const avatars = require("./src/services/avatars");
 
 async function insertAdmin() {
   try {
@@ -41,13 +43,8 @@ async function insertAdmin() {
 async function insertUsers() {
   try {
     const queries = [];
-    for (let i = 0; i < 5; i += 1) {
-      const randomDate = faker.date
-        .past()
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " ");
-      const password = faker.internet.password(); // Generate a random password
+    for (let i = 0; i < users.length; i += 1) {
+      const { password } = users[i];
       const hashedPassword = argon2.hash(password); // Hash the password
 
       queries.push(
@@ -55,13 +52,13 @@ async function insertUsers() {
           return database.query(
             "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
             [
-              faker.person.firstName(),
-              faker.internet.email(),
-              randomDate,
-              faker.number.binary({ min: 0, max: 1 }),
+              users[i].name,
+              users[i].email,
+              users[i].naissance,
+              users[i].civility,
               hashed,
               0,
-              faker.image.avatarGitHub(),
+              users[i].avatar,
             ]
           );
         })
@@ -120,6 +117,47 @@ async function insertCategories() {
   }
 }
 
+async function insertAvatars() {
+  try {
+    const queries = [];
+    for (let i = 0; i < avatars.length; i += 1) {
+      queries.push(
+        database.query("INSERT INTO `Avatar` (`url`) VALUES (?)", [
+          avatars[i].url,
+        ])
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting avatars:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+// Join tables
+
+async function insertFilmCategorie() {
+  try {
+    const queries = [];
+    for (let i = 0; i < 20; i += 1) {
+      queries.push(
+        database.query(
+          "INSERT INTO `Categorie_par_film` (`filmId`, `categorieId`, `unique_key`) VALUES (?, ?, ?)",
+          [
+            faker.number.int({ min: 1, max: films.length }),
+            faker.number.int({ min: 1, max: categories.length }),
+            faker.string.uuid(),
+          ]
+        )
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting film_categorie:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
 async function insertCommentaires() {
   try {
     const queries = [];
@@ -133,8 +171,8 @@ async function insertCommentaires() {
         database.query(
           "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `content`, `date`, `unique_key`) VALUES (?, ?, ?, ?, ?)",
           [
-            faker.number.int({ min: 1, max: 5 }),
-            faker.number.int({ min: 1, max: 27 }),
+            faker.number.int({ min: 1, max: users.length }),
+            faker.number.int({ min: 1, max: films.length }),
             faker.lorem.paragraph(),
             randomDate,
             faker.string.uuid(),
@@ -149,23 +187,29 @@ async function insertCommentaires() {
   }
 }
 
-async function insertFilmCategorie() {
+async function insertAvatarUser() {
   try {
     const queries = [];
-    for (let i = 0; i < films.length; i += 1) {
+    for (let i = 0; i < 10; i += 1) {
       queries.push(
         database.query(
-          "INSERT INTO `Categorie_par_film` (`filmId`, `categorieId`) VALUES (?, ?)",
-          [i + 1, faker.number.int({ min: 1, max: categories.length })]
+          "INSERT INTO `Avatar_user` (`userId`, `avatarId`, `unique_key`) VALUES (?, ?, ?)",
+          [
+            faker.number.int({ min: 1, max: users.length }),
+            faker.number.int({ min: 1, max: avatars.length }),
+            faker.string.uuid(),
+          ]
         )
       );
     }
     await Promise.all(queries);
   } catch (err) {
-    console.error("Error inserting film_categorie:", err.message);
+    console.error("Error inserting avatar_user:", err.message);
     throw err; // Re-throw the error to be caught in the main seed function
   }
 }
+
+// Main seed function
 
 async function seed() {
   try {
@@ -173,26 +217,36 @@ async function seed() {
     await database.query("TRUNCATE `User`");
     await database.query("TRUNCATE `Film`");
     await database.query("TRUNCATE `Categorie`");
+    await database.query("TRUNCATE `Avatar`");
     await database.query("TRUNCATE `Categorie_par_film`");
     await database.query("TRUNCATE `Commentaire_film`");
+    await database.query("TRUNCATE `Avatar_user`");
 
     await insertAdmin();
     await insertUsers();
     await insertFilms();
     await insertCategories();
+    await insertAvatars();
 
     // Verify the insertions
-    const [movies] = await database.query(
+    const [filmsCountRow] = await database.query(
       "SELECT COUNT(*) AS count FROM `Film`"
     );
-    const [genres] = await database.query(
+    const [categoriesCountRow] = await database.query(
       "SELECT COUNT(*) AS count FROM `Categorie`"
     );
-    const [users] = await database.query(
+    const [usersCountRow] = await database.query(
       "SELECT COUNT(*) AS count FROM `User`"
     );
 
-    if (movies[0].count >= films.length && genres[0].count >= genres.length) {
+    const [avatarsCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Avatar`"
+    );
+
+    if (
+      filmsCountRow[0].count >= films.length &&
+      categoriesCountRow[0].count >= categories.length
+    ) {
       await insertFilmCategorie();
     } else {
       throw new Error(
@@ -200,13 +254,28 @@ async function seed() {
       );
     }
 
-    if (users[0].count >= 5 && movies[0].count >= films.length) {
+    if (
+      usersCountRow[0].count >= users.length &&
+      filmsCountRow[0].count >= films.length
+    ) {
       await insertCommentaires();
     } else {
       throw new Error(
         "Not enough data in User or Film tables for seeding Commentaire_film"
       );
     }
+
+    if (
+      usersCountRow[0].count >= users.length &&
+      avatarsCountRow[0].count >= avatars.length
+    ) {
+      await insertAvatarUser();
+    } else {
+      throw new Error(
+        "Not enough data in User or Avatar tables for seeding Avatar_user"
+      );
+    }
+
     await database.query("SET FOREIGN_KEY_CHECKS = 1");
 
     console.info(`${database.databaseName} filled from ${__filename} 🌱`);

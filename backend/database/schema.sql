@@ -35,6 +35,14 @@ CREATE TABLE
         `name` VARCHAR(255) NOT NULL
     );
 
+DROP TABLE IF EXISTS `Avatar`;
+
+CREATE TABLE
+    `Avatar` (
+        `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        `url` VARCHAR(255) NOT NULL
+    );
+
 -- Join tables
 
 DROP TABLE IF EXISTS `Watchlist`;
@@ -65,6 +73,7 @@ CREATE TABLE
     `Categorie_par_film` (
         `filmId` INT NOT NULL,
         `categorieId` INT NOT NULL,
+        `unique_key` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
         CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`),
         PRIMARY KEY (`filmId`, `categorieId`)
@@ -82,4 +91,16 @@ CREATE TABLE
         `unique_key` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
         CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`)
+    );
+
+DROP TABLE IF EXISTS `Avatar_user`;
+
+CREATE TABLE
+    `Avatar_user` (
+        `userId` INT NOT NULL,
+        `avatarId` INT NOT NULL,
+        `unique_key` VARCHAR(255) NOT NULL,
+        CONSTRAINT FK_Avatar_User_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
+        CONSTRAINT FK_Avatar_User_avatar_id FOREIGN KEY (`avatarId`) REFERENCES `Avatar` (`id`),
+        PRIMARY KEY (`userId`, `avatarId`)
     );

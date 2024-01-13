@@ -7,7 +7,16 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="app">
+    <div
+      className="app"
+      style={
+        location.pathname.includes("/account")
+          ? {
+              gap: "10px",
+            }
+          : {}
+      }
+    >
       <Toaster />
       {!location.pathname.includes("/moviePlayer/") && <NavBarDesktop />}
       <Outlet />
