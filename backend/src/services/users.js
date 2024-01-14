@@ -4,14 +4,10 @@ const { faker } = require("@faker-js/faker");
 
 const users = [];
 
-const userLength = 100;
+const userLength = 99;
 
 for (let i = 0; i < userLength; i += 1) {
-  const randomDate = faker.date
-    .past()
-    .toISOString()
-    .slice(0, 19)
-    .replace("T", " ");
+  const randomDate = faker.date.past().toISOString().split("T")[0];
 
   users.push({
     name: faker.person.firstName(),

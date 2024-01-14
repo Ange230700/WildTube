@@ -37,7 +37,7 @@ const browseCommentsByFilmId = async (req, res, next) => {
 
 const addComment = async (req, res, next) => {
   try {
-    const { userId, filmId, content } = req.body;
+    const { userId, filmId, avatarId, content } = req.body;
     const date = new Date().toISOString().slice(0, 19).replace("T", " ");
     const unique_key = uuidv4();
 
@@ -47,6 +47,7 @@ const addComment = async (req, res, next) => {
     const newComment = await tables.Commentaire_film.create({
       userId,
       filmId,
+      avatarId,
       content,
       date,
       unique_key,

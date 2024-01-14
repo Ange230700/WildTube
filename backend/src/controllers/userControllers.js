@@ -5,7 +5,7 @@ const tables = require("../tables");
 
 const updateAvatar = async (req, res) => {
   const { userId } = req.params;
-  const { avatar } = req.body;
+  const { avatarId } = req.body;
 
   try {
     // Vérifiez si l'utilisateur existe
@@ -15,7 +15,7 @@ const updateAvatar = async (req, res) => {
     }
 
     // Mettez à jour l'avatar dans la base de données
-    const updatedUser = await tables.User.updateAvatar(userId, avatar);
+    const updatedUser = await tables.User.updateAvatar(userId, avatarId);
 
     // Répondre avec les informations mises à jour de l'utilisateur
     res.json(updatedUser);
@@ -31,7 +31,7 @@ const updateAvatar = async (req, res) => {
 const browse = async (req, res, next) => {
   try {
     // Fetch all items from the database
-    const users = await tables.User.readAll();
+    const users = await tables.User.readAllUsersWithAvatar();
 
     // Respond with the items in JSON format
     res.json(users);
@@ -45,7 +45,7 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
-    const user = await tables.User.read(req.params.id);
+    const user = await tables.User.readUserWithAvatar(req.params.id);
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
@@ -64,7 +64,8 @@ const read = async (req, res, next) => {
 // Modify the edit function
 const edit = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, naissance, civility, password, IsAdmin } = req.body;
+  const { name, email, naissance, civility, password, IsAdmin, avatarId } =
+    req.body;
 
   try {
     // Optional: Verify old password before updating to new one
@@ -88,6 +89,7 @@ const edit = async (req, res, next) => {
       civility,
       hashed_password: req.body.hashed_password,
       IsAdmin,
+      avatarId,
     });
 
     if (!updatedUser) {
@@ -108,9 +110,10 @@ const edit = async (req, res, next) => {
 const add = async (req, res, next) => {
   try {
     // Get the data submitted by the user in the request body
-    const { name, email, naissance, civility, hashedPassword } = req.body;
+    const { name, email, naissance, civility, hashedPassword, avatarId } =
+      req.body;
 
-    const civilityValue = civility === "Madame" ? 0 : 1;
+    const civilityValue = civility ? 1 : 0;
 
     // Add the new item to the database
     const newUser = await tables.User.create({
@@ -119,6 +122,7 @@ const add = async (req, res, next) => {
       naissance,
       civility: civilityValue,
       hashedPassword,
+      avatarId,
     });
 
     // Respond with the newly added item in JSON format

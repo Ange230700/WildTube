@@ -38,13 +38,13 @@ router.get(
   categorieParFilmControllers.browseFilmsForSpecificCategorie
 );
 router.get("/comments", commentaireFilmControllers.browse);
+
+// Route to get a specific item by ID
+router.get("/users/:id", userControllers.read);
 router.get(
   "/comments/film/:filmId",
   commentaireFilmControllers.browseCommentsByFilmId
 );
-
-// Route to get a specific item by ID
-router.get("/users/:id", userControllers.read);
 
 // Route to edit a specific item by ID
 router.put("/users/:id", userControllers.edit);

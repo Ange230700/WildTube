@@ -15,7 +15,7 @@ function CommentsSection({ filmId, user }) {
   };
 
   const addComment = async (content) => {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments`;
     const commentData = {
       userId: user.id,
       filmId,
@@ -92,8 +92,8 @@ function CommentsSection({ filmId, user }) {
                       alt={comment.username}
                       className="Avatar2"
                       src={
-                        comment.avatar
-                          ? comment.avatar
+                        comment.avatar_url
+                          ? comment.avatar_url
                           : "https://avatars.githubusercontent.com/u/97165289"
                       }
                     />
@@ -170,8 +170,8 @@ function CommentsSection({ filmId, user }) {
                     alt={comment.username}
                     className="Avatar2"
                     src={
-                      comment.avatar
-                        ? comment.avatar
+                      comment.avatar_url
+                        ? comment.avatar_url
                         : "https://avatars.githubusercontent.com/u/97165289"
                     }
                   />

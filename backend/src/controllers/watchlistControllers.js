@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const tables = require("../tables");
 
 const browseWatchlistMoviesByUserId = async (req, res, next) => {
@@ -21,13 +22,14 @@ const browseWatchlistMoviesByUserId = async (req, res, next) => {
 };
 
 const addMovieToWatchlist = async (req, res, next) => {
-  const { userId, filmId } = req.body;
+  const { userId, filmId, unique_key } = req.body;
   // console.warn(req.body);
 
   try {
     const result = await tables.Watchlist.createMovieInWatchlist(
       userId,
-      filmId
+      filmId,
+      unique_key
     );
     // console.warn(result);
 

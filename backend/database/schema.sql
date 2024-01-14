@@ -1,15 +1,10 @@
-DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `Avatar`;
 
 CREATE TABLE
-    `User` (
+    `Avatar` (
         `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        `name` VARCHAR(50) NOT NULL,
-        `email` VARCHAR(50) NOT NULL,
-        `naissance` DATE NOT NULL,
-        `civility` BOOLEAN NOT NULL,
-        `hashed_password` VARCHAR(150) NOT NULL,
-        `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
-        `avatar` VARCHAR(255)
+        `avatar_url` VARCHAR(255),
+        `avatar_filename` VARCHAR(255)
     );
 
 DROP TABLE IF EXISTS `Film`;
@@ -35,37 +30,22 @@ CREATE TABLE
         `name` VARCHAR(255) NOT NULL
     );
 
-DROP TABLE IF EXISTS `Avatar`;
+DROP TABLE IF EXISTS `User`;
 
 CREATE TABLE
-    `Avatar` (
+    `User` (
         `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        `url` VARCHAR(255) NOT NULL
+        `name` VARCHAR(50) NOT NULL,
+        `email` VARCHAR(50) NOT NULL,
+        `naissance` DATE NOT NULL,
+        `civility` BOOLEAN NOT NULL,
+        `hashed_password` VARCHAR(150) NOT NULL,
+        `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
+        `avatarId` INT,
+        CONSTRAINT FK_User_avatar_id FOREIGN KEY (`avatarId`) REFERENCES `Avatar` (`id`)
     );
 
 -- Join tables
-
-DROP TABLE IF EXISTS `Watchlist`;
-
-CREATE TABLE
-    `Watchlist` (
-        `userId` INT NOT NULL,
-        `filmId` INT NOT NULL,
-        CONSTRAINT FK_Watchlist_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Watchlist_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        PRIMARY KEY (`userId`, `filmId`)
-    );
-
-DROP TABLE IF EXISTS `Favori_film`;
-
-CREATE TABLE
-    `Favori_film` (
-        `userId` INT NOT NULL,
-        `filmId` INT NOT NULL,
-        CONSTRAINT FK_Favori_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Favori_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        PRIMARY KEY (`userId`, `filmId`)
-    );
 
 DROP TABLE IF EXISTS `Categorie_par_film`;
 
@@ -83,24 +63,38 @@ DROP TABLE IF EXISTS `Commentaire_film`;
 
 CREATE TABLE
     `Commentaire_film` (
-        `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         `userId` INT NOT NULL,
         `filmId` INT NOT NULL,
+        `avatarId` INT NOT NULL,
         `content` VARCHAR(500) NOT NULL,
         `date` DATETIME NOT NULL,
         `unique_key` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`)
+        CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        CONSTRAINT FK_Commentaire_Film_avatar_id FOREIGN KEY (`avatarId`) REFERENCES `Avatar` (`id`),
+        PRIMARY KEY (`userId`, `filmId`, `avatarId`)
     );
 
-DROP TABLE IF EXISTS `Avatar_user`;
+DROP TABLE IF EXISTS `Watchlist`;
 
 CREATE TABLE
-    `Avatar_user` (
+    `Watchlist` (
         `userId` INT NOT NULL,
-        `avatarId` INT NOT NULL,
+        `filmId` INT NOT NULL,
         `unique_key` VARCHAR(255) NOT NULL,
-        CONSTRAINT FK_Avatar_User_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Avatar_User_avatar_id FOREIGN KEY (`avatarId`) REFERENCES `Avatar` (`id`),
-        PRIMARY KEY (`userId`, `avatarId`)
+        CONSTRAINT FK_Watchlist_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
+        CONSTRAINT FK_Watchlist_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        PRIMARY KEY (`userId`, `filmId`)
+    );
+
+DROP TABLE IF EXISTS `Favori_film`;
+
+CREATE TABLE
+    `Favori_film` (
+        `userId` INT NOT NULL,
+        `filmId` INT NOT NULL,
+        `unique_key` VARCHAR(255) NOT NULL,
+        CONSTRAINT FK_Favori_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
+        CONSTRAINT FK_Favori_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        PRIMARY KEY (`userId`, `filmId`)
     );

@@ -10,12 +10,12 @@ function UserProfileEditor() {
   const { userId } = useParams();
   const { user, updateUser } = useUser();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    naissance: "",
-    civility: "",
-    password: "",
-    avatar: "",
+    name: user.name || "",
+    email: user.email || "",
+    naissance: user.naissance || "",
+    civility: user.civility !== undefined ? user.civility : "",
+    password: user.password || "",
+    avatar: user.avatar || "",
   });
 
   // console.warn(formData.password, "formData");
@@ -164,14 +164,16 @@ function UserProfileEditor() {
   }, []);
 
   useEffect(() => {
-    setFormData({
-      name: user.name,
-      email: user.email,
-      naissance: formatDate(user.naissance),
-      civility: user.civility,
-      password: user.password,
-      avatar: user.avatar,
-    });
+    if (user) {
+      setFormData({
+        name: user.name,
+        email: user.email,
+        naissance: formatDate(user.naissance),
+        civility: user.civility !== undefined ? user.civility : "",
+        password: user.password,
+        avatar: user.avatar,
+      });
+    }
   }, [user]);
 
   return !user ? null : (
@@ -242,7 +244,7 @@ function UserProfileEditor() {
                     value="Madame"
                     className="radioButton"
                     onChange={handleInputChange}
-                    checked={formData.civility === false}
+                    checked={formData.civility === false || !user.civility}
                   />
                 </label>
               </div>
@@ -255,7 +257,7 @@ function UserProfileEditor() {
                     className="radioButton"
                     onChange={handleInputChange}
                     value="Monsieur"
-                    checked={formData.civility === true}
+                    checked={formData.civility === true || user.civility}
                   />
                 </label>
               </div>

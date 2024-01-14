@@ -6,8 +6,7 @@ const avatars = [];
 
 for (let i = 0; i < 10; i += 1) {
   avatars.push({
-    id: i + 1,
-    url: faker.image.avatarGitHub(),
+    avatar_url: faker.image.avatarGitHub(),
   });
 }
 

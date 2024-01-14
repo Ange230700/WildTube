@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractManager = require("./AbstractManager");
 
 class FavoriFilmManager extends AbstractManager {
@@ -5,12 +6,17 @@ class FavoriFilmManager extends AbstractManager {
     super({ table: "Favori_film" });
   }
 
-  async createMovieInFavorites(userId, filmId) {
+  async createMovieInFavorites(userId, filmId, unique_key) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (userId, filmId) VALUES (?, ?)`,
-      [userId, filmId]
+      `INSERT INTO ${this.table} (userId, filmId, unique_key) VALUES (?, ?, ?)`,
+      [userId, filmId, unique_key]
     );
-    return result;
+    return {
+      id: result.insertId,
+      userId,
+      filmId,
+      unique_key,
+    };
   }
 
   async readFavoriteMoviesByUserId(userId) {
