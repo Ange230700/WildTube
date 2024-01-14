@@ -31,7 +31,7 @@ const updateAvatar = async (req, res) => {
 const browse = async (req, res, next) => {
   try {
     // Fetch all items from the database
-    const users = await tables.User.readAllUsersWithAvatar();
+    const users = await tables.User.readAll();
 
     // Respond with the items in JSON format
     res.json(users);

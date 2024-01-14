@@ -22,7 +22,8 @@ const browseFavoriteMoviesByUserId = async (req, res, next) => {
 };
 
 const addMovieToFavorite = async (req, res, next) => {
-  const { userId, filmId, unique_key } = req.body;
+  const { userId, filmId } = req.body;
+  const unique_key = `${userId}-${filmId}`;
   // console.warn(req.body);
 
   try {

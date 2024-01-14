@@ -11,12 +11,7 @@ class WatchlistManager extends AbstractManager {
       `INSERT INTO ${this.table} (userId, filmId, unique_key) VALUES (?, ?, ?)`,
       [userId, filmId, unique_key]
     );
-    return {
-      id: result.insertId,
-      userId,
-      filmId,
-      unique_key,
-    };
+    return result;
   }
 
   async readWatchlistMoviesByUserId(userId) {

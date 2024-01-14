@@ -63,16 +63,6 @@ class UserManager extends AbstractManager {
     return rows;
   }
 
-  async readAllUsersWithAvatar() {
-    // Execute the SQL SELECT query to retrieve all items from the "user" table
-    const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id`
-    );
-
-    // Return the array of items
-    return rows;
-  }
-
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
