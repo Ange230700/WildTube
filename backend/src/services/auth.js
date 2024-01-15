@@ -4,9 +4,14 @@ const hashPassword = async (req, res, next) => {
   try {
     const { password } = req.body;
 
+    if (!password) {
+      console.warn(req.body);
+      throw new Error("Password is undefined");
+    }
+
     const hashedPassword = await argon2.hash(password);
 
-    req.body.hashedPassword = hashedPassword;
+    req.body.hashed_password = hashedPassword;
 
     delete req.body.password;
 

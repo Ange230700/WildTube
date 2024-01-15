@@ -64,11 +64,11 @@ function Inscription() {
       !user.email ||
       !user.password ||
       !user.avatarId ||
-      !user.naissance ||
-      !user.civility
+      !user.naissance
     ) {
       console.error("All fields are required");
       console.warn(user);
+
       return;
     }
 
@@ -85,6 +85,7 @@ function Inscription() {
         }, 3000);
       }
     } catch (someError) {
+      console.warn(user);
       console.error("Error during registration:", someError);
     }
   };
@@ -98,7 +99,13 @@ function Inscription() {
 
         if (result.status === 200) {
           setAvatars(result.data);
+
           setSelectedAvatar(result.data[0]);
+
+          setUser((prevData) => ({
+            ...prevData,
+            avatarId: result.data[0].id,
+          }));
         }
       } catch (someError) {
         console.error("Error during avatar fetching:", someError);

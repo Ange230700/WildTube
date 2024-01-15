@@ -128,8 +128,15 @@ const edit = async (req, res, next) => {
 const add = async (req, res, next) => {
   try {
     // Create a new item in the database based on the provided data
-    const { name, email, naissance, civility, password, IsAdmin, avatarId } =
-      req.body;
+    const {
+      name,
+      email,
+      naissance,
+      civility,
+      hashed_password,
+      IsAdmin,
+      avatarId,
+    } = req.body;
 
     // Check if the user already exists
     const existingUser = await tables.User.readByEmail(email);
@@ -139,21 +146,19 @@ const add = async (req, res, next) => {
       return;
     }
 
-    if (!password) {
+    if (!hashed_password) {
       res.status(400).json({ error: "Password is required" });
+      console.warn(req.body);
       return;
     }
 
-    // Hash the password
-    const hashedPassword = await argon2.hash(password);
-
     // Create the new user in the database
-    const newUser = await tables.User.add({
+    const newUser = await tables.User.create({
       name,
       email,
       naissance,
       civility,
-      hashed_password: hashedPassword,
+      hashed_password,
       IsAdmin,
       avatarId,
     });

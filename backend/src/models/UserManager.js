@@ -8,11 +8,18 @@ class UserManager extends AbstractManager {
   }
 
   // The C of CRUD - Create operation
-  async create({ name, email, naissance, civility, hashedPassword, avatarId }) {
+  async create({
+    name,
+    email,
+    naissance,
+    civility,
+    hashed_password,
+    avatarId,
+  }) {
     // Execute the SQL INSERT query to insert a new item into the "user" table
     const [result] = await this.database.query(
       `INSERT INTO ${this.table} (name, email, naissance, civility, hashed_password, avatarId) VALUES (?, ?, ?, ?, ?, ?)`,
-      [name, email, naissance, civility, hashedPassword, avatarId]
+      [name, email, naissance, civility, hashed_password, avatarId]
     );
 
     // Get the ID of the newly inserted item
@@ -25,7 +32,7 @@ class UserManager extends AbstractManager {
       email,
       naissance,
       civility,
-      hashed_password: hashedPassword,
+      hashed_password,
       avatarId,
     };
   }
