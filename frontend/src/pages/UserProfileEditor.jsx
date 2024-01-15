@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -273,14 +274,19 @@ function UserProfileEditor() {
               />
             </div>
           </div>
-          <h3>Choisissez un nouvel avatar :</h3>
-          {avatars.map((avatar) => (
-            <div className="choiceAvatar" key={avatar.id}>
-              <button type="button" onClick={() => handleAvatarChange(avatar)}>
-                <img src={avatar.url} alt="Avatar" />
-              </button>
-            </div>
-          ))}
+          {/* <div className="avatar-choice">
+            <h3>Choisissez un nouvel avatar :</h3>
+            {avatars.map((avatar) => (
+              <div className="choiceAvatar" key={avatar.id}>
+                <button
+                  type="button"
+                  onClick={() => handleAvatarChange(avatar)}
+                >
+                  <img src={avatar.url} alt="Avatar" />
+                </button>
+              </div>
+            ))}
+          </div> */}
           <div className="buttonContainer">
             <button className="signUpButton" type="submit">
               <p className="inscription">Modifier</p>

@@ -45,6 +45,24 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
+    const user = await tables.User.read(req.params.id);
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (user == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+const readUserWithAvatar = async (req, res, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
     const user = await tables.User.readUserWithAvatar(req.params.id);
 
     // If the item is not found, respond with HTTP 404 (Not Found)
@@ -109,27 +127,42 @@ const edit = async (req, res, next) => {
 
 const add = async (req, res, next) => {
   try {
-    // Get the data submitted by the user in the request body
-    const { name, email, naissance, civility, hashedPassword, avatarId } =
+    // Create a new item in the database based on the provided data
+    const { name, email, naissance, civility, password, IsAdmin, avatarId } =
       req.body;
 
-    const civilityValue = civility ? 1 : 0;
+    // Check if the user already exists
+    const existingUser = await tables.User.readByEmail(email);
 
-    // Add the new item to the database
-    const newUser = await tables.User.create({
+    if (existingUser) {
+      res.status(409).json({ error: "User already exists" });
+      return;
+    }
+
+    if (!password) {
+      res.status(400).json({ error: "Password is required" });
+      return;
+    }
+
+    // Hash the password
+    const hashedPassword = await argon2.hash(password);
+
+    // Create the new user in the database
+    const newUser = await tables.User.add({
       name,
       email,
       naissance,
-      civility: civilityValue,
-      hashedPassword,
+      civility,
+      hashed_password: hashedPassword,
+      IsAdmin,
       avatarId,
     });
 
-    // Respond with the newly added item in JSON format
-    if (!newUser) {
-      res.status(400).json({ message: "Bad Request" });
-    } else {
+    // Respond with the newly created user in JSON format
+    if (newUser) {
       res.status(201).json(newUser);
+    } else {
+      res.status(500).json({ error: "Failed to create user" });
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
@@ -144,6 +177,7 @@ const add = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  readUserWithAvatar,
   edit,
   add,
   updateAvatar,

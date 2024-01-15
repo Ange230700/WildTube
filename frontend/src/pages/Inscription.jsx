@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
@@ -11,11 +11,14 @@ function Inscription() {
     naissance: "",
     civility: "",
     password: "",
-    avatar: "",
+    avatarId: "",
   });
 
   // const { updateUser, user: connectedUser } = useUser();
   const [showModal, setShowModal] = useState(false);
+  const [avatars, setAvatars] = useState([]);
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+
   const navigate = useNavigate();
 
   const toggleModal = () => {
@@ -36,8 +39,38 @@ function Inscription() {
     }));
   };
 
+  const handleAvatarChange = (avatar) => {
+    try {
+      if (!avatar) {
+        console.error("Invalid avatar selected");
+        return;
+      }
+
+      setSelectedAvatar(avatar);
+      setUser((prevData) => ({
+        ...prevData,
+        avatarId: avatar.id,
+      }));
+    } catch (someError) {
+      console.error("Error during avatar selection:", someError);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      !user.name ||
+      !user.email ||
+      !user.password ||
+      !user.avatarId ||
+      !user.naissance ||
+      !user.civility
+    ) {
+      console.error("All fields are required");
+      console.warn(user);
+      return;
+    }
 
     try {
       const result = await axios.post(
@@ -56,101 +89,147 @@ function Inscription() {
     }
   };
 
+  useEffect(() => {
+    const fetchAvatars = async () => {
+      try {
+        const result = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/avatars`
+        );
+
+        if (result.status === 200) {
+          setAvatars(result.data);
+          setSelectedAvatar(result.data[0]);
+        }
+      } catch (someError) {
+        console.error("Error during avatar fetching:", someError);
+      }
+    };
+
+    fetchAvatars();
+  }, []);
+
   return (
-    <div className="signUpPageMockupGuest">
-      <div className="searchDisplaySection">
+    <main className="signUpPageMockupGuest">
+      <section className="searchDisplaySection">
         <LogoContainer />
         <form className="form" onSubmit={handleSubmit}>
-          <div className="inputs">
-            <div className="inputContainer">
-              <input
-                type="text"
-                name="name"
-                className="input"
-                value={user.name}
-                onChange={handleInputChange}
-                placeholder="Nom"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="email"
-                name="email"
-                className="input"
-                value={user.email}
-                onChange={handleInputChange}
-                placeholder="Adresse Mail"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="password"
-                name="password"
-                className="input"
-                value={user.password}
-                onChange={handleInputChange}
-                placeholder="Mot de passe"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="password"
-                className="input"
-                placeholder="Confirmation du mot de passe"
-              />
-            </div>
-          </div>
-
-          <div className="additionalInformation">
-            <div className="orientation">Civilité :</div>
-            <div className="orientationContainer">
-              <div className="orientationOption">
-                <label className="orientationText">
-                  Madame
-                  <input
-                    name="civility"
-                    type="radio"
-                    value="Madame"
-                    className="radioButton"
-                    onChange={handleInputChange}
-                    checked={user.civility === false}
-                  />
-                </label>
+          <div className="signUpWrapper">
+            <div className="inputs">
+              <div className="inputContainer">
+                <input
+                  type="text"
+                  name="name"
+                  className="input"
+                  value={user.name}
+                  onChange={handleInputChange}
+                  placeholder="Nom"
+                />
               </div>
-              <div className="orientationOption">
-                <label className="orientationText">
-                  Monsieur
-                  <input
-                    name="civility"
-                    type="radio"
-                    className="radioButton"
-                    onChange={handleInputChange}
-                    value="Monsieur"
-                    checked={user.civility === true}
-                  />
-                </label>
+              <div className="inputContainer">
+                <input
+                  type="email"
+                  name="email"
+                  className="input"
+                  value={user.email}
+                  onChange={handleInputChange}
+                  placeholder="Adresse Mail"
+                />
+              </div>
+              <div className="inputContainer">
+                <input
+                  type="password"
+                  name="password"
+                  className="input"
+                  value={user.password}
+                  onChange={handleInputChange}
+                  placeholder="Mot de passe"
+                />
+              </div>
+              <div className="inputContainer">
+                <input
+                  type="password"
+                  className="input"
+                  placeholder="Confirmation du mot de passe"
+                />
               </div>
             </div>
-            <div className="birthday">Date de naissance :</div>
-            <div className="orientationContainer">
-              <input
-                className="inputDate"
-                type="date"
-                name="naissance"
-                value={user.naissance}
-                onChange={handleInputChange}
-              />
+            <div className="additionalInformation">
+              <h4 className="orientation">Civilité :</h4>
+              <div className="orientationContainer">
+                <div className="orientationOption">
+                  <label className="orientationText">
+                    Madame
+                    <input
+                      name="civility"
+                      type="radio"
+                      value="Madame"
+                      className="radioButton"
+                      onChange={handleInputChange}
+                      checked={user.civility === false}
+                    />
+                  </label>
+                </div>
+                <div className="orientationOption">
+                  <label className="orientationText">
+                    Monsieur
+                    <input
+                      name="civility"
+                      type="radio"
+                      className="radioButton"
+                      onChange={handleInputChange}
+                      value="Monsieur"
+                      checked={user.civility === true}
+                    />
+                  </label>
+                </div>
+              </div>
+              <h4 className="birthday">Date de naissance :</h4>
+              <div className="orientationContainer">
+                <input
+                  className="inputDate"
+                  type="date"
+                  name="naissance"
+                  value={user.naissance}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <h4>Choisissez un avatar :</h4>
+              <div className="preview">
+                {selectedAvatar && (
+                  <img
+                    className="avatarPreview"
+                    src={selectedAvatar.avatar_url}
+                    alt="Avatar"
+                  />
+                )}
+              </div>
+              <div className="avatar-choice">
+                {avatars.map((avatar) => (
+                  <button
+                    key={avatar.id}
+                    className="avatarButton"
+                    type="button"
+                    onClick={() => handleAvatarChange(avatar)}
+                  >
+                    <img
+                      className="avatar"
+                      src={avatar.avatar_url}
+                      alt="Avatar"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="buttonContainer">
-            <button className="signUpButton" type="submit">
-              <p className="inscription">Inscription</p>
-            </button>
+            <div className="buttonContainer">
+              <button className="signUpButton" type="submit">
+                <p className="inscription">Inscription</p>
+              </button>
+            </div>
           </div>
           {showModal && <ModalInscription />}
         </form>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 

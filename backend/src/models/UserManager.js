@@ -25,7 +25,7 @@ class UserManager extends AbstractManager {
       email,
       naissance,
       civility,
-      hashedPassword,
+      hashed_password: hashedPassword,
       avatarId,
     };
   }
@@ -34,7 +34,7 @@ class UserManager extends AbstractManager {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
-      `SELECT id, name, email, naissance, civility, IsAdmin, avatarId FROM ${this.table} WHERE id = ?`,
+      `SELECT * FROM ${this.table} WHERE id = ?`,
       [id]
     );
 

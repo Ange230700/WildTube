@@ -2,8 +2,6 @@
 
 const tables = require("../tables");
 
-const { v4: uuidv4 } = require("uuid"); // eslint-disable-line
-
 const browse = async (req, res, next) => {
   try {
     const comments = await tables.Commentaire_film.readAll();
@@ -38,8 +36,8 @@ const browseCommentsByFilmId = async (req, res, next) => {
 const addComment = async (req, res, next) => {
   try {
     const { userId, filmId, avatarId, content } = req.body;
-    const date = new Date().toISOString().slice(0, 19).replace("T", " ");
-    const unique_key = uuidv4();
+    const date = new Date().toISOString().split("T")[0];
+    const unique_key = `${userId}-${filmId}-${avatarId}`;
 
     console.warn(date);
     console.warn(unique_key);

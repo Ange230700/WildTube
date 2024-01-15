@@ -19,6 +19,17 @@ class AvatarManager extends AbstractManager {
     return rows;
   }
 
+  async read(id) {
+    // Execute the SQL SELECT query to retrieve a specific avatar by its ID
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+
+    // Return the first row of the result, which represents the avatar
+    return rows;
+  }
+
   // The U of CRUD - Update operation
 
   // The D of CRUD - Delete operation

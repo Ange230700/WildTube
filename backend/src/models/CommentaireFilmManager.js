@@ -9,19 +9,11 @@ class CommentaireFilmManager extends AbstractManager {
 
   async create({ userId, filmId, avatarId, content, date, unique_key }) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (userId, filmId, content, date, unique_key) VALUES (?, ?, ?, ?, ?)`,
-      [userId, filmId, content, date, unique_key]
+      `INSERT INTO ${this.table} (userId, filmId, avatarId, content, date, unique_key) VALUES (?, ?, ?, ?, ?, ?)`,
+      [userId, filmId, avatarId, content, date, unique_key]
     );
 
-    return {
-      id: result.insertId,
-      userId,
-      filmId,
-      avatarId,
-      content,
-      date,
-      unique_key,
-    };
+    return result;
   }
 
   async readAll() {

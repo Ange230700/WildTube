@@ -41,7 +41,7 @@ CREATE TABLE
         `civility` BOOLEAN NOT NULL,
         `hashed_password` VARCHAR(150) NOT NULL,
         `IsAdmin` BOOLEAN NOT NULL DEFAULT 0,
-        `avatarId` INT,
+        `avatarId` INT NOT NULL,
         CONSTRAINT FK_User_avatar_id FOREIGN KEY (`avatarId`) REFERENCES `Avatar` (`id`)
     );
 
