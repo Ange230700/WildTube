@@ -55,7 +55,6 @@ class UserManager extends AbstractManager {
     return result;
   }
 
-
   // The U of CRUD - Update operation
   async update(id, { name, email, naissance, avatar }) {
     console.warn("Updating user with ID:", id); // Log the ID

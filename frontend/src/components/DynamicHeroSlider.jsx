@@ -5,6 +5,10 @@ import "react-multi-carousel/lib/styles.css";
 import HeroMovieSlideLink from "./HeroMovieSlideLink";
 
 const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 1601 },
+    items: 1,
+  },
   desktop: {
     breakpoint: { max: 1600, min: 1025 },
     items: 1,

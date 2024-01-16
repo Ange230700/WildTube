@@ -64,6 +64,7 @@ const edit = async (req, res, next) => {
   const { id } = req.params;
   // Get the new data from the request body
   const { name, email, naissance } = req.body;
+  const avatar = req.file ? req.file.path : null;
 
   let formattedDate = naissance;
   if (!Number.isNaN(Date.parse(naissance))) {
@@ -78,11 +79,6 @@ const edit = async (req, res, next) => {
       naissance: formattedDate,
       avatar,
     });
-  } catch (err) {
-    next(err);
-  }
-};
-// This operation is not yet implemented
 
     // Respond with the updated item in JSON format
     if (!updatedUser) {
