@@ -71,7 +71,7 @@ function Inscription() {
             </div>
             <div className="inputContainer">
               <input
-                type="text"
+                type="email"
                 value={user.email}
                 name="email"
                 onChange={handleInputChange}

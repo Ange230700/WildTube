@@ -19,6 +19,7 @@ const commentaireParFilmControllers = require("./controllers/commentaireParFilmC
 
 // Route to get a list of items
 router.get("/films", filmControllers.browse);
+router.get("/films/:id", filmControllers.read);
 router.get(
   "/films/category/:id",
   categorieParFilmControllers.browseFilmsForSpecificCategorie
@@ -40,7 +41,7 @@ router.get("/commentaires/film/:id", commentaireParFilmControllers.read);
 // Route to edit a specific item by ID
 
 router.put("/users/:id", userControllers.edit);
-
+router.put("/films/:id", filmControllers.edit);
 
 router.put("/commentaire/film/:id", commentaireParFilmControllers.edit);
 
@@ -55,5 +56,7 @@ router.post("/commentaire/film", commentaireParFilmControllers.add);
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
 router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);
 router.delete("/commentaire/film/:id", commentaireParFilmControllers.destroy);
+router.delete("/films/:id", filmControllers.destroy);
+router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
 
 module.exports = router;
