@@ -83,3 +83,4 @@ CREATE TABLE
         CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE,
         CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`) ON DELETE CASCADE
     );
+

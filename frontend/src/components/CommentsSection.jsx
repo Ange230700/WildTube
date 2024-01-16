@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 function CommentsSection({ filmId, user }) {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
+  const [editableComment, setEditableComment] = useState(null); // New state to track the comment being edited
   const commentsWrapperRef = useRef(null); // Ref for the comments wrapper
 
   const scrollToBottom = () => {
@@ -71,6 +72,57 @@ function CommentsSection({ filmId, user }) {
     scrollToBottom();
   }, [comments]);
 
+
+  const handleDeleteComment = async (id) => {
+    try {
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/${id}`;
+      await axios.delete(url);
+
+      // Mettez à jour la liste des commentaires après la suppression
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/comments/film/${filmId}`
+      );
+      setComments(response.data);
+    } catch (error) {
+      console.error("Error deleting comment", error);
+    }
+  };
+
+  const handleEditComment = async (commentId) => {
+    // Find the comment by id
+    const commentToEdit = comments.find((comment) => comment.id === commentId);
+
+    // Set the comment content in the textarea and update editableComment state
+    setCommentContent(commentToEdit.content);
+    setEditableComment(commentToEdit);
+
+    // Implement the editing logic here using editableComment
+    if (editableComment) {
+      try {
+        const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/${
+          editableComment.id
+        }`;
+        const updatedCommentData = {
+          content: commentContent,
+        };
+
+        await axios.put(url, updatedCommentData);
+
+        // Fetch updated comments after editing
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/comments/film/${filmId}`
+        );
+        setComments(response.data);
+      } catch (error) {
+        console.error("Error updating comment", error);
+      } finally {
+        // Reset editableComment state and clear commentContent
+        setEditableComment(null);
+        setCommentContent("");
+      }
+    }
+  };
+=======
   if (user) {
     return (
       <section className="CommentsSection">
@@ -180,6 +232,24 @@ function CommentsSection({ filmId, user }) {
                 <div className="FrameContainer">
                   <div className="Frame1">
                     <p className="CommentText">{comment.content}</p>
+                    {user.id === comment.userId && (
+                      <div className="CommentActionButtons">
+                        <button
+                          type="button"
+                          className="EditButton"
+                          onClick={() => handleEditComment(comment.id)}
+                        >
+                          Modifier
+                        </button>
+                        <button
+                          type="button"
+                          className="DeleteButton"
+                          onClick={() => handleDeleteComment(comment.id)}
+                        >
+                          Supprimer
+                        </button>
+                      </div>
+                    )}
                   </div>
                   <div className="CommentDateContainer">
                     <h6 className="CommentDate">{formattedDate}</h6>

@@ -3,18 +3,24 @@ import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
 // import { NavLink } from "react-router-dom";
 
-function MovieSlide({ movie }) {
+function MovieSlide({ movie, cover }) {
   const { user } = useUser();
   return movie.IsAvailable || user ? (
+    <div>
     <img src={movie.miniature} alt={movie.title} className="movie-slide" />
+    <img src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${movie.miniature}`} alt={movie.title} className="movie-slide" />
+    </div>
+
   ) : (
     <>
       <div className="movie-slide-requiring-registration">
         <img
           src={movie.miniature}
+          
           alt={movie.title}
           className="movie-slide blur-filter"
         />
+         <img src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${movie.miniature}`} alt={movie.title} className="movie-slide" />
       </div>
       <div className="locked-overlay">
         <div className="lock-icon-container">

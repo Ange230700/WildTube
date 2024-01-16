@@ -61,13 +61,29 @@ const read = async (req, res, next) => {
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   const { id } = req.params;
-  req.body.id = id;
+
+  // Get the new data from the request body
+  const { name, email, naissance } = req.body;
+  const avatar = req.file ? req.file.path : null;
+
+  let formattedDate = naissance;
+  if (!Number.isNaN(Date.parse(naissance))) {
+    formattedDate = new Date(naissance).toISOString().slice(0, 10);
+  }
 
   try {
-    const result = await tables.User.update(req.body);
-    if (result) {
-      res.json(result);
-      res.status(204);
+    // Update the item in the database
+    const updatedUser = await tables.User.update(id, {
+      name,
+      email,
+      naissance: formattedDate,
+      avatar,
+    });
+
+    // Respond with the updated item in JSON format
+    if (!updatedUser) {
+      res.status(400).json({ message: "Bad Request" });
+
     } else {
       res.sendStatus(404);
     }
