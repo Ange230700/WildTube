@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,12 +13,10 @@ function UserProfileEditor() {
     name: user.name || "",
     email: user.email || "",
     naissance: user.naissance || "",
-    civility: user.civility !== undefined ? user.civility : "",
+    civility: user.civility || "",
     password: user.password || "",
-    avatar: user.avatar || "",
+    avatarId: user.avatarId || "",
   });
-
-  // console.warn(formData.password, "formData");
 
   const [showModal, setShowModal] = useState(false);
   // const [currentPassword, setCurrentPassword] = useState("");
@@ -34,9 +31,7 @@ function UserProfileEditor() {
   };
 
   // eslint-disable-next-line no-unused-vars
-  const [selectedAvatar, setSelectedAvatar] = useState(
-    user.avatar || "https://avatars.githubusercontent.com/u/97165289"
-  ); // Avatar principal
+  const [selectedAvatar, setSelectedAvatar] = useState(null); // Avatar principal
 
   // Update these handlers to capture the new and old password inputs
   // const handleNewPasswordChange = (e) => {
@@ -51,37 +46,23 @@ function UserProfileEditor() {
   //   setConfirmPassword(e.target.value);
   // };
 
-  const handleAvatarChange = async (newAvatar) => {
+  const handleAvatarChange = (avatar) => {
     try {
-      // Ensure newAvatar is not null
-      if (!newAvatar) {
-        console.error("Invalid avatar selected");
+      if (!avatar) {
+        setSelectedAvatar((prevData) => ({
+          ...prevData,
+          avatar_url: "https://avatars.githubusercontent.com/u/97165289",
+        }));
         return;
       }
 
-      // Mettez à jour l'avatar principal avec celui sélectionné
-      setSelectedAvatar(newAvatar);
-
-      // Envoyez la mise à jour au backend
-      const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}/avatar`,
-        { avatar: newAvatar },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        // Gérez les erreurs si nécessaire
-        console.error("Failed to update avatar on the server");
-      } else {
-        updateUser({ ...user, avatar: newAvatar });
-      }
-    } catch (error) {
-      console.error("Error updating avatar:", error.message);
-      // Gérez les erreurs ici, par exemple, affichez un message à l'utilisateur
+      setSelectedAvatar(avatar);
+      setFormData((prevData) => ({
+        ...prevData,
+        avatarId: avatar.id,
+      }));
+    } catch (someError) {
+      console.error("Error during avatar selection:", someError);
     }
   };
 
@@ -112,12 +93,10 @@ function UserProfileEditor() {
 
     // Append modified fields to FormData
     Object.keys(formData).forEach((key) => {
-      if (formData[key] !== user[key]) {
+      if (formData[key] && formData[key] !== user[key]) {
         updateData.append(key, formData[key]);
       }
     });
-
-    // console.warn("formData", formData.password);
 
     try {
       const result = await axios.put(
@@ -129,8 +108,6 @@ function UserProfileEditor() {
           },
         }
       );
-
-      console.warn("updatedUser : ", result.data);
 
       if (result.status === 200) {
         const updatedUser = result.data;
@@ -149,15 +126,22 @@ function UserProfileEditor() {
   useEffect(() => {
     const fetchAvatars = async () => {
       try {
-        const response = await axios.get(
+        const result = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/avatars`
         );
 
-        if (response.status === 200) {
-          setAvatars(response.data);
+        if (result.status === 200) {
+          setAvatars(result.data);
+
+          setSelectedAvatar(result.data[0]);
+
+          setFormData((prevData) => ({
+            ...prevData,
+            avatar: result.data[0],
+          }));
         }
-      } catch (error) {
-        console.error(error);
+      } catch (someError) {
+        console.error("Error during avatar fetching:", someError);
       }
     };
 
@@ -182,28 +166,29 @@ function UserProfileEditor() {
       <div className="searchDisplaySection">
         <LogoContainer />
         <form className="form" onSubmit={handleSubmit}>
-          <div className="inputs">
-            <div className="inputContainer">
-              <input
-                type="text"
-                name="name"
-                className="input"
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Nom"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="email"
-                name="email"
-                className="input"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Email"
-              />
-            </div>
-            {/* <div className="inputContainer">
+          <div className="signUpWrapper">
+            <div className="inputs">
+              <div className="inputContainer">
+                <input
+                  type="text"
+                  name="name"
+                  className="input"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Nom"
+                />
+              </div>
+              <div className="inputContainer">
+                <input
+                  type="email"
+                  name="email"
+                  className="input"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="Email"
+                />
+              </div>
+              {/* <div className="inputContainer">
               <input
                 type="password"
                 className="input"
@@ -212,17 +197,17 @@ function UserProfileEditor() {
                 placeholder="Ancien mot de passe"
               />
             </div> */}
-            <div className="inputContainer">
-              <input
-                type="password"
-                name="password"
-                className="input"
-                value={newPassword}
-                onChange={handleInputChange}
-                placeholder="Nouveau mot de passe"
-              />
-            </div>
-            {/* <div className="inputContainer">
+              <div className="inputContainer">
+                <input
+                  type="password"
+                  name="password"
+                  className="input"
+                  value={newPassword}
+                  onChange={handleInputChange}
+                  placeholder="Nouveau mot de passe"
+                />
+              </div>
+              {/* <div className="inputContainer">
               <input
                 type="password"
                 className="input"
@@ -231,66 +216,91 @@ function UserProfileEditor() {
                 placeholder="Confirmation du nouveau mot de passe"
               />
             </div> */}
-          </div>
+            </div>
 
-          <div className="additionalInformation">
-            <div className="orientation">Civilité :</div>
-            <div className="orientationContainer">
-              <div className="orientationOption">
-                <label className="orientationText">
-                  Madame
-                  <input
-                    name="civility"
-                    type="radio"
-                    value="Madame"
-                    className="radioButton"
-                    onChange={handleInputChange}
-                    checked={formData.civility === false || !user.civility}
-                  />
-                </label>
+            <div className="additionalInformation">
+              <h4 className="orientation">Civilité :</h4>
+              <div className="orientationContainer">
+                <div className="orientationOption">
+                  <label className="orientationText">
+                    Madame
+                    <input
+                      name="civility"
+                      type="radio"
+                      value="Madame"
+                      className="radioButton"
+                      onChange={handleInputChange}
+                      checked={formData.civility === false || !user.civility}
+                    />
+                  </label>
+                </div>
+                <div className="orientationOption">
+                  <label className="orientationText">
+                    Monsieur
+                    <input
+                      name="civility"
+                      type="radio"
+                      className="radioButton"
+                      onChange={handleInputChange}
+                      value="Monsieur"
+                      checked={formData.civility === true || user.civility}
+                    />
+                  </label>
+                </div>
               </div>
-              <div className="orientationOption">
-                <label className="orientationText">
-                  Monsieur
-                  <input
-                    name="civility"
-                    type="radio"
-                    className="radioButton"
-                    onChange={handleInputChange}
-                    value="Monsieur"
-                    checked={formData.civility === true || user.civility}
-                  />
-                </label>
+              <h4 className="birthday">Date de naissance :</h4>
+              <div className="orientationContainer">
+                <input
+                  className="inputDate"
+                  type="date"
+                  name="naissance"
+                  value={formData.naissance}
+                  onChange={handleInputChange}
+                />
               </div>
-            </div>
-            <div className="birthday">Date de naissance :</div>
-            <div className="orientationContainer">
-              <input
-                className="inputDate"
-                type="date"
-                name="naissance"
-                value={formData.naissance}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          {/* <div className="avatar-choice">
-            <h3>Choisissez un nouvel avatar :</h3>
-            {avatars.map((avatar) => (
-              <div className="choiceAvatar" key={avatar.id}>
+              <h4>Choisissez un nouvel avatar :</h4>
+              <div className="preview">
+                {selectedAvatar && (
+                  <img
+                    className="avatarPreview"
+                    src={selectedAvatar.avatar_url}
+                    alt="Avatar"
+                  />
+                )}
+              </div>
+              <div className="avatar-choice">
                 <button
+                  className="avatarButton"
                   type="button"
-                  onClick={() => handleAvatarChange(avatar)}
+                  onClick={() => handleAvatarChange(null)}
                 >
-                  <img src={avatar.url} alt="Avatar" />
+                  <img
+                    className="avatar"
+                    src="https://avatars.githubusercontent.com/u/97165289"
+                    alt="Avatar"
+                  />
                 </button>
+                {avatars.map((avatar) => (
+                  <button
+                    key={avatar.id}
+                    className="avatarButton"
+                    type="button"
+                    onClick={() => handleAvatarChange(avatar)}
+                  >
+                    <img
+                      src={avatar.avatar_url}
+                      alt="Avatar"
+                      className="avatar"
+                    />
+                  </button>
+                ))}
               </div>
-            ))}
-          </div> */}
-          <div className="buttonContainer">
-            <button className="signUpButton" type="submit">
-              <p className="inscription">Modifier</p>
-            </button>
+            </div>
+            <div className="buttonContainer">
+              <button className="signUpButton" type="submit">
+                <p className="inscription">Modifier</p>
+              </button>
+            </div>
           </div>
           {showModal && <ModalInscription />}
         </form>

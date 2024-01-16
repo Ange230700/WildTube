@@ -42,7 +42,10 @@ function Inscription() {
   const handleAvatarChange = (avatar) => {
     try {
       if (!avatar) {
-        console.error("Invalid avatar selected");
+        setSelectedAvatar((prevData) => ({
+          ...prevData,
+          avatar_url: "https://avatars.githubusercontent.com/u/97165289",
+        }));
         return;
       }
 
@@ -67,7 +70,6 @@ function Inscription() {
       !user.naissance
     ) {
       console.error("All fields are required");
-      console.warn(user);
 
       return;
     }
@@ -85,7 +87,6 @@ function Inscription() {
         }, 3000);
       }
     } catch (someError) {
-      console.warn(user);
       console.error("Error during registration:", someError);
     }
   };
@@ -211,6 +212,17 @@ function Inscription() {
                 )}
               </div>
               <div className="avatar-choice">
+                <button
+                  className="avatarButton"
+                  type="button"
+                  onClick={() => handleAvatarChange(null)}
+                >
+                  <img
+                    className="avatar"
+                    src="https://avatars.githubusercontent.com/u/97165289"
+                    alt="Avatar"
+                  />
+                </button>
                 {avatars.map((avatar) => (
                   <button
                     key={avatar.id}

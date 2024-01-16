@@ -1,6 +1,3 @@
-/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-/* eslint-disable camelcase */
-
 // Load environment variables from .env file
 require("dotenv").config();
 

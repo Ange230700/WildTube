@@ -5,7 +5,6 @@ const hashPassword = async (req, res, next) => {
     const { password } = req.body;
 
     if (!password) {
-      console.warn(req.body);
       throw new Error("Password is undefined");
     }
 

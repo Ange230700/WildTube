@@ -3,13 +3,11 @@ const tables = require("../tables");
 
 const browseFavoriteMoviesByUserId = async (req, res, next) => {
   const { userId } = req.params;
-  // console.warn(req.params);
 
   try {
     const favorites = await tables.Favori_film.readFavoriteMoviesByUserId(
       userId
     );
-    // console.warn(favorites);
 
     if (favorites == null) {
       res.sendStatus(404);
@@ -24,7 +22,6 @@ const browseFavoriteMoviesByUserId = async (req, res, next) => {
 const addMovieToFavorite = async (req, res, next) => {
   const { userId, filmId } = req.body;
   const unique_key = `${userId}-${filmId}`;
-  // console.warn(req.body);
 
   try {
     const result = await tables.Favori_film.createMovieInFavorites(
@@ -32,7 +29,6 @@ const addMovieToFavorite = async (req, res, next) => {
       filmId,
       unique_key
     );
-    // console.warn(result);
 
     if (result.affectedRows) {
       res.sendStatus(200);
@@ -46,11 +42,9 @@ const addMovieToFavorite = async (req, res, next) => {
 
 const destroy = async (req, res, next) => {
   const { userId, filmId } = req.params;
-  // console.warn("req.params", req.params);
 
   try {
     const result = await tables.Favori_film.delete(userId, filmId);
-    // console.warn(result);
 
     if (result.affectedRows) {
       res.sendStatus(200);

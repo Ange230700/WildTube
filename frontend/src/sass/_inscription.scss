@@ -176,6 +176,15 @@
         }
       }
 
+      .signUpWrapper::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      .signUpWrapper::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-font-color);
+        border-radius: 5px;
+      }
+
       .buttonContainer {
         justify-content: center;
         display: flex;

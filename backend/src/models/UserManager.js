@@ -60,6 +60,17 @@ class UserManager extends AbstractManager {
     return rows;
   }
 
+  async readByEmail(email) {
+    // Execute the SQL SELECT query to retrieve a specific item by its ID
+    const [result] = await this.database.query(
+      `SELECT * FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id WHERE email = ?`,
+      [email]
+    );
+
+    // Return the first row of the result, which represents the item
+    return result[0];
+  }
+
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "user" table
     const [rows] = await this.database.query(
@@ -87,7 +98,6 @@ class UserManager extends AbstractManager {
   // The U of CRUD - Update operation
   async update(
     id,
-    // eslint-disable-next-line camelcase
     { name, email, naissance, civility, hashed_password, IsAdmin, avatarId }
   ) {
     await this.database.query(
@@ -100,7 +110,6 @@ class UserManager extends AbstractManager {
           IsAdmin = COALESCE(?, IsAdmin),
           avatarId = COALESCE(?, avatarId)
           WHERE id = ?`,
-      // eslint-disable-next-line camelcase
       [name, email, naissance, civility, hashed_password, IsAdmin, avatarId, id]
     );
 
@@ -123,17 +132,6 @@ class UserManager extends AbstractManager {
 
     // Return the first row of the result, which represents the item
     return rows;
-  }
-
-  async readByEmail(email) {
-    // Execute the SQL SELECT query to retrieve a specific item by its ID
-    const [result] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE email = ?`,
-      [email]
-    );
-
-    // Return the first row of the result, which represents the item
-    return result[0];
   }
 }
 

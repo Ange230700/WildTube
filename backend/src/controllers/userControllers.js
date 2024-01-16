@@ -148,7 +148,6 @@ const add = async (req, res, next) => {
 
     if (!hashed_password) {
       res.status(400).json({ error: "Password is required" });
-      console.warn(req.body);
       return;
     }
 

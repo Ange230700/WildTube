@@ -27,9 +27,8 @@ function UserProfil() {
         <img
           className="Avatar1"
           src={
-            user.avatar
-              ? user.avatar
-              : "https://avatars.githubusercontent.com/u/97165289"
+            user.avatar_url ||
+            "https://avatars.githubusercontent.com/u/97165289"
           }
           alt="Avatar1"
         />

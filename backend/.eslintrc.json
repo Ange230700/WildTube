@@ -10,7 +10,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-console": "off",
+    "no-console":0,
     "no-restricted-syntax": [
       "error",
       {
@@ -18,6 +18,7 @@
         "message": "You can only call the error(), warn() and info() methods from the console object"
       }
     ],
-    "camelcase": "off"
+    "camelcase": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }

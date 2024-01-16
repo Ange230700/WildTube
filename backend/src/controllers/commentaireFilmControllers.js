@@ -39,9 +39,6 @@ const addComment = async (req, res, next) => {
     const date = new Date().toISOString().split("T")[0];
     const unique_key = `${userId}-${filmId}-${avatarId}`;
 
-    console.warn(date);
-    console.warn(unique_key);
-
     const newComment = await tables.Commentaire_film.create({
       userId,
       filmId,
