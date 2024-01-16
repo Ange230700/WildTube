@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useUser } from "../contexts/UserContext";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
 
-function Inscription() {
-  const [user, setUser] = useState({
+function UserProfileEditor() {
+  const { user, updateUser } = useUser();
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     naissance: "",
@@ -13,48 +15,56 @@ function Inscription() {
     avatar: "",
   });
 
-  // const { updateUser, user: connectedUser } = useUser();
   const [showModal, setShowModal] = useState(false);
-  // const navigate = useNavigate();
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
+  useEffect(() => {
+    setFormData({
+      name: user.name || "",
+      email: user.email || "",
+      naissance: user.naissance
+        ? new Date(user.naissance).toISOString().split("T")[0]
+        : "",
+      civility: user.civility || false,
+      password: user.password || "",
+      avatar: user.avatar || "",
+    });
+  }, [user]);
+
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
-    if (user.civility === "Monsieur") {
-      user.civility = true;
-    } else if (user.civility === "Madame") {
-      user.civility = false;
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const updateData = new FormData();
+
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== user[key]) {
+        updateData.append(key, formData[key]);
+      }
+    });
 
     try {
-      const result = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
-        user
+      const result = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
+        updateData
       );
-      // console.log(user);
-      if (result.status === 201) {
-        toggleModal(); // Afficher la modale en cas de succès
-        // updateUser(result.data);
-        // navigate("/");
-      }
 
-      // console.log("Request URL:", url);
-      // console.log("User registered successfully");
-    } catch (someError) {
-      console.error("Error during registration:", someError);
+      if (result.status === 200) {
+        updateUser(result.data);
+        toggleModal();
+      }
+    } catch (error) {
+      // Handle error...
+      console.error(error);
     }
   };
-  return (
+
+  return !user ? null : (
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
@@ -65,7 +75,7 @@ function Inscription() {
                 type="text"
                 name="name"
                 className="input"
-                value={user.name}
+                value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Nom"
               />
@@ -75,9 +85,16 @@ function Inscription() {
                 type="email"
                 name="email"
                 className="input"
-                value={user.email}
+                value={formData.email}
                 onChange={handleInputChange}
-                placeholder="Adresse Mail"
+                placeholder="Email"
+              />
+            </div>
+            <div className="inputContainer">
+              <input
+                type="password"
+                className="input"
+                placeholder="Ancien mot de passe"
               />
             </div>
             <div className="inputContainer">
@@ -85,16 +102,16 @@ function Inscription() {
                 type="password"
                 name="password"
                 className="input"
-                value={user.password}
+                value={formData.password}
                 onChange={handleInputChange}
-                placeholder="Mot de passe"
+                placeholder="Nouveau mot de passe"
               />
             </div>
             <div className="inputContainer">
               <input
                 type="password"
                 className="input"
-                placeholder="Confirmation du mot de passe"
+                placeholder="Confirmation du nouveau mot de passe"
               />
             </div>
           </div>
@@ -111,7 +128,7 @@ function Inscription() {
                     value="Madame"
                     className="radioButton"
                     onChange={handleInputChange}
-                    checked={user.civility === "Madame"}
+                    checked={formData.civility === "Madame"}
                   />
                 </label>
               </div>
@@ -124,7 +141,7 @@ function Inscription() {
                     className="radioButton"
                     onChange={handleInputChange}
                     value="Monsieur"
-                    checked={user.civility === "Monsieur"}
+                    checked={formData.civility === "Monsieur"}
                   />
                 </label>
               </div>
@@ -135,7 +152,7 @@ function Inscription() {
                 className="inputDate"
                 type="date"
                 name="naissance"
-                value={user.naissance}
+                value={formData.naissance}
                 onChange={handleInputChange}
               />
             </div>
@@ -146,7 +163,7 @@ function Inscription() {
               onClick={handleSubmit}
               type="button"
             >
-              <p className="inscription">Inscription</p>
+              <p className="inscription">Modifier</p>
             </button>
           </div>
           {showModal && (
@@ -161,4 +178,4 @@ function Inscription() {
   );
 }
 
-export default Inscription;
+export default UserProfileEditor;

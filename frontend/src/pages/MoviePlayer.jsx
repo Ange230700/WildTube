@@ -1,4 +1,3 @@
-/* eslint-disable react/self-closing-comp  */
 import { useParams, NavLink } from "react-router-dom";
 import { useMovies } from "../contexts/MovieContext";
 
@@ -36,7 +35,7 @@ function MoviePlayer() {
                 frameBorder="0"
                 allowFullScreen
                 loading="lazy"
-              ></iframe>
+              />
             );
           })}
       </div>

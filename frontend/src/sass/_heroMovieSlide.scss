@@ -19,6 +19,13 @@
         ) * 0.5
     )
   );
-  border-radius: var(--border-radius-constant, 10px);
+  border-radius: clamp(
+    calc(var(--border-radius-constant) * 1),
+    calc(3.125vw * 1),
+    calc(var(--border-radius-constant) * 1 * 2.25)
+  );
   object-fit: cover;
+  &:hover {
+    transform: scale(1.01);
+  }
 }

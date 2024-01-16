@@ -1,6 +1,30 @@
 // Import access to database tables
 const tables = require("../tables");
 
+const updateAvatar = async (req, res) => {
+  const { userId } = req.params;
+  const { avatar } = req.body;
+
+  try {
+    // Vérifiez si l'utilisateur existe
+    const existingUser = await tables.User.read(userId);
+    if (!existingUser) {
+      res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+
+    // Mettez à jour l'avatar dans la base de données
+    const updatedUser = await tables.User.updateAvatar(userId, avatar);
+
+    // Répondre avec les informations mises à jour de l'utilisateur
+    res.json(updatedUser);
+  } catch (error) {
+    console.error("Error updating avatar:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la mise à jour de l'avatar" });
+  }
+};
+
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
@@ -14,6 +38,8 @@ const browse = async (req, res, next) => {
     next(err);
   }
 };
+
+// The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
@@ -32,12 +58,11 @@ const read = async (req, res, next) => {
   }
 };
 
-// The R of BREAD - Read operation
-
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   const { id } = req.params;
   req.body.id = id;
+
   try {
     const result = await tables.User.update(req.body);
     if (result) {
@@ -50,9 +75,6 @@ const edit = async (req, res, next) => {
     next(err);
   }
 };
-// This operation is not yet implemented
-
-// eslint-disable-next-line consistent-return
 
 // The A of BREAD - Add (Create) operation
 
@@ -88,7 +110,8 @@ const add = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
-  add,
-  edit,
   read,
+  edit,
+  add,
+  updateAvatar,
 };
