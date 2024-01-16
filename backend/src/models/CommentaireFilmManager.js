@@ -24,8 +24,26 @@ class CommentaireFilmManager extends AbstractManager {
 
   async readAllCommentsByFilmId(filmId) {
     const [result] = await this.database.query(
-      `SELECT * FROM ${this.table} JOIN User ON ${this.table}.userId = User.id JOIN Film ON ${this.table}.filmId = Film.id WHERE filmId = ?`,
+      `SELECT User.id AS userId, Film.id AS filmId,${this.table}.date AS date, ${this.table}.id AS id, User.avatar AS avatar,${this.table}.content AS content FROM ${this.table} JOIN User ON ${this.table}.userId = User.id JOIN Film ON ${this.table}.filmId = Film.id WHERE filmId = ?`,
       [filmId]
+    );
+
+    return result;
+  }
+
+  async delete(commentId) {
+    const [result] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
+      [commentId]
+    );
+
+    return result;
+  }
+
+  async update(commentId, { content }) {
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET content = ? WHERE id = ?`,
+      [content, commentId]
     );
 
     return result;
