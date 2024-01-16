@@ -42,7 +42,10 @@ router.get("/comments", commentaireFilmControllers.browse);
 // Route to get a specific item by ID
 router.get("/avatar/:id", avatarControllers.read);
 router.get("/user/:id", userControllers.read);
-router.get("/user/:id/avatar/:avatarId", userControllers.readUserWithAvatar);
+router.get(
+  "/user/:userId/avatar/:avatarId",
+  userControllers.readUserWithAvatar
+);
 router.get(
   "/comments/film/:filmId",
   commentaireFilmControllers.browseCommentsByFilmId

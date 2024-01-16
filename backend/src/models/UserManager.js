@@ -49,11 +49,11 @@ class UserManager extends AbstractManager {
     return rows;
   }
 
-  async readUserWithAvatar(id) {
+  async readUserWithAvatar(user_id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id WHERE User.id = ?`,
-      [id]
+      `SELECT User.id AS id, name, email, naissance, civility, hashed_password, IsAdmin, avatarId, avatar_url, avatar_filename FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id WHERE id = ?`,
+      [user_id]
     );
 
     // Return the first row of the result, which represents the item
@@ -63,7 +63,7 @@ class UserManager extends AbstractManager {
   async readByEmail(email) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [result] = await this.database.query(
-      `SELECT * FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id WHERE email = ?`,
+      `SELECT User.id AS id, name, email, naissance, civility, hashed_password, IsAdmin, avatarId, avatar_url, avatar_filename FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id WHERE email = ?`,
       [email]
     );
 
@@ -108,12 +108,12 @@ class UserManager extends AbstractManager {
           civility = COALESCE(?, civility), 
           hashed_password = COALESCE(?, hashed_password), 
           avatarId = COALESCE(?, avatarId)
-          WHERE id = ?`,
+          WHERE ${this.table}.id = ?`,
       [name, email, naissance, civility, hashed_password, avatarId, id]
     );
 
     const updatedRows = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE id = ?`,
+      `SELECT * FROM ${this.table} WHERE ${this.table}.id = ?`,
       [id]
     );
 

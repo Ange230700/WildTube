@@ -10,18 +10,24 @@ const login = async (req, res, next) => {
       return;
     }
 
-    const verified = await argon2.verify(
-      user.hashed_password,
-      req.body.password
-    );
+    if (user && user.hashed_password) {
+      const verified = await argon2.verify(
+        user.hashed_password,
+        req.body.password
+      );
 
-    if (verified) {
-      delete user.hashed_password;
-      res.status(200).json({ ...user, message: "Logged in successfully" });
+      if (verified) {
+        // delete user.hashed_password;
+        res.status(200).json({ ...user, message: "Logged in successfully" });
+      } else {
+        res.sendStatus(422).json({ message: " Invalid email or password " });
+      }
     } else {
-      res.sendStatus(422).json({ message: " Invalid email or password " });
+      console.warn("user", user);
+      res.sendStatus(422);
     }
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };

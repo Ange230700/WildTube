@@ -151,8 +151,8 @@ async function insertFilmCategorie() {
       while (
         uniqueKeysCombinations.size <
         faker.number.int({
-          min: Math.floor(totalOfUniqueKeysCombinations / 2),
-          max: totalOfUniqueKeysCombinations,
+          min: Math.floor(totalOfUniqueKeysCombinations / 4),
+          max: Math.floor(totalOfUniqueKeysCombinations / 2),
         })
       ) {
         const filmId = faker.number.int({ min: 1, max: films.length });
@@ -210,7 +210,7 @@ async function insertCommentaires() {
         uniqueKeysCombinations.size <
         faker.number.int({
           min: 0,
-          max: Math.floor(totalOfUniqueKeysCombinations / 2),
+          max: Math.floor(totalOfUniqueKeysCombinations / 4),
         })
       ) {
         const userId = faker.number.int({ min: 1, max: users.length });
@@ -265,7 +265,7 @@ async function insertFilmsIntoWatchlist() {
         uniqueKeysCombinations.size <
         faker.number.int({
           min: 0,
-          max: Math.floor(totalOfUniqueKeysCombinations / 2),
+          max: Math.floor(totalOfUniqueKeysCombinations / 4),
         })
       ) {
         const userId = faker.number.int({ min: 1, max: users.length });
@@ -312,7 +312,7 @@ async function insertFilmsIntoFavorites() {
         uniqueKeysCombinations.size <
         faker.number.int({
           min: 0,
-          max: Math.floor(totalOfUniqueKeysCombinations / 2),
+          max: Math.floor(totalOfUniqueKeysCombinations / 4),
         })
       ) {
         const userId = faker.number.int({ min: 1, max: users.length });

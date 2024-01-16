@@ -63,7 +63,7 @@ const read = async (req, res, next) => {
 const readUserWithAvatar = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
-    const user = await tables.User.readUserWithAvatar(req.params.id);
+    const user = await tables.User.readUserWithAvatar(req.params.avatarId);
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
@@ -89,6 +89,7 @@ const edit = async (req, res, next) => {
     const currentUser = await tables.User.read(id);
 
     if (!currentUser) {
+      console.warn("currentUser", currentUser);
       res.status(404).json({ error: "User not found" });
       return;
     }
@@ -109,6 +110,7 @@ const edit = async (req, res, next) => {
     });
 
     if (!updatedUser) {
+      console.warn("updatedUser", updatedUser);
       res.status(404).json({ error: "User not found" });
       return;
     }
@@ -117,6 +119,8 @@ const edit = async (req, res, next) => {
     const { hashed_password, ...userWithoutPassword } = updatedUser;
     res.status(200).json(userWithoutPassword);
   } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+    console.error(err);
     next(err);
   }
 };

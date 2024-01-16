@@ -3,6 +3,7 @@ import { useUser } from "../contexts/UserContext";
 
 function NavBar() {
   const { user } = useUser();
+  console.warn("user", user);
   const location = useLocation();
 
   const changeProfile = () => {
@@ -57,7 +58,8 @@ function NavBar() {
               <img
                 className="icon avatar"
                 src={
-                  user.avatar_url ||
+                  user?.avatar_url ||
+                  user?.avatar_filename ||
                   "https://avatars.githubusercontent.com/u/97165289"
                 }
                 alt="avatar"

@@ -8,6 +8,7 @@ import formatDate from "../utils/formatDate"; // Import a utility function for d
 
 function UserProfileEditor() {
   const { userId } = useParams();
+  console.warn("userId::: ", userId);
   const { user, updateUser } = useUser();
   const [formData, setFormData] = useState({
     name: user.name || "",
@@ -110,7 +111,11 @@ function UserProfileEditor() {
       );
 
       if (result.status === 200) {
-        const updatedUser = result.data;
+        const updatedUser = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/user/${userId}/avatar/${
+            formData.avatarId
+          }`
+        );
         updateUser(updatedUser);
         toggleModal();
         setTimeout(() => {
@@ -133,8 +138,6 @@ function UserProfileEditor() {
         if (result.status === 200) {
           setAvatars(result.data);
 
-          setSelectedAvatar(result.data[0]);
-
           setFormData((prevData) => ({
             ...prevData,
             avatar: result.data[0],
@@ -156,8 +159,14 @@ function UserProfileEditor() {
         naissance: formatDate(user.naissance),
         civility: user.civility !== undefined ? user.civility : "",
         password: user.password,
-        avatar: user.avatar,
+        avatarId: user.avatarId,
       });
+
+      setSelectedAvatar(
+        user.avatar_filename ||
+          user.avatar_url ||
+          "https://avatars.githubusercontent.com/u/97165289"
+      );
     }
   }, [user]);
 
@@ -263,7 +272,7 @@ function UserProfileEditor() {
                 {selectedAvatar && (
                   <img
                     className="avatarPreview"
-                    src={selectedAvatar.avatar_url}
+                    src={selectedAvatar.avatar_url || user.avatar_url}
                     alt="Avatar"
                   />
                 )}
