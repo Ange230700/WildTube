@@ -40,7 +40,7 @@ CREATE TABLE
         `duration` INT not null,
         `year` VARCHAR(4) NOT NULL,
         `description` VARCHAR(700) not null,
-        `IsAvailable` BOOLEAN NOT NULL
+        `IsAvailable` BOOLEAN NOT NULL,
     );
 
 INSERT INTO
@@ -486,7 +486,7 @@ VALUES
         'Aurel',
         'aurelien.emeriau@wcs.com',
         '1983/06/10',
-        '0',
+        '1',
         'ggfd4554',
         '0'
     ),
@@ -496,7 +496,7 @@ VALUES
         '1998/03/19',
         '0',
         'ggfd455',
-        '0'
+        '1'
     );
 
 INSERT INTO
@@ -552,3 +552,10 @@ INSERT INTO
 VALUES
     (1, 10),
     (2, 10);
+INSERT INTO
+     `commentaire_film` (`userId`, `filmId`, `content`) 
+VALUES (1, 3, 'dernier commentaire'), (1,3 ,'la bonne') ;
+
+INSERT INTO
+    `commentaire_serie` (`userId`, `serieId`, `content`)
+VALUES (1,2, 'test pour serie'), (1,2 ,'ca fonctionne');

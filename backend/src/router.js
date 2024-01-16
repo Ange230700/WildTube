@@ -7,6 +7,7 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import itemControllers module for handling item-related operations
+const { uploadImages } = require("./multer/multer");
 const categorieControllers = require("./controllers/categorieControllers");
 const categorieParSerieControllers = require("./controllers/categorieParSerieControllers");
 const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
@@ -17,6 +18,8 @@ const enTendanceFilmControllers = require("./controllers/enTendanceFilmControlle
 const enTendanceSerieControllers = require("./controllers/enTendanceSerieControllers");
 const favoriFilmControllers = require("./controllers/favoriFilmControllers");
 const favoriSerieControllers = require("./controllers/favoriSerieControllers");
+// const commentaireParFilmControllers = require("./controllers/commentaireParFilmControllers");
+// const commentaireParSerieControllers = require("./controllers/commentaireParSerieControllers");
 const authControllers = require("./controllers/authControllers");
 // const categorieParFilmControllers = require("./controllers/categorieParFilmControllers");
 
@@ -48,7 +51,6 @@ router.get("/favorites/serie", favoriSerieControllers.browse);
 router.get("/FilmsEnTendance", enTendanceFilmControllers.browse);
 router.get("/SeriesEnTendance", enTendanceSerieControllers.browse);
 router.get("/favorites", favoriFilmControllers.browse);
-
 // Route to get a specific item by ID
 router.get("/categories/:id", categorieControllers.read);
 // router.get("/categoriesParSerie/:id", categorieParSerieControllers.read);
@@ -60,7 +62,8 @@ router.get("/favorites/serie/:id", favoriSerieControllers.read);
 router.get("/FilmsEnTendance/:id", enTendanceFilmControllers.read);
 router.get("/SeriesEnTendance/:id", enTendanceSerieControllers.read);
 router.get("/favorites/:id", favoriFilmControllers.read);
-
+// router.get("/commentaires/film/:id", commentaireParFilmControllers.read);
+// router.get("/commentaires/serie/:id", commentaireParSerieControllers.read);
 // Route to edit a specific item by ID
 router.put("/categories/:id", categorieControllers.edit);
 // router.put("/categoriesParSerie/:id", categorieParSerieControllers.edit);
@@ -68,12 +71,14 @@ router.put("/categories/:id", categorieControllers.edit);
 router.put("/films/:id", filmControllers.edit);
 router.put("/series/:id", serieControllers.edit);
 router.put("/users/:id", userControllers.edit);
+// router.put("/commentaire/film/:id", commentaireParFilmControllers.edit);
+// router.put("/commentaire/serie/:id", commentaireParSerieControllers.edit);
 
 // Route to add a new item
 router.post("/categories", categorieControllers.add);
 router.post("/categoriesParSerie", categorieParSerieControllers.add);
 router.post("/categoriesParFilm", categorieParFilmControllers.add);
-router.post("/films", filmControllers.add);
+router.post("/films", uploadImages.array("images", 2), filmControllers.add);
 router.post("/series", serieControllers.add);
 router.post("/users", userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.add);
@@ -81,6 +86,8 @@ router.post("/favorites/serie", favoriSerieControllers.add);
 router.post("/FilmsEnTendance", enTendanceFilmControllers.add);
 router.post("/SeriesEnTendance", enTendanceSerieControllers.add);
 router.post("/favorites", favoriFilmControllers.add);
+// router.post("/commentaire/film", commentaireParFilmControllers.add);
+// router.post("/commentaire/serie", commentaireParSerieControllers.add);
 
 // Route to delete a specific item by ID
 router.delete("/categories/:id", categorieControllers.destroy);
@@ -94,6 +101,8 @@ router.delete("/favorites/serie/:id", favoriSerieControllers.destroy);
 router.delete("/FilmsEnTendance/:id", enTendanceFilmControllers.destroy);
 router.delete("/SeriesEnTendance/:id", enTendanceSerieControllers.destroy);
 router.delete("/favorites/:id", favoriFilmControllers.destroy);
+// router.delete("/commentaire/film/:id", commentaireParFilmControllers.destroy);
+// router.delete("/commentaire/serie/:id", commentaireParSerieControllers.destroy);
 
 router.post("/login", authControllers.login);
 

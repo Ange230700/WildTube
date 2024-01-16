@@ -1,0 +1,572 @@
+.ProfileDisplaySection {
+  width: 100%;
+  height: 100%;
+  padding-top: 13px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 6px;
+  display: inline-flex;
+
+  .Profilepicturecontainer {
+    align-self: stretch;
+    height: 28px;
+    padding-left: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    display: flex;
+
+    .Avatar1 {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .SearchBarContainer {
+    align-self: stretch;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+
+    .AjouterUneVideo {
+      width: 220px;
+      text-align: center;
+      color: #f0e063;
+      font-size: 16px;
+      font-family: Roboto Flex;
+      font-weight: 700;
+      word-wrap: break-word;
+    }
+  }
+
+  .Emptyfieldscontainer {
+    align-self: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+
+    .Imageuploadercontainer {
+      width: 100vw;
+      height: 18vh;
+      align-self: stretch;
+      padding-left: 10px;
+      padding-right: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+
+      .Outlineimageuploader {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px white dotted;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        display: inline-flex;
+
+        .Frame4 {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          display: flex;
+
+          .UploadSolid1 {
+            width: 62px;
+            height: 62px;
+            position: relative;
+
+            .Vector {
+              width: 62px;
+              height: 62px;
+              left: 0px;
+              top: 0px;
+              position: absolute;
+              background: white;
+            }
+          }
+
+          .ImporterLeFilm {
+            width: 81px;
+            text-align: center;
+            color: white;
+            font-size: 9px;
+            font-family: Roboto Flex;
+            font-weight: 400;
+            word-wrap: break-word;
+          }
+
+          .input {
+            background: rgba(238, 226, 226, 0.1);
+            color: #dbdbdb;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+          }
+        }
+      }
+
+      .Outlineimageuploader {
+        width: 118px;
+        height: 118px;
+        padding: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px white dotted;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        display: inline-flex;
+
+        .Frame4 {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          display: flex;
+
+          .UploadSolid1 {
+            width: 62px;
+            height: 62px;
+            position: relative;
+
+            .Vector {
+              width: 62px;
+              height: 62px;
+              left: 0px;
+              top: 0px;
+              position: absolute;
+              background: white;
+            }
+          }
+
+          .AjouterUneMiniature {
+            width: 81px;
+            text-align: center;
+            color: white;
+            font-size: 9px;
+            font-family: Roboto Flex;
+            font-weight: 400;
+            word-wrap: break-word;
+          }
+        }
+      }
+    }
+    .Titleinputcontainer1 {
+      align-self: stretch;
+      padding: 10px;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+      display: inline-flex;
+
+      .Input {
+        flex: 1 1 0;
+        height: 100%;
+        padding: 10px;
+        background: rgba(238, 226, 226, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+        border-bottom: 1px #ff509a solid;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+        display: flex;
+
+        .TitreDuFilm {
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 65px;
+          height: 20px;
+          color: #dbdbdb;
+          font-size: 9px;
+          font-family: Roboto Flex;
+          font-weight: 400;
+          word-wrap: break-word;
+        }
+
+        .input {
+          background: rgba(238, 226, 226, 0.1);
+          color: #dbdbdb;
+          border: none;
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .Titleinputcontainer2 {
+      align-self: stretch;
+      padding: 10px;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+      display: inline-flex;
+
+      .Input {
+        flex: 1 1 0;
+        align-self: stretch;
+        padding: 10px;
+        background: rgba(238, 226, 226, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+        border-bottom: 1px #ff509a solid;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        display: flex;
+
+        .DurEDuFilm {
+          text-align: center;
+          color: #dbdbdb;
+          font-size: 9px;
+          font-family: Roboto Flex;
+          font-weight: 400;
+          word-wrap: break-word;
+        }
+
+        .input {
+          background: rgba(238, 226, 226, 0.1);
+          color: #dbdbdb;
+          border: none;
+          width: 100%;
+          border-radius: 5px;
+        }
+      }
+
+      .Input {
+        flex: 1 1 0;
+        height: 36px;
+        padding: 10px;
+        background: rgba(238, 226, 226, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+        border-bottom: 2px #ff509a solid;
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+
+        .AnnEDeSortie {
+          text-align: center;
+          color: #dbdbdb;
+          font-size: 9px;
+          font-family: Roboto Flex;
+          font-weight: 400;
+          word-wrap: break-word;
+        }
+
+        .CaretDownSolid1 {
+          width: 10px;
+          height: 16px;
+          position: relative;
+
+          .Vector {
+            width: 10px;
+            height: 6px;
+            left: -0px;
+            top: 6px;
+            position: absolute;
+            background: #dbdbdb;
+          }
+        }
+      }
+    }
+
+    .Titleinputcontainer3 {
+      align-self: stretch;
+      padding: 10px;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 5px;
+      display: inline-flex;
+      height: 150px;
+
+      .Input {
+        gap: 10px;
+        height: 100%;
+        width: 100%;
+        padding: 10px;
+        background: rgba(238, 226, 226, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+        border-bottom: 2px #ff509a solid;
+        justify-content: flex-start;
+        align-items: start;
+        display: flex;
+
+        .CatGorieDuFilm {
+          text-align: center;
+          color: #dbdbdb;
+          font-size: 9px;
+          font-family: Roboto Flex;
+          font-weight: 400;
+          word-wrap: break-word;
+        }
+
+        .tab {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .CaretDownSolid1 {
+          width: 10px;
+          height: 16px;
+          position: relative;
+
+          .Vector {
+            width: 10px;
+            height: 6px;
+            left: -0px;
+            top: 6px;
+            position: absolute;
+            background: #dbdbdb;
+          }
+        }
+      }
+    }
+
+    .Titleinputcontainer4 {
+      align-self: stretch;
+      padding: 10px;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 22px;
+      display: inline-flex;
+      height: 150px;
+
+      .Input {
+        height: 100%;
+        width: 100%;
+        padding: 10px;
+        background: rgba(238, 226, 226, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+        border-bottom: 2px #ff509a solid;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+
+        .DescriptifDuFilm {
+          text-align: center;
+          width: 90px;
+          height: 10%;
+          color: #dbdbdb;
+          font-size: 9px;
+          font-family: Roboto Flex;
+          font-weight: 400;
+          word-wrap: break-word;
+        }
+
+        .input {
+          background: rgba(238, 226, 226, 0.1);
+          color: #dbdbdb;
+          border: none;
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  .Grantingscontainer {
+    align-self: stretch;
+    height: 149px;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    display: flex;
+
+    .Autorisation {
+      text-align: center;
+      color: #f0e063;
+      font-size: 9px;
+      font-family: Roboto Flex;
+      font-weight: 400;
+      word-wrap: break-word;
+    }
+
+    .Input {
+      align-self: stretch;
+      padding: 10px;
+      background: rgba(238, 226, 226, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px #ff509a solid;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+
+      .SquareCheckRegular1 {
+        width: 14px;
+        height: 16px;
+        position: relative;
+
+        .Vector {
+          width: 14px;
+          height: 14px;
+          left: 0px;
+          top: 1px;
+          position: absolute;
+          background: #dbdbdb;
+        }
+      }
+
+      .CheckboxCheckSvgrepoCom1 {
+        width: 800px;
+        height: 800px;
+        padding: 133.33px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+        .Vector {
+          width: 533.33px;
+          height: 533.33px;
+          border: 66.67px black solid;
+        }
+      }
+
+      .Visiteur {
+        text-align: center;
+        color: #dbdbdb;
+        font-size: 9px;
+        font-family: Roboto Flex;
+        font-weight: 400;
+        word-wrap: break-word;
+      }
+    }
+
+    .Input {
+      align-self: stretch;
+      padding: 10px;
+      background: rgba(238, 226, 226, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+
+      .SquareRegular1 {
+        width: 14px;
+        height: 16px;
+        position: relative;
+
+        .Vector {
+          width: 14px;
+          height: 14px;
+          left: 0px;
+          top: 1px;
+          position: absolute;
+          background: #dbdbdb;
+        }
+      }
+
+      .UtilisateurAvecCompte {
+        text-align: center;
+        color: #dbdbdb;
+        font-size: 9px;
+        font-family: Roboto Flex;
+        font-weight: 400;
+        word-wrap: break-word;
+      }
+    }
+
+    .Input {
+      align-self: stretch;
+      padding: 10px;
+      background: rgba(238, 226, 226, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+
+      .SquareRegular1 {
+        width: 14px;
+        height: 16px;
+        position: relative;
+
+        .Vector {
+          width: 14px;
+          height: 14px;
+          left: 0px;
+          top: 1px;
+          position: absolute;
+          background: #dbdbdb;
+        }
+      }
+
+      .Administrateur {
+        text-align: center;
+        color: #dbdbdb;
+        font-size: 9px;
+        font-family: Roboto Flex;
+        font-weight: 400;
+        word-wrap: break-word;
+      }
+    }
+  }
+
+  .Titleinputcontainer {
+    align-self: stretch;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    display: inline-flex;
+
+    .ConnectionButton {
+      padding-left: 10px;
+      padding-right: 10px;
+      background: #ff509a;
+      border-radius: 5px;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      display: flex;
+      margin-bottom: 50px;
+
+      button {
+        background: none;
+        border: none;
+      }
+
+      .Ajouter {
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        color: #021222;
+        font-size: 16px;
+        font-family: Roboto Flex;
+        font-weight: 600;
+        word-wrap: break-word;
+      }
+    }
+  }
+}
