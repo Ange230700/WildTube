@@ -25,13 +25,16 @@ function Connection() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:3310/api/login", user);
+      const result = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/login`,
+        user
+      );
       if (result.status === 200) {
         updateUser(result.data);
         navigate("/");
       }
     } catch (err) {
-      console.error("Error connecting");
+      console.error("Incorrect email or password");
     }
   };
 
@@ -77,15 +80,18 @@ function Connection() {
               </div>
             </div>
             <div className="signUpText">
-              <div className="tuNAsPasDeCompte">Tu n’as pas de compte ?</div>
-              <div className="signupInviteContainer">
-                <NavLink to="/Inscription">
-                  <p className="inscrisToiIci">Inscris toi ici </p>
-                </NavLink>
-                <p className="catalogue">
+              <p className="tuNAsPasDeCompte">
+                Tu n’as pas de compte ?<span> </span>
+                <span>
+                  <NavLink to="/Inscription" className="inscrisToiIci">
+                    Inscris toi ici
+                  </NavLink>
+                </span>
+                <span> </span>
+                <span className="catalogue">
                   pour débloquer l’entièreté du catalogue.
-                </p>
-              </div>
+                </span>
+              </p>
             </div>
           </div>
         </>
@@ -95,5 +101,3 @@ function Connection() {
 }
 
 export default Connection;
-
-

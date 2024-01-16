@@ -9,11 +9,10 @@ import LogoContainer from "../components/LogoContainer";
 function Home() {
   const { movies } = useMovies();
   const [categories, setCategories] = useState([]);
-  // const [entendance, setEnTendance] = useState([]);
 
-  const getcategories = () => {
+  const getCategories = () => {
     axios
-      .get("http://localhost:3310/api/categories")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/categories`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -21,23 +20,10 @@ function Home() {
         console.error(error);
       });
   };
-  useEffect(() => {
-    getcategories();
-  }, []);
 
-  // const getentendance = () => {
-  //   axios
-  //     .get("http://localhost:3310/api/FilmsEnTendance")
-  //     .then((response) => {
-  //       setEnTendance(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-  // useEffect(() => {
-  //   getentendance();
-  // }, []);
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <div className="home">

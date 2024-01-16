@@ -1,0 +1,78 @@
+.ContainerEditVideo {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .titlePage {
+    display: flex;
+    justify-content: center;
+    padding-top: 8vh;
+    padding-bottom: 5vh;
+  }
+  .containerFormMiniature {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    .miniature {
+      object-fit: cover;
+      border-radius: 5px;
+      background: rgba(238, 226, 226, 0.1);
+      border-bottom: 1px #ff509a solid;
+      height: 20vh;
+      width: 80%;
+    }
+    .min {
+      position: absolute;
+      border-radius: 5px;
+      color: var(--text-field-background-color);
+      font-size: 0.8rem;
+      background-color: #ff509a;
+      button {
+        border: none;
+      }
+    }
+  }
+  .containerFormEdit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    .edit {
+      color: var(--text-field-background-color);
+      border: none;
+      background: rgba(238, 226, 226, 0.1);
+      height: 7vh;
+      border-radius: 10px;
+      border-bottom: 1px #ff509a solid;
+      &::placeholder {
+        color: red;
+      }
+    }
+  }
+  .containerButtonEdit {
+    display: flex;
+    padding-top: 15vh;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    .editButton {
+      background-color: var(--secondary-font-color);
+      border: 1px solid #ff509a;
+      border-radius: 3px;
+      width: 25vw;
+      height: 5vh;
+      cursor: pointer;
+      color: hsla(0, 0%, 86%, 1);
+    }
+  }
+  .delete {
+    background-color: var(--secondary-font-color);
+    border: 1px solid #ff509a;
+    border-radius: 3px;
+    width: 25vw;
+    height: 5vh;
+    cursor: pointer;
+    color: hsla(0, 0%, 86%, 1);
+  }
+}

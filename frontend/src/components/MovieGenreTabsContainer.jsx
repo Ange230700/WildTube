@@ -1,40 +1,21 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+/* eslint-disable import/no-extraneous-dependencies */
+import useEmblaCarousel from "embla-carousel-react";
 import PropTypes from "prop-types";
+import MovieGenreTab from "./MovieGenreTab";
 
 function MovieGenreTabsContainer({ categories }) {
+  const [emblaRef] = useEmblaCarousel({
+    loop: false,
+  });
+
   return (
-    <ul className="movie-genre-tabs-container">
-      {categories.map((categorie) => {
-        const [allMoviesForOneCategorie, setAllMoviesForOneCategorie] =
-          useState([]);
-        useEffect(() => {
-          axios
-            .get(`http://localhost:3310/api/films/category/${categorie.id}`)
-            .then((response) => {
-              setAllMoviesForOneCategorie(response.data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        }, [categorie.id]);
-        if (allMoviesForOneCategorie.length) {
-          return (
-            <li className="movie-genre-tab-container" key={categorie.id}>
-              <Link
-                className="movie-genre selected-tab"
-                to={`/category/${categorie.id}`}
-                state={categorie.id}
-              >
-                {categorie.name}
-              </Link>
-            </li>
-          );
-        }
-        return null;
-      })}
-    </ul>
+    <div className="embla" ref={emblaRef}>
+      <div className="embla__container">
+        {categories.map((category) => (
+          <MovieGenreTab key={category.id} category={category} />
+        ))}
+      </div>
+    </div>
   );
 }
 

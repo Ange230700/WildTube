@@ -4,27 +4,22 @@ class UserManager extends AbstractManager {
   constructor() {
     // Call the constructor of the parent class (AbstractManager)
     // and pass the table name "user" as configuration
-    super({ table: "user" });
+    super({ table: "User" });
   }
 
   // The C of CRUD - Create operation
-
-  async create({
-    name,
-    email,
-    naissance,
-    civility,
-    password,
-    IsAdmin = false,
-  }) {
-    // Execute the SQL INSERT query to add a new item to the "user" table
+  async create({ name, email, naissance, civility, hashedPassword }) {
+    // Execute the SQL INSERT query to insert a new item into the "user" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (name, email, naissance, civility, password, IsAdmin) values (?, ?, ?, ?, ?, ?)`,
-      [name, email, naissance, civility, password, IsAdmin]
+      `INSERT INTO ${this.table} (name, email, naissance, civility, hashed_password) VALUES (?, ?, ?, ?, ?)`,
+      [name, email, naissance, civility, hashedPassword]
     );
 
-    // Return the ID of the newly inserted item
-    return result;
+    // Get the ID of the newly inserted item
+    const createdId = result.insertId;
+
+    // Return the newly created item
+    return { id: createdId, name, email, naissance, civility, hashedPassword };
   }
   // The Rs of CRUD - Read operations
 
@@ -49,11 +44,23 @@ class UserManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  async update({ name, email, naissance, civility, password, IsAdmin, id }) {
+  async updateAvatar(id, avatar) {
     // Execute the SQL UPDATE query to update a item to the "user" table
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET name=?, email=?, naissance=?, civility=?, password=?, IsAdmin=?  WHERE id=?`,
-      [name, email, naissance, civility, password, IsAdmin, id]
+      `UPDATE ${this.table} SET avatar = ? WHERE id = ?`,
+      [avatar, id]
+    );
+
+    // Return the ID of the newly inserted item
+    return result;
+  }
+
+  // The U of CRUD - Update operation
+  async update({ name, email, naissance, civility, IsAdmin, id }) {
+    // Execute the SQL UPDATE query to update a item to the "user" table
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET name=?, email=?, naissance=?, civility=?, IsAdmin=?  WHERE id=?`,
+      [name, email, new Date(naissance), civility, IsAdmin, id]
     );
 
     // Return the ID of the newly inserted item
