@@ -12,9 +12,11 @@
     flex-direction: column;
     display: flex;
     gap: var(--spacing-constant);
+    gap: 50px;
   }
   .inputs {
     flex-direction: column;
+
     display: flex;
     align-items: center;
     gap: var(--spacing-constant);
@@ -23,6 +25,14 @@
     justify-content: center;
     display: flex;
     max-width: 500px;
+    position: relative;
+
+    .errorMessage {
+      color: red;
+      position: absolute;
+      font-size: 12px;
+      left: 10px;
+    }
   }
   .input {
     width: 63vw;
@@ -42,6 +52,9 @@
     &:focus {
       outline: none;
     }
+  }
+  .errorPassword {
+    border: 2px solid red;
   }
   .additionalInformation {
     flex-direction: column;

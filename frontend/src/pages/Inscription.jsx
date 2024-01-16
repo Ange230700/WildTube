@@ -12,6 +12,8 @@ function Inscription() {
     password: "",
     avatar: "",
   });
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   // const { updateUser, user: connectedUser } = useUser();
   const [showModal, setShowModal] = useState(false);
@@ -28,6 +30,16 @@ function Inscription() {
       [name]: value,
     }));
   };
+  const handleEmailChange = (e) => {
+    setEmailError("");
+    handleInputChange(e);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleSubmit = async () => {
     if (user.civility === "Monsieur") {
@@ -35,7 +47,6 @@ function Inscription() {
     } else if (user.civility === "Madame") {
       user.civility = false;
     }
-
     try {
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/users`,
@@ -51,7 +62,12 @@ function Inscription() {
       // console.log("Request URL:", url);
       // console.log("User registered successfully");
     } catch (someError) {
-      console.error("Error during registration:", someError);
+      if (someError.response && someError.response.status === 400) {
+        // Si l'email existe déjà, définir l'erreur d'email
+        setEmailError(someError.response.data.message);
+      } else {
+        console.error("Error during registration:", someError);
+      }
     }
   };
   return (
@@ -74,28 +90,50 @@ function Inscription() {
               <input
                 type="email"
                 name="email"
-                className="input"
+                className={`input ${
+                  user.email && !emailRegex.test(user.email) ? "errorEmail" : ""
+                }`}
                 value={user.email}
-                onChange={handleInputChange}
+                onChange={handleEmailChange}
                 placeholder="Adresse Mail"
               />
+              {emailError && <div className="errorMessage">{emailError}</div>}
             </div>
             <div className="inputContainer">
               <input
                 type="password"
                 name="password"
-                className="input"
+                className={`input ${
+                  user.password && user.password.length < 8
+                    ? "errorPassword"
+                    : ""
+                }`}
+                minLength="8"
                 value={user.password}
                 onChange={handleInputChange}
                 placeholder="Mot de passe"
               />
+              {user.password && user.password.length < 8 && (
+                <div className="errorMessage">Min 8 caractères</div>
+              )}
             </div>
             <div className="inputContainer">
               <input
                 type="password"
-                className="input"
+                className={`input ${
+                  confirmPassword && user.password !== confirmPassword
+                    ? "errorPassword"
+                    : ""
+                }`}
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
                 placeholder="Confirmation du mot de passe"
               />
+              {confirmPassword && user.password !== confirmPassword && (
+                <div className="errorMessage">
+                  Les mots de passe ne sont pas identiques
+                </div>
+              )}
             </div>
           </div>
 
@@ -134,6 +172,7 @@ function Inscription() {
               <input
                 className="inputDate"
                 type="date"
+                max={new Date().toISOString().split("T")[0]}
                 name="naissance"
                 value={user.naissance}
                 onChange={handleInputChange}
