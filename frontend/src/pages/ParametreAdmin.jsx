@@ -1,4 +1,4 @@
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, NavLink, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function ParametreAdmin() {
@@ -73,12 +73,6 @@ function ParametreAdmin() {
             <h3>Ajouter des Administrateurs</h3>
           </Link>
         </div>
-
-        {/* <div className="params">
-          <NavLink to="/EditVideo">
-            <h3>Modifier / supprimer des videos</h3>
-          </NavLink>
-        </div>
         <div className="params">
           <h3>Modifier les sections</h3>
         </div>
@@ -89,7 +83,7 @@ function ParametreAdmin() {
           <NavLink to="/AjoutAdmin">
             <h3>Ajouter des Administrateurs</h3>
           </NavLink>
-        </div> */}
+        </div>
         <div className="Useroption">
           <button
             className="RegarderPlusTardButton"
