@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "favoris/",
+        path: "favorites/",
         element: <Favorites />,
       },
       {
@@ -83,7 +83,7 @@ const router = createBrowserRouter([
         element: <AjoutAdmin />,
       },
       {
-        path: "/EditVideo",
+        path: "/EditVideo/:movieId",
         element: <EditVideo />,
       },
     ],

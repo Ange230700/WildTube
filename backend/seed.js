@@ -13,6 +13,31 @@ const database = require("./database/client");
 const films = require("./src/services/films");
 const categories = require("./src/services/categories");
 
+async function insertAdmin() {
+  try {
+    const password = "admin";
+    const hashedPassword = argon2.hash(password); // Hash the password
+
+    hashedPassword.then((hashed) => {
+      return database.query(
+        "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [
+          "Admin",
+          "admin@admin.admin",
+          "2000-01-01 00:00:00",
+          1,
+          hashed,
+          1,
+          "https://avatars.githubusercontent.com/u/97165289",
+        ]
+      );
+    });
+  } catch (err) {
+    console.error("Error inserting admin:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
 async function insertUsers() {
   try {
     const queries = [];
@@ -26,22 +51,20 @@ async function insertUsers() {
       const hashedPassword = argon2.hash(password); // Hash the password
 
       queries.push(
-        queries.push(
-          hashedPassword.then((hashed) => {
-            return database.query(
-              "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-              [
-                faker.person.firstName(),
-                faker.internet.email(),
-                randomDate,
-                faker.number.binary({ min: 0, max: 1 }),
-                hashed,
-                0,
-                faker.image.avatarGitHub(),
-              ]
-            );
-          })
-        )
+        hashedPassword.then((hashed) => {
+          return database.query(
+            "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [
+              faker.person.firstName(),
+              faker.internet.email(),
+              randomDate,
+              faker.number.binary({ min: 0, max: 1 }),
+              hashed,
+              0,
+              faker.image.avatarGitHub(),
+            ]
+          );
+        })
       );
     }
     await Promise.all(queries);
@@ -153,6 +176,7 @@ async function seed() {
     await database.query("TRUNCATE `Categorie_par_film`");
     await database.query("TRUNCATE `Commentaire_film`");
 
+    await insertAdmin();
     await insertUsers();
     await insertFilms();
     await insertCategories();

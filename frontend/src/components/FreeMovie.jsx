@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams, NavLink, useLocation } from "react-router-dom";
+import { useParams, NavLink, useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import CommentsSection from "./CommentsSection";
 
 function FreeMovie({ movie }) {
+  const navigate = useNavigate();
   const { movieId } = useParams();
   const { user } = useUser();
   const [isFavorited, setIsFavorited] = useState(false);
@@ -32,6 +33,9 @@ function FreeMovie({ movie }) {
       console.error("Error checking favorite status", error);
       return null;
     }
+  };
+  const handleClick = () => {
+    navigate(`/EditVideo/${movie.id}`);
   };
 
   const handleFavoriteClick = async (myMovieId) => {
@@ -188,6 +192,21 @@ function FreeMovie({ movie }) {
                   alt="favourite icon"
                 />
               </button>
+              {user.IsAdmin === 1 ? (
+                <button
+                  className="ThumbsUpRegular1"
+                  type="button"
+                  onClick={handleClick}
+                >
+                  <img
+                    className="favourite-icon"
+                    src="/src/assets/icons/edit.png"
+                    alt="edit icon"
+                  />
+                </button>
+              ) : (
+                ""
+              )}
               <button
                 className="ThumbsUpRegular1"
                 type="button"

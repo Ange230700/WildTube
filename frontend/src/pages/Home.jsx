@@ -10,7 +10,7 @@ function Home() {
   const { movies } = useMovies();
   const [categories, setCategories] = useState([]);
 
-  const getcategories = () => {
+  const getCategories = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/categories`)
       .then((response) => {
@@ -22,7 +22,7 @@ function Home() {
   };
 
   useEffect(() => {
-    getcategories();
+    getCategories();
   }, []);
 
   return (
