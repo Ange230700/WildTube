@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 const tables = require("../tables");
 
 const browse = async (req, res, next) => {
@@ -36,6 +34,12 @@ const browseCommentsByFilmId = async (req, res, next) => {
 const addComment = async (req, res, next) => {
   try {
     const { userId, filmId, avatarId, content } = req.body;
+
+    if (!userId || !filmId || !avatarId) {
+      res.status(400).json({ message: "Bad Request" });
+      return;
+    }
+
     const date = new Date().toISOString().split("T")[0];
     const unique_key = `${userId}-${filmId}-${avatarId}`;
 
@@ -50,6 +54,7 @@ const addComment = async (req, res, next) => {
 
     res.status(201).json(newComment);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };

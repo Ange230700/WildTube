@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 const AbstractManager = require("./AbstractManager");
 
 class CommentaireFilmManager extends AbstractManager {
@@ -8,6 +6,10 @@ class CommentaireFilmManager extends AbstractManager {
   }
 
   async create({ userId, filmId, avatarId, content, date, unique_key }) {
+    if (!userId || !filmId || !avatarId) {
+      throw new Error("Bad Request");
+    }
+
     const [result] = await this.database.query(
       `INSERT INTO ${this.table} (userId, filmId, avatarId, content, date, unique_key) VALUES (?, ?, ?, ?, ?, ?)`,
       [userId, filmId, avatarId, content, date, unique_key]

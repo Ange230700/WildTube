@@ -1,5 +1,3 @@
-// utils/dateFormatter.js
-
 const formatDate = (dateString) => {
   if (!dateString) return "";
 

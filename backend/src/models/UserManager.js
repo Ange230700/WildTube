@@ -52,7 +52,7 @@ class UserManager extends AbstractManager {
   async readUserWithAvatar(user_id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
-      `SELECT User.id AS id, name, email, naissance, civility, hashed_password, IsAdmin, avatarId, avatar_url, avatar_filename FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id WHERE id = ?`,
+      `SELECT ${this.table}.id, ${this.table}.name, ${this.table}.email, ${this.table}.naissance, ${this.table}.civility, ${this.table}.hashed_password, ${this.table}.IsAdmin, ${this.table}.avatarId, Avatar.avatar_url, Avatar.avatar_filename FROM ${this.table} JOIN Avatar ON ${this.table}.avatarId = Avatar.id WHERE ${this.table}.id = ?`,
       [user_id]
     );
 
@@ -63,7 +63,7 @@ class UserManager extends AbstractManager {
   async readByEmail(email) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [result] = await this.database.query(
-      `SELECT User.id AS id, name, email, naissance, civility, hashed_password, IsAdmin, avatarId, avatar_url, avatar_filename FROM ${this.table} JOIN Avatar ON User.avatarId = Avatar.id WHERE email = ?`,
+      `SELECT ${this.table}.id, ${this.table}.name, ${this.table}.email, ${this.table}.naissance, ${this.table}.civility, ${this.table}.hashed_password, ${this.table}.IsAdmin, ${this.table}.avatarId, Avatar.avatar_url, Avatar.avatar_filename FROM ${this.table} JOIN Avatar ON ${this.table}.avatarId = Avatar.id WHERE ${this.table}.email = ?`,
       [email]
     );
 

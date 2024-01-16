@@ -19,6 +19,7 @@ function CommentsSection({ filmId, user }) {
     const commentData = {
       userId: user.id,
       filmId,
+      avatarId: user.avatarId,
       content,
     };
 
@@ -137,9 +138,9 @@ function CommentsSection({ filmId, user }) {
                 alt="avatar"
                 className="Avatar2"
                 src={
-                  user.avatar
-                    ? user.avatar
-                    : "https://avatars.githubusercontent.com/u/97165289"
+                  user.avatar_filename ||
+                  user.avatar_url ||
+                  "https://avatars.githubusercontent.com/u/97165289"
                 }
               />
               <h6 className="Username">{user.name}</h6>
@@ -231,7 +232,9 @@ CommentsSection.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    avatar: PropTypes.string,
+    avatarId: PropTypes.number.isRequired,
+    avatar_filename: PropTypes.string,
+    avatar_url: PropTypes.string.isRequired,
   }),
 };
 
