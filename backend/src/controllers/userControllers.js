@@ -82,8 +82,7 @@ const readUserWithAvatar = async (req, res, next) => {
 // Modify the edit function
 const edit = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, naissance, civility, password, IsAdmin, avatarId } =
-    req.body;
+  const { name, email, naissance, civility, password, avatarId } = req.body;
 
   try {
     // Optional: Verify old password before updating to new one
@@ -106,7 +105,6 @@ const edit = async (req, res, next) => {
       naissance,
       civility,
       hashed_password: req.body.hashed_password,
-      IsAdmin,
       avatarId,
     });
 
@@ -166,10 +164,12 @@ const add = async (req, res, next) => {
     if (newUser) {
       res.status(201).json(newUser);
     } else {
-      res.status(500).json({ error: "Failed to create user" });
+      res.status(400).json({ error: "Unable to create user" });
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
     next(err);
   }
 };

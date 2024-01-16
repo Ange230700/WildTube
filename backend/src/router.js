@@ -49,7 +49,7 @@ router.get(
 );
 
 // Route to edit a specific item by ID
-router.put("/users/:id", userControllers.edit);
+router.put("/user/:id", userControllers.edit);
 router.put("/update-avatar/:userId", userControllers.updateAvatar);
 
 // Route to add a new item

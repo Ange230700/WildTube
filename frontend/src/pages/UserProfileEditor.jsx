@@ -100,7 +100,7 @@ function UserProfileEditor() {
 
     try {
       const result = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/${userId}`,
         { ...formData },
         {
           headers: {
