@@ -272,7 +272,13 @@ function UserProfileEditor() {
                 {selectedAvatar && (
                   <img
                     className="avatarPreview"
-                    src={selectedAvatar.avatar_url || user.avatar_url}
+                    src={
+                      selectedAvatar.avatar_filename ||
+                      selectedAvatar.avatar_url ||
+                      user.avatar_filename ||
+                      user.avatar_url ||
+                      "https://avatars.githubusercontent.com/u/97165289"
+                    }
                     alt="Avatar"
                   />
                 )}
@@ -297,7 +303,11 @@ function UserProfileEditor() {
                     onClick={() => handleAvatarChange(avatar)}
                   >
                     <img
-                      src={avatar.avatar_url}
+                      src={
+                        avatar.avatar_filename ||
+                        avatar.avatar_url ||
+                        "https://avatars.githubusercontent.com/u/97165289"
+                      }
                       alt="Avatar"
                       className="avatar"
                     />

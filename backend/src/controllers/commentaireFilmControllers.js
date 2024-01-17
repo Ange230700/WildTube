@@ -40,7 +40,7 @@ const addComment = async (req, res, next) => {
       return;
     }
 
-    const date = new Date().toISOString().split("T")[0];
+    const date = new Date().toISOString().slice(0, 19).replace("T", " ");
     const unique_key = `${userId}-${filmId}-${avatarId}`;
 
     const newComment = await tables.Commentaire_film.create({

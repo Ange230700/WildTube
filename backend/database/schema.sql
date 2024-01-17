@@ -68,6 +68,7 @@ CREATE TABLE `Commentaire_film` (
     `avatarId` INT NOT NULL,
     `content` VARCHAR(500) NOT NULL,
     `date` DATETIME NOT NULL,
+    `unique_key` VARCHAR(350) NOT NULL DEFAULT '',
     CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
     CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
     CONSTRAINT FK_Commentaire_Film_avatar_id FOREIGN KEY (`avatarId`) REFERENCES `Avatar` (`id`)

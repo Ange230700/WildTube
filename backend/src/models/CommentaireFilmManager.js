@@ -22,7 +22,7 @@ class CommentaireFilmManager extends AbstractManager {
 
   async readAllCommentsByFilmId(filmId) {
     const [result] = await this.database.query(
-      `SELECT * FROM ${this.table} JOIN User ON ${this.table}.userId = User.id JOIN Avatar ON ${this.table}.avatarId = Avatar.id JOIN Film ON ${this.table}.filmId = Film.id WHERE filmId = ?`,
+      `SELECT ${this.table}.*, User.*, Avatar.* FROM ${this.table} JOIN User ON ${this.table}.userId = User.id JOIN Avatar ON ${this.table}.avatarId = Avatar.id JOIN Film ON ${this.table}.filmId = Film.id WHERE filmId = ?`,
       [filmId]
     );
 

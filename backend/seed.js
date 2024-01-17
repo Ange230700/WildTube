@@ -219,13 +219,14 @@ async function insertCommentaires() {
 
         queries.push(
           database.query(
-            "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `avatarId`, `content`, `date`) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `avatarId`, `content`, `date`, `unique_key`) VALUES (?, ?, ?, ?, ?, ?)",
             [
               userId,
               filmId,
               avatarId,
               faker.lorem.paragraph(),
               faker.date.past(),
+              faker.string.uuid(),
             ]
           )
         );

@@ -206,7 +206,11 @@ function Inscription() {
                 {selectedAvatar && (
                   <img
                     className="avatarPreview"
-                    src={selectedAvatar.avatar_url}
+                    src={
+                      selectedAvatar.avatar_filename ||
+                      selectedAvatar.avatar_url ||
+                      "https://avatars.githubusercontent.com/u/97165289"
+                    }
                     alt="Avatar"
                   />
                 )}
@@ -232,7 +236,7 @@ function Inscription() {
                   >
                     <img
                       className="avatar"
-                      src={avatar.avatar_url}
+                      src={avatar.avatar_filename || avatar.avatar_url}
                       alt="Avatar"
                     />
                   </button>

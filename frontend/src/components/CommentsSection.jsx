@@ -84,18 +84,19 @@ function CommentsSection({ filmId, user }) {
           ) : (
             comments.map((comment) => {
               const formattedDate = comment.date.slice(0, 19).replace("T", " ");
+              const commentKey = `${comment.unique_key}-${comment.id}-${comment.filmId}-${comment.userId}-${comment.avatarId}-${comment.date}`;
 
               return (
-                <div className="CommentContainer" key={comment.unique_key}>
+                <div className="CommentContainer" key={commentKey}>
                   {" "}
                   <div className="UserInfo">
                     <img
                       alt={comment.username}
                       className="Avatar2"
                       src={
-                        comment.avatar_url
-                          ? comment.avatar_url
-                          : "https://avatars.githubusercontent.com/u/97165289"
+                        comment.avatar_filename ||
+                        comment.avatar_url ||
+                        "https://avatars.githubusercontent.com/u/97165289"
                       }
                     />
                     <h6 className="Username">{comment.name}</h6>
@@ -162,18 +163,19 @@ function CommentsSection({ filmId, user }) {
         ) : (
           comments.map((comment) => {
             const formattedDate = comment.date.slice(0, 19).replace("T", " ");
+            const commentKey = `${comment.unique_key}-${comment.id}-${comment.film_id}-${comment.user_id}-${comment.avatar_id}-${comment.content}-${comment.date}`;
 
             return (
-              <div className="CommentContainer" key={comment.unique_key}>
+              <div className="CommentContainer" key={commentKey}>
                 {" "}
                 <div className="UserInfo">
                   <img
                     alt={comment.username}
                     className="Avatar2"
                     src={
-                      comment.avatar_url
-                        ? comment.avatar_url
-                        : "https://avatars.githubusercontent.com/u/97165289"
+                      comment.avatar_filename ||
+                      comment.avatar_url ||
+                      "https://avatars.githubusercontent.com/u/97165289"
                     }
                   />
                   <h6 className="Username">{comment.name}</h6>
@@ -209,18 +211,6 @@ function CommentsSection({ filmId, user }) {
               />
             </button>
           </div>
-          {/* <div className="UserInfo">
-            <img
-              alt="avatar"
-              className="Avatar2"
-              src={
-                user.avatar
-                  ? user.avatar
-                  : "https://avatars.githubusercontent.com/u/97165289"
-              }
-            />
-            <h6 className="Username">{user.name}</h6>
-          </div> */}
         </div>
       </div>
     </section>
