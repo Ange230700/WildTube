@@ -44,7 +44,6 @@ router.get(
 );
 router.get("/users/:id", userControllers.read);
 
-
 // Route to edit a specific item by ID
 router.put("/users/:id", userControllers.edit);
 router.put("/films/:id", filmControllers.edit);
@@ -58,12 +57,10 @@ router.put("/update-avatar/:userId", userControllers.updateAvatar);
 router.post("/comments", commentaireFilmControllers.addComment);
 router.post("/films", uploadImages.array("images", 2), filmControllers.add);
 
-
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
 router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
-
 
 module.exports = router;

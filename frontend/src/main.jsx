@@ -20,6 +20,7 @@ import AccountInfo from "./pages/AccountInfo";
 import "./sass/index.scss";
 import AjoutAdmin from "./pages/AjoutAdmin";
 import EditVideo from "./pages/EditVideo";
+import AddVideos from "./pages/AddVideos";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "/EditVideo/:movieId",
         element: <EditVideo />,
+      },
+      {
+        path: "/AddVideos",
+        element: <AddVideos />,
       },
     ],
   },
