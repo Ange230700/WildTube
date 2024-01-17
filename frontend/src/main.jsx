@@ -78,7 +78,7 @@ const router = createBrowserRouter([
         element: <AjoutAdmin />,
       },
       {
-        path: "/EditVideo",
+        path: "/EditVideo/:movieId",
         element: <EditVideo />,
       },
     ],

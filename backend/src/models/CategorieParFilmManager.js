@@ -22,6 +22,17 @@ class CategorieParFilmManager extends AbstractManager {
     return rows;
   }
 
+  async delete({ id }) {
+    // Execute the SQL DELETE query to remove an categorieParFilm by its ID
+    const [result] = await this.database.query(
+      `delete from ${this.table} where filmId = ?`,
+      [id]
+    );
+
+    // Return the number of affected rows
+    return result;
+  }
+
   // The D of CRUD - Delete operation
 }
 

@@ -88,10 +88,14 @@ const edit = async (req, res, next) => {
     // Optional: Verify old password before updating to new one
     const currentUser = await tables.User.read(id);
 
+    let formattedDate = naissance;
+    if (!Number.isNaN(Date.parse(naissance))) {
+      formattedDate = new Date(naissance).toISOString().slice(0, 10);
+    }
+
     if (!currentUser) {
       console.warn("currentUser", currentUser);
       res.status(404).json({ error: "User not found" });
-      return;
     }
 
     if (password) {
@@ -103,7 +107,7 @@ const edit = async (req, res, next) => {
     const updatedUser = await tables.User.update(id, {
       name,
       email,
-      naissance,
+      naissance: formattedDate,
       civility,
       hashed_password: req.body.hashed_password,
       avatarId,

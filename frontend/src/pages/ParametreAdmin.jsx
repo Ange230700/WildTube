@@ -69,20 +69,23 @@ function ParametreAdmin() {
             Ajouter des Administrateurs
           </Link>
         </div>
-
-        <div className="params">
-          <Link to="/EditVideo">
-            <h3>Modifier / supprimer des videos</h3>
+        <div className="Useroption">
+          <Link className="RegarderPlusTard" to="/EditVideo">
+            Modifier / supprimer des videos
           </Link>
         </div>
-        <div className="params">
-          <h3>Modifier les sections</h3>
+        <div className="Useroption">
+          <Link className="RegarderPlusTard" to="/">
+            Modifier les sections
+          </Link>
         </div>
-        <div className="params">
-          <h3>Gérer les catégories</h3>
+        <div className="Useroption">
+          <Link className="RegarderPlusTard" to="/">
+            Gérer les catégories
+          </Link>
         </div>
-        <div className="params">
-          <Link to="/AjoutAdmin">
+        <div className="Useroption">
+          <Link className="RegarderPlusTard" to="/AjoutAdmin">
             <h3>Ajouter des Administrateurs</h3>
           </Link>
         </div>

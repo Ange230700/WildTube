@@ -58,9 +58,45 @@ const addComment = async (req, res, next) => {
     next(err);
   }
 };
+const deleteComment = async (req, res, next) => {
+  try {
+    const { commentId } = req.params;
+
+    const deletedComment = await tables.Commentaire_film.delete(commentId);
+
+    if (deletedComment.affectedRows === 0) {
+      res.status(404).json({ message: "Comment not found" });
+    } else {
+      res.json({ message: "Comment deleted successfully" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updateComment = async (req, res, next) => {
+  try {
+    const { commentId } = req.params;
+    const { content } = req.body;
+
+    const updatedComment = await tables.Commentaire_film.update(commentId, {
+      content,
+    });
+
+    if (!updatedComment) {
+      res.status(404).json({ message: "Comment not found" });
+    } else {
+      res.json(updatedComment);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {
   browse,
   browseCommentsByFilmId,
   addComment,
+  deleteComment,
+  updateComment,
 };

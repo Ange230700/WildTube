@@ -28,6 +28,24 @@ class CommentaireFilmManager extends AbstractManager {
 
     return result;
   }
+
+  async delete(commentId) {
+    const [result] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
+      [commentId]
+    );
+
+    return result;
+  }
+
+  async update(commentId, { content }) {
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET content = ? WHERE id = ?`,
+      [content, commentId]
+    );
+
+    return result;
+  }
 }
 
 module.exports = CommentaireFilmManager;
