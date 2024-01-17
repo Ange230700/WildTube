@@ -5,14 +5,10 @@ class CommentaireFilmManager extends AbstractManager {
     super({ table: "Commentaire_film" });
   }
 
-  async create({ userId, filmId, avatarId, content, date, unique_key }) {
-    if (!userId || !filmId || !avatarId) {
-      throw new Error("Bad Request");
-    }
-
+  async create({ userId, filmId, avatarId, content, date }) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (userId, filmId, avatarId, content, date, unique_key) VALUES (?, ?, ?, ?, ?, ?)`,
-      [userId, filmId, avatarId, content, date, unique_key]
+      `INSERT INTO ${this.table} (userId, filmId, avatarId, content, date) VALUES (?, ?, ?, ?, ?)`,
+      [userId, filmId, avatarId, content, date]
     );
 
     return result;

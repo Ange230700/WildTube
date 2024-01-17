@@ -216,24 +216,19 @@ async function insertCommentaires() {
         const userId = faker.number.int({ min: 1, max: users.length });
         const filmId = faker.number.int({ min: 1, max: films.length });
         const avatarId = faker.number.int({ min: 1, max: avatars.length });
-        const unique_key = `${userId}-${filmId}-${avatarId}`;
 
-        if (!uniqueKeysCombinations.has(unique_key)) {
-          uniqueKeysCombinations.add(unique_key);
-          queries.push(
-            database.query(
-              "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `avatarId`, `content`, `date`, `unique_key`) VALUES (?, ?, ?, ?, ?, ?)",
-              [
-                userId,
-                filmId,
-                avatarId,
-                faker.lorem.paragraph(),
-                faker.date.past(),
-                unique_key,
-              ]
-            )
-          );
-        }
+        queries.push(
+          database.query(
+            "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `avatarId`, `content`, `date`) VALUES (?, ?, ?, ?, ?)",
+            [
+              userId,
+              filmId,
+              avatarId,
+              faker.lorem.paragraph(),
+              faker.date.past(),
+            ]
+          )
+        );
       }
 
       await Promise.all(queries);
