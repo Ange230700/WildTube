@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 import MovieLink from "../components/MovieLink";
 
 function Favorites() {
-  const { user } = useUser();
+  const { isAuthenticated, user } = useAuth();
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (user && isAuthenticated) {
       axios
         .get(
           `${import.meta.env.VITE_BACKEND_URL}/api/favorites/film/${user.id}`

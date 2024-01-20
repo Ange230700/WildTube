@@ -5,10 +5,12 @@ import { useUser } from "../contexts/UserContext";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
 import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
+import useAuth from "../hooks/useAuth";
 
 function UserProfileEditor() {
   const { userId } = useParams();
-  const { user, updateUser } = useUser();
+  const { user, isAuthenticated } = useAuth();
+  const { updateUser } = useUser();
   const [formData, setFormData] = useState({
     name: user.name || "",
     email: user.email || "",
@@ -171,7 +173,7 @@ function UserProfileEditor() {
     }
   }, [user]);
 
-  return !user ? null : (
+  return !user || !isAuthenticated ? null : (
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
