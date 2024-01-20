@@ -2,7 +2,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
-import LogOut from "../components/LogOut";
 import LogoContainer from "../components/LogoContainer";
 
 function Connection() {
@@ -11,7 +10,7 @@ function Connection() {
     password: "",
   });
 
-  const { updateUser, user: connectedUser } = useUser();
+  const { updateUser } = useUser();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,58 +38,52 @@ function Connection() {
 
   return (
     <div className="loginPage">
-      {connectedUser ? (
-        <LogOut />
-      ) : (
-        <>
-          <LogoContainer />
-          <form className="form" onSubmit={handleLogin}>
-            <div className="inputs">
-              <div className="inputContainer">
-                <input
-                  type="text"
-                  className="input"
-                  name="email"
-                  value={user.email}
-                  placeholder="Adresse Mail :"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="inputContainer">
-                <input
-                  type="password"
-                  name="password"
-                  value={user.password}
-                  className="input"
-                  placeholder="Mot de passe :"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="buttonContainer">
-                <div className="connectionButton">
-                  <button type="submit" className="connexion">
-                    connexion
-                  </button>
-                </div>
-              </div>
+      <LogoContainer />
+      <form className="form" onSubmit={handleLogin}>
+        <div className="inputs">
+          <div className="inputContainer">
+            <input
+              type="text"
+              className="input"
+              name="email"
+              value={user.email}
+              placeholder="Adresse Mail :"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="inputContainer">
+            <input
+              type="password"
+              name="password"
+              value={user.password}
+              className="input"
+              placeholder="Mot de passe :"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="buttonContainer">
+            <div className="connectionButton">
+              <button type="submit" className="connexion">
+                connexion
+              </button>
             </div>
-            <div className="signUpText">
-              <p className="tuNAsPasDeCompte">
-                Tu n’as pas de compte ?<span> </span>
-                <span>
-                  <NavLink to="/Inscription" className="inscrisToiIci">
-                    Inscris toi ici
-                  </NavLink>
-                </span>
-                <span> </span>
-                <span className="catalogue">
-                  pour débloquer l’entièreté du catalogue.
-                </span>
-              </p>
-            </div>
-          </form>
-        </>
-      )}
+          </div>
+        </div>
+        <div className="signUpText">
+          <p className="tuNAsPasDeCompte">
+            Tu n’as pas de compte ?<span> </span>
+            <span>
+              <NavLink to="/Inscription" className="inscrisToiIci">
+                Inscris toi ici
+              </NavLink>
+            </span>
+            <span> </span>
+            <span className="catalogue">
+              pour débloquer l’entièreté du catalogue.
+            </span>
+          </p>
+        </div>
+      </form>
     </div>
   );
 }
