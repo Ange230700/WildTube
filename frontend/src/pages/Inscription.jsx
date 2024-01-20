@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
 
@@ -18,6 +18,7 @@ function Inscription() {
   const [showModal, setShowModal] = useState(false);
   const [avatars, setAvatars] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const { setAuth } = useOutletContext();
 
   const navigate = useNavigate();
 
@@ -70,21 +71,34 @@ function Inscription() {
       !user.naissance
     ) {
       console.error("All fields are required");
-
       return;
     }
 
     try {
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/users`,
-        user
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }
       );
 
       if (result.status === 201) {
+        const authentication = await result.data;
+
+        setAuth(authentication);
+        localStorage.setItem("token", authentication.token);
+
         toggleModal();
         setTimeout(() => {
           navigate("/Connection");
         }, 3000);
+      } else {
+        console.error("Error during registration", "result", result);
       }
     } catch (someError) {
       console.error("Error during registration:", someError);

@@ -53,7 +53,6 @@ const add = async (req, res, next) => {
   try {
     // 1. Ajouter le film
     const insertId = await tables.film.create(film);
-    // console.log("Insert ID:", insertId);
 
     // 2. Faire la connexion avec les catégories
     const categories = JSON.parse(req.body.category);

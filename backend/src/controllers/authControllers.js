@@ -1,4 +1,5 @@
 const argon2 = require("argon2");
+const jwt = require("jsonwebtoken");
 const tables = require("../tables");
 
 const login = async (req, res, next) => {
@@ -18,12 +19,22 @@ const login = async (req, res, next) => {
 
       if (verified) {
         // delete user.hashed_password;
-        res.status(200).json({ ...user, message: "Logged in successfully" });
+        const token = await jwt.sign(
+          { sub: user.id, user },
+          process.env.APP_SECRET,
+          {
+            expiresIn: "1h",
+          }
+        );
+        res.status(200).json({
+          token,
+          ...user,
+          message: "Logged in successfully",
+        });
       } else {
         res.sendStatus(422).json({ message: " Invalid email or password " });
       }
     } else {
-      console.warn("user", user);
       res.sendStatus(422);
     }
   } catch (err) {

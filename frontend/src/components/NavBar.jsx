@@ -3,7 +3,6 @@ import { useUser } from "../contexts/UserContext";
 
 function NavBar() {
   const { user } = useUser();
-  console.warn("user", user);
   const location = useLocation();
 
   const changeProfile = () => {

@@ -9,7 +9,7 @@ const router = express.Router();
 // Import itemControllers module for handling item-related operations
 
 const { uploadImages } = require("./multer/multer");
-const { hashPassword } = require("./services/auth");
+const { hashPassword, verifyToken } = require("./services/auth");
 
 const userControllers = require("./controllers/userControllers");
 const filmControllers = require("./controllers/filmControllers");
@@ -78,5 +78,10 @@ router.delete("/comments/:commentId", commentaireFilmControllers.deleteComment);
 
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
+
+// Authentication wall
+router.use(verifyToken);
+
+router.get("/userByToken", userControllers.getByToken);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const argon2 = require("argon2");
+const jwt = require("jsonwebtoken");
 
 const hashPassword = async (req, res, next) => {
   try {
@@ -20,6 +21,36 @@ const hashPassword = async (req, res, next) => {
   }
 };
 
+const verifyToken = (req, res, next) => {
+  try {
+    // check Authorization header
+    const authorizationHeader = req.get("Authorization");
+
+    if (!authorizationHeader) {
+      throw new Error("Authorization header is undefined");
+    }
+
+    // check if token is valid
+    const [type, token] = authorizationHeader.split(" ");
+
+    if (type !== "Bearer") {
+      throw new Error("Authorization type is not Bearer");
+    }
+
+    // check if token is valid (its expiration date and its authenticity)
+    // if token is valid, the payload is returned and decoded
+    req.auth = jwt.verify(token, process.env.APP_SECRET);
+
+    next();
+  } catch (err) {
+    console.error(err.message);
+    if (err.message === "jwt expired") {
+      res.status(400).send("expired session");
+    }
+  }
+};
+
 module.exports = {
   hashPassword,
+  verifyToken,
 };

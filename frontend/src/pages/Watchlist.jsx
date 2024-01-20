@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import MovieLink from "../components/MovieLink";
@@ -6,6 +7,7 @@ import MovieLink from "../components/MovieLink";
 function Watchlist() {
   const { user } = useUser();
   const [watchlistItems, setWatchlistItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -19,6 +21,8 @@ function Watchlist() {
         .catch((error) => {
           console.error(error);
         });
+    } else {
+      navigate("/connection");
     }
   }, []);
 

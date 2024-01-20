@@ -78,6 +78,26 @@ const readUserWithAvatar = async (req, res, next) => {
   }
 };
 
+const getByToken = async (req, res) => {
+  const userInfos = req.auth;
+
+  try {
+    if (userInfos && userInfos.sub) {
+      const user = await tables.User.read(userInfos.sub);
+
+      if (!user) {
+        res.sendStatus(404);
+      } else {
+        res.json(user);
+      }
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 // Modify the edit function
 const edit = async (req, res, next) => {
@@ -94,7 +114,6 @@ const edit = async (req, res, next) => {
     }
 
     if (!currentUser) {
-      console.warn("currentUser", currentUser);
       res.status(404).json({ error: "User not found" });
     }
 
@@ -114,7 +133,6 @@ const edit = async (req, res, next) => {
     });
 
     if (!updatedUser) {
-      console.warn("updatedUser", updatedUser);
       res.status(404).json({ error: "User not found" });
       return;
     }
@@ -190,6 +208,7 @@ module.exports = {
   browse,
   read,
   readUserWithAvatar,
+  getByToken,
   edit,
   add,
   updateAvatar,

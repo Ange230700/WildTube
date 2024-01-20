@@ -1,18 +1,25 @@
+import { useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
-  const { user } = useUser();
-  const { updateUser } = useUser();
+  const { user, updateUser } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogOut = () => {
     updateUser(null);
+    localStorage.removeItem("token");
     navigate("/");
   };
 
-  return (
+  useEffect(() => {
+    if (!user) {
+      navigate("/connection");
+    }
+  }, []);
+
+  return user ? (
     <div
       className="ProfileDisplaySection"
       style={
@@ -68,6 +75,8 @@ function UserProfil() {
         </div>
       </section>
     </div>
+  ) : (
+    <div />
   );
 }
 

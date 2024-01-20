@@ -8,7 +8,6 @@ import formatDate from "../utils/formatDate"; // Import a utility function for d
 
 function UserProfileEditor() {
   const { userId } = useParams();
-  console.warn("userId::: ", userId);
   const { user, updateUser } = useUser();
   const [formData, setFormData] = useState({
     name: user.name || "",
@@ -167,6 +166,8 @@ function UserProfileEditor() {
           user.avatar_url ||
           "https://avatars.githubusercontent.com/u/97165289"
       );
+    } else {
+      navigate("/connection");
     }
   }, [user]);
 
