@@ -112,6 +112,7 @@ function CommentsSection({ filmId, user }) {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/comments/film/${filmId}`
         );
+
         setComments(response.data);
       } catch (error) {
         console.error("Error updating comment", error);

@@ -1,10 +1,9 @@
-import { useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import useAuth from "../hooks/useAuth";
 
 function UserProfil() {
-  const { isAuthenticated, user } = useAuth();
+  const { user } = useAuth();
   const { updateUser } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,13 +14,7 @@ function UserProfil() {
     navigate("/");
   };
 
-  useEffect(() => {
-    if (!user || !isAuthenticated) {
-      navigate("/connection");
-    }
-  }, []);
-
-  return user && isAuthenticated ? (
+  return user ? (
     <div
       className="ProfileDisplaySection"
       style={

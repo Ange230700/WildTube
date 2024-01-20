@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import MovieLink from "../components/MovieLink";
 
 function Watchlist() {
-  const { isAuthenticated, user } = useAuth();
+  const { user } = useAuth();
   const [watchlistItems, setWatchlistItems] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && isAuthenticated) {
+    if (user) {
       axios
         .get(
           `${import.meta.env.VITE_BACKEND_URL}/api/watchlist/film/${user.id}`
@@ -21,8 +19,6 @@ function Watchlist() {
         .catch((error) => {
           console.error(error);
         });
-    } else {
-      navigate("/connection");
     }
   }, []);
 

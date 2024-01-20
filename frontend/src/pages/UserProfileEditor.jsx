@@ -9,7 +9,7 @@ import useAuth from "../hooks/useAuth";
 
 function UserProfileEditor() {
   const { userId } = useParams();
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
   const { updateUser } = useUser();
   const [formData, setFormData] = useState({
     name: user.name || "",
@@ -173,7 +173,7 @@ function UserProfileEditor() {
     }
   }, [user]);
 
-  return !user || !isAuthenticated ? null : (
+  return !user ? null : (
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
