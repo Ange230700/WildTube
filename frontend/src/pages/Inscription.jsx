@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
+import { useUser } from "../contexts/UserContext";
 
 function Inscription() {
   const [user, setUser] = useState({
@@ -14,11 +15,10 @@ function Inscription() {
     avatarId: "",
   });
 
-  // const { updateUser, user: connectedUser } = useUser();
+  const { updateUser } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [avatars, setAvatars] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const { setAuth } = useOutletContext();
 
   const navigate = useNavigate();
 
@@ -90,7 +90,7 @@ function Inscription() {
       if (result.status === 201) {
         const authentication = await result.data;
 
-        setAuth(authentication);
+        updateUser(authentication);
         localStorage.setItem("token", authentication.token);
 
         toggleModal();
