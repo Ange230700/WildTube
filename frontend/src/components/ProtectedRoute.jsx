@@ -12,7 +12,7 @@ function ProtectedRoute({ children }) {
     if (!isAuthenticated) {
       navigate("/connection");
     }
-  }, []);
+  }, [isAuthenticated, navigate]);
 
   return children;
 }

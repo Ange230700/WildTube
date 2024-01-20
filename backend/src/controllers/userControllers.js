@@ -80,17 +80,22 @@ const readUserWithAvatar = async (req, res, next) => {
 
 const getByToken = async (req, res) => {
   const userInfos = req.auth;
+  console.warn("userInfos", userInfos);
 
   try {
-    if (userInfos && userInfos.sub) {
-      const user = await tables.User.read(userInfos.sub);
-
-      if (!user) {
-        res.sendStatus(404);
-      } else {
-        res.json(user);
-      }
+    if (!userInfos || !userInfos.sub) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
     }
+
+    const user = await tables.User.read(userInfos.sub);
+
+    if (!user) {
+      res.sendStatus(404).json({ error: "User not found" });
+      return;
+    }
+
+    res.status(200).json(user);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     console.error(err);

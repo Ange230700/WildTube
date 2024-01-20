@@ -27,14 +27,14 @@ const verifyToken = (req, res, next) => {
     const authorizationHeader = req.get("Authorization");
 
     if (!authorizationHeader) {
-      throw new Error("Authorization header is undefined");
+      res.status(401).send({ error: "No token provided " });
     }
 
     // check if token is valid
     const [type, token] = authorizationHeader.split(" ");
 
     if (type !== "Bearer") {
-      throw new Error("Authorization type is not Bearer");
+      res.status(401).send({ error: "Invalid token type" });
     }
 
     // check if token is valid (its expiration date and its authenticity)
@@ -45,7 +45,7 @@ const verifyToken = (req, res, next) => {
   } catch (err) {
     console.error(err.message);
     if (err.message === "jwt expired") {
-      res.status(400).send("expired session");
+      res.status(401).send({ error: "Token expired" });
     }
   }
 };
