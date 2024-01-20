@@ -9,7 +9,8 @@ function AjoutAdmin() {
   const fetch = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users`
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+        { withCredentials: true }
       );
       setUsers(response.data);
     } catch (err) {
