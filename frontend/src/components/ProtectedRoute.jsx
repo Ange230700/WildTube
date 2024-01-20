@@ -11,11 +11,12 @@ function ProtectedRoute({ children }) {
 
   const fetchUser = async () => {
     try {
+      const token = localStorage.getItem("token");
       const res = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/userByToken`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/${user.id}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

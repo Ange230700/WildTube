@@ -75,13 +75,14 @@ function Inscription() {
     }
 
     try {
+      const token = localStorage.getItem("token");
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/users`,
         user,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
           withCredentials: true,
         }

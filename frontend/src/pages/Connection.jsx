@@ -28,6 +28,7 @@ function Connection() {
         user
       );
       if (result.status === 200) {
+        localStorage.setItem("token", result.data.token);
         updateUser(result.data);
         navigate("/");
       }
