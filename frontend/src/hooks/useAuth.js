@@ -26,8 +26,6 @@ export default function useAuth() {
           console.error("Authentication error:", err);
           localStorage.removeItem("token");
         });
-    } else {
-      setIsAuthenticated(false);
     }
   }, []);
 

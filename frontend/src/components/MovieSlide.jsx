@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
 // import { NavLink } from "react-router-dom";
 
-function MovieSlide({ movie, cover }) {
+function MovieSlide({ movie }) {
   const { user } = useUser();
   return movie.IsAvailable || user ? (
     <div>
