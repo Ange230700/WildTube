@@ -7,9 +7,7 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const updateUser = (newUser) => {
-    console.warn("newUserBefore", newUser); // § it should be null but it's not. Why?
     setUser(newUser);
-    console.warn("newUserAfter", newUser); // § it returns the new user as expected
   };
   const contexValue = useMemo(() => {
     return { user, updateUser };

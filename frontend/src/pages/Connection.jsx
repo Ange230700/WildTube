@@ -1,8 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
 import LogoContainer from "../components/LogoContainer";
+import { useUser } from "../contexts/UserContext";
 
 function Connection() {
   const [user, setUser] = useState({
@@ -10,7 +10,7 @@ function Connection() {
     password: "",
   });
 
-  const { updateUser, updateIsAuthenticated } = useAuth();
+  const { updateUser } = useUser();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,12 +28,13 @@ function Connection() {
         user
       );
       if (result.status === 200) {
-        updateUser(result.data);
-        if (result.data.token) {
-          localStorage.setItem("token", result.data.token);
-          updateIsAuthenticated(true);
+        if (result.data) {
+          updateUser(result.data);
+          if (result.data.token) {
+            localStorage.setItem("token", result.data.token);
+          }
+          navigate("/");
         }
-        navigate("/");
       }
     } catch (err) {
       console.error("Incorrect email or password");

@@ -1,8 +1,8 @@
-import useAuth from "../hooks/useAuth";
 // import ToggleSwitch from "./ToggleSwitch";
+import { useUser } from "../contexts/UserContext";
 
 function LogoContainer() {
-  const { user } = useAuth();
+  const { user } = useUser();
 
   return !(user && user.IsAdmin) ? (
     <div className="logo-container">

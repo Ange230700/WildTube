@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { useUser } from "../contexts/UserContext";
 
 function NavBarDesktop() {
-  const { user } = useAuth();
+  const { user } = useUser();
 
   const changeProfile = () => {
     if (user && user.IsAdmin) {

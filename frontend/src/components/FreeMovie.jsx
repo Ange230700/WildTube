@@ -3,12 +3,12 @@ import { useParams, NavLink, useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import CommentsSection from "./CommentsSection";
-import useAuth from "../hooks/useAuth";
+import { useUser } from "../contexts/UserContext";
 
 function FreeMovie({ movie }) {
   const navigate = useNavigate();
   const { movieId } = useParams();
-  const { isAuthenticated, user } = useAuth();
+  const { user } = useUser();
   const [isFavorited, setIsFavorited] = useState(false);
   const [isWatchlisted, setIsWatchlisted] = useState(false);
   const location = useLocation();
@@ -229,11 +229,7 @@ function FreeMovie({ movie }) {
           <p className="movie-title">{movie.title}</p>
           <p className="movie-description">{movie.description}</p>
         </div>
-        <CommentsSection
-          filmId={movie.id}
-          user={user}
-          isAuthenticated={isAuthenticated}
-        />
+        <CommentsSection filmId={movie.id} user={user} />
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
 import MovieLink from "../components/MovieLink";
+import { useUser } from "../contexts/UserContext";
 
 function Watchlist() {
-  const { user } = useAuth();
+  const { user } = useUser();
   const [watchlistItems, setWatchlistItems] = useState([]);
 
   useEffect(() => {

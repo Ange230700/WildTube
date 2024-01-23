@@ -1,14 +1,13 @@
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
-  const { user, isAuthenticated, updateUser } = useAuth();
+  const { user, updateUser } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogOut = () => {
     updateUser(null);
-    isAuthenticated(false);
     localStorage.removeItem("token");
     navigate("/");
   };

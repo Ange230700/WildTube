@@ -4,11 +4,11 @@ import axios from "axios";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
 import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
-import useAuth from "../hooks/useAuth";
+import { useUser } from "../contexts/UserContext";
 
 function UserProfileEditor() {
   const { userId } = useParams();
-  const { user, updateUser } = useAuth();
+  const { user, updateUser } = useUser();
   const [formData, setFormData] = useState({
     name: user.name || "",
     email: user.email || "",

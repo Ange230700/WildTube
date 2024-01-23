@@ -31,7 +31,7 @@ const verifyToken = (req, res, next) => {
     );
 
     if (!authorizationHeader) {
-      res.status(401).send({ error: "No token provided " });
+      res.status(401).send({ error: "No token provided" });
     }
 
     // check if token is valid
