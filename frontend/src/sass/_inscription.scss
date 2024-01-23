@@ -33,6 +33,11 @@
       font-size: 12px;
       left: 10px;
     }
+    .errorEmail {
+      color: red;
+      font-size: 12px;
+      left: 10px;
+    }
   }
   .input {
     width: 63vw;
@@ -126,6 +131,11 @@
     padding: calc(var(--spacing-constant) * 1) calc(var(--spacing-constant) * 2);
     border: none;
     cursor: pointer;
+  }
+  .signUpButton:disabled {
+    background-color: #cccccc;
+    color: #ffffff;
+    cursor: not-allowed;
   }
   .inscription {
     text-align: center;

@@ -74,7 +74,13 @@ function Inscription() {
     <div className="signUpPageMockupGuest">
       <div className="searchDisplaySection">
         <LogoContainer />
-        <form className="form">
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <div className="inputs">
             <div className="inputContainer">
               <input
@@ -183,7 +189,16 @@ function Inscription() {
             <button
               className="signUpButton"
               onClick={handleSubmit}
-              type="button"
+              type="submit"
+              disabled={
+                !user.name ||
+                !user.email ||
+                !user.password ||
+                !user.naissance ||
+                !user.civility ||
+                user.password.length < 8 ||
+                user.password !== confirmPassword
+              }
             >
               <p className="inscription">Inscription</p>
             </button>
