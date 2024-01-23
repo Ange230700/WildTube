@@ -10,7 +10,7 @@ function Connection() {
     password: "",
   });
 
-  const { updateUser } = useAuth();
+  const { updateUser, updateIsAuthenticated } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +30,7 @@ function Connection() {
       if (result.status === 200) {
         localStorage.setItem("token", result.data.token);
         updateUser(result.data);
+        updateIsAuthenticated(true);
         navigate("/");
       }
     } catch (err) {
