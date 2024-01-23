@@ -12,8 +12,10 @@
 
   .containerUser {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
+    max-width: 600px;
     gap: 5px;
     background: rgba(238, 226, 226, 0.1);
     border-bottom: 1px #ff509a solid;

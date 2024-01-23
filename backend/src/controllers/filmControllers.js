@@ -38,7 +38,6 @@ const edit = async (req, res, next) => {
   }
 };
 
-
 const add = async (req, res, next) => {
   if (req.body.images.length === 2) {
     const miniature = req.body.images[0];
@@ -95,7 +94,6 @@ const add = async (req, res, next) => {
   }
 };
 
-
 const destroy = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -112,6 +110,7 @@ const destroy = async (req, res, next) => {
 
 module.exports = {
   browse,
+  add,
   read,
   destroy,
   edit,

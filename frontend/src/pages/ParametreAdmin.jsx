@@ -1,4 +1,4 @@
-import { useNavigate, Link, NavLink, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function ParametreAdmin() {
@@ -79,11 +79,11 @@ function ParametreAdmin() {
         <div className="params">
           <h3>Gérer les catégories</h3>
         </div>
-        <div className="params">
+        {/* <div className="params">
           <NavLink to="/AjoutAdmin">
             <h3>Ajouter des Administrateurs</h3>
           </NavLink>
-        </div>
+        </div> */}
         <div className="Useroption">
           <button
             className="RegarderPlusTardButton"

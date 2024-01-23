@@ -12,9 +12,11 @@
     flex-direction: column;
     display: flex;
     gap: var(--spacing-constant);
+    gap: 50px;
   }
   .inputs {
     flex-direction: column;
+
     display: flex;
     align-items: center;
     gap: var(--spacing-constant);
@@ -23,6 +25,19 @@
     justify-content: center;
     display: flex;
     max-width: 500px;
+    position: relative;
+
+    .errorMessage {
+      color: red;
+      position: absolute;
+      font-size: 12px;
+      left: 10px;
+    }
+    .errorEmail {
+      color: red;
+      font-size: 12px;
+      left: 10px;
+    }
   }
   .input {
     width: 63vw;
@@ -42,6 +57,9 @@
     &:focus {
       outline: none;
     }
+  }
+  .errorPassword {
+    border: 2px solid red;
   }
   .additionalInformation {
     flex-direction: column;
@@ -113,6 +131,11 @@
     padding: calc(var(--spacing-constant) * 1) calc(var(--spacing-constant) * 2);
     border: none;
     cursor: pointer;
+  }
+  .signUpButton:disabled {
+    background-color: #cccccc;
+    color: #ffffff;
+    cursor: not-allowed;
   }
   .inscription {
     text-align: center;

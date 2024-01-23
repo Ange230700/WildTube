@@ -72,7 +72,6 @@ function CommentsSection({ filmId, user }) {
     scrollToBottom();
   }, [comments]);
 
-
   const handleDeleteComment = async (id) => {
     try {
       const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/${id}`;
@@ -122,7 +121,6 @@ function CommentsSection({ filmId, user }) {
       }
     }
   };
-=======
   if (user) {
     return (
       <section className="CommentsSection">

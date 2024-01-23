@@ -83,7 +83,6 @@ const edit = async (req, res, next) => {
     // Respond with the updated item in JSON format
     if (!updatedUser) {
       res.status(400).json({ message: "Bad Request" });
-
     } else {
       res.sendStatus(404);
     }
@@ -99,20 +98,27 @@ const add = async (req, res, next) => {
     // Get the data submitted by the user in the request body
     const { name, email, naissance, civility, hashedPassword } = req.body;
 
-    // Add the new item to the database
-    const newUser = await tables.User.create({
-      name,
-      email,
-      naissance,
-      civility,
-      hashedPassword,
-    });
+    const existingUserEmail = await tables.User.readByEmail(email);
 
-    // Respond with the newly added item in JSON format
-    if (!newUser) {
-      res.status(400).json({ message: "Bad Request" });
+    if (existingUserEmail) {
+      // If the email already exists, respond with an error
+      res.status(400).json({ message: "Adresse email déjà utilisé" });
     } else {
-      res.status(201).json(newUser);
+      // Add the new item to the database
+      const newUser = await tables.User.create({
+        name,
+        email,
+        naissance,
+        civility,
+        hashedPassword,
+      });
+
+      // Respond with the newly added item in JSON format
+      if (!newUser) {
+        res.status(400).json({ message: "Bad Request" });
+      } else {
+        res.status(201).json(newUser);
+      }
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
