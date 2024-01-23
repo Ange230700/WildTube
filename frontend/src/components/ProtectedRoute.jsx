@@ -8,11 +8,10 @@ function ProtectedRoute({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.warn("isAuthenticated:", isAuthenticated);
     if (!isAuthenticated) {
       navigate("/connection");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated]);
 
   return children;
 }

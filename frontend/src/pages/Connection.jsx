@@ -28,9 +28,11 @@ function Connection() {
         user
       );
       if (result.status === 200) {
-        localStorage.setItem("token", result.data.token);
         updateUser(result.data);
-        updateIsAuthenticated(true);
+        if (result.data.token) {
+          localStorage.setItem("token", result.data.token);
+          updateIsAuthenticated(true);
+        }
         navigate("/");
       }
     } catch (err) {

@@ -13,7 +13,7 @@ function UserProfil() {
     navigate("/");
   };
 
-  return user ? (
+  return (
     <div
       className="ProfileDisplaySection"
       style={
@@ -69,8 +69,6 @@ function UserProfil() {
         </div>
       </section>
     </div>
-  ) : (
-    <div />
   );
 }
 

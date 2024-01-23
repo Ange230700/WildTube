@@ -7,18 +7,27 @@ export default function useAuth() {
   const { user, updateUser } = useUser();
 
   const updateIsAuthenticated = (value) => {
+    console.warn("isAuthenticatedBefore", value); // § it should be false but it is true. Why?
     setIsAuthenticated(value);
+    console.warn("isAuthenticatedAfter", isAuthenticated); // § it should be true but it is false. Why?
   };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/userByToken`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const userByToken = axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/userByToken`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (userByToken) {
+        updateUser(userByToken);
+      }
     }
   }, []);
 
