@@ -80,8 +80,7 @@ const readUserWithAvatar = async (req, res, next) => {
 
 const getByToken = async (req, res) => {
   const userInfos = req.auth;
-  console.warn("userInfos", userInfos);
-  console.warn("userInfos.sub", userInfos.sub);
+  console.warn("const userInfos = req.auth; =>", userInfos);
 
   try {
     if (!userInfos || !userInfos.sub) {

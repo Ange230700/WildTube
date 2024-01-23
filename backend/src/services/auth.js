@@ -25,7 +25,10 @@ const verifyToken = (req, res, next) => {
   try {
     // check Authorization header
     const authorizationHeader = req.get("Authorization");
-    console.warn("authorizationHeader", authorizationHeader);
+    console.warn(
+      "const authorizationHeader = req.get('Authorization');",
+      authorizationHeader
+    );
 
     if (!authorizationHeader) {
       res.status(401).send({ error: "No token provided " });
