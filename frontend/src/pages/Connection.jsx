@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 import LogoContainer from "../components/LogoContainer";
 
 function Connection() {
@@ -10,7 +10,7 @@ function Connection() {
     password: "",
   });
 
-  const { updateUser } = useUser();
+  const { updateUser } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

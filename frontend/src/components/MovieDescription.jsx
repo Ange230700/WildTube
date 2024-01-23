@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 import FreeMovie from "./FreeMovie";
 import MovieLoginRequired from "./MovieLoginRequired";
 
 function MovieDescription({ movie }) {
-  const { user } = useUser();
+  const { user } = useAuth();
   const { movieId } = useParams();
   if (!movieId) {
     return <h1>Aucun film trouvé.</h1>;

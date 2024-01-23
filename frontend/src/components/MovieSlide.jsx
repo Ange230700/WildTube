@@ -1,10 +1,10 @@
 /*eslint-disable */
 import PropTypes from "prop-types";
-import { useUser } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 // import { NavLink } from "react-router-dom";
 
 function MovieSlide({ movie }) {
-  const { user } = useUser();
+  const { user } = useAuth();
   return movie.IsAvailable || user ? (
     <div>
       <img src={movie.miniature} alt={movie.title} className="movie-slide" />

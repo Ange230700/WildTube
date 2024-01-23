@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
-import { useUser } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 
 function Inscription() {
   const [user, setUser] = useState({
@@ -15,7 +15,7 @@ function Inscription() {
     avatarId: "",
   });
 
-  const { updateUser } = useUser();
+  const { updateUser } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [avatars, setAvatars] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(null);

@@ -1,8 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 
 function NavBar() {
-  const { user } = useUser();
+  const { user } = useAuth();
   const location = useLocation();
 
   const changeProfile = () => {

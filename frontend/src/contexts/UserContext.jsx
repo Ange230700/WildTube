@@ -9,7 +9,6 @@ export function UserProvider({ children }) {
   const updateUser = (newUser) => {
     setUser(newUser);
   };
-
   const contexValue = useMemo(() => {
     return { user, updateUser };
   }, [user, updateUser]);

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
 import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
 import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
@@ -9,8 +8,7 @@ import useAuth from "../hooks/useAuth";
 
 function UserProfileEditor() {
   const { userId } = useParams();
-  const { user } = useAuth();
-  const { updateUser } = useUser();
+  const { user, updateUser } = useAuth();
   const [formData, setFormData] = useState({
     name: user.name || "",
     email: user.email || "",

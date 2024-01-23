@@ -5,6 +5,7 @@ const tables = require("../tables");
 const login = async (req, res, next) => {
   try {
     const user = await tables.User.readByEmail(req.body.email);
+    console.warn("user", user);
 
     if (!user) {
       res.sendStatus(422).json({ message: "Invalid email or password" });
@@ -24,7 +25,7 @@ const login = async (req, res, next) => {
         });
         res.status(200).json({
           token,
-          ...user,
+          user,
           message: "Logged in successfully",
         });
       } else {

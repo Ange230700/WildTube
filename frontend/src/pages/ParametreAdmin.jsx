@@ -1,9 +1,8 @@
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
+import useAuth from "../hooks/useAuth";
 
 function ParametreAdmin() {
-  const { user } = useUser();
-  const { updateUser } = useUser();
+  const { user, updateUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const handleLogOut = () => {

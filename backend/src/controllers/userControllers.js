@@ -81,6 +81,7 @@ const readUserWithAvatar = async (req, res, next) => {
 const getByToken = async (req, res) => {
   const userInfos = req.auth;
   console.warn("userInfos", userInfos);
+  console.warn("userInfos.sub", userInfos.sub);
 
   try {
     if (!userInfos || !userInfos.sub) {
@@ -89,6 +90,7 @@ const getByToken = async (req, res) => {
     }
 
     const user = await tables.User.read(userInfos.sub);
+    console.warn("user", user);
 
     if (!user) {
       res.sendStatus(404).json({ error: "User not found" });
