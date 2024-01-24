@@ -49,6 +49,7 @@ class FilmManager extends AbstractManager {
       `update ${this.table} SET miniature=?, title=?, videoUrl=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
       [miniature, title, videoUrl, duration, year, description, IsAvailable, id]
     );
+
     return result.affectedRows;
   }
 
@@ -60,5 +61,4 @@ class FilmManager extends AbstractManager {
     return result;
   }
 }
-
 module.exports = FilmManager;

@@ -111,6 +111,7 @@ function CommentsSection({ filmId, user }) {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/comments/film/${filmId}`
         );
+
         setComments(response.data);
       } catch (error) {
         console.error("Error updating comment", error);
@@ -237,14 +238,20 @@ function CommentsSection({ filmId, user }) {
                           className="EditButton"
                           onClick={() => handleEditComment(comment.id)}
                         >
-                          Modifier
+                          <img
+                            src="/src/assets/icons/modifier.png"
+                            alt="Modifier"
+                          />
                         </button>
                         <button
                           type="button"
                           className="DeleteButton"
                           onClick={() => handleDeleteComment(comment.id)}
                         >
-                          Supprimer
+                          <img
+                            src="/src/assets/icons/supprimer.png"
+                            alt="Supprimer"
+                          />
                         </button>
                       </div>
                     )}

@@ -61,6 +61,9 @@ function AddVideos() {
         duration ||
         isAvailable) === (undefined || "" || false)
     ) {
+
+      // eslint-disable-next-line no-alert
+      alert("champ manquant");
       toast.error("champ manquant");
     } else if (isAvailable === "utilisateur") {
       setIsAvailable(true);

@@ -114,4 +114,5 @@ module.exports = {
   read,
   destroy,
   edit,
+  add,
 };
