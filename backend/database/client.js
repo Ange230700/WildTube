@@ -22,7 +22,7 @@ client
     connection.release();
   })
   .catch((error) => {
-    console.warn(
+    console.error(
       "Warning:",
       "Failed to establish a database connection.",
       "Please check your database credentials in the .env file if you need a database access."

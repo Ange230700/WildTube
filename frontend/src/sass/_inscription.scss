@@ -6,140 +6,223 @@
   .searchDisplaySection {
     flex-direction: column;
     display: flex;
-  }
 
-  .form {
-    flex-direction: column;
-    display: flex;
-    gap: var(--spacing-constant);
-    gap: 50px;
-  }
-  .inputs {
-    flex-direction: column;
+    .form {
+      flex-direction: column;
+      display: flex;
+      gap: var(--spacing-constant);
 
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-constant);
-  }
-  .inputContainer {
-    justify-content: center;
-    display: flex;
-    max-width: 500px;
-    position: relative;
+      .signUpWrapper {
+        height: calc(
+          100vh -
+            (
+              var(--spacing-constant) * 1 + var(--header-height, 60.53px) +
+                var(--footer-height, 29.2px)
+            )
+        );
+        overflow-y: scroll;
 
-    .errorMessage {
-      color: red;
-      position: absolute;
-      font-size: 12px;
-      left: 10px;
+        .inputs {
+          flex-direction: column;
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-constant);
+
+          .inputContainer {
+            justify-content: center;
+            display: flex;
+            max-width: 500px;
+
+            .input {
+              width: 63vw;
+              color: var(--text-field-background-color);
+              border: none;
+              height: 7vh;
+              padding: 10px;
+              background: rgba(238, 226, 226, 0.1);
+              border-radius: 6px;
+              overflow: hidden;
+              border-bottom: 1px #ff509a solid;
+              align-items: center;
+              display: flex;
+              &::placeholder {
+                color: var(--text-field-background-color);
+              }
+              &:focus {
+                outline: none;
+              }
+            }
+
+            .errorMessage {
+              color: red;
+              position: absolute;
+              font-size: 12px;
+              left: 10px;
+            }
+
+            .errorEmail {
+              color: red;
+              font-size: 12px;
+              left: 10px;
+            }
+
+            .errorPassword {
+              border: 2px solid red;
+            }
+          }
+        }
+
+        .additionalInformation {
+          flex-direction: column;
+          display: flex;
+          gap: clamp(
+            calc(var(--spacing-constant) * 2),
+            calc(2.5vw * 2),
+            calc(var(--spacing-constant) * 2 * 1.5)
+          );
+          width: 100%;
+
+          h4 {
+            text-align: center;
+            color: var(--primary-font-color);
+            font-weight: var(--font-weight-semi-bold);
+          }
+
+          .orientationContainer {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            gap: calc(var(--spacing-constant) * 2);
+
+            .orientationOption {
+              display: flex;
+              gap: 10px;
+              align-items: center;
+
+              .orientationText {
+                font-weight: var(--font-weight-semi-bold);
+                display: flex;
+                align-items: center;
+                gap: calc(var(--spacing-constant) * 0.5);
+
+                .radioButton {
+                  width: 6vw;
+                  height: 3vh;
+                }
+              }
+            }
+
+            .inputDate {
+              width: 75vw;
+              max-width: 500px;
+              height: 6vh;
+              text-align: center;
+              background: rgba(238, 226, 226, 0.1);
+              border: none;
+              color: var(--text-field-background-color);
+              border-bottom: 1px #ff509a solid;
+              border-radius: 6px;
+              font-family: var(--main-font);
+              &:focus {
+                outline: none;
+              }
+            }
+
+            ::-webkit-calendar-picker-indicator {
+              background-color: var(--text-field-background-color);
+              cursor: pointer;
+              padding: 10px;
+              border-radius: 6px;
+              margin-right: 2px;
+            }
+          }
+
+          .preview {
+            height: clamp(
+              calc(128px * 1),
+              calc(40vw * 1),
+              calc(128px * 1 * 1.5)
+            );
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(
+              calc(var(--spacing-constant) * 1),
+              calc(2.5vw * 1),
+              calc(var(--spacing-constant) * 1 * 1.5)
+            );
+            display: flex;
+
+            .avatarPreview {
+              width: clamp(
+                calc(100px * 1),
+                calc(31.25vw * 1),
+                calc(100px * 1 * 1.5)
+              );
+              aspect-ratio: 1 / 1;
+              border-radius: clamp(
+                calc(var(--border-radius-constant) * 6),
+                calc(2.5vw * 6),
+                calc(var(--border-radius-constant) * 6 * 1.5)
+              );
+              object-fit: cover;
+            }
+          }
+
+          .avatar-choice {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: calc(var(--spacing-constant) * 2);
+            padding: 0 20%;
+
+            .avatarButton {
+              width: fit-content;
+              height: fit-content;
+              border: none;
+              background-color: transparent;
+
+              .avatar {
+                width: 48px;
+                height: auto;
+              }
+            }
+          }
+        }
+      }
+
+      .signUpWrapper::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      .signUpWrapper::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-font-color);
+        border-radius: 5px;
+      }
+
+      .buttonContainer {
+        justify-content: center;
+        display: flex;
+
+        .signUpButton {
+          width: 35vw;
+          max-width: 300px;
+          background-color: var(--secondary-font-color);
+          border-radius: 5px;
+          padding: calc(var(--spacing-constant) * 1)
+            calc(var(--spacing-constant) * 2);
+          border: none;
+          cursor: pointer;
+
+          .inscription {
+            text-align: center;
+            color: var(--background-color);
+            font-weight: var(--font-weight-semi-bold);
+          }
+        }
+      }
     }
-    .errorEmail {
-      color: red;
-      font-size: 12px;
-      left: 10px;
-    }
-  }
-  .input {
-    width: 63vw;
-    color: var(--text-field-background-color);
-    border: none;
-    height: 7vh;
-    padding: 10px;
-    background: rgba(238, 226, 226, 0.1);
-    border-radius: 6px;
-    overflow: hidden;
-    border-bottom: 1px #ff509a solid;
-    align-items: center;
-    display: flex;
-    &::placeholder {
-      color: var(--text-field-background-color);
-    }
-    &:focus {
-      outline: none;
-    }
-  }
-  .errorPassword {
-    border: 2px solid red;
-  }
-  .additionalInformation {
-    flex-direction: column;
-    display: flex;
-  }
-  .orientation {
-    text-align: center;
-    color: var(--primary-font-color);
-    font-weight: var(--font-weight-semi-bold);
-  }
-  .orientationContainer {
-    display: inline-flex;
-    justify-content: center;
-    margin: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    gap: calc(var(--spacing-constant) * 2);
-  }
-  .orientationOption {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .orientationText {
-    font-weight: var(--font-weight-semi-bold);
-    display: flex;
-    align-items: center;
-    gap: calc(var(--spacing-constant) * 0.5);
-  }
-  .radioButton {
-    width: 6vw;
-    height: 3vh;
-  }
-  .birthday {
-    text-align: center;
-    font-weight: var(--font-weight-semi-bold);
-  }
-  .inputDate {
-    width: 75vw;
-    max-width: 500px;
-    height: 6vh;
-    text-align: center;
-    background: rgba(238, 226, 226, 0.1);
-    border: none;
-    color: var(--text-field-background-color);
-    border-bottom: 1px #ff509a solid;
-    border-radius: 6px;
-    font-family: var(--main-font);
-    &:focus {
-      outline: none;
-    }
-  }
-  ::-webkit-calendar-picker-indicator {
-    background-color: var(--text-field-background-color);
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 6px;
-    margin-right: 2px;
-  }
-  .buttonContainer {
-    justify-content: center;
-    display: flex;
-  }
-  .signUpButton {
-    width: 35vw;
-    max-width: 300px;
-    background-color: var(--secondary-font-color);
-    border-radius: 5px;
-    padding: calc(var(--spacing-constant) * 1) calc(var(--spacing-constant) * 2);
-    border: none;
-    cursor: pointer;
-  }
-  .signUpButton:disabled {
-    background-color: #cccccc;
-    color: #ffffff;
-    cursor: not-allowed;
-  }
-  .inscription {
-    text-align: center;
-    color: var(--background-color);
-    font-weight: var(--font-weight-semi-bold);
   }
 }

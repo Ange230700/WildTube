@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
 import MovieLink from "../components/MovieLink";
+import { useUser } from "../contexts/UserContext";
 
 function Favorites() {
   const { user } = useUser();
   const [favorites, setFavorites] = useState([]);
-
-  // console.warn("user id", user.id);
 
   useEffect(() => {
     if (user) {

@@ -3,24 +3,36 @@ import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
 // import { NavLink } from "react-router-dom";
 
-function MovieSlide({ movie, cover }) {
+function MovieSlide({ movie }) {
   const { user } = useUser();
   return movie.IsAvailable || user ? (
     <div>
-    <img src={movie.miniature} alt={movie.title} className="movie-slide" />
-    <img src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${movie.miniature}`} alt={movie.title} className="movie-slide" />
+      <img
+        src={
+          (movie.miniature_filename &&
+            `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+              movie?.miniature_filename
+            }`) ||
+          movie?.miniature_url
+        }
+        alt={movie.title}
+        className="movie-slide"
+      />
     </div>
-
   ) : (
     <>
       <div className="movie-slide-requiring-registration">
         <img
-          src={movie.miniature}
-          
+          src={
+            (movie.miniature_filename &&
+              `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                movie?.miniature_filename
+              }`) ||
+            movie?.miniature_url
+          }
           alt={movie.title}
           className="movie-slide blur-filter"
         />
-         <img src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${movie.miniature}`} alt={movie.title} className="movie-slide" />
       </div>
       <div className="locked-overlay">
         <div className="lock-icon-container">
@@ -38,7 +50,8 @@ function MovieSlide({ movie, cover }) {
 MovieSlide.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    miniature: PropTypes.string.isRequired,
+    miniature_filename: PropTypes.string,
+    miniature_url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     videoUrl: PropTypes.string,
     duration: PropTypes.number.isRequired,

@@ -1,8 +1,4 @@
-/* eslint-disable camelcase */
-
 const tables = require("../tables");
-
-const { v4: uuidv4 } = require("uuid"); // eslint-disable-line
 
 const browse = async (req, res, next) => {
   try {
@@ -37,16 +33,20 @@ const browseCommentsByFilmId = async (req, res, next) => {
 
 const addComment = async (req, res, next) => {
   try {
-    const { userId, filmId, content } = req.body;
-    const date = new Date().toISOString().slice(0, 19).replace("T", " ");
-    const unique_key = uuidv4();
+    const { userId, filmId, avatarId, content } = req.body;
 
-    console.warn(date);
-    console.warn(unique_key);
+    if (!userId || !filmId || !avatarId) {
+      res.status(400).json({ message: "Bad Request" });
+      return;
+    }
+
+    const date = new Date().toISOString().slice(0, 19).replace("T", " ");
+    const unique_key = `${userId}-${filmId}-${avatarId}`;
 
     const newComment = await tables.Commentaire_film.create({
       userId,
       filmId,
+      avatarId,
       content,
       date,
       unique_key,
@@ -54,6 +54,7 @@ const addComment = async (req, res, next) => {
 
     res.status(201).json(newComment);
   } catch (err) {
+    console.error(err);
     next(err);
   }
 };

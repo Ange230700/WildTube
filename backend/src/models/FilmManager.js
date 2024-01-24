@@ -6,18 +6,31 @@ class FilmManager extends AbstractManager {
   }
 
   async create({
-    urlImage,
-    cover,
+    miniature_url,
+    miniature_filename,
+    cover_url,
+    cover_filename,
     title,
-    video,
+    videoUrl,
     duration,
     year,
     description,
     isAvailable,
   }) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (miniature, cover, title, videoUrl, duration, year, description, isAvailable) values (?,?,?,?,?,?,?,?)`,
-      [urlImage, cover, title, video, duration, year, description, isAvailable]
+      `insert into ${this.table} (miniature_url, miniature_filename, cover_url, cover_filename, title, videoUrl, duration, year, description, isAvailable) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        miniature_url,
+        miniature_filename,
+        cover_url,
+        cover_filename,
+        title,
+        videoUrl,
+        duration,
+        year,
+        description,
+        isAvailable,
+      ]
     );
     return result.insertId;
   }
@@ -37,7 +50,7 @@ class FilmManager extends AbstractManager {
 
   async update({
     id,
-    miniature,
+    miniature_filename,
     title,
     videoUrl,
     duration,
@@ -46,8 +59,17 @@ class FilmManager extends AbstractManager {
     IsAvailable,
   }) {
     const [result] = await this.database.query(
-      `update ${this.table} SET miniature=?, title=?, videoUrl=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
-      [miniature, title, videoUrl, duration, year, description, IsAvailable, id]
+      `update ${this.table} SET miniature_filename=?, title=?, videoUrl=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
+      [
+        miniature_filename,
+        title,
+        videoUrl,
+        duration,
+        year,
+        description,
+        IsAvailable,
+        id,
+      ]
     );
 
     return result.affectedRows;

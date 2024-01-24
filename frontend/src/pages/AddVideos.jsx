@@ -17,8 +17,7 @@ function AddVideos() {
   const [categoriesPourAssocier, setCategoriesPourAssocier] = useState([]);
   const handleAjoutCategorie = (e) => {
     const categoriesFiltered = categories.filter((cat) => {
-      // eslint-disable-next-line radix
-      if (cat.id === parseInt(e.target.value)) {
+      if (cat.id === parseInt(e.target.value, 10)) {
         setCategoriesPourAssocier((oldValue) => {
           return [...oldValue, cat];
         });
@@ -27,8 +26,6 @@ function AddVideos() {
       return cat;
     });
     setCategories(categoriesFiltered);
-    // console.log(categories);
-    // console.log(categoriesPourAssocier);
   };
 
   const handleSuppCategorie = (clickedCategoryId) => {
@@ -61,7 +58,6 @@ function AddVideos() {
         duration ||
         isAvailable) === (undefined || "" || false)
     ) {
-
       // eslint-disable-next-line no-alert
       alert("champ manquant");
       toast.error("champ manquant");

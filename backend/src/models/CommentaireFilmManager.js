@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 const AbstractManager = require("./AbstractManager");
 
 class CommentaireFilmManager extends AbstractManager {
@@ -7,13 +5,13 @@ class CommentaireFilmManager extends AbstractManager {
     super({ table: "Commentaire_film" });
   }
 
-  async create({ userId, filmId, content, date, unique_key }) {
+  async create({ userId, filmId, avatarId, content, date }) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (userId, filmId, content, date, unique_key) VALUES (?, ?, ?, ?, ?)`,
-      [userId, filmId, content, date, unique_key]
+      `INSERT INTO ${this.table} (userId, filmId, avatarId, content, date) VALUES (?, ?, ?, ?, ?)`,
+      [userId, filmId, avatarId, content, date]
     );
 
-    return { id: result.insertId, userId, filmId, content, date, unique_key };
+    return result;
   }
 
   async readAll() {
@@ -24,7 +22,7 @@ class CommentaireFilmManager extends AbstractManager {
 
   async readAllCommentsByFilmId(filmId) {
     const [result] = await this.database.query(
-      `SELECT User.id AS userId, Film.id AS filmId,${this.table}.date AS date, ${this.table}.id AS id, User.avatar AS avatar,${this.table}.content AS content FROM ${this.table} JOIN User ON ${this.table}.userId = User.id JOIN Film ON ${this.table}.filmId = Film.id WHERE filmId = ?`,
+      `SELECT ${this.table}.*, User.*, Avatar.* FROM ${this.table} JOIN User ON ${this.table}.userId = User.id JOIN Avatar ON ${this.table}.avatarId = Avatar.id JOIN Film ON ${this.table}.filmId = Film.id WHERE filmId = ?`,
       [filmId]
     );
 

@@ -1,8 +1,8 @@
 const films = [
   {
-    miniature:
+    miniature_url:
       "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg",
-    cover:
+    cover_url:
       "https://w0.peakpx.com/wallpaper/34/966/HD-wallpaper-the-avengers-avengers-endgame-avengers-avengers-endgame.jpg",
     title: "Avengers: Endgame",
     videoUrl: "https://www.youtube.com/watch?v=TcMBFSGVi1c",
@@ -13,9 +13,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg",
-    cover:
+    cover_url:
       "https://www.highlandernews.org/wp-content/uploads/landscape-1522924460-avengers-infinity-war-poster.jpg",
     title: "Avengers: Infinity War",
     videoUrl: "https://www.youtube.com/watch?v=6ZfuNTqbHE8",
@@ -26,9 +26,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
-    cover: "https://pbs.twimg.com/media/EJHjitpUUAA2EAp.jpg",
+    cover_url: "https://pbs.twimg.com/media/EJHjitpUUAA2EAp.jpg",
     title: "The Avengers",
     videoUrl: "https://www.youtube.com/watch?v=eOrNdBpGMv8",
     duration: 143,
@@ -38,8 +38,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature: "https://i.ebayimg.com/images/g/Sv8AAOSwb7Rc0l0P/s-l1600.jpg",
-    cover: "https://wallpapercave.com/wp/wp11799668.jpg",
+    miniature_url:
+      "https://i.ebayimg.com/images/g/Sv8AAOSwb7Rc0l0P/s-l1600.jpg",
+    cover_url: "https://wallpapercave.com/wp/wp11799668.jpg",
     title: "Iron man",
     videoUrl: "https://www.youtube.com/watch?v=8hYlB38asDY",
     duration: 126,
@@ -49,9 +50,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://m.media-amazon.com/images/M/MV5BMTkxM2FiYjctYjliYy00NjY2LWFmOTEtMWZiYWRjNjA4MGYxXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
-    cover:
+    cover_url:
       "https://www.wheninmanila.com/wp-content/uploads/2023/11/SHARED-Cover-Collage-x2-30-2.png",
     title: "Aquaman and the Lost Kingdom",
     videoUrl: "https://www.youtube.com/watch?v=2wcj6SrX4zw",
@@ -62,9 +63,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://cdn.entries.clios.com/styles/clio_aotw_ems_image_details_retina/s3/entry_attachments/image/72/2297/22197/123544/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg/xBckjuirX08J68hRmi7_Zgv4jhFeC3AbYX8REOHE770.jpeg",
-    cover:
+    cover_url:
       "https://w0.peakpx.com/wallpaper/307/244/HD-wallpaper-batman-the-batman.jpg",
     title: "The Batman",
     videoUrl: "https://www.youtube.com/watch?v=mqqft2x_Aa4",
@@ -75,9 +76,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://m.media-amazon.com/images/M/MV5BMzZhYTVlMTMtMGZhMC00ZWYxLTljZDQtN2Y3YmFmZTk5OWU2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg",
-    cover:
+    cover_url:
       "https://www.tvinsider.com/wp-content/uploads/2023/11/avatar-the-last-airbender-770x433.jpg",
     title: "Avatar: The Last Airbender",
     videoUrl: "https://www.youtube.com/watch?v=waJKJW_XU90&ab_channel=Netflix",
@@ -88,9 +89,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img4.acsta.net/pictures/21/11/17/17/24/3336846.jpg",
-    cover:
+    cover_url:
       "https://hustonsite.files.wordpress.com/2023/06/93361-matrixresurrections_bannerposter.jpg",
     title: "Matrix Resurrections",
     videoUrl: "https://www.youtube.com/watch?v=9ix7TUGVYIo",
@@ -101,9 +102,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://static.posters.cz/image/1300/art-photo/harry-potter-and-the-half-blood-prince-i167377.jpg",
-    cover: "https://picfiles.alphacoders.com/621/62184.jpg",
+    cover_url: "https://picfiles.alphacoders.com/621/62184.jpg",
     title: "Harry Potter and the Half-Blood Prince",
     videoUrl:
       "https://www.youtube.com/watch?v=tAiy66Xrsz4&ab_channel=HarryPotter",
@@ -114,9 +115,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img2.acsta.net/pictures/17/09/12/10/29/1142495.jpg",
-    cover:
+    cover_url:
       "https://pop.h-cdn.co/assets/17/39/1600x900/hd-aspect-1506522430-2049.jpg",
     title: "Blade Runner 2049",
     videoUrl:
@@ -128,9 +129,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img4.acsta.net/r_1280_720/img/6b/c7/6bc7a13ca6446a603f160b4ab4414141.jpg",
-    cover:
+    cover_url:
       "https://c8.alamy.com/comp/K36B8T/gladiator-gladiator-date-2000-K36B8T.jpg",
     title: "Gladiator",
     videoUrl:
@@ -142,9 +143,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img6.acsta.net/medias/nmedia/18/82/69/17/19806656.jpg",
-    cover:
+    cover_url:
       "https://assets.mubicdn.net/images/artworks/582651/images-original.png?1686650120",
     title: "Intouchables",
     videoUrl: "https://www.youtube.com/watch?v=34WIbmXkewU&ab_channel=Gaumont",
@@ -155,8 +156,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature: "https://i.ebayimg.com/images/g/3hUAAOSwfNRhXhUZ/s-l1200.webp",
-    cover:
+    miniature_url:
+      "https://i.ebayimg.com/images/g/3hUAAOSwfNRhXhUZ/s-l1200.webp",
+    cover_url:
       "https://d3dfsf9oc1ojzp.cloudfront.net/original/4X/7/3/b/73b08b82c41c646a8e21866f0998ecf5472ce7df.jpeg",
     title: "Justice League Dark",
     videoUrl: "https://www.youtube.com/watch?v=NsBnnM2qjAo",
@@ -167,8 +169,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature: "https://i.ebayimg.com/images/g/qisAAOSwDvVkuA-M/s-l1600.jpg",
-    cover:
+    miniature_url:
+      "https://i.ebayimg.com/images/g/qisAAOSwDvVkuA-M/s-l1600.jpg",
+    cover_url:
       "https://4k wallpapers.com/images/wallpapers/justice-league-3840x2160-11805.jpg",
     title: "Justice League War World",
     videoUrl: "https://www.youtube.com/watch?v=IPDLodUE9gg&ab",
@@ -179,9 +182,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://www.bigflix.com/wp-content/uploads/2023/12/jl-crisis-on-infinite-earths-part1-blogroll-1701467786426.jpg",
-    cover:
+    cover_url:
       "https://i0.wp.com/www.iconvsicon.com/wp-content/uploads/2023/12/JL_CRISIS_PT1_-2024-featured.jpg?fit=800%2C485&ssl=1",
     title: "Justice League: Crisis on Two Earths",
     videoUrl: "https://www.youtube.com/watch?v=c6oSqBly2ho?si=Sgb0RXhNJpMhp2ii",
@@ -192,9 +195,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img2.acsta.net/medias/nmedia/18/84/94/35/20078430.jpg",
-    cover:
+    cover_url:
       "https://thumb.canalplus.pro/http/unsafe/1440x810/filters:quality(80)/img-hapi.canalplus.pro:80/ServiceImage/ImageID/112134748",
     title: "Rebelle",
     videoUrl: "https://www.youtube.com/watch?v=tS9efNQn1Gk?",
@@ -205,9 +208,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img4.acsta.net/medias/nmedia/18/35/57/73/18660716.jpg",
-    cover:
+    cover_url:
       "https://le-cartographe.net/images/stories/Images/godfather_large.jpg",
     title: "Le parrain",
     videoUrl: "https://www.youtube.com/watch?v=bmtuIhesQWA",
@@ -218,9 +221,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img5.acsta.net/medias/nmedia/18/63/95/41/18927494.jpg",
-    cover:
+    cover_url:
       "https://www.fsa.uliege.be/upload/docs/image/jpeg/2023-06/indiana.jpg",
     title: "Indiana Jones et le cadran de la destinée",
     videoUrl: "https://www.youtube.com/watch?v=4tvtYAMPsxI",
@@ -231,9 +234,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img2.acsta.net/pictures/16/02/03/11/17/130929.jpg",
-    cover:
+    cover_url:
       "https://images.affiches-et-posters.com//albums/3/46439/poster-film-batman-superman-l-aube-justice-129600.jpg",
     title: "Batman VS Superman",
     videoUrl: "https://www.youtube.com/watch?v=NAk1BGZQnk0",
@@ -244,9 +247,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img5.acsta.net/pictures/22/04/08/10/30/1779137.jpg",
-    cover:
+    cover_url:
       "https://proxymedia.woopic.com/api/v1/images/331%2FDOCTORSTRANW0191275_BAN1_2424_NEWTV.jpg",
     title: "Dr Strange",
     videoUrl: "https://www.youtube.com/watch?v=C0kqV-TYXP4",
@@ -257,9 +260,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://musicart.xboxlive.com/7/687d6400-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080",
-    cover:
+    cover_url:
       "https://res.cloudinary.com/jerrick/image/upload/v1667350087/6361be46da5a81001da26b55.jpg",
     title: "Black Panther",
     videoUrl: "https://www.youtube.com/watch?v=DlGIWM_e9vg",
@@ -270,9 +273,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img4.acsta.net/pictures/21/11/16/10/01/4860598.jpg",
-    cover: "https://imgsrc.cineserie.com/2021/12/sp-1.jpg?ver=1",
+    cover_url: "https://imgsrc.cineserie.com/2021/12/sp-1.jpg?ver=1",
     title: "SpiderMan No Way Hole",
     videoUrl: "https://www.youtube.com/watch?v=o-qvJ2iUqvA",
     duration: 148,
@@ -282,9 +285,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img6.acsta.net/pictures/22/05/24/11/16/2411535.jpg",
-    cover:
+    cover_url:
       "https://m.media-amazon.com/images/I/71znSSjPGQL._AC_UF894,1000_QL80_.jpg",
     title: "Thor Love and Thunder",
     videoUrl: "https://www.youtube.com/watch?v=wPPim0we5m8",
@@ -295,9 +298,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img4.acsta.net/pictures/21/07/30/15/39/5399627.jpg",
-    cover:
+    cover_url:
       "https://i0.wp.com/www.universdescomics.com/wp-content/uploads/2021/08/Shang-Chi-official-poster-1-e1629547002819.jpg?fit=810%2C522&ssl=1",
     title: "Shang-Shi",
     videoUrl: "https://www.youtube.com/watch?v=PD3rUCBFDlI",
@@ -308,9 +311,9 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img6.acsta.net/pictures/23/07/17/15/06/1535719.jpg",
-    cover:
+    cover_url:
       "https://dulaccinemas.com/sites/default/files/styles/vignette_fiche_film/public/film/photos/2023/8-LLSIC.jpg?itok=GYqGB912",
     title: "Napoleon",
     videoUrl: "https://www.youtube.com/watch?v=A3xaMZZooVs",
@@ -321,9 +324,9 @@ const films = [
     IsAvailable: 0,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img2.acsta.net/pictures/19/10/25/11/18/5224976.jpg",
-    cover:
+    cover_url:
       "https://i0.wp.com/songedunenuitdete.com/wp-content/uploads/2018/03/Titanic-mythic-kiss.jpg?fit=1920%2C1080&ssl=1",
     title: "Titanic",
     videoUrl: "https://www.youtube.com/watch?v=RSmXRew7hvo",
@@ -334,9 +337,10 @@ const films = [
     IsAvailable: 1,
   },
   {
-    miniature:
+    miniature_url:
       "https://fr.web.img2.acsta.net/pictures/20/08/03/12/15/2118693.jpg",
-    cover: "https://www.pieuvre.ca/wp-content/uploads/2020/12/tenet-poster.jpg",
+    cover_url:
+      "https://www.pieuvre.ca/wp-content/uploads/2020/12/tenet-poster.jpg",
     title: "Tenet",
     videoUrl: "https://www.youtube.com/watch?v=6UG5LJQNjts",
     duration: 210,
