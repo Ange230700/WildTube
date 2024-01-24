@@ -22,7 +22,6 @@ function Inscription() {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   const navigate = useNavigate();
-
   const toggleModal = () => {
     setShowModal(!showModal);
   };
