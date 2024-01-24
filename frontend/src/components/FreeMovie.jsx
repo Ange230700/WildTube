@@ -175,7 +175,7 @@ function FreeMovie({ movie }) {
             <p className="separator">•</p>
             <p className="movie-info duration">{movie.duration}m</p>
           </div>
-          {!user ? null : (
+          {user && (
             <div className="ActionIcons">
               <button
                 className="ThumbsUpRegular1"
@@ -192,7 +192,7 @@ function FreeMovie({ movie }) {
                   alt="favourite icon"
                 />
               </button>
-              {user.IsAdmin === 1 ? (
+              {user && user.IsAdmin === 1 ? (
                 <button
                   className="ThumbsUpRegular1"
                   type="button"

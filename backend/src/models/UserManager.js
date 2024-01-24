@@ -84,17 +84,6 @@ class UserManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  async updateAvatar(id, avatarId) {
-    // Execute the SQL UPDATE query to update a item to the "user" table
-    const [result] = await this.database.query(
-      `UPDATE ${this.table} SET avatarId = ? WHERE id = ?`,
-      [avatarId, id]
-    );
-
-    // Return the ID of the newly inserted item
-    return result;
-  }
-
   // The U of CRUD - Update operation
   async update(
     id,
@@ -117,7 +106,7 @@ class UserManager extends AbstractManager {
       [id]
     );
 
-    return updatedRows.length > 0 ? updatedRows[0] : null;
+    return updatedRows.length > 0 && updatedRows[0];
   }
 
   // The D of CRUD - Delete operation

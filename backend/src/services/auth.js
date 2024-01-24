@@ -25,10 +25,6 @@ const verifyToken = (req, res, next) => {
   try {
     // check Authorization header
     const authorizationHeader = req.get("Authorization");
-    console.warn(
-      "const authorizationHeader = req.get('Authorization');",
-      authorizationHeader
-    );
 
     if (!authorizationHeader) {
       res.status(401).send({ error: "No token provided" });
@@ -36,7 +32,6 @@ const verifyToken = (req, res, next) => {
 
     // check if token is valid
     const [type, token] = authorizationHeader.split(" ");
-    console.warn("token", token);
 
     if (type !== "Bearer") {
       res.status(401).send({ error: "Invalid token type" });
@@ -45,7 +40,6 @@ const verifyToken = (req, res, next) => {
     // check if token is valid (its expiration date and its authenticity)
     // if token is valid, the payload is returned and decoded
     req.auth = jwt.verify(token, process.env.APP_SECRET);
-    console.warn("req.auth", req.auth);
 
     next();
   } catch (err) {

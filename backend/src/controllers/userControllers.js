@@ -3,30 +3,6 @@ const argon2 = require("argon2");
 // Import access to database tables
 const tables = require("../tables");
 
-const updateAvatar = async (req, res) => {
-  const { userId } = req.params;
-  const { avatarId } = req.body;
-
-  try {
-    // Vérifiez si l'utilisateur existe
-    const existingUser = await tables.User.read(userId);
-    if (!existingUser) {
-      res.status(404).json({ error: "Utilisateur non trouvé" });
-    }
-
-    // Mettez à jour l'avatar dans la base de données
-    const updatedUser = await tables.User.updateAvatar(userId, avatarId);
-
-    // Répondre avec les informations mises à jour de l'utilisateur
-    res.json(updatedUser);
-  } catch (error) {
-    console.error("Error updating avatar:", error);
-    res
-      .status(500)
-      .json({ error: "Erreur lors de la mise à jour de l'avatar" });
-  }
-};
-
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
@@ -80,7 +56,6 @@ const readUserWithAvatar = async (req, res, next) => {
 
 const getByToken = async (req, res) => {
   const userInfos = req.auth;
-  console.warn("const userInfos = req.auth; =>", userInfos);
 
   try {
     if (!userInfos || !userInfos.sub) {
@@ -88,8 +63,7 @@ const getByToken = async (req, res) => {
       return;
     }
 
-    const user = await tables.User.read(userInfos.sub);
-    console.warn("user", user);
+    const user = await tables.User.readUserWithAvatar(userInfos.sub);
 
     if (!user) {
       res.sendStatus(404).json({ error: "User not found" });
@@ -217,5 +191,4 @@ module.exports = {
   getByToken,
   edit,
   add,
-  updateAvatar,
 };

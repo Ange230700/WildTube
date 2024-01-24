@@ -28,13 +28,9 @@ function Connection() {
         user
       );
       if (result.status === 200) {
-        if (result.data) {
-          updateUser(result.data);
-          if (result.data.token) {
-            localStorage.setItem("token", result.data.token);
-          }
-          navigate("/");
-        }
+        updateUser(result.data);
+        localStorage.setItem("token", result.data.token);
+        navigate("/");
       }
     } catch (err) {
       console.error("Incorrect email or password");

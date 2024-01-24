@@ -27,13 +27,13 @@ function UserProfil() {
         <img
           className="Avatar1"
           src={
-            user?.avatar_filename ||
-            user?.avatar_url ||
+            (user && user.avatar_filename) ||
+            (user && user.avatar_url) ||
             "https://avatars.githubusercontent.com/u/97165289"
           }
           alt="Avatar1"
         />
-        <h2 className="User">{user.name}</h2>
+        <h2 className="User">{user && user.name}</h2>
       </div>
       <section className="Useroptionscontainer">
         <div className="Useroption">
@@ -52,7 +52,7 @@ function UserProfil() {
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to={`/account/${user.id}`}>
+            <Link to={`/account/${user && user.id}`}>
               <h3>Informations du compte</h3>
             </Link>
           </div>

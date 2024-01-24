@@ -57,8 +57,8 @@ function NavBar() {
               <img
                 className="icon avatar"
                 src={
-                  user?.avatar_filename ||
-                  user?.avatar_url ||
+                  (user && user?.avatar_filename) ||
+                  (user && user?.avatar_url) ||
                   "https://avatars.githubusercontent.com/u/97165289"
                 }
                 alt="avatar"

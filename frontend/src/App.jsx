@@ -8,7 +8,7 @@ import { useUser } from "./contexts/UserContext";
 
 function App() {
   const location = useLocation();
-  const { updateUser } = useUser();
+  const { updateUser, user } = useUser();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,9 +41,11 @@ function App() {
       }
     >
       <Toaster />
-      {!location.pathname.includes("/moviePlayer/") && <NavBarDesktop />}
+      {!location.pathname.includes("/moviePlayer/") && (
+        <NavBarDesktop user={user} />
+      )}
       <Outlet />
-      {!location.pathname.includes("/moviePlayer/") && <NavBar />}
+      {!location.pathname.includes("/moviePlayer/") && <NavBar user={user} />}
     </div>
   );
 }

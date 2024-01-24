@@ -64,11 +64,11 @@ function Inscription() {
     e.preventDefault();
 
     if (
-      !user.name ||
-      !user.email ||
-      !user.password ||
-      !user.avatarId ||
-      !user.naissance
+      !user?.name ||
+      !user?.email ||
+      !user?.password ||
+      !user?.avatarId ||
+      !user?.naissance
     ) {
       console.error("All fields are required");
       return;
