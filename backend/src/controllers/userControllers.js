@@ -1,4 +1,5 @@
 const argon2 = require("argon2");
+const jwt = require("jsonwebtoken");
 
 // Import access to database tables
 const tables = require("../tables");
@@ -168,7 +169,17 @@ const add = async (req, res, next) => {
 
     // Respond with the newly created user in JSON format
     if (newUser) {
-      res.status(201).json(newUser);
+      const userToken = await jwt.sign(
+        { sub: newUser.id, email: newUser.email },
+        process.env.APP_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      res.status(201).json({
+        token: userToken,
+        newUser,
+      });
     } else {
       res.status(400).json({ error: "Unable to create user" });
     }
