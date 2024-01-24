@@ -1,7 +1,7 @@
-/*eslint-disable */
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useUser } from "../contexts/UserContext";
 import LogOut from "../components/LogOut";
 import LogoContainer from "../components/LogoContainer";
@@ -34,9 +34,11 @@ function Connection() {
         navigate("/");
       }
     } catch (err) {
+      toast.error("Email ou mot de passe incorect");
       console.error("Incorrect email or password");
     }
   };
+  // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   return (
     <div className="loginPage">
@@ -45,7 +47,13 @@ function Connection() {
       ) : (
         <>
           <LogoContainer />
-          <div className="form">
+          <form
+            className="form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin();
+            }}
+          >
             <div className="inputs">
               <div className="inputContainer">
                 <input
@@ -70,7 +78,7 @@ function Connection() {
               <div className="buttonContainer">
                 <div className="connectionButton">
                   <button
-                    type="button"
+                    type="submit"
                     className="connexion"
                     onClick={handleLogin}
                   >
@@ -93,7 +101,7 @@ function Connection() {
                 </span>
               </p>
             </div>
-          </div>
+          </form>
         </>
       )}
     </div>

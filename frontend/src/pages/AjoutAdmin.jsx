@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useUser } from "../contexts/UserContext";
 import LogoContainer from "../components/LogoContainer";
 
 function AjoutAdmin() {
+  const { user: currentUser } = useUser();
   const [users, setUsers] = useState([]);
 
   const fetch = async () => {
@@ -18,6 +20,10 @@ function AjoutAdmin() {
   };
 
   const handleClick = async (user) => {
+    if (currentUser.id === user.id) {
+      toast.error("Vous ne pouvez pas supprimer votre propre compte");
+      return;
+    }
     if (user !== null) {
       try {
         await axios.put(
