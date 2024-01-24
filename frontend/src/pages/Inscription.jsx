@@ -18,7 +18,7 @@ function Inscription() {
   // const { updateUser, user: connectedUser } = useUser();
   const [showModal, setShowModal] = useState(false);
   // const navigate = useNavigate();
-
+  // supprimer commentaire ;
   const toggleModal = () => {
     setShowModal(!showModal);
   };
