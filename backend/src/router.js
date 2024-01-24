@@ -21,7 +21,7 @@ const commentaireFilmControllers = require("./controllers/commentaireFilmControl
 
 // Route to get a list of items
 router.get("/films", filmControllers.browse);
-// router.get("/films/:id", filmControllers.read);
+router.get("/films/:id", filmControllers.read);
 router.get(
   "/films/category/:id",
   categorieParFilmControllers.browseFilmsForSpecificCategorie

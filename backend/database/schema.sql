@@ -65,8 +65,8 @@ CREATE TABLE
     `Categorie_par_film` (
         `filmId` INT NOT NULL,
         `categorieId` INT NOT NULL,
-        CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`),
+        CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`) ON DELETE CASCADE,
+        CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`) ON DELETE CASCADE,
         PRIMARY KEY (`filmId`, `categorieId`)
     );
 
@@ -80,6 +80,6 @@ CREATE TABLE
         `content` VARCHAR(500) NOT NULL,
         `date` DATETIME NOT NULL,
         `unique_key` VARCHAR(255) NOT NULL,
-        CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`)
+        CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE,
+        CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`) ON DELETE CASCADE
     );

@@ -110,6 +110,7 @@ const destroy = async (req, res, next) => {
 
 module.exports = {
   browse,
+  add,
   read,
   destroy,
   edit,
