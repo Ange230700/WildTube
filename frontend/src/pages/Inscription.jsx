@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
 import { useUser } from "../contexts/UserContext";
+import ModalInscription from "../components/ModalInscription";
 
 function Inscription() {
   const [user, setUser] = useState({
@@ -15,7 +16,6 @@ function Inscription() {
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [emailError, setEmailError] = useState("");
-
   const { updateUser } = useUser();
   const [showModal, setShowModal] = useState(false);
   const [avatars, setAvatars] = useState([]);
@@ -98,14 +98,14 @@ function Inscription() {
       );
 
       if (result.status === 201) {
-        const authentication = await result.data;
+        const authentication = result.data;
 
         updateUser(authentication);
         localStorage.setItem("token", authentication.token);
 
         toggleModal();
         setTimeout(() => {
-          navigate("/Connection");
+          navigate("/");
         }, 3000);
       } else {
         console.error("Error during registration", "result", result);
@@ -306,7 +306,7 @@ function Inscription() {
                   !user?.email ||
                   !user?.password ||
                   !user?.naissance ||
-                  !user?.civility ||
+                  // !user?.civility ||
                   user?.password.length < 8 ||
                   user?.password !== confirmPassword
                 }
@@ -314,6 +314,12 @@ function Inscription() {
                 <p className="inscription">Inscription</p>
               </button>
             </div>
+            {showModal && (
+              <ModalInscription
+                toggleModal={toggleModal}
+                showModal={setShowModal}
+              />
+            )}
           </div>
         </form>
       </section>

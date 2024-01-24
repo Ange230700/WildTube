@@ -32,6 +32,7 @@
             justify-content: center;
             display: flex;
             max-width: 500px;
+            position: relative;
 
             .input {
               width: 63vw;
@@ -179,6 +180,7 @@
             padding: 0 20%;
 
             .avatarButton {
+              cursor: pointer;
               width: fit-content;
               height: fit-content;
               border: none;
