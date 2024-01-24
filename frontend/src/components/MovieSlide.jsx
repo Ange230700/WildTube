@@ -6,12 +6,30 @@ import { useUser } from "../contexts/UserContext";
 function MovieSlide({ movie }) {
   const { user } = useUser();
   return movie.IsAvailable || user ? (
-    <img src={movie.miniature} alt={movie.title} className="movie-slide" />
+    <div>
+      <img
+        src={
+          (movie.miniature_filename &&
+            `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+              movie?.miniature_filename
+            }`) ||
+          movie?.miniature_url
+        }
+        alt={movie.title}
+        className="movie-slide"
+      />
+    </div>
   ) : (
     <>
       <div className="movie-slide-requiring-registration">
         <img
-          src={movie.miniature}
+          src={
+            (movie.miniature_filename &&
+              `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                movie?.miniature_filename
+              }`) ||
+            movie?.miniature_url
+          }
           alt={movie.title}
           className="movie-slide blur-filter"
         />
@@ -32,7 +50,8 @@ function MovieSlide({ movie }) {
 MovieSlide.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    miniature: PropTypes.string.isRequired,
+    miniature_filename: PropTypes.string,
+    miniature_url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     videoUrl: PropTypes.string,
     duration: PropTypes.number.isRequired,

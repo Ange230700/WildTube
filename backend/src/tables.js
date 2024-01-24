@@ -3,21 +3,23 @@
 /* ************************************************************************* */
 
 // Import the manager modules responsible for handling data operations on the tables
-const CategorieManager = require("./models/CategorieManager");
 const UserManager = require("./models/UserManager");
 const FilmManager = require("./models/FilmManager");
+const CategorieManager = require("./models/CategorieManager");
+const AvatarManager = require("./models/AvatarManager");
+const WatchlistManager = require("./models/WatchlistManager");
 const FavoriFilmManager = require("./models/FavoriFilmManager");
 const CategorieParFilmManager = require("./models/CategorieParFilmManager");
-const WatchlistManager = require("./models/WatchlistManager");
 const CommentaireFilmManager = require("./models/CommentaireFilmManager");
 
 const managers = [
-  CategorieManager,
   UserManager,
   FilmManager,
+  CategorieManager,
+  AvatarManager,
+  WatchlistManager,
   FavoriFilmManager,
   CategorieParFilmManager,
-  WatchlistManager,
   CommentaireFilmManager,
   // Add other managers here
 ];

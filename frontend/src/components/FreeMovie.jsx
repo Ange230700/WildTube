@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams, NavLink, useLocation } from "react-router-dom";
+import { useParams, NavLink, useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
 import CommentsSection from "./CommentsSection";
+import { useUser } from "../contexts/UserContext";
 
 function FreeMovie({ movie }) {
+  const navigate = useNavigate();
   const { movieId } = useParams();
   const { user } = useUser();
   const [isFavorited, setIsFavorited] = useState(false);
@@ -32,6 +33,9 @@ function FreeMovie({ movie }) {
       console.error("Error checking favorite status", error);
       return null;
     }
+  };
+  const handleClick = () => {
+    navigate(`/EditVideo/${movie.id}`);
   };
 
   const handleFavoriteClick = async (myMovieId) => {
@@ -151,7 +155,17 @@ function FreeMovie({ movie }) {
         }
       >
         <div className="thumbnail-container">
-          <img className="movie-cover" src={movie.cover} alt={movie.title} />
+          <img
+            className="movie-cover"
+            src={
+              (movie.cover_filename &&
+                `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                  movie?.cover_filename
+                }`) ||
+              movie?.cover_url
+            }
+            alt={movie.title}
+          />
           <div className="upper-layer">
             <NavLink
               className="play-button-container"
@@ -171,7 +185,7 @@ function FreeMovie({ movie }) {
             <p className="separator">•</p>
             <p className="movie-info duration">{movie.duration}m</p>
           </div>
-          {!user ? null : (
+          {user && (
             <div className="ActionIcons">
               <button
                 className="ThumbsUpRegular1"
@@ -188,6 +202,21 @@ function FreeMovie({ movie }) {
                   alt="favourite icon"
                 />
               </button>
+              {user && user.IsAdmin === 1 ? (
+                <button
+                  className="ThumbsUpRegular1"
+                  type="button"
+                  onClick={handleClick}
+                >
+                  <img
+                    className="favourite-icon"
+                    src="/src/assets/icons/edit.png"
+                    alt="edit icon"
+                  />
+                </button>
+              ) : (
+                ""
+              )}
               <button
                 className="ThumbsUpRegular1"
                 type="button"
@@ -219,7 +248,8 @@ function FreeMovie({ movie }) {
 FreeMovie.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    cover: PropTypes.string.isRequired,
+    cover_filename: PropTypes.string,
+    cover_url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
