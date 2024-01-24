@@ -38,10 +38,10 @@ async function insertFilms() {
     for (let i = 0; i < films.length; i += 1) {
       queries.push(
         database.query(
-          "INSERT INTO `Film` (`miniature`, `cover`, `title`, `videoUrl`, `duration`, `year`, `description`, `IsAvailable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+          "INSERT INTO `Film` (`miniature_url`, `cover_url`, `title`, `videoUrl`, `duration`, `year`, `description`, `IsAvailable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
           [
-            films[i].miniature,
-            films[i].cover,
+            films[i].miniature_url,
+            films[i].cover_url,
             films[i].title,
             films[i].videoUrl,
             films[i].duration,

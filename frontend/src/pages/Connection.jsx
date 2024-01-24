@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import LogoContainer from "../components/LogoContainer";
 import { useUser } from "../contexts/UserContext";
 
@@ -33,14 +34,21 @@ function Connection() {
         navigate("/");
       }
     } catch (err) {
+      toast.error("Email ou mot de passe incorrect");
       console.error("Incorrect email or password");
     }
   };
+  // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   return (
     <div className="loginPage">
       <LogoContainer />
-      <form className="form" onSubmit={handleLogin}>
+      <form
+        className="form"
+        onSubmit={(e) => {
+          handleLogin(e);
+        }}
+      >
         <div className="inputs">
           <div className="inputContainer">
             <input

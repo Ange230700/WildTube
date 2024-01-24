@@ -17,7 +17,8 @@ function HeroMovieSlideLink({ movie }) {
 HeroMovieSlideLink.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    cover: PropTypes.string.isRequired,
+    cover_filename: PropTypes.string,
+    cover_url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     videoUrl: PropTypes.string,
     duration: PropTypes.number.isRequired,

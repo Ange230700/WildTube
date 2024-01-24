@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
-import ModalInscription from "../components/ModalInscription";
 import { useUser } from "../contexts/UserContext";
 
 function Inscription() {
@@ -14,6 +13,8 @@ function Inscription() {
     password: "",
     avatarId: "",
   });
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const { updateUser } = useUser();
   const [showModal, setShowModal] = useState(false);
@@ -39,6 +40,16 @@ function Inscription() {
       [name]: civilityValue,
     }));
   };
+  const handleEmailChange = (e) => {
+    setEmailError("");
+    handleInputChange(e);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleAvatarChange = (avatar) => {
     try {
@@ -73,7 +84,6 @@ function Inscription() {
       console.error("All fields are required");
       return;
     }
-
     try {
       const token = localStorage.getItem("token");
       const result = await axios.post(
@@ -102,7 +112,12 @@ function Inscription() {
         console.error("Error during registration", "result", result);
       }
     } catch (someError) {
-      console.error("Error during registration:", someError);
+      if (someError.response && someError.response.status === 400) {
+        // Si l'email existe déjà, définir l'erreur d'email
+        setEmailError(someError.response.data.message);
+      } else {
+        console.error("Error during registration:", someError);
+      }
     }
   };
 
@@ -135,7 +150,12 @@ function Inscription() {
     <main className="signUpPageMockupGuest">
       <section className="searchDisplaySection">
         <LogoContainer />
-        <form className="form" onSubmit={handleSubmit}>
+        <form
+          className="form"
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
           <div className="signUpWrapper">
             <div className="inputs">
               <div className="inputContainer">
@@ -152,26 +172,45 @@ function Inscription() {
                 <input
                   type="email"
                   name="email"
-                  className="input"
+                  className={`input ${
+                    user.email && !emailRegex.test(user.email)
+                      ? "errorEmail"
+                      : ""
+                  }`}
                   value={user.email}
-                  onChange={handleInputChange}
+                  onChange={handleEmailChange}
                   placeholder="Adresse Mail"
                 />
+                {emailError && <p className="errorMessage">{emailError}</p>}
               </div>
               <div className="inputContainer">
                 <input
                   type="password"
                   name="password"
-                  className="input"
+                  className={`input ${
+                    user.password && user.password.length < 8
+                      ? "errorPassword"
+                      : ""
+                  }`}
+                  minLength="8"
                   value={user.password}
                   onChange={handleInputChange}
                   placeholder="Mot de passe"
                 />
+                {user.password && user.password.length < 8 && (
+                  <p className="errorMessage">Min 8 caractères</p>
+                )}
               </div>
               <div className="inputContainer">
                 <input
                   type="password"
-                  className="input"
+                  className={`input ${
+                    confirmPassword && user.password !== confirmPassword
+                      ? "errorPassword"
+                      : ""
+                  }`}
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
                   placeholder="Confirmation du mot de passe"
                 />
               </div>
@@ -211,6 +250,7 @@ function Inscription() {
                 <input
                   className="inputDate"
                   type="date"
+                  max={new Date().toISOString().split("T")[0]}
                   name="naissance"
                   value={user.naissance}
                   onChange={handleInputChange}
@@ -259,12 +299,23 @@ function Inscription() {
               </div>
             </div>
             <div className="buttonContainer">
-              <button className="signUpButton" type="submit">
+              <button
+                className="signUpButton"
+                type="submit"
+                disabled={
+                  !user?.name ||
+                  !user?.email ||
+                  !user?.password ||
+                  !user?.naissance ||
+                  !user?.civility ||
+                  user?.password.length < 8 ||
+                  user?.password !== confirmPassword
+                }
+              >
                 <p className="inscription">Inscription</p>
               </button>
             </div>
           </div>
-          {showModal && <ModalInscription />}
         </form>
       </section>
     </main>

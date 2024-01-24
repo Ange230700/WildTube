@@ -72,7 +72,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/Parametre",
-        element: <ParametreAdmin />,
+        element: (
+          <ProtectedRoute>
+            <ParametreAdmin />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profil",
@@ -92,11 +96,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/AjoutAdmin",
-        element: <AjoutAdmin />,
+        element: (
+          <ProtectedRoute>
+            <AjoutAdmin />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/EditVideo/:movieId",
-        element: <EditVideo />,
+        element: (
+          <ProtectedRoute>
+            <EditVideo />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

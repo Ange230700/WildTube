@@ -274,9 +274,16 @@ function UserProfileEditor() {
                     <img
                       className="avatarPreview"
                       src={
-                        selectedAvatar?.avatar_filename ||
+                        (selectedAvatar.avatar_filename &&
+                          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            selectedAvatar?.avatar_filename
+                          }`) ||
+                        (user.avatar_filename &&
+                          `
+                          ${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            user?.avatar_filename
+                          }`) ||
                         selectedAvatar?.avatar_url ||
-                        user?.avatar_filename ||
                         user?.avatar_url ||
                         "https://avatars.githubusercontent.com/u/97165289"
                       }
@@ -305,7 +312,10 @@ function UserProfileEditor() {
                     >
                       <img
                         src={
-                          avatar?.avatar_filename ||
+                          (avatar.avatar_filename &&
+                            `${
+                              import.meta.env.VITE_BACKEND_URL
+                            }/assets/images/${avatar?.avatar_filename}`) ||
                           avatar?.avatar_url ||
                           "https://avatars.githubusercontent.com/u/97165289"
                         }

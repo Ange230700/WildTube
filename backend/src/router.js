@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Import itemControllers module for handling item-related operations
 
-const { uploadImages } = require("./multer/multer");
+const { uploadImages } = require("./services/multer");
 const { hashPassword, verifyToken } = require("./services/auth");
 
 const userControllers = require("./controllers/userControllers");
@@ -25,6 +25,7 @@ const authControllers = require("./controllers/authControllers");
 // Route to get a list of items
 router.get("/users", userControllers.browse);
 router.get("/films", filmControllers.browse);
+router.get("/films/:id", filmControllers.read);
 router.get("/categories", categorieControllers.browse);
 router.get("/avatars", avatarControllers.browse);
 router.get(
@@ -44,7 +45,6 @@ router.get("/comments", commentaireFilmControllers.browse);
 
 // Route to get a specific item by ID
 router.get("/avatar/:id", avatarControllers.read);
-router.get("/user/:id", userControllers.read);
 router.get("/userByToken", verifyToken, userControllers.getByToken);
 router.get(
   "/user/:userId/avatar/:avatarId",

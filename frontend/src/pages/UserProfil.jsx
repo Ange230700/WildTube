@@ -27,8 +27,12 @@ function UserProfil() {
         <img
           className="Avatar1"
           src={
-            (user && user.avatar_filename) ||
-            (user && user.avatar_url) ||
+            (user &&
+              user.avatar_filename &&
+              `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                user?.avatar_filename
+              }`) ||
+            user?.avatar_url ||
             "https://avatars.githubusercontent.com/u/97165289"
           }
           alt="Avatar1"

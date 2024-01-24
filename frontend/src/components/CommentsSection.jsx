@@ -145,9 +145,11 @@ function CommentsSection({ filmId, user }) {
                       alt={comment.username}
                       className="Avatar2"
                       src={
-                        comment.avatar_filename ||
-                        comment.avatar_url ||
-                        "https://avatars.githubusercontent.com/u/97165289"
+                        (comment.avatar_filename &&
+                          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            comment?.avatar_filename
+                          }`) ||
+                        comment?.avatar_url
                       }
                     />
                     <h6 className="Username">{comment.name}</h6>
@@ -155,6 +157,30 @@ function CommentsSection({ filmId, user }) {
                   <div className="FrameContainer">
                     <div className="Frame1">
                       <p className="CommentText">{comment.content}</p>
+                      {user && user.id === comment.userId && (
+                        <div className="CommentActionButtons">
+                          <button
+                            type="button"
+                            className="EditButton"
+                            onClick={() => handleEditComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/modifier.png"
+                              alt="Modifier"
+                            />
+                          </button>
+                          <button
+                            type="button"
+                            className="DeleteButton"
+                            onClick={() => handleDeleteComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/supprimer.png"
+                              alt="Supprimer"
+                            />
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="CommentDateContainer">
                       <h6 className="CommentDate">{formattedDate}</h6>
@@ -224,9 +250,11 @@ function CommentsSection({ filmId, user }) {
                     alt={comment.username}
                     className="Avatar2"
                     src={
-                      comment.avatar_filename ||
-                      comment.avatar_url ||
-                      "https://avatars.githubusercontent.com/u/97165289"
+                      (comment.avatar_filename &&
+                        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                          comment?.avatar_filename
+                        }`) ||
+                      comment?.avatar_url
                     }
                   />
                   <h6 className="Username">{comment.name}</h6>
@@ -234,24 +262,6 @@ function CommentsSection({ filmId, user }) {
                 <div className="FrameContainer">
                   <div className="Frame1">
                     <p className="CommentText">{comment.content}</p>
-                    {user.id === comment.userId && (
-                      <div className="CommentActionButtons">
-                        <button
-                          type="button"
-                          className="EditButton"
-                          onClick={() => handleEditComment(comment.id)}
-                        >
-                          Modifier
-                        </button>
-                        <button
-                          type="button"
-                          className="DeleteButton"
-                          onClick={() => handleDeleteComment(comment.id)}
-                        >
-                          Supprimer
-                        </button>
-                      </div>
-                    )}
                   </div>
                   <div className="CommentDateContainer">
                     <h6 className="CommentDate">{formattedDate}</h6>

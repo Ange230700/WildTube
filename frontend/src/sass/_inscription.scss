@@ -52,6 +52,23 @@
                 outline: none;
               }
             }
+
+            .errorMessage {
+              color: red;
+              position: absolute;
+              font-size: 12px;
+              left: 10px;
+            }
+
+            .errorEmail {
+              color: red;
+              font-size: 12px;
+              left: 10px;
+            }
+
+            .errorPassword {
+              border: 2px solid red;
+            }
           }
         }
 

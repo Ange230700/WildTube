@@ -155,7 +155,17 @@ function FreeMovie({ movie }) {
         }
       >
         <div className="thumbnail-container">
-          <img className="movie-cover" src={movie.cover} alt={movie.title} />
+          <img
+            className="movie-cover"
+            src={
+              (movie.cover_filename &&
+                `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                  movie?.cover_filename
+                }`) ||
+              movie?.cover_url
+            }
+            alt={movie.title}
+          />
           <div className="upper-layer">
             <NavLink
               className="play-button-container"
@@ -238,7 +248,8 @@ function FreeMovie({ movie }) {
 FreeMovie.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    cover: PropTypes.string.isRequired,
+    cover_filename: PropTypes.string,
+    cover_url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
