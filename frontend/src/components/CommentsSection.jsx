@@ -153,6 +153,30 @@ function CommentsSection({ filmId, user }) {
                   <div className="FrameContainer">
                     <div className="Frame1">
                       <p className="CommentText">{comment.content}</p>
+                      {user.id === comment.userId && (
+                        <div className="CommentActionButtons">
+                          <button
+                            type="button"
+                            className="EditButton"
+                            onClick={() => handleEditComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/modifier.png"
+                              alt="Modifier"
+                            />
+                          </button>
+                          <button
+                            type="button"
+                            className="DeleteButton"
+                            onClick={() => handleDeleteComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/supprimer.png"
+                              alt="Supprimer"
+                            />
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="CommentDateContainer">
                       <h6 className="CommentDate">{formattedDate}</h6>
@@ -283,7 +307,7 @@ function CommentsSection({ filmId, user }) {
               />
             </button>
           </div>
-          {/* <div className="UserInfo">
+          <div className="UserInfo">
             <img
               alt="avatar"
               className="Avatar2"
@@ -294,7 +318,7 @@ function CommentsSection({ filmId, user }) {
               }
             />
             <h6 className="Username">{user.name}</h6>
-          </div> */}
+          </div>
         </div>
       </div>
     </section>

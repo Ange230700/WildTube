@@ -3,8 +3,7 @@ import { useParams, NavLink, useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
-// eslint-disable-next-line import/no-unresolved
-import CommentsSection from "./CommentsSection.js";
+import CommentsSection from "./CommentsSection";
 
 function FreeMovie({ movie }) {
   const navigate = useNavigate();
