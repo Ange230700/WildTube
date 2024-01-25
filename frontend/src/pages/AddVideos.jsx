@@ -62,8 +62,6 @@ function AddVideos() {
         duration ||
         isAvailable) === (undefined || "" || false)
     ) {
-      // eslint-disable-next-line no-alert
-      alert("champ manquant");
       toast.error("champ manquant");
     } else if (isAvailable === "utilisateur") {
       setIsAvailable(true);
@@ -85,15 +83,22 @@ function AddVideos() {
     formData.append("images", cover);
 
     // eslint-disable-next-line no-unused-vars
-    const result = await axios.post(
-      "http://localhost:3310/api/films",
-      formData,
-      {
+    const result = await axios
+      .post("http://localhost:3310/api/films", formData, {
         headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
-
-    fetchMovies();
+      })
+      .then(() => {
+        toast.success("Film ajouté avec succès");
+        setTimeout(() => {
+          fetchMovies();
+        }, 1);
+      })
+      .catch(() => {
+        toast.error("Erreur lors de l'ajout du film");
+        setTimeout(() => {
+          fetchMovies();
+        }, 1);
+      });
   };
 
   const fetchData = async () => {
@@ -141,11 +146,13 @@ function AddVideos() {
           <div className="Outlineimageuploader">
             <div className="Frame4">
               <div className="AjouterUneMiniature">Ajouter une miniature</div>
-              <img
-                src={previewFile}
-                alt="miniature"
-                style={{ width: "100px", height: "50px" }}
-              />
+              {previewFile && (
+                <img
+                  src={previewFile}
+                  alt="miniature"
+                  style={{ width: "100px", height: "50px" }}
+                />
+              )}
               <input
                 className="input"
                 onChange={(e) => setFile(e.target.files[0])}
@@ -157,11 +164,13 @@ function AddVideos() {
           <div className="Outlineimageuploader">
             <div className="Frame4">
               <div className="AjouterUneMiniature">Ajouter une cover</div>
-              <img
-                src={previewCover}
-                alt="cover"
-                style={{ width: "100px", height: "50px" }}
-              />
+              {previewCover && (
+                <img
+                  src={previewCover}
+                  alt="cover"
+                  style={{ width: "100px", height: "50px" }}
+                />
+              )}
               <input
                 className="input"
                 onChange={(e) => setCover(e.target.files[0])}

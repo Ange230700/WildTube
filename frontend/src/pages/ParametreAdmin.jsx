@@ -40,7 +40,7 @@ function ParametreAdmin() {
       <section className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to>
+            <Link to="/addvideos">
               <h3>Ajouter des videos</h3>
             </Link>
           </div>
