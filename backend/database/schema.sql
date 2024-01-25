@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS `Film`;
 CREATE TABLE
     `Film` (
         `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        `miniature_url` VARCHAR(255),
+        `miniature_url` VARCHAR(255) DEFAULT NULL,
         `miniature_filename` VARCHAR(255),
         `cover_url` VARCHAR(255),
         `cover_filename` VARCHAR(255),

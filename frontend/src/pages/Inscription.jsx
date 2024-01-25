@@ -98,8 +98,6 @@ function Inscription() {
         }
       );
 
-      fetchUser();
-
       if (result.status === 201) {
         const authentication = result.data;
 

@@ -19,6 +19,22 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
   }
 };
 
+const readOneFilmFromOneCategory = async (request, response, next) => {
+  try {
+    // Fetch all items from the database
+    const film = await tables.categorie_par_film.readOneFilmFromOneCategory(
+      request.params.filmId,
+      request.params.categoryId
+    );
+
+    // Respond with the items in JSON format
+    response.json(film);
+  } catch (error) {
+    // Pass any errors to the error-handling middleware
+    next(error);
+  }
+};
+
 const destroy = async (req, response, next) => {
   const { id } = req.params;
   try {
@@ -44,8 +60,30 @@ const destroy = async (req, response, next) => {
 
 // The D of BREAD - Delete operation
 
+const removeFilmFromCategory = async (req, response, next) => {
+  const { filmId, categoryId } = req.params;
+  try {
+    // Delete the item from the database
+    const result = await tables.categorie_par_film.delete({
+      filmId,
+      categoryId,
+    });
+
+    if (result.affectedRows) {
+      response.sendStatus(200);
+    } else {
+      response.sendStatus(404);
+    }
+  } catch (error) {
+    // Pass any errors to the error-handling middleware
+    next(error);
+  }
+};
+
 // Ready to export the controller functions
 module.exports = {
   browseFilmsForSpecificCategorie,
+  readOneFilmFromOneCategory,
   destroy,
+  removeFilmFromCategory,
 };

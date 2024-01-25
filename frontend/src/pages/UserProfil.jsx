@@ -63,11 +63,11 @@ function UserProfil() {
         </div>
         <div className="Useroption">
           <button
-            className="RegarderPlusTardButton"
+            className="RegarderPlusTard"
             type="button"
             onClick={handleLogOut}
           >
-            Déconnexion
+            <h3 className="h3">Déconnexion</h3>
           </button>
         </div>
       </section>

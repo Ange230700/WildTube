@@ -40,7 +40,7 @@ function ParametreAdmin() {
       <section className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to>
+            <Link to="/addVideos">
               <h3>Ajouter des videos</h3>
             </Link>
           </div>
@@ -113,11 +113,11 @@ function ParametreAdmin() {
         </div>
         <div className="Useroption">
           <button
-            className="RegarderPlusTardButton"
+            className="RegarderPlusTard"
             type="button"
             onClick={handleLogOut}
           >
-            Déconnexion
+            <h3 className="h3">Déconnexion</h3>
           </button>
         </div>
       </section>

@@ -62,17 +62,29 @@ class CategorieParFilmManager extends AbstractManager {
     return rows;
   }
 
+  // ? get one film from one categorie
+
+  async readOneFilmFromOneCategory(filmId, categorieId) {
+    // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} JOIN Categorie ON Categorie.id = ${this.table}.categorieId JOIN Film ON Film.id = ${this.table}.filmId WHERE Film.id = ? AND Categorie.id = ?`,
+      [filmId, categorieId]
+    );
+    // Return the array of categories
+    return rows;
+  }
+
   // The D of CRUD - Delete operation
 
   async delete({ filmId, categorieId }) {
-    // Execute the SQL DELETE query to remove an categorieParFilm by its ID
+    // Execute the SQL DELETE query to delete the categorieParFilm from the "categorieParFilm" table
     const [result] = await this.database.query(
-      `delete from ${this.table} where filmId = ? and categorieId = ?`,
+      `DELETE FROM ${this.table} WHERE filmId = ? AND categorieId = ?`,
       [filmId, categorieId]
     );
 
-    // Return the number of affected rows
-    return result;
+    // Return the number of rows deleted (should be 1)
+    return result.affectedRows;
   }
 }
 

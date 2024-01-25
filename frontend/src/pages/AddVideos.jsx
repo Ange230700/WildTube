@@ -84,16 +84,22 @@ function AddVideos() {
     formData.append("images", file);
     formData.append("images", cover);
 
-    await axios.post("http://localhost:3310/api/films", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/api/films`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
 
     fetchMovies();
   };
 
   const fetchData = async () => {
     try {
-      const resultat = await axios.get("http://localhost:3310/api/categories");
+      const resultat = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/categories`
+      );
       setCategories(resultat.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -116,31 +122,27 @@ function AddVideos() {
   }, [file, cover]);
 
   return (
-    <div className="ProfileDisplaySection">
+    <form className="ProfileDisplaySection2" onSubmit={submit}>
       <div className="SearchBarContainer">
-        <div className="AjouterUneVideo">Ajouter une video</div>
+        <h2 className="AjouterUneVideo">Ajouter une video</h2>
       </div>
       <div className="Emptyfieldscontainer">
         <div className="Imageuploadercontainer">
-          <div className="Outlineimageuploader">
-            <div className="Frame4">
-              <div className="ImporterLeFilm">Importer le film</div>
-              <input
-                className="input"
-                onChange={(e) => setVideoUrl(e.target.value)}
-                type="text"
-                placeholder="https://www.monfilm.com/"
-              />
-            </div>
+          <div className="inputContainer">
+            <input
+              type="text"
+              name="name"
+              className="input"
+              onChange={(e) => setVideoUrl(e.target.value)}
+              placeholder="lien de la video"
+            />
           </div>
           <div className="Outlineimageuploader">
             <div className="Frame4">
-              <div className="AjouterUneMiniature">Ajouter une miniature</div>
-              <img
-                src={previewFile}
-                alt="miniature"
-                style={{ width: "100px", height: "50px" }}
-              />
+              <h4 className="AjouterUneMiniature">Ajouter une miniature</h4>
+              <div className="imageContainer">
+                {previewFile && <img src={previewFile} alt="miniature" />}
+              </div>
               <input
                 className="input"
                 onChange={(e) => setFile(e.target.files[0])}
@@ -151,12 +153,10 @@ function AddVideos() {
           </div>
           <div className="Outlineimageuploader">
             <div className="Frame4">
-              <div className="AjouterUneMiniature">Ajouter une cover</div>
-              <img
-                src={previewCover}
-                alt="cover"
-                style={{ width: "100px", height: "50px" }}
-              />
+              <h4 className="AjouterUneMiniature">Ajouter une cover</h4>
+              <div className="imageContainer2">
+                {previewCover && <img src={previewCover} alt="cover" />}
+              </div>
               <input
                 className="input"
                 onChange={(e) => setCover(e.target.files[0])}
@@ -166,45 +166,44 @@ function AddVideos() {
             </div>
           </div>
         </div>
-        <div className="Titleinputcontainer1">
-          <div className="Input">
-            <div className="TitreDuFilm">Titre du film</div>
-            <input
-              className="input"
-              onChange={(e) => setTitle(e.target.value)}
-              type="text"
-            />
-          </div>
+        <div className="inputContainer">
+          <input
+            type="text"
+            name="name"
+            className="input"
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Titre du film"
+          />
         </div>
-        <div className="Titleinputcontainer2">
-          <div className="Input">
-            <div className="DurEDuFilm">Durée du film</div>
-            <input
-              className="input"
-              onChange={(e) => setDuration(e.target.value)}
-              type="text"
-            />
-          </div>
-          <div className="Input">
-            <div className="AnnEDeSortie">Année de sortie</div>
-            <input
-              className="input"
-              onChange={(e) => setYear(e.target.value)}
-              type="text"
-            />
-          </div>
+        <div className="inputContainer">
+          <input
+            type="text"
+            name="name"
+            className="input"
+            onChange={(e) => setDuration(e.target.value)}
+            placeholder="Durée du film"
+          />
         </div>
+        <div className="inputContainer">
+          <input
+            type="text"
+            name="name"
+            className="input"
+            onChange={(e) => setYear(e.target.value)}
+            placeholder="Année de sortie"
+          />
+        </div>
+        <h4>Catégorie du film</h4>
+        <select onChange={handleAjoutCategorie}>
+          <option value=""> --- </option>
+          {categories.map((cat) => (
+            <option value={cat.id} key={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
         <div className="Titleinputcontainer3">
           <div className="Input">
-            <div className="CatGorieDuFilm">Catégorie du film</div>
-            <select onChange={handleAjoutCategorie}>
-              <option value=""> --- </option>
-              {categories.map((cat) => (
-                <option value={cat.id} key={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
             <div className="tab">
               {categoriesPourAssocier.map((cat) => (
                 <div
@@ -224,10 +223,10 @@ function AddVideos() {
             </div>
           </div>
         </div>
+        <div className="DescriptifDuFilm">Descriptif du film</div>
         <div className="Titleinputcontainer4">
           <div className="Input">
-            <div className="DescriptifDuFilm">Descriptif du film</div>
-            <input
+            <textarea
               className="input"
               onChange={(e) => setDescription(e.target.value)}
               type="text"
@@ -257,17 +256,17 @@ function AddVideos() {
             onClick={(e) => setIsAvailable(e.target.value)}
             checked={isAvailable === "1"}
           />
-          <div className="UtilisateurAvecCompte">Utilisateur avec compte</div>
+          <div className="Visiteur">Utilisateur</div>
         </div>
       </div>
       <div className="Titleinputcontainer">
         <div className="ConnectionButton">
-          <button type="submit" className="Ajouter" onClick={submit}>
+          <button type="submit" className="Ajouter">
             Ajouter
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

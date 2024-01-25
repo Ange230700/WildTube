@@ -2,11 +2,28 @@
 import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
+import axios from "axios";
 // import { NavLink } from "react-router-dom";
 
-function MovieSlide({ movie }) {
+function MovieSlide({ movie, categorie }) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
+
+  const handleMovieDeletion = () => {
+    axios
+      .delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/film/${movie.id}/category/${
+          categorie.id
+        }`
+      )
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   if (user && user.IsAdmin && isAdminMode) {
     return (
       <>
@@ -28,11 +45,14 @@ function MovieSlide({ movie }) {
             className="movie-slide blur-filter"
           />
         </div>
-        <div
+        <button
           className="locked-overlay"
           style={{
             backgroundColor: "#00000055",
+            border: "none",
+            outline: "none",
           }}
+          onClick={handleMovieDeletion}
         >
           <div className="lock-icon-container">
             <img
@@ -41,7 +61,7 @@ function MovieSlide({ movie }) {
               alt="lock icon"
             />
           </div>
-        </div>
+        </button>
       </>
     );
   }
@@ -98,6 +118,9 @@ MovieSlide.propTypes = {
     year: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     IsAvailable: PropTypes.number.isRequired,
+  }).isRequired,
+  categorie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
   }).isRequired,
 };
 

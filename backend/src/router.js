@@ -54,6 +54,10 @@ router.get(
   "/comments/film/:filmId",
   commentaireFilmControllers.browseCommentsByFilmId
 );
+router.get(
+  "/film/:filmId/category/:categoryId",
+  categorieParFilmControllers.readOneFilmFromOneCategory
+);
 
 // Route to edit a specific item by ID
 router.put("/user/:id", userControllers.edit);
@@ -75,5 +79,9 @@ router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);
 router.delete("/comments/:commentId", commentaireFilmControllers.deleteComment);
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
+router.delete(
+  "/film/:filmId/category/:categoryId",
+  categorieParFilmControllers.removeFilmFromCategory
+);
 
 module.exports = router;
