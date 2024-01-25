@@ -42,8 +42,8 @@ const add = async (req, res, next) => {
   if (req.body.images.length === 2) {
     const miniature = req.body.images[0];
     const cover = req.body.images[1];
-    req.body.urlImage = miniature;
-    req.body.cover = cover;
+    req.body.miniature_filename = miniature;
+    req.body.cover_filename = cover;
   } else {
     res.status(403).send({ message: "Fichier manquant" });
   }

@@ -6,9 +6,7 @@ class FilmManager extends AbstractManager {
   }
 
   async create({
-    miniature_url,
     miniature_filename,
-    cover_url,
     cover_filename,
     title,
     videoUrl,
@@ -18,11 +16,9 @@ class FilmManager extends AbstractManager {
     isAvailable,
   }) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (miniature_url, miniature_filename, cover_url, cover_filename, title, videoUrl, duration, year, description, isAvailable) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (miniature_filename, cover_filename, title, videoUrl, duration, year, description, isAvailable) values (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        miniature_url,
         miniature_filename,
-        cover_url,
         cover_filename,
         title,
         videoUrl,

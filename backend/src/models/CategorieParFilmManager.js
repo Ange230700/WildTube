@@ -10,14 +10,15 @@ class CategorieParFilmManager extends AbstractManager {
   // The C of CRUD - Create operation
   async create({ filmId, categoriesIds }) {
     // prepa querySQLString et array de dependances
-    let querySQL = `insert into ${this.table} (filmId, categorieId) values`;
+    let querySQL = `insert into ${this.table} (filmId, categorieId, unique_key) values`;
     const arrDep = [];
 
     categoriesIds.forEach((catId, index) => {
-      if (index === 0) querySQL += " (?, ?)";
-      else querySQL += ", (?, ?)";
+      const unique_key = `${filmId}-${catId}`;
+      if (index === 0) querySQL += " (?, ?, ?)";
+      else querySQL += ", (?, ?, ?)";
 
-      arrDep.push(filmId, catId);
+      arrDep.push(filmId, catId, unique_key);
     });
     // console.log("querySQL =>", querySQL);
     // console.log("arrDep =>", arrDep);
