@@ -84,14 +84,9 @@ function AddVideos() {
     formData.append("images", file);
     formData.append("images", cover);
 
-    // eslint-disable-next-line no-unused-vars
-    const result = await axios.post(
-      "http://localhost:3310/api/films",
-      formData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
+    await axios.post("http://localhost:3310/api/films", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
     fetchMovies();
   };

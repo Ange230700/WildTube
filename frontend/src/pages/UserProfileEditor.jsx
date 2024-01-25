@@ -7,7 +7,7 @@ import { useUser } from "../contexts/UserContext";
 
 function UserProfileEditor() {
   const { userId } = useParams();
-  const { user, updateUser } = useUser();
+  const { user, fetchUser } = useUser();
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -102,16 +102,11 @@ function UserProfileEditor() {
         }
       );
 
+      fetchUser();
+
       if (result.status === 200) {
-        const token = localStorage.getItem("token");
-        axios
-          .get(`${import.meta.env.VITE_BACKEND_URL}/api/userByToken`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((response) => {
-            updateUser(response.data[0]);
+        fetchUser()
+          .then(() => {
             navigate("/profil");
           })
           .catch((error) => {

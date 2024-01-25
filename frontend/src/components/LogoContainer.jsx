@@ -11,12 +11,12 @@ function LogoContainer() {
         src="/src/assets/icons/logo.svg"
         alt="wildtube logo"
       />
-      {user && user.IsAdmin && (
+      {user && user.IsAdmin ? (
         <div className="switchContainer">
           <h6>Mode admin :</h6>
           <ToggleSwitch />
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
