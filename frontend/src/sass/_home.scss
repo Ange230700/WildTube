@@ -17,6 +17,32 @@
       calc(var(--spacing-constant) * 2 * 1.5)
     );
     display: flex;
+
+    .add-category-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--neutral-color-faded);
+      height: clamp(
+        calc(107px * 1),
+        calc(33.4375vw * 1),
+        calc(107px * 1 * 1.5)
+      );
+      border-radius: clamp(
+        calc(var(--border-radius-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--border-radius-constant) * 1.5)
+      );
+      cursor: pointer;
+      margin: 0
+        clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1.5)
+        );
+      border: none;
+      outline: none;
+    }
   }
 }
 

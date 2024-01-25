@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
 import { UserProvider } from "./contexts/UserContext";
+import { AdminModeProvider } from "./contexts/AdminModeContext";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
@@ -18,6 +19,8 @@ import UserProfil from "./pages/UserProfil";
 import UserProfileEditor from "./pages/UserProfileEditor";
 import AjoutAdmin from "./pages/AjoutAdmin";
 import EditVideo from "./pages/EditVideo";
+import AddSection from "./pages/AddSection";
+import EditSection from "./pages/EditSection";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./sass/index.scss";
 
@@ -110,6 +113,22 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/addSection",
+        element: (
+          <ProtectedRoute>
+            <AddSection />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/editSection/:sectionId",
+        element: (
+          <ProtectedRoute>
+            <EditSection />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
@@ -118,10 +137,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <UserProvider>
-      <MovieProvider>
-        <RouterProvider router={router} />
-      </MovieProvider>
-    </UserProvider>
+    <AdminModeProvider>
+      <UserProvider>
+        <MovieProvider>
+          <RouterProvider router={router} />
+        </MovieProvider>
+      </UserProvider>
+    </AdminModeProvider>
   </React.StrictMode>
 );

@@ -59,6 +59,7 @@ router.get(
 router.put("/user/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
 router.put("/films/:id", filmControllers.edit);
+router.put("/categories/:id", categorieControllers.edit);
 
 // Route to add a new item
 router.post("/login", authControllers.login);

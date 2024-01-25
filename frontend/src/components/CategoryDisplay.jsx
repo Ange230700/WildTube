@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Carousel from "react-multi-carousel";
 import axios from "axios";
 import MovieLink from "./MovieLink";
+import { useAdminMode } from "../contexts/AdminModeContext";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,7 +39,9 @@ const responsive = {
 };
 
 function CategoryDisplay({ categorie }) {
+  const { isAdminMode } = useAdminMode();
   const [allMoviesForOneCategorie, setAllMoviesForOneCategorie] = useState([]);
+
   useEffect(() => {
     axios
       .get(
@@ -52,11 +55,32 @@ function CategoryDisplay({ categorie }) {
       });
   }, [categorie.id]);
 
-  if (allMoviesForOneCategorie.length) {
-    return (
+  return (
+    allMoviesForOneCategorie.length && (
       <section className="category-movie-display-container">
         <div className="category-title-container">
-          <div className="category-title">{categorie.name}</div>
+          <h1
+            className="category-title"
+            style={
+              isAdminMode
+                ? {
+                    fontSize: "2em",
+                  }
+                : {}
+            }
+          >
+            {categorie.name}
+          </h1>
+          {isAdminMode && (
+            <>
+              <button className="add-movie-container" type="button">
+                <img src="/src/assets/icons/edit.png" alt="edit button" />
+              </button>
+              <button className="add-movie-container" type="button">
+                <img src="/src/assets/icons/remove.svg" alt="edit button" />
+              </button>
+            </>
+          )}
         </div>
         <Carousel
           additionalTransfrom={0}
@@ -69,7 +93,7 @@ function CategoryDisplay({ categorie }) {
           draggable
           focusOnSelect={false}
           infinite={false}
-          itemClass=""
+          itemClass="static-slider-item"
           keyBoardControl
           minimumTouchDrag={80}
           pauseOnHover
@@ -87,14 +111,13 @@ function CategoryDisplay({ categorie }) {
           slidesToSlide={1}
           swipeable
         >
-          {allMoviesForOneCategorie.map((movie) => (
-            <MovieLink key={movie.id} movie={movie} />
-          ))}
+          {allMoviesForOneCategorie.map((movie) => {
+            return <MovieLink key={movie.id} movie={movie} />;
+          })}
         </Carousel>
       </section>
-    );
-  }
-  return null;
+    )
+  );
 }
 
 CategoryDisplay.propTypes = {
