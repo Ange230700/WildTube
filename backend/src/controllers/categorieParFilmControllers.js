@@ -7,7 +7,7 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const films =
-      await tables.Categorie_par_film.readAllFilmsForSpecificCategorie(
+      await tables.categorie_par_film.readAllFilmsForSpecificCategorie(
         request.params.id
       );
 
@@ -23,7 +23,7 @@ const destroy = async (req, response, next) => {
   const { id } = req.params;
   try {
     // Delete the item from the database
-    const result = await tables.Categorie_par_film.delete({
+    const result = await tables.categorie_par_film.delete({
       id,
     });
 

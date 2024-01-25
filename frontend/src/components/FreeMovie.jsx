@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import CommentsSection from "./CommentsSection";
@@ -7,7 +7,6 @@ import { useUser } from "../contexts/UserContext";
 
 function FreeMovie({ movie }) {
   const navigate = useNavigate();
-  const { movieId } = useParams();
   const { user } = useUser();
   const [isFavorited, setIsFavorited] = useState(false);
   const [isWatchlisted, setIsWatchlisted] = useState(false);
@@ -143,105 +142,107 @@ function FreeMovie({ movie }) {
   }, [user, movie.id]);
 
   return (
-    <div className="movie-page-details" key={parseInt(movieId, 10)}>
-      <div
-        className="movie-information-display"
-        style={
-          location.pathname.includes("/movies/")
-            ? {
-                paddingBottom: "9.375vw",
+    movie && (
+      <div className="movie-page-details" key={movie.id}>
+        <div
+          className="movie-information-display"
+          style={
+            location.pathname.includes("/movies/")
+              ? {
+                  paddingBottom: "9.375vw",
+                }
+              : {}
+          }
+        >
+          <div className="thumbnail-container">
+            <img
+              className="movie-cover"
+              src={
+                (movie.cover_filename &&
+                  `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                    movie?.cover_filename
+                  }`) ||
+                movie?.cover_url
               }
-            : {}
-        }
-      >
-        <div className="thumbnail-container">
-          <img
-            className="movie-cover"
-            src={
-              (movie.cover_filename &&
-                `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                  movie?.cover_filename
-                }`) ||
-              movie?.cover_url
-            }
-            alt={movie.title}
-          />
-          <div className="upper-layer">
-            <NavLink
-              className="play-button-container"
-              to={`/moviePlayer/${movie.id}`}
-            >
-              <img
-                className="play-button"
-                src="/src/assets/icons/play_button_icon.svg"
-                alt="play button"
-              />
-            </NavLink>
-          </div>
-        </div>
-        <div className="details-option-wrapper">
-          <div className="details-container">
-            <p className="movie-info release-year">{movie.year}</p>
-            <p className="separator">•</p>
-            <p className="movie-info duration">{movie.duration}m</p>
-          </div>
-          {user && (
-            <div className="ActionIcons">
-              <button
-                className="ThumbsUpRegular1"
-                type="button"
-                onClick={() => handleFavoriteClick(movie.id)}
+              alt={movie.title}
+            />
+            <div className="upper-layer">
+              <NavLink
+                className="play-button-container"
+                to={`/moviePlayer/${movie.id}`}
               >
                 <img
-                  className="favourite-icon"
-                  src={
-                    !isFavorited
-                      ? "/src/assets/icons/favourite-icon.svg"
-                      : "/src/assets/icons/thumbs-up-solid.svg"
-                  }
-                  alt="favourite icon"
+                  className="play-button"
+                  src="/src/assets/icons/play_button_icon.svg"
+                  alt="play button"
                 />
-              </button>
-              {user && user.IsAdmin === 1 ? (
+              </NavLink>
+            </div>
+          </div>
+          <div className="details-option-wrapper">
+            <div className="details-container">
+              <p className="movie-info release-year">{movie.year}</p>
+              <p className="separator">•</p>
+              <p className="movie-info duration">{movie.duration}m</p>
+            </div>
+            {user && (
+              <div className="ActionIcons">
                 <button
                   className="ThumbsUpRegular1"
                   type="button"
-                  onClick={handleClick}
+                  onClick={() => handleFavoriteClick(movie.id)}
                 >
                   <img
                     className="favourite-icon"
-                    src="/src/assets/icons/edit.png"
-                    alt="edit icon"
+                    src={
+                      !isFavorited
+                        ? "/src/assets/icons/favourite-icon.svg"
+                        : "/src/assets/icons/thumbs-up-solid.svg"
+                    }
+                    alt="favourite icon"
                   />
                 </button>
-              ) : (
-                ""
-              )}
-              <button
-                className="ThumbsUpRegular1"
-                type="button"
-                onClick={() => handleWatchlistClick(movie.id)}
-              >
-                <img
-                  className="favourite-icon"
-                  src={
-                    !isWatchlisted
-                      ? "/src/assets/icons/watchlist-icon.svg"
-                      : "/src/assets/icons/check-solid.svg"
-                  }
-                  alt="watchlist icon"
-                />
-              </button>
-            </div>
-          )}
+                {user && user.IsAdmin === 1 ? (
+                  <button
+                    className="ThumbsUpRegular1"
+                    type="button"
+                    onClick={handleClick}
+                  >
+                    <img
+                      className="favourite-icon"
+                      src="/src/assets/icons/edit.png"
+                      alt="edit icon"
+                    />
+                  </button>
+                ) : (
+                  ""
+                )}
+                <button
+                  className="ThumbsUpRegular1"
+                  type="button"
+                  onClick={() => handleWatchlistClick(movie.id)}
+                >
+                  <img
+                    className="favourite-icon"
+                    src={
+                      !isWatchlisted
+                        ? "/src/assets/icons/watchlist-icon.svg"
+                        : "/src/assets/icons/check-solid.svg"
+                    }
+                    alt="watchlist icon"
+                  />
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="description-container">
+            <p className="movie-title">{movie.title}</p>
+            <p className="movie-description">{movie.description}</p>
+          </div>
+          <CommentsSection filmId={movie.id} user={user} />
         </div>
-        <div className="description-container">
-          <p className="movie-title">{movie.title}</p>
-          <p className="movie-description">{movie.description}</p>
-        </div>
-        <CommentsSection filmId={movie.id} user={user} />
       </div>
-    </div>
+    )
   );
 }
 
