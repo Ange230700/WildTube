@@ -16,11 +16,11 @@ import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
 import UserProfileEditor from "./pages/UserProfileEditor";
-import AccountInfo from "./pages/AccountInfo";
-import "./sass/index.scss";
 import AjoutAdmin from "./pages/AjoutAdmin";
 import EditVideo from "./pages/EditVideo";
 import AddVideos from "./pages/AddVideos";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./sass/index.scss";
 
 const router = createBrowserRouter([
   {
@@ -37,15 +37,19 @@ const router = createBrowserRouter([
       },
       {
         path: "favorites/",
-        element: <Favorites />,
+        element: (
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "watchlist/",
-        element: <Watchlist />,
-      },
-      {
-        path: "accountinfo/",
-        element: <AccountInfo />,
+        element: (
+          <ProtectedRoute>
+            <Watchlist />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "category/:catId",
@@ -69,27 +73,51 @@ const router = createBrowserRouter([
       },
       {
         path: "/Parametre",
-        element: <ParametreAdmin />,
+        element: (
+          <ProtectedRoute>
+            <ParametreAdmin />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profil",
-        element: <UserProfil />,
+        element: (
+          <ProtectedRoute>
+            <UserProfil />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/profileEditor",
-        element: <UserProfileEditor />,
+        path: "/account/:userId",
+        element: (
+          <ProtectedRoute>
+            <UserProfileEditor />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/AjoutAdmin",
-        element: <AjoutAdmin />,
+        element: (
+          <ProtectedRoute>
+            <AjoutAdmin />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/EditVideo/:movieId",
-        element: <EditVideo />,
+        element: (
+          <ProtectedRoute>
+            <EditVideo />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/AddVideos",
-        element: <AddVideos />,
+        element: (
+          <ProtectedRoute>
+            <AddVideos />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

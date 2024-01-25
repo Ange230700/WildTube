@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 function CommentsSection({ filmId, user }) {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
+  const [editableComment, setEditableComment] = useState(null); // New state to track the comment being edited
   const commentsWrapperRef = useRef(null); // Ref for the comments wrapper
 
   const scrollToBottom = () => {
@@ -15,10 +16,11 @@ function CommentsSection({ filmId, user }) {
   };
 
   const addComment = async (content) => {
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments`;
     const commentData = {
       userId: user.id,
       filmId,
+      avatarId: user.avatarId,
       content,
     };
 
@@ -71,6 +73,56 @@ function CommentsSection({ filmId, user }) {
     scrollToBottom();
   }, [comments]);
 
+  const handleDeleteComment = async (id) => {
+    try {
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/${id}`;
+      await axios.delete(url);
+
+      // Mettez à jour la liste des commentaires après la suppression
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/comments/film/${filmId}`
+      );
+      setComments(response.data);
+    } catch (error) {
+      console.error("Error deleting comment", error);
+    }
+  };
+
+  const handleEditComment = async (commentId) => {
+    // Find the comment by id
+    const commentToEdit = comments.find((comment) => comment.id === commentId);
+
+    // Set the comment content in the textarea and update editableComment state
+    setCommentContent(commentToEdit.content);
+    setEditableComment(commentToEdit);
+
+    // Implement the editing logic here using editableComment
+    if (editableComment) {
+      try {
+        const url = `${import.meta.env.VITE_BACKEND_URL}/api/comments/${
+          editableComment.id
+        }`;
+        const updatedCommentData = {
+          content: commentContent,
+        };
+
+        await axios.put(url, updatedCommentData);
+
+        // Fetch updated comments after editing
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/comments/film/${filmId}`
+        );
+
+        setComments(response.data);
+      } catch (error) {
+        console.error("Error updating comment", error);
+      } finally {
+        // Reset editableComment state and clear commentContent
+        setEditableComment(null);
+        setCommentContent("");
+      }
+    }
+  };
   if (user) {
     return (
       <section className="CommentsSection">
@@ -83,18 +135,21 @@ function CommentsSection({ filmId, user }) {
           ) : (
             comments.map((comment) => {
               const formattedDate = comment.date.slice(0, 19).replace("T", " ");
+              const commentKey = `${comment.unique_key}-${comment.id}-${comment.filmId}-${comment.userId}-${comment.avatarId}-${comment.date}`;
 
               return (
-                <div className="CommentContainer" key={comment.unique_key}>
+                <div className="CommentContainer" key={commentKey}>
                   {" "}
                   <div className="UserInfo">
                     <img
                       alt={comment.username}
                       className="Avatar2"
                       src={
-                        comment.avatar
-                          ? comment.avatar
-                          : "https://avatars.githubusercontent.com/u/97165289"
+                        (comment.avatar_filename &&
+                          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            comment?.avatar_filename
+                          }`) ||
+                        comment?.avatar_url
                       }
                     />
                     <h6 className="Username">{comment.name}</h6>
@@ -102,6 +157,30 @@ function CommentsSection({ filmId, user }) {
                   <div className="FrameContainer">
                     <div className="Frame1">
                       <p className="CommentText">{comment.content}</p>
+                      {user && user.id === comment.userId && (
+                        <div className="CommentActionButtons">
+                          <button
+                            type="button"
+                            className="EditButton"
+                            onClick={() => handleEditComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/modifier.png"
+                              alt="Modifier"
+                            />
+                          </button>
+                          <button
+                            type="button"
+                            className="DeleteButton"
+                            onClick={() => handleDeleteComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/supprimer.png"
+                              alt="Supprimer"
+                            />
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="CommentDateContainer">
                       <h6 className="CommentDate">{formattedDate}</h6>
@@ -137,9 +216,9 @@ function CommentsSection({ filmId, user }) {
                 alt="avatar"
                 className="Avatar2"
                 src={
-                  user.avatar
-                    ? user.avatar
-                    : "https://avatars.githubusercontent.com/u/97165289"
+                  user.avatar_filename ||
+                  user.avatar_url ||
+                  "https://avatars.githubusercontent.com/u/97165289"
                 }
               />
               <h6 className="Username">{user.name}</h6>
@@ -161,18 +240,21 @@ function CommentsSection({ filmId, user }) {
         ) : (
           comments.map((comment) => {
             const formattedDate = comment.date.slice(0, 19).replace("T", " ");
+            const commentKey = `${comment.unique_key}-${comment.id}-${comment.film_id}-${comment.user_id}-${comment.avatar_id}-${comment.content}-${comment.date}`;
 
             return (
-              <div className="CommentContainer" key={comment.unique_key}>
+              <div className="CommentContainer" key={commentKey}>
                 {" "}
                 <div className="UserInfo">
                   <img
                     alt={comment.username}
                     className="Avatar2"
                     src={
-                      comment.avatar
-                        ? comment.avatar
-                        : "https://avatars.githubusercontent.com/u/97165289"
+                      (comment.avatar_filename &&
+                        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                          comment?.avatar_filename
+                        }`) ||
+                      comment?.avatar_url
                     }
                   />
                   <h6 className="Username">{comment.name}</h6>
@@ -208,18 +290,6 @@ function CommentsSection({ filmId, user }) {
               />
             </button>
           </div>
-          {/* <div className="UserInfo">
-            <img
-              alt="avatar"
-              className="Avatar2"
-              src={
-                user.avatar
-                  ? user.avatar
-                  : "https://avatars.githubusercontent.com/u/97165289"
-              }
-            />
-            <h6 className="Username">{user.name}</h6>
-          </div> */}
         </div>
       </div>
     </section>
@@ -231,7 +301,9 @@ CommentsSection.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    avatar: PropTypes.string,
+    avatarId: PropTypes.number.isRequired,
+    avatar_filename: PropTypes.string,
+    avatar_url: PropTypes.string.isRequired,
   }),
 };
 

@@ -141,7 +141,7 @@ function EditVideo() {
       </form>
       <div className="containerButtonEdit">
         <button className="editButton" type="button" onClick={handleEditClick}>
-          Editer
+          Éditer
         </button>
         <button className="delete" type="button" onClick={handleDelete}>
           Supprimer

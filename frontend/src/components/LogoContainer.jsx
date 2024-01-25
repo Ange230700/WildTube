@@ -1,5 +1,5 @@
-import { useUser } from "../contexts/UserContext";
 // import ToggleSwitch from "./ToggleSwitch";
+import { useUser } from "../contexts/UserContext";
 
 function LogoContainer() {
   const { user } = useUser();

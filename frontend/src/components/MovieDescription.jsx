@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
 import FreeMovie from "./FreeMovie";
 import MovieLoginRequired from "./MovieLoginRequired";
+import { useUser } from "../contexts/UserContext";
 
 function MovieDescription({ movie }) {
   const { user } = useUser();
@@ -21,7 +21,8 @@ MovieDescription.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
+    cover_filename: PropTypes.string,
+    cover_url: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
     IsAvailable: PropTypes.number.isRequired,

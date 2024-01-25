@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractManager = require("./AbstractManager");
 
 class WatchlistManager extends AbstractManager {
@@ -5,10 +6,10 @@ class WatchlistManager extends AbstractManager {
     super({ table: "Watchlist" });
   }
 
-  async createMovieInWatchlist(userId, filmId) {
+  async createMovieInWatchlist(userId, filmId, unique_key) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (userId, filmId) VALUES (?, ?)`,
-      [userId, filmId]
+      `INSERT INTO ${this.table} (userId, filmId, unique_key) VALUES (?, ?, ?)`,
+      [userId, filmId, unique_key]
     );
     return result;
   }

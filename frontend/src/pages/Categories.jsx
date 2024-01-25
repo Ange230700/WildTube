@@ -72,7 +72,16 @@ function Categories() {
 
         <MovieGenreTabsContainer categories={categories} />
         <div className="display-container">
-          <div className="display">
+          <div
+            className="display"
+            style={
+              pathname.includes("/category/")
+                ? {
+                    justifyContent: "center",
+                  }
+                : {}
+            }
+          >
             {searchValue.length > 0 ? (
               <>
                 {reqOneCount

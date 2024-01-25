@@ -5,6 +5,10 @@ import "react-multi-carousel/lib/styles.css";
 import HeroMovieSlideLink from "./HeroMovieSlideLink";
 
 const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 1601 },
+    items: 1,
+  },
   desktop: {
     breakpoint: { max: 1600, min: 1025 },
     items: 1,
@@ -68,7 +72,8 @@ DynamicHeroSlider.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      cover: PropTypes.string.isRequired,
+      cover_filename: PropTypes.string,
+      cover_url: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       videoUrl: PropTypes.string,
       duration: PropTypes.number.isRequired,

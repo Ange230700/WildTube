@@ -16,7 +16,6 @@ function NavBar() {
   };
 
   return (
-
     <nav
       className="navbar"
       style={
@@ -58,9 +57,9 @@ function NavBar() {
               <img
                 className="icon avatar"
                 src={
-                  user.avatar
-                    ? user.avatar
-                    : "https://avatars.githubusercontent.com/u/97165289"
+                  (user && user?.avatar_filename) ||
+                  (user && user?.avatar_url) ||
+                  "https://avatars.githubusercontent.com/u/97165289"
                 }
                 alt="avatar"
               />

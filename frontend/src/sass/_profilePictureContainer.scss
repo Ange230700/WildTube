@@ -1,0 +1,28 @@
+.Profilepicturecontainer {
+  height: clamp(calc(128px * 1), calc(40vw * 1), calc(128px * 1 * 1.5));
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(
+    calc(var(--spacing-constant) * 1),
+    calc(2.5vw * 1),
+    calc(var(--spacing-constant) * 1 * 1.5)
+  );
+  display: flex;
+
+  .Avatar1 {
+    width: clamp(calc(100px * 1), calc(31.25vw * 1), calc(100px * 1 * 1.5));
+    aspect-ratio: 1 / 1;
+    border-radius: clamp(
+      calc(var(--border-radius-constant) * 6),
+      calc(2.5vw * 6),
+      calc(var(--border-radius-constant) * 6 * 1.5)
+    );
+    object-fit: cover;
+  }
+
+  .User {
+    color: var(--neutral-color);
+    font-weight: var(--font-weight-semi-bold);
+  }
+}
