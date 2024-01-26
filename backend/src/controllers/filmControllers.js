@@ -93,6 +93,19 @@ const add = async (req, res, next) => {
   }
 };
 
+const getFilmByCategorie = async (req, res, next) => {
+  try {
+    const film = await tables.Film.getFilmByCategorie(req.params.id);
+    if (film == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(film);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const destroy = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -112,5 +125,6 @@ module.exports = {
   read,
   edit,
   add,
+  getFilmByCategorie,
   destroy,
 };

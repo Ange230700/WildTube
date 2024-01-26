@@ -111,6 +111,7 @@ const edit = async (req, res, next) => {
       civility,
       hashed_password: req.body.hashed_password,
       avatarId,
+      IsAdmin: req.body.IsAdmin || currentUser.IsAdmin,
     });
 
     if (!updatedUser) {

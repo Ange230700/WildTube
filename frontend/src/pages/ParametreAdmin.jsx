@@ -45,6 +45,23 @@ function ParametreAdmin() {
           </div>
         </div>
         <div className="Useroption">
+          <div className="RegarderPlusTard" />
+        </div>
+        <div className="Useroption">
+          <div className="RegarderPlusTard">
+            <Link to>
+              <h3>Modifier les sections</h3>
+            </Link>
+          </div>
+        </div>
+        <div className="Useroption">
+          <div className="RegarderPlusTard">
+            <Link to>
+              <h3>Gérer les catégories</h3>
+            </Link>
+          </div>
+        </div>
+        <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/favorites">
               <h3>Favoris</h3>

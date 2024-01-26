@@ -239,6 +239,12 @@
             aspect-ratio: 1 / 1;
             object-fit: cover;
           }
+          cursor: pointer;
+
+          &.disabled {
+            cursor: auto;
+            opacity: 0.5;
+          }
         }
       }
 

@@ -19,20 +19,37 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
   }
 };
 
-const destroy = async (req, response, next) => {
-  const { id } = req.params;
+const AddCategoriesToFilm = async (req, res, next) => {
+  const { filmId, categorieId } = req.body;
+
+  try {
+    const result = await tables.Categorie_par_film.createCategorieForFilm(
+      filmId,
+      categorieId
+    );
+
+    if (result.affectedRows) {
+      res.sendStatus(201);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const destroy = async (req, res, next) => {
+  const { unique_key } = req.params;
   try {
     // Delete the item from the database
-    const result = await tables.categorie_par_film.delete({
-      id,
-    });
+    const result = await tables.Categorie_par_film.deleteCategorie(unique_key);
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with HTTP 204 (No Content)
     if (result.affectedRows) {
-      response.sendStatus(200);
+      res.sendStatus(200);
     } else {
-      response.sendStatus(404);
+      res.sendStatus(404);
     }
   } catch (error) {
     // Pass any errors to the error-handling middleware
@@ -48,4 +65,5 @@ const destroy = async (req, response, next) => {
 module.exports = {
   browseFilmsForSpecificCategorie,
   destroy,
+  AddCategoriesToFilm,
 };
