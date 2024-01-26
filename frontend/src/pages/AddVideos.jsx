@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useMovies } from "../contexts/MovieContext";
 
@@ -16,6 +17,7 @@ function AddVideos() {
   const [isAvailable, setIsAvailable] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoriesPourAssocier, setCategoriesPourAssocier] = useState([]);
+  const navigate = useNavigate();
 
   const { fetchMovies } = useMovies();
 
@@ -91,6 +93,7 @@ function AddVideos() {
         setTimeout(() => {
           fetchMovies();
         }, 1);
+        navigate("/");
       })
       .catch(() => {
         toast.error("Erreur lors de l'ajout du film");

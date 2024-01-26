@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -8,6 +8,7 @@ function EditVideo() {
   const { movieId } = useParams();
   const [categories, setCategories] = useState([]);
   const [categorieVideo, setCategorieVideo] = useState([]);
+  const navigate = useNavigate();
   const [video, setVideo] = useState({
     miniature_url: "",
     title: "",
@@ -143,6 +144,7 @@ function EditVideo() {
       );
       if (response.status === 200) {
         toast.success("Success");
+        navigate("/");
       }
     } catch (e) {
       console.error("Error deleting", e);
@@ -215,13 +217,13 @@ function EditVideo() {
           onChange={handleInputChange}
         />
         {categorieVideo.map((categorie) => (
-          <div className="containerCategorie" key={categorie.uniqueKey}>
+          <div className="containerCategorie" key={categorie.unique_key}>
             {categorie.name}
 
             <button
               className="buttonDelete"
               type="button"
-              onClick={() => handleDeleteCategorie(categorie.uniqueKey)}
+              onClick={() => handleDeleteCategorie(categorie.unique_key)}
             >
               <img className="imgCroix" src={croixRouge} alt="croix-rouge" />
             </button>

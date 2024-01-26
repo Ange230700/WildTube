@@ -87,15 +87,14 @@ router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
 router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);
 router.delete("/comments/:commentId", commentaireFilmControllers.deleteComment);
 router.delete("/films/:id", filmControllers.destroy);
-router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
-router.delete(
-  "/film/:filmId/category/:categorieId",
-  categorieParFilmControllers.removeFilmFromCategory
-);
-router.delete("/category/:id", categorieControllers.removeCategory);
 router.delete(
   "/categoriesParFilm/:unique_key",
   categorieParFilmControllers.destroy
 );
+router.delete(
+  "/film/:filmId/category/:>categorieId",
+  categorieParFilmControllers.removeFilmFromCategory
+);
+router.delete("/category/:id", categorieControllers.removeCategory);
 
 module.exports = router;

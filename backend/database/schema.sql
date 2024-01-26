@@ -72,7 +72,7 @@ CREATE TABLE `Commentaire_film` (
     `date` DATETIME NOT NULL,
     `unique_key` VARCHAR(350) NOT NULL DEFAULT '',
     CONSTRAINT FK_Commentaire_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-    CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+    CONSTRAINT FK_Commentaire_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`) ON DELETE CASCADE,
     CONSTRAINT FK_Commentaire_Film_avatar_id FOREIGN KEY (`avatarId`) REFERENCES `Avatar` (`id`)
 );
 
@@ -84,7 +84,7 @@ CREATE TABLE
         `filmId` INT NOT NULL,
         `unique_key` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Watchlist_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Watchlist_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        CONSTRAINT FK_Watchlist_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`) ON DELETE CASCADE,
         PRIMARY KEY (`userId`, `filmId`)
     );
 
@@ -96,6 +96,6 @@ CREATE TABLE
         `filmId` INT NOT NULL,
         `unique_key` VARCHAR(255) NOT NULL,
         CONSTRAINT FK_Favori_Film_user_id FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-        CONSTRAINT FK_Favori_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
+        CONSTRAINT FK_Favori_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`) ON DELETE CASCADE,
         PRIMARY KEY (`userId`, `filmId`)
     );

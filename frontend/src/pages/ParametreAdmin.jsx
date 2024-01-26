@@ -44,23 +44,20 @@ function ParametreAdmin() {
             </Link>
           </div>
         </div>
-        <div className="Useroption">
-          <div className="RegarderPlusTard" />
-        </div>
-        <div className="Useroption">
+        {/* <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to>
               <h3>Modifier les sections</h3>
             </Link>
           </div>
-        </div>
-        <div className="Useroption">
+        </div> */}
+        {/* <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to>
               <h3>Gérer les catégories</h3>
             </Link>
           </div>
-        </div>
+        </div> */}
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/favorites">
@@ -72,13 +69,6 @@ function ParametreAdmin() {
           <div className="RegarderPlusTard">
             <Link to="/watchlist">
               <h3>À regarder plus tard</h3>
-            </Link>
-          </div>
-        </div>
-        <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to="/">
-              <h3>Gérer les catégories</h3>
             </Link>
           </div>
         </div>

@@ -7,7 +7,7 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const films =
-      await tables.categorie_par_film.readAllFilmsForSpecificCategorie(
+      await tables.Categorie_par_film.readAllFilmsForSpecificCategorie(
         request.params.id
       );
 
@@ -22,7 +22,7 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
 const readOneFilmFromOneCategory = async (request, response, next) => {
   try {
     // Fetch all items from the database
-    const film = await tables.categorie_par_film.readOneFilmFromOneCategory(
+    const film = await tables.Categorie_par_film.readOneFilmFromOneCategory(
       request.params.filmId,
       request.params.categoryId
     );
@@ -81,7 +81,7 @@ const addFilmToCategory = async (req, response, next) => {
   const { filmId, categorieId } = req.params;
   try {
     // Create a new item in the database
-    const result = await tables.categorie_par_film.createFilmInOneCategory({
+    const result = await tables.Categorie_par_film.createFilmInOneCategory({
       filmId,
       categorieId,
     });
@@ -102,7 +102,7 @@ const removeFilmFromCategory = async (req, response, next) => {
   console.warn("categoryId", categorieId);
   try {
     // Delete the item from the database
-    const result = await tables.categorie_par_film.delete({
+    const result = await tables.Categorie_par_film.delete({
       filmId,
       categorieId,
     });
