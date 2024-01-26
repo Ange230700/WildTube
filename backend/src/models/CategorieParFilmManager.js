@@ -74,6 +74,29 @@ class CategorieParFilmManager extends AbstractManager {
     // Return the number of affected rows
     return result;
   }
+
+  async createCategorieForFilm(filmId, categorieId) {
+    const unique_key = `${filmId}-${categorieId}`;
+    const [result] = await this.database.query(
+      `INSERT INTO ${this.table} (filmId, categorieId, unique_key) VALUES (?, ?, ?)`,
+      [filmId, categorieId, unique_key]
+    );
+
+    return result;
+  }
+
+  async deleteCategorie(unique_key) {
+    // Execute the SQL DELETE query to remove an categorieParFilm by its ID
+    const [result] = await this.database.query(
+      `delete from ${this.table} where unique_key = ?`,
+      [unique_key]
+    );
+
+    // Return the number of affected rows
+    return result;
+  }
+  // The D of CRUD - Delete operation
+
 }
 
 // Ready to export the manager

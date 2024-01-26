@@ -1,9 +1,8 @@
-import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function ParametreAdmin() {
   const { user, updateUser } = useUser();
-  const { movieId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -46,14 +45,7 @@ function ParametreAdmin() {
           </div>
         </div>
         <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link
-              to={`
-              /EditVideo/${parseInt(movieId, 10)}`}
-            >
-              <h3>Modifier / supprimer des videos</h3>
-            </Link>
-          </div>
+          <div className="RegarderPlusTard" />
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
