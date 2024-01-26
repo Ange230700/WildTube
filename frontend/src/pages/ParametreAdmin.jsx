@@ -39,7 +39,7 @@ function ParametreAdmin() {
       <section className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to>
+            <Link to="/addvideos">
               <h3>Ajouter des videos</h3>
             </Link>
           </div>
@@ -72,20 +72,6 @@ function ParametreAdmin() {
           <div className="RegarderPlusTard">
             <Link to="/watchlist">
               <h3>À regarder plus tard</h3>
-            </Link>
-          </div>
-        </div>
-        <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to="/AjoutAdmin">
-              <h3>Ajouter des Administrateurs</h3>
-            </Link>
-          </div>
-        </div>
-        <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to="/">
-              <h3>Modifier les sections</h3>
             </Link>
           </div>
         </div>

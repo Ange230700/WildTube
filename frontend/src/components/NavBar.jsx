@@ -20,7 +20,8 @@ function NavBar() {
       className="navbar"
       style={
         location.pathname.includes("/movies/") ||
-        location.pathname.includes("/profil")
+        location.pathname.includes("/profil") ||
+        location.pathname.includes("/addvideos")
           ? {
               position: "fixed",
               bottom: "0",
