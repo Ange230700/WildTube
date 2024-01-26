@@ -49,6 +49,18 @@
         color: red;
       }
     }
+    .containerCategorie {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .buttonDelete {
+        all: unset;
+        .imgCroix {
+          width: 15px;
+          cursor: pointer;
+        }
+      }
+    }
   }
   .containerButtonEdit {
     display: flex;

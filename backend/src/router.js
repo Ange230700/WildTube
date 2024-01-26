@@ -26,6 +26,7 @@ const authControllers = require("./controllers/authControllers");
 router.get("/users", userControllers.browse);
 router.get("/films", filmControllers.browse);
 router.get("/films/:id", filmControllers.read);
+router.get("/categories/film/:id", filmControllers.getFilmByCategorie);
 router.get("/categories", categorieControllers.browse);
 router.get("/avatars", avatarControllers.browse);
 router.get(
@@ -56,7 +57,7 @@ router.get(
 );
 
 // Route to edit a specific item by ID
-router.put("/user/:id", userControllers.edit);
+router.put("/users/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
 router.put("/films/:id", filmControllers.edit);
 
@@ -67,12 +68,19 @@ router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 router.post("/comments", commentaireFilmControllers.addComment);
 router.post("/films", uploadImages.array("images", 2), filmControllers.add);
+router.post(
+  "/categoriesParFilm",
+  categorieParFilmControllers.AddCategoriesToFilm
+);
 
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
 router.delete("/watchlist/film/:userId/:filmId", watchlistControllers.destroy);
 router.delete("/comments/:commentId", commentaireFilmControllers.deleteComment);
 router.delete("/films/:id", filmControllers.destroy);
-router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
+router.delete(
+  "/categoriesParFilm/:unique_key",
+  categorieParFilmControllers.destroy
+);
 
 module.exports = router;

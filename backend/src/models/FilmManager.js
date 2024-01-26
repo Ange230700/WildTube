@@ -75,6 +75,17 @@ class FilmManager extends AbstractManager {
     return result.affectedRows;
   }
 
+  async getFilmByCategorie(id) {
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table}
+      INNER JOIN Categorie_par_film ON Film.id = Categorie_par_film.filmId
+      INNER JOIN Categorie ON Categorie_par_film.categorieId = Categorie.id
+      WHERE Film.id = ?`,
+      [id]
+    );
+    return rows;
+  }
+
   async delete(id) {
     const result = await this.database.query(
       `delete  from ${this.table} where id = ?`,
