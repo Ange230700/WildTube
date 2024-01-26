@@ -61,7 +61,7 @@ router.get(
 );
 
 // Route to edit a specific item by ID
-router.put("/users/:id", userControllers.edit);
+router.put("/user/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
 router.put("/films/:id", filmControllers.edit);
 router.put("/categories/:id", categorieControllers.edit);
@@ -92,7 +92,7 @@ router.delete(
   categorieParFilmControllers.destroy
 );
 router.delete(
-  "/film/:filmId/category/:>categorieId",
+  "/film/:filmId/category/:categorieId",
   categorieParFilmControllers.removeFilmFromCategory
 );
 router.delete("/category/:id", categorieControllers.removeCategory);

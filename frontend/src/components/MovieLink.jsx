@@ -4,12 +4,7 @@ import MovieSlide from "./MovieSlide";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
 
-function MovieLink({
-  movie,
-  categorie,
-  fetchMoviesByCategorie,
-  isMovieInCategory,
-}) {
+function MovieLink({ movie, categorie, fetchMoviesByCategorie }) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
 
@@ -26,7 +21,6 @@ function MovieLink({
         movie={movie}
         categorie={categorie}
         fetchMoviesByCategorie={fetchMoviesByCategorie}
-        isMovieInCategory={isMovieInCategory}
       />
     </NavLink>
   );
@@ -40,7 +34,6 @@ MovieLink.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired,
   fetchMoviesByCategorie: PropTypes.func.isRequired,
-  isMovieInCategory: PropTypes.func.isRequired,
 };
 
 export default MovieLink;

@@ -80,8 +80,12 @@
         display: flex;
         align-items: center;
 
-        a,
-        .h3 {
+        a {
+          text-decoration: none;
+          color: var(--neutral-color);
+        }
+
+        h3 {
           text-decoration: none;
           color: var(--neutral-color);
         }

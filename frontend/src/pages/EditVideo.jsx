@@ -129,6 +129,7 @@ function EditVideo() {
       );
       if (response.status === 204) {
         toast.success("Video modifié");
+        navigate("/");
       } else {
         toast.error("Aie un soucis est apparue");
       }

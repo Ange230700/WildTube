@@ -177,7 +177,7 @@ function UserProfileEditor() {
                     type="text"
                     name="name"
                     className="input"
-                    value={formData?.name}
+                    value={formData?.name || ""}
                     onChange={handleInputChange}
                     placeholder="Nom"
                   />

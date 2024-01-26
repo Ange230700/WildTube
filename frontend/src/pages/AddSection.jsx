@@ -50,24 +50,6 @@ function AddSection() {
     postCategory();
   };
 
-  const isMovieInCategory = async (movieId) => {
-    try {
-      const categoryId = await postCategory();
-      const result = await axios.get(
-        `${
-          import.meta.env.VITE_BACKEND_URL
-        }/api/film/${movieId}/category/${categoryId}`
-      );
-      if (result.status === 200) {
-        return result.data;
-      }
-    } catch (error) {
-      console.error("Error getting movie categories:", error);
-    }
-
-    return null;
-  };
-
   return (
     <div className="search">
       <div className="search-display-section">
@@ -107,21 +89,13 @@ function AddSection() {
                   movie.title.toLowerCase().includes(searchValue.toLowerCase())
                 )
                 .map((movie) => (
-                  <MovieLink
-                    key={movie.id}
-                    movie={movie}
-                    isMovieInCategory={(movieId) => isMovieInCategory(movieId)}
-                  />
+                  <MovieLink key={movie.id} movie={movie} />
                 ))}
             </>
           ) : (
             <>
               {movies.map((movie) => (
-                <MovieLink
-                  key={movie.id}
-                  movie={movie}
-                  isMovieInCategory={(movieId) => isMovieInCategory(movieId)}
-                />
+                <MovieLink key={movie.id} movie={movie} />
               ))}
             </>
           )}

@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
 
-function MovieSlide({
-  movie,
-  categorie,
-  fetchMoviesByCategorie,
-  isMovieInCategory,
-}) {
+function MovieSlide({ movie, categorie, fetchMoviesByCategorie }) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
   const [isDeleting, setIsDeleting] = useState(false);
-  const [inCategory, setInCategory] = useState(false);
 
   const handleMovieDeletion = async () => {
     setIsDeleting(true);
@@ -39,17 +33,6 @@ function MovieSlide({
       setIsDeleting(false);
     }
   };
-
-  useEffect(() => {
-    const checkCategory = async () => {
-      const result = await isMovieInCategory(movie.id);
-      setInCategory(result);
-    };
-
-    if (user && user.IsAdmin && isAdminMode) {
-      checkCategory();
-    }
-  }, [movie, user, isAdminMode, isMovieInCategory]);
 
   if (user && user.IsAdmin && isAdminMode) {
     return (
@@ -87,9 +70,8 @@ function MovieSlide({
               <img
                 className="lock-icon"
                 src={
-                  inCategory
-                    ? "/src/assets/icons/add4.svg"
-                    : "/src/assets/icons/remove2.svg"
+                  "/src/assets/icons/add4.svg" ||
+                  "/src/assets/icons/remove2.svg"
                 }
                 alt="lock icon"
               />
@@ -158,7 +140,6 @@ MovieSlide.propTypes = {
     id: PropTypes.number.isRequired,
   }).isRequired,
   fetchMoviesByCategorie: PropTypes.func.isRequired,
-  isMovieInCategory: PropTypes.func.isRequired,
 };
 
 export default MovieSlide;

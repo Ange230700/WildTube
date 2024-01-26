@@ -67,6 +67,13 @@ function ParametreAdmin() {
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
+            <Link to={`/account/${user && user.id}`}>
+              <h3>Informations du compte</h3>
+            </Link>
+          </div>
+        </div>
+        <div className="Useroption">
+          <div className="RegarderPlusTard">
             <Link to="/watchlist">
               <h3>À regarder plus tard</h3>
             </Link>

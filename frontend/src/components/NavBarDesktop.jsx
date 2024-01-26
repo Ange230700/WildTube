@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
+import ToggleSwitch from "./ToggleSwitch";
 
 function NavBarDesktop() {
   const { user } = useUser();
@@ -26,6 +27,12 @@ function NavBarDesktop() {
             <p className="link-text">Recherche</p>
           </NavLink>
         </div>
+        {user && user.IsAdmin ? (
+          <div className="switchContainer">
+            <h6>Mode admin :</h6>
+            <ToggleSwitch />
+          </div>
+        ) : null}
         <NavLink className="link" to={changeProfile()}>
           {user ? (
             <img

@@ -67,7 +67,7 @@ function UserProfil() {
             type="button"
             onClick={handleLogOut}
           >
-            <h3 className="h3">Déconnexion</h3>
+            <h3>Déconnexion</h3>
           </button>
         </div>
       </section>
