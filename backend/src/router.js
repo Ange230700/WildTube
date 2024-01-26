@@ -26,6 +26,7 @@ const authControllers = require("./controllers/authControllers");
 router.get("/users", userControllers.browse);
 router.get("/films", filmControllers.browse);
 router.get("/films/:id", filmControllers.read);
+router.get("/categories/film/:id", filmControllers.getFilmByCategorie);
 router.get("/categories", categorieControllers.browse);
 router.get("/avatars", avatarControllers.browse);
 router.get(
@@ -60,7 +61,7 @@ router.get(
 );
 
 // Route to edit a specific item by ID
-router.put("/user/:id", userControllers.edit);
+router.put("/users/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
 router.put("/films/:id", filmControllers.edit);
 router.put("/categories/:id", categorieControllers.edit);
@@ -76,6 +77,10 @@ router.post(
   "/film/category/:categoryId",
   categorieParFilmControllers.addFilmToCategory
 );
+router.post(
+  "/categoriesParFilm",
+  categorieParFilmControllers.AddCategoriesToFilm
+);
 
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
@@ -88,5 +93,9 @@ router.delete(
   categorieParFilmControllers.removeFilmFromCategory
 );
 router.delete("/category/:id", categorieControllers.removeCategory);
+router.delete(
+  "/categoriesParFilm/:unique_key",
+  categorieParFilmControllers.destroy
+);
 
 module.exports = router;

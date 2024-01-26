@@ -111,6 +111,7 @@ const edit = async (req, res, next) => {
       civility,
       hashed_password: req.body.hashed_password,
       avatarId,
+      IsAdmin: req.body.IsAdmin || currentUser.IsAdmin,
     });
 
     if (!updatedUser) {
@@ -166,6 +167,10 @@ const add = async (req, res, next) => {
       IsAdmin,
       avatarId,
     });
+    const userAvatar = await tables.Avatar.read(avatarId);
+
+    newUser.avatar_filename = userAvatar[0].avatar_filename;
+    newUser.avatar_url = userAvatar[0].avatar_url;
 
     // Respond with the newly created user in JSON format
     if (newUser) {

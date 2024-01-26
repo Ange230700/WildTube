@@ -7,6 +7,7 @@ import CategoryDisplay from "../components/CategoryDisplay";
 import MovieGenreTabsContainer from "../components/MovieGenreTabsContainer";
 import LogoContainer from "../components/LogoContainer";
 // import { useAdminMode } from "../contexts/AdminModeContext";
+import { useUser } from "../contexts/UserContext";
 
 function Home() {
   const { movies } = useMovies();
@@ -17,6 +18,8 @@ function Home() {
   // const handleAddCategory = () => {
   //   navigate("/AddSection");
   // };
+  const { user } = useUser();
+  const [showAd, setShowAd] = useState(false);
 
   const getCategories = () => {
     axios
@@ -33,11 +36,28 @@ function Home() {
     getCategories();
   }, []);
 
+  useEffect(() => {
+    setShowAd(true);
+    const timer = setTimeout(() => {
+      setShowAd(false);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="home">
       <div className="movies-display-section">
         <LogoContainer />
         <DynamicHeroSlider movies={movies} />
+        <button
+          type="button"
+          className={`pub ${showAd ? "show" : "hide"}`}
+          onClick={() =>
+            window.open("https://open.spotify.com/intl-fr", "_blank")
+          }
+        >
+          {!user && <img src="/src/assets/icons/pub_spotify.jpg" alt="pub" />}
+        </button>
         <MovieGenreTabsContainer categories={categories} />
         {/* {isAdminMode && (
           <button

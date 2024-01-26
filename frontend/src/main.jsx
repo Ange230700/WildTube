@@ -131,7 +131,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/AddVideos",
+        path: "/addvideos",
         element: (
           <ProtectedRoute>
             <AddVideos />

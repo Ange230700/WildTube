@@ -101,7 +101,7 @@ function Inscription() {
       if (result.status === 201) {
         const authentication = result.data;
 
-        updateUser(authentication);
+        updateUser(authentication.newUser);
         localStorage.setItem("token", authentication.token);
 
         fetchUser();

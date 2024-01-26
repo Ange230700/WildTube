@@ -13,13 +13,13 @@
   .containerUser {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
     justify-content: center;
     max-width: 600px;
     gap: 5px;
     background: rgba(238, 226, 226, 0.1);
     border-bottom: 1px #ff509a solid;
-    height: 25vh;
+    height: 45vh;
+    overflow: auto;
     width: 80%;
     .borderUser {
       background-color: transparent;
@@ -32,7 +32,15 @@
     .checked {
       background-color: var(--secondary-font-color);
     }
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb-color, hsla(335, 100%, 66%, 1));
+      border-radius: 10px;
+    }
   }
+
   .popUp {
     position: fixed;
     top: 50%;

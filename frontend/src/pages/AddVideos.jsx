@@ -62,8 +62,6 @@ function AddVideos() {
         duration ||
         isAvailable) === (undefined || "" || false)
     ) {
-      // eslint-disable-next-line no-alert
-      alert("champ manquant");
       toast.error("champ manquant");
     } else if (isAvailable === "utilisateur") {
       setIsAvailable(true);
@@ -84,15 +82,22 @@ function AddVideos() {
     formData.append("images", file);
     formData.append("images", cover);
 
-    await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/api/films`,
-      formData,
-      {
+    await axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/films`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
-
-    fetchMovies();
+      })
+      .then(() => {
+        toast.success("Film ajouté avec succès");
+        setTimeout(() => {
+          fetchMovies();
+        }, 1);
+      })
+      .catch(() => {
+        toast.error("Erreur lors de l'ajout du film");
+        setTimeout(() => {
+          fetchMovies();
+        }, 1);
+      });
   };
 
   const fetchData = async () => {

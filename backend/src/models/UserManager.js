@@ -87,7 +87,7 @@ class UserManager extends AbstractManager {
   // The U of CRUD - Update operation
   async update(
     id,
-    { name, email, naissance, civility, hashed_password, avatarId }
+    { name, email, naissance, civility, hashed_password, avatarId, IsAdmin }
   ) {
     await this.database.query(
       `UPDATE ${this.table} SET 
@@ -96,9 +96,10 @@ class UserManager extends AbstractManager {
           naissance = COALESCE(?, naissance), 
           civility = COALESCE(?, civility), 
           hashed_password = COALESCE(?, hashed_password), 
-          avatarId = COALESCE(?, avatarId)
+          avatarId = COALESCE(?, avatarId),
+          IsAdmin = COALESCE(?, IsAdmin)
           WHERE ${this.table}.id = ?`,
-      [name, email, naissance, civility, hashed_password, avatarId, id]
+      [name, email, naissance, civility, hashed_password, avatarId, IsAdmin, id]
     );
 
     const updatedRows = await this.database.query(

@@ -20,12 +20,12 @@ const browseFavoriteMoviesByUserId = async (req, res, next) => {
 };
 
 const addMovieToFavorite = async (req, res, next) => {
-  const { userId, filmId } = req.body;
-  const unique_key = `${userId}-${filmId}`;
+  const { categorieId, filmId } = req.body;
+  const unique_key = `${categorieId}-${filmId}`;
 
   try {
     const result = await tables.Favori_film.createMovieInFavorites(
-      userId,
+      categorieId,
       filmId,
       unique_key
     );

@@ -1,9 +1,8 @@
-import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function ParametreAdmin() {
   const { user, updateUser } = useUser();
-  const { movieId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -40,20 +39,13 @@ function ParametreAdmin() {
       <section className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to="/addVideos">
+            <Link to="/addvideos">
               <h3>Ajouter des videos</h3>
             </Link>
           </div>
         </div>
         <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link
-              to={`
-              /EditVideo/${parseInt(movieId, 10)}`}
-            >
-              <h3>Modifier / supprimer des videos</h3>
-            </Link>
-          </div>
+          <div className="RegarderPlusTard" />
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
@@ -80,20 +72,6 @@ function ParametreAdmin() {
           <div className="RegarderPlusTard">
             <Link to="/watchlist">
               <h3>À regarder plus tard</h3>
-            </Link>
-          </div>
-        </div>
-        <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to="/AjoutAdmin">
-              <h3>Ajouter des Administrateurs</h3>
-            </Link>
-          </div>
-        </div>
-        <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to="/">
-              <h3>Modifier les sections</h3>
             </Link>
           </div>
         </div>

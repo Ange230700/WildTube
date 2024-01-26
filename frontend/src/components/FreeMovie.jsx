@@ -141,6 +141,21 @@ function FreeMovie({ movie }) {
     }
   }, [user, movie.id]);
 
+  const handleshare = () => {
+    const movieUrl = `${import.meta.env.VITE_FRONTEND_URL}/movies/${movie.id}`;
+
+    if (navigator.share) {
+      navigator.share({
+        title: movie.title,
+        text: movie.description,
+        url: movieUrl,
+      });
+    } else {
+      const mailToLink = `mailto:?subject=${movie.title}&body=${movie.description} ${movieUrl}`;
+      window.location.href = mailToLink;
+    }
+  };
+
   return (
     movie && (
       <div className="movie-page-details" key={movie.id}>
@@ -187,6 +202,13 @@ function FreeMovie({ movie }) {
             </div>
             {user && (
               <div className="ActionIcons">
+                <button
+                  type="button"
+                  className="ThumbsUpRegular1"
+                  onClick={() => handleshare(movie)}
+                >
+                  <img src="/src/assets/icons/partage.svg" alt="partage" />
+                </button>
                 <button
                   className="ThumbsUpRegular1"
                   type="button"

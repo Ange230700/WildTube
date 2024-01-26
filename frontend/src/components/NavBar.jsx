@@ -22,7 +22,7 @@ function NavBar() {
         location.pathname.includes("/movies/") ||
         location.pathname.includes("/profil") ||
         location.pathname.includes("/Parametre") ||
-        location.pathname.includes("/addVideos")
+        location.pathname.includes("/addvideos")
           ? {
               position: "fixed",
               bottom: "0",

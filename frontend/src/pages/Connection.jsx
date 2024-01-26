@@ -28,8 +28,9 @@ function Connection() {
         `${import.meta.env.VITE_BACKEND_URL}/api/login`,
         user
       );
+
       if (result.status === 200) {
-        updateUser(result.data);
+        updateUser(result.data.user);
         localStorage.setItem("token", result.data.token);
         navigate("/");
       }
