@@ -45,8 +45,30 @@ const edit = async (request, response, next) => {
 
 // The D of BREAD - Destroy (Delete) operation
 
+const removeCategory = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    // Delete the item from the database
+    const result = await tables.Categorie.deleteCategory({
+      id,
+    });
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with HTTP 204 (No Content)
+    if (result.affectedRows) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    // Pass any errors to the error-handling middleware
+    next(error);
+  }
+};
+
 // Ready to export the controller functions
 module.exports = {
   browse,
   edit,
+  removeCategory,
 };

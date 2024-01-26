@@ -56,8 +56,8 @@ CREATE TABLE
         `filmId` INT NOT NULL,
         `categorieId` INT NOT NULL,
         `unique_key` VARCHAR(255) NOT NULL,
-        CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`),
-        CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`),
+        CONSTRAINT FK_Categorie_Par_Film_film_id FOREIGN KEY (`filmId`) REFERENCES `Film` (`id`) ON DELETE CASCADE,
+        CONSTRAINT FK_Categorie_Par_Film_categorie_id FOREIGN KEY (`categorieId`) REFERENCES `Categorie` (`id`) ON DELETE CASCADE,
         PRIMARY KEY (`filmId`, `categorieId`)
     );
 

@@ -30,6 +30,17 @@ class CategorieParFilmManager extends AbstractManager {
     return result;
   }
 
+  async createFilmInOneCategory({ filmId, categorieId }) {
+    // Execute the SQL INSERT query to add a new categorieParFilm to the "categorieParFilm" table
+    const [result] = await this.database.query(
+      `INSERT INTO ${this.table} (filmId, categorieId) VALUES (?, ?)`,
+      [filmId, categorieId]
+    );
+
+    // Return the ID of the newly inserted categorieParFilm
+    return result;
+  }
+
   async readAll() {
     // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
     const [rows] = await this.database.query(
@@ -82,9 +93,10 @@ class CategorieParFilmManager extends AbstractManager {
       `DELETE FROM ${this.table} WHERE filmId = ? AND categorieId = ?`,
       [filmId, categorieId]
     );
+    console.warn("result", result);
 
     // Return the number of rows deleted (should be 1)
-    return result.affectedRows;
+    return result;
   }
 }
 

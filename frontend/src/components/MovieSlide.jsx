@@ -1,70 +1,105 @@
-/*eslint-disable */
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
-import axios from "axios";
-// import { NavLink } from "react-router-dom";
 
-function MovieSlide({ movie, categorie }) {
+function MovieSlide({
+  movie,
+  categorie,
+  fetchMoviesByCategorie,
+  isMovieInCategory,
+}) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [inCategory, setInCategory] = useState(false);
 
-  const handleMovieDeletion = () => {
-    axios
-      .delete(
+  const handleMovieDeletion = async () => {
+    setIsDeleting(true);
+
+    try {
+      const result = await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}/api/film/${movie.id}/category/${
           categorie.id
         }`
-      )
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      );
+
+      if (result.status === 200) {
+        toast.success("Movie deleted");
+        fetchMoviesByCategorie();
+      } else {
+        toast.error("An error occurred");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred");
+    } finally {
+      setIsDeleting(false);
+    }
   };
+
+  useEffect(() => {
+    const checkCategory = async () => {
+      const result = await isMovieInCategory(movie.id);
+      setInCategory(result);
+    };
+
+    if (user && user.IsAdmin && isAdminMode) {
+      checkCategory();
+    }
+  }, [movie, user, isAdminMode, isMovieInCategory]);
 
   if (user && user.IsAdmin && isAdminMode) {
     return (
-      <>
-        <div
-          className="movie-slide-requiring-registration"
-          style={{
-            filter: "blur(0px)",
-          }}
-        >
-          <img
-            src={
-              (movie.miniature_filename &&
-                `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                  movie?.miniature_filename
-                }`) ||
-              movie?.miniature_url
-            }
-            alt={movie.title}
-            className="movie-slide blur-filter"
-          />
-        </div>
-        <button
-          className="locked-overlay"
-          style={{
-            backgroundColor: "#00000055",
-            border: "none",
-            outline: "none",
-          }}
-          onClick={handleMovieDeletion}
-        >
-          <div className="lock-icon-container">
+      !isDeleting && (
+        <>
+          <div
+            className="movie-slide-requiring-registration"
+            style={{
+              filter: "blur(0px)",
+            }}
+          >
             <img
-              className="lock-icon"
-              src="/src/assets/icons/remove2.svg"
-              alt="lock icon"
+              src={
+                (movie.miniature_filename &&
+                  `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                    movie?.miniature_filename
+                  }`) ||
+                movie?.miniature_url
+              }
+              alt={movie.title}
+              className="movie-slide blur-filter"
             />
           </div>
-        </button>
-      </>
+          <button
+            className="locked-overlay"
+            style={{
+              backgroundColor: "#00000055",
+              border: "none",
+              outline: "none",
+            }}
+            type="button"
+            onClick={handleMovieDeletion}
+          >
+            <div className="lock-icon-container">
+              <img
+                className="lock-icon"
+                src={
+                  inCategory
+                    ? "/src/assets/icons/add4.svg"
+                    : "/src/assets/icons/remove2.svg"
+                }
+                alt="lock icon"
+              />
+            </div>
+          </button>
+        </>
+      )
     );
   }
+
   return movie.IsAvailable || user ? (
     <div>
       <img
@@ -122,6 +157,8 @@ MovieSlide.propTypes = {
   categorie: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,
+  fetchMoviesByCategorie: PropTypes.func.isRequired,
+  isMovieInCategory: PropTypes.func.isRequired,
 };
 
 export default MovieSlide;

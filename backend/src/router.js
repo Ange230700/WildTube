@@ -72,6 +72,10 @@ router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 router.post("/comments", commentaireFilmControllers.addComment);
 router.post("/films", uploadImages.array("images", 2), filmControllers.add);
+router.post(
+  "/film/category/:categoryId",
+  categorieParFilmControllers.addFilmToCategory
+);
 
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
@@ -80,8 +84,9 @@ router.delete("/comments/:commentId", commentaireFilmControllers.deleteComment);
 router.delete("/films/:id", filmControllers.destroy);
 router.delete("/categoriesParFilm/:id", categorieParFilmControllers.destroy);
 router.delete(
-  "/film/:filmId/category/:categoryId",
+  "/film/:filmId/category/:categorieId",
   categorieParFilmControllers.removeFilmFromCategory
 );
+router.delete("/category/:id", categorieControllers.removeCategory);
 
 module.exports = router;

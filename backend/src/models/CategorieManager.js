@@ -43,6 +43,16 @@ class CategorieManager extends AbstractManager {
   }
 
   // The D of CRUD - Delete operation
+  async deleteCategory({ id }) {
+    // Execute the SQL DELETE query to delete the category with the given ID
+    const [rows] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+
+    // Return the category
+    return rows;
+  }
 }
 
 module.exports = CategorieManager;

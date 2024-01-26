@@ -58,16 +58,37 @@ const destroy = async (req, response, next) => {
 
 // The A of BREAD - Add operation
 
+const addFilmToCategory = async (req, response, next) => {
+  const { filmId, categorieId } = req.params;
+  try {
+    // Create a new item in the database
+    const result = await tables.categorie_par_film.createFilmInOneCategory({
+      filmId,
+      categorieId,
+    });
+
+    // Respond with the newly created item
+    response.status(201).json(result);
+  } catch (error) {
+    // Pass any errors to the error-handling middleware
+    next(error);
+  }
+};
+
 // The D of BREAD - Delete operation
 
 const removeFilmFromCategory = async (req, response, next) => {
-  const { filmId, categoryId } = req.params;
+  const { filmId, categorieId } = req.params;
+  console.warn("filmId", filmId);
+  console.warn("categoryId", categorieId);
   try {
     // Delete the item from the database
     const result = await tables.categorie_par_film.delete({
       filmId,
-      categoryId,
+      categorieId,
     });
+    console.warn("result1", result);
+    console.warn("result.affectedRows", result.affectedRows);
 
     if (result.affectedRows) {
       response.sendStatus(200);
@@ -84,6 +105,7 @@ const removeFilmFromCategory = async (req, response, next) => {
 module.exports = {
   browseFilmsForSpecificCategorie,
   readOneFilmFromOneCategory,
+  addFilmToCategory,
   destroy,
   removeFilmFromCategory,
 };
