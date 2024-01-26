@@ -7,7 +7,7 @@ const browseFilmsForSpecificCategorie = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const films =
-      await tables.Categorie_par_film.readAllFilmsForSpecificCategorie(
+      await tables.categorie_par_film.readAllFilmsForSpecificCategorie(
         request.params.id
       );
 

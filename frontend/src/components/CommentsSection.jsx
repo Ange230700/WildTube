@@ -1,12 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { useUser } from "../contexts/UserContext";
 
-function CommentsSection({ filmId, user }) {
+function CommentsSection({ filmId }) {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
   const [editableComment, setEditableComment] = useState(null); // New state to track the comment being edited
   const commentsWrapperRef = useRef(null); // Ref for the comments wrapper
+
+  const { user } = useUser();
 
   const scrollToBottom = () => {
     if (commentsWrapperRef.current) {
@@ -52,19 +55,18 @@ function CommentsSection({ filmId, user }) {
     setCommentContent(e.target.value); // Update state on textarea change
   };
 
+  const fetchComments = async () => {
+    try {
+      const url = `${
+        import.meta.env.VITE_BACKEND_URL
+      }/api/comments/film/${filmId}`;
+      const response = await axios.get(url);
+      setComments(response.data);
+    } catch (error) {
+      console.error("Error fetching comments", error);
+    }
+  };
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const url = `${
-          import.meta.env.VITE_BACKEND_URL
-        }/api/comments/film/${filmId}`;
-        const response = await axios.get(url);
-        setComments(response.data);
-      } catch (error) {
-        console.error("Error fetching comments", error);
-      }
-    };
-
     fetchComments();
   }, [filmId]);
 
@@ -79,10 +81,7 @@ function CommentsSection({ filmId, user }) {
       await axios.delete(url);
 
       // Mettez à jour la liste des commentaires après la suppression
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/comments/film/${filmId}`
-      );
-      setComments(response.data);
+      fetchComments();
     } catch (error) {
       console.error("Error deleting comment", error);
     }
@@ -145,11 +144,11 @@ function CommentsSection({ filmId, user }) {
                       alt={comment.username}
                       className="Avatar2"
                       src={
-                        (comment.avatar_filename &&
-                          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                            comment?.avatar_filename
-                          }`) ||
-                        comment?.avatar_url
+                        comment.avatar_filename
+                          ? `${
+                              import.meta.env.VITE_BACKEND_URL
+                            }/assets/images/${comment.avatar_filename}`
+                          : comment.avatar_url
                       }
                     />
                     <h6 className="Username">{comment.name}</h6>
@@ -157,30 +156,31 @@ function CommentsSection({ filmId, user }) {
                   <div className="FrameContainer">
                     <div className="Frame1">
                       <p className="CommentText">{comment.content}</p>
-                      {user && user.id === comment.userId && (
-                        <div className="CommentActionButtons">
-                          <button
-                            type="button"
-                            className="EditButton"
-                            onClick={() => handleEditComment(comment.id)}
-                          >
-                            <img
-                              src="/src/assets/icons/modifier.png"
-                              alt="Modifier"
-                            />
-                          </button>
-                          <button
-                            type="button"
-                            className="DeleteButton"
-                            onClick={() => handleDeleteComment(comment.id)}
-                          >
-                            <img
-                              src="/src/assets/icons/supprimer.png"
-                              alt="Supprimer"
-                            />
-                          </button>
-                        </div>
-                      )}
+                      {(user && user.id === comment.userId) ||
+                        (user.IsAdmin && (
+                          <div className="CommentActionButtons">
+                            <button
+                              type="button"
+                              className="EditButton"
+                              onClick={() => handleEditComment(comment.id)}
+                            >
+                              <img
+                                src="/src/assets/icons/modifier.png"
+                                alt="Modifier"
+                              />
+                            </button>
+                            <button
+                              type="button"
+                              className="DeleteButton"
+                              onClick={() => handleDeleteComment(comment.id)}
+                            >
+                              <img
+                                src="/src/assets/icons/supprimer.png"
+                                alt="Supprimer"
+                              />
+                            </button>
+                          </div>
+                        ))}
                     </div>
                     <div className="CommentDateContainer">
                       <h6 className="CommentDate">{formattedDate}</h6>
@@ -200,8 +200,13 @@ function CommentsSection({ filmId, user }) {
                 onChange={handleTextareaChange} // Handle change
               />
               <button
+                disabled={editableComment}
                 type="button"
-                className="SendSvgrepoCom2"
+                className={
+                  editableComment
+                    ? "SendSvgrepoCom2 disabled"
+                    : "SendSvgrepoCom2"
+                }
                 onClick={handleCommentSubmit}
               >
                 <img
@@ -246,18 +251,18 @@ function CommentsSection({ filmId, user }) {
               <div className="CommentContainer" key={commentKey}>
                 {" "}
                 <div className="UserInfo">
-                  <img
+                  {/* <img
                     alt={comment.username}
                     className="Avatar2"
                     src={
-                      (comment.avatar_filename &&
-                        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                          comment?.avatar_filename
-                        }`) ||
-                      comment?.avatar_url
+                      comment.avatar_filename
+                        ? `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            comment.avatar_filename
+                          }`
+                        : comment.avatar_url
                     }
                   />
-                  <h6 className="Username">{comment.name}</h6>
+                  <h6 className="Username">{comment.name}</h6> */}
                 </div>
                 <div className="FrameContainer">
                   <div className="Frame1">
@@ -298,18 +303,10 @@ function CommentsSection({ filmId, user }) {
 
 CommentsSection.propTypes = {
   filmId: PropTypes.number,
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarId: PropTypes.number.isRequired,
-    avatar_filename: PropTypes.string,
-    avatar_url: PropTypes.string.isRequired,
-  }),
 };
 
 CommentsSection.defaultProps = {
   filmId: null,
-  user: null,
 };
 
 export default CommentsSection;

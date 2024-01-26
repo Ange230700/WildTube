@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useMovies } from "../contexts/MovieContext";
 
 function AddVideos() {
   const [file, setFile] = useState(undefined);
@@ -15,6 +16,9 @@ function AddVideos() {
   const [isAvailable, setIsAvailable] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoriesPourAssocier, setCategoriesPourAssocier] = useState([]);
+
+  const { fetchMovies } = useMovies();
+
   const handleAjoutCategorie = (e) => {
     const categoriesFiltered = categories.filter((cat) => {
       if (cat.id === parseInt(e.target.value, 10)) {
@@ -73,7 +77,7 @@ function AddVideos() {
     formData.append("category", JSON.stringify(categoriesPourAssocier));
     formData.append("description", description);
     formData.append("title", title);
-    formData.append("video", videoUrl);
+    formData.append("videoUrl", videoUrl);
     formData.append("year", year);
     formData.append("isAvailable", isAvailable);
     formData.append("duration", duration);
@@ -88,6 +92,8 @@ function AddVideos() {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
+
+    fetchMovies();
   };
 
   const fetchData = async () => {

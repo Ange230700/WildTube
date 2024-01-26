@@ -18,6 +18,7 @@ import UserProfil from "./pages/UserProfil";
 import UserProfileEditor from "./pages/UserProfileEditor";
 import AjoutAdmin from "./pages/AjoutAdmin";
 import EditVideo from "./pages/EditVideo";
+import AddVideos from "./pages/AddVideos";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./sass/index.scss";
 
@@ -107,6 +108,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <EditVideo />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/AddVideos",
+        element: (
+          <ProtectedRoute>
+            <AddVideos />
           </ProtectedRoute>
         ),
       },

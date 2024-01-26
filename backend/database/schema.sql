@@ -12,12 +12,12 @@ DROP TABLE IF EXISTS `Film`;
 CREATE TABLE
     `Film` (
         `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        `miniature_url` VARCHAR(255) NOT NULL,
+        `miniature_url` VARCHAR(255),
         `miniature_filename` VARCHAR(255),
-        `cover_url` VARCHAR(255) NOT NULL,
+        `cover_url` VARCHAR(255),
         `cover_filename` VARCHAR(255),
         `title` VARCHAR(255) NOT NULL,
-        `videoUrl` VARCHAR(255),
+        `videoUrl` VARCHAR(255) NOT NULL,
         `duration` INT NOT NULL,
         `year` VARCHAR(4) NOT NULL,
         `description` VARCHAR(700) NOT NULL,
