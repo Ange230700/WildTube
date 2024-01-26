@@ -82,6 +82,7 @@ function EditVideo() {
       console.error("Error fetching categories", error);
     }
   };
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -96,9 +97,11 @@ function EditVideo() {
       console.error("Error fetching categories", error);
     }
   };
+
   useEffect(() => {
     fetchCategorieVideo();
   }, []);
+
   const handleAddCategorie = async (value) => {
     try {
       const response = await axios.post(

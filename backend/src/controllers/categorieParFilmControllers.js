@@ -37,11 +37,13 @@ const readOneFilmFromOneCategory = async (request, response, next) => {
 
 const AddCategoriesToFilm = async (req, res, next) => {
   const { filmId, categorieId } = req.body;
+  const unique_key = `${categorieId}-${filmId}`;
 
   try {
     const result = await tables.Categorie_par_film.createCategorieForFilm(
       filmId,
-      categorieId
+      categorieId,
+      unique_key
     );
 
     if (result.affectedRows) {

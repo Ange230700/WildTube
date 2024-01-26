@@ -95,7 +95,7 @@ const add = async (req, res, next) => {
 
 const getFilmByCategorie = async (req, res, next) => {
   try {
-    const film = await tables.Film.getFilmByCategorie(req.params.id);
+    const film = await tables.film.getFilmByCategorie(req.params.id);
     if (film == null) {
       res.sendStatus(404);
     } else {
