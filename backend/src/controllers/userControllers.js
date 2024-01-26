@@ -166,6 +166,10 @@ const add = async (req, res, next) => {
       IsAdmin,
       avatarId,
     });
+    const userAvatar = await tables.Avatar.read(avatarId);
+
+    newUser.avatar_filename = userAvatar[0].avatar_filename;
+    newUser.avatar_url = userAvatar[0].avatar_url;
 
     // Respond with the newly created user in JSON format
     if (newUser) {
