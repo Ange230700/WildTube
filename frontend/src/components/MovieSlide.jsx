@@ -26,6 +26,10 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
     user.IsAdmin &&
     isAdminMode
   ) {
+    console.warn(
+      "selectedMovies && selectedMovies.includes(movie)",
+      selectedMovies && selectedMovies.includes(movie)
+    );
     return (
       <label className="movie-checkbox-label">
         <input
@@ -76,6 +80,7 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
       </label>
     );
   }
+
   return movie.IsAvailable || user ? (
     <div>
       <img

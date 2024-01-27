@@ -68,13 +68,17 @@ function Home() {
             <img src="/src/assets/icons/add.svg" alt="add" />
           </button>
         )}
-        {categories.map((categorie) => (
-          <CategoryDisplay
-            key={categorie.id}
-            categorie={categorie}
-            getCategories={getCategories}
-          />
-        ))}
+        {categories.map(
+          (categorie) =>
+            (categorie && (
+              <CategoryDisplay
+                key={categorie.id}
+                categorie={categorie}
+                getCategories={getCategories}
+              />
+            )) ||
+            null
+        )}
       </div>
     </div>
   );

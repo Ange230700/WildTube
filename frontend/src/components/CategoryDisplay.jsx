@@ -90,8 +90,7 @@ function CategoryDisplay({ categorie, getCategories }) {
   }, [categorie.id]);
 
   return (
-    !isDeleting &&
-    allMoviesForOneCategorie.length && (
+    (!isDeleting && allMoviesForOneCategorie.length && (
       <section className="category-movie-display-container">
         <div className="category-title-container">
           <h1
@@ -166,7 +165,8 @@ function CategoryDisplay({ categorie, getCategories }) {
           })}
         </Carousel>
       </section>
-    )
+    )) ||
+    null
   );
 }
 

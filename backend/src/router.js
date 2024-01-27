@@ -59,6 +59,7 @@ router.get(
   "/film/:filmId/category/:categoryId",
   categorieParFilmControllers.readOneFilmFromOneCategory
 );
+router.get("/category/:id", categorieControllers.read);
 
 // Route to edit a specific item by ID
 router.put("/user/:id", userControllers.edit);

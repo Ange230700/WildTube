@@ -14,6 +14,26 @@ function EditSection() {
   const [selectedMovies, setSelectedMovies] = useState(new Set());
   const [categoryName, setCategoryName] = useState("");
 
+  function fetchCategory() {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/category/${sectionId}`)
+      .then((response) => {
+        setCategoryName(response.data.name);
+      })
+      .catch((error) => console.error(error));
+  }
+
+  function fetchMoviesInThisCategory() {
+    axios
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${sectionId}`
+      )
+      .then((response) => {
+        setSelectedMovies(response.data);
+      })
+      .catch((error) => console.error(error));
+  }
+
   function handleSearchChange(event) {
     setSearchValue(event.target.value);
   }
@@ -25,12 +45,27 @@ function EditSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Determine movies to add or remove based on `selectedMovies`
+    if (categoryName) {
+      axios
+        .put(`${import.meta.env.VITE_BACKEND_URL}/api/category/${sectionId}`, {
+          name: categoryName,
+        })
+        .then(() => {
+          toast.success("Category name updated");
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("An error occurred");
+        });
+    }
+
     const moviesToAdd = [];
 
     selectedMovies.forEach((selectedMovie) => {
       if (!moviesToAdd.includes(selectedMovie)) {
         moviesToAdd.push(selectedMovie);
+      } else {
+        moviesToAdd.splice(moviesToAdd.indexOf(selectedMovie), 1);
       }
     });
 
@@ -39,6 +74,8 @@ function EditSection() {
     movies.forEach((movie) => {
       if (!selectedMovies.has(movie)) {
         moviesToRemove.push(movie);
+      } else {
+        moviesToRemove.splice(moviesToRemove.indexOf(movie), 1);
       }
     });
 
@@ -82,21 +119,9 @@ function EditSection() {
     await Promise.all(requests);
   };
 
-  const fetchCurrentMoviesInCategory = () => {
-    axios
-      .get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${sectionId}`
-      )
-      .then((response) => {
-        const currentMovies = new Set(response.data.map((movie) => movie));
-        setSelectedMovies(currentMovies);
-      })
-      .catch((error) => console.error(error));
-  };
-
   useEffect(() => {
-    // Fetch current movies in the section and update `selectedMovies`
-    fetchCurrentMoviesInCategory();
+    fetchCategory();
+    fetchMoviesInThisCategory();
   }, [sectionId]);
 
   return (
@@ -104,7 +129,7 @@ function EditSection() {
       <form className="search-display-section" onSubmit={handleSubmit}>
         <div className="titleContainer">
           <h2 className="title">
-            Modifier la section {`${parseInt(sectionId, 10)}`}
+            Modification de la section '{categoryName && categoryName}'
           </h2>
         </div>
         {user && user.IsAdmin && (
@@ -140,7 +165,7 @@ function EditSection() {
                     key={movie.id}
                     movie={movie}
                     sectionId={sectionId}
-                    selectedMovies={selectedMovies}
+                    selectedMovies={Array.from(selectedMovies)}
                     setSelectedMovies={setSelectedMovies}
                   />
                 ))}

@@ -4,13 +4,16 @@ import { Toaster } from "react-hot-toast";
 import NavBar from "./components/NavBar";
 import NavBarDesktop from "./components/NavBarDesktop";
 import { useUser } from "./contexts/UserContext";
+import { useAdminMode } from "./contexts/AdminModeContext";
 
 function App() {
   const location = useLocation();
   const { user, fetchUser } = useUser();
+  const { fetchAdminMode, setIsAdminMode } = useAdminMode();
 
   useEffect(() => {
     fetchUser();
+    setIsAdminMode(fetchAdminMode);
   }, []);
 
   return (

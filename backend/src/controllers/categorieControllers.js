@@ -16,6 +16,23 @@ const browse = async (request, response, next) => {
 };
 
 // The R of BREAD - Read operation
+const read = async (request, response, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
+    const categorie = await tables.Categorie.read(request.params.id);
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (categorie == null) {
+      response.sendStatus(404);
+    } else {
+      response.json(categorie);
+    }
+  } catch (error) {
+    // Pass any errors to the error-handling middleware
+    next(error);
+  }
+};
 
 // The E of BREAD - Edit (Update) operation
 const edit = async (request, response, next) => {
@@ -82,6 +99,7 @@ const removeCategory = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
+  read,
   edit,
   add,
   removeCategory,
