@@ -4,17 +4,22 @@ import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
 
-function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
+function MovieSlide({
+  movie,
+  selectedMovies,
+  setSelectedMovies,
+  originalSelectedMovies,
+}) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
   const location = useLocation();
 
-  const handleCheck = (e) => {
+  const handleCheck = () => {
     const newSelectedMovies = new Set(selectedMovies);
-    if (e.target.checked) {
-      newSelectedMovies.delete(e.target.value);
+    if (newSelectedMovies.has(movie)) {
+      newSelectedMovies.delete(movie);
     } else {
-      newSelectedMovies.add(e.target.value);
+      newSelectedMovies.add(movie);
     }
     setSelectedMovies(newSelectedMovies);
   };
@@ -30,9 +35,10 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
         <input
           type="checkbox"
           className="movie-checkbox-input"
-          checked={selectedMovies && selectedMovies.includes(movie)}
+          checked={
+            selectedMovies.has(movie) || originalSelectedMovies.has(movie)
+          }
           onChange={handleCheck}
-          value={movie}
         />
         <span className="custom-checkbox" />
         <div
@@ -65,7 +71,9 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
             <img
               className="lock-icon"
               src={`/src/assets/icons/${
-                selectedMovies.includes(movie) ? "remove2" : "add4"
+                selectedMovies.has(movie) || originalSelectedMovies.has(movie)
+                  ? "remove2"
+                  : "add4"
               }.svg`}
               alt="lock icon"
             />
@@ -129,24 +137,13 @@ MovieSlide.propTypes = {
     description: PropTypes.string.isRequired,
     IsAvailable: PropTypes.number.isRequired,
   }).isRequired,
-  selectedMovies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      miniature_filename: PropTypes.string,
-      miniature_url: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      videoUrl: PropTypes.string,
-      duration: PropTypes.number.isRequired,
-      year: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      IsAvailable: PropTypes.number.isRequired,
-    })
-  ),
+  selectedMovies: PropTypes.instanceOf(Set),
   setSelectedMovies: PropTypes.func,
+  originalSelectedMovies: PropTypes.instanceOf(Set).isRequired,
 };
 
 MovieSlide.defaultProps = {
-  selectedMovies: [],
+  selectedMovies: new Set(),
   setSelectedMovies: () => {},
 };
 

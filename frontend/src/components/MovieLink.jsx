@@ -4,7 +4,12 @@ import MovieSlide from "./MovieSlide";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
 
-function MovieLink({ movie, selectedMovies, setSelectedMovies }) {
+function MovieLink({
+  movie,
+  selectedMovies,
+  setSelectedMovies,
+  originalSelectedMovies,
+}) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
 
@@ -21,6 +26,7 @@ function MovieLink({ movie, selectedMovies, setSelectedMovies }) {
         movie={movie}
         selectedMovies={selectedMovies}
         setSelectedMovies={setSelectedMovies}
+        originalSelectedMovies={originalSelectedMovies}
       />
     </NavLink>
   );
@@ -40,24 +46,13 @@ MovieLink.propTypes = {
     description: PropTypes.string.isRequired,
     IsAvailable: PropTypes.number.isRequired,
   }).isRequired,
-  selectedMovies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      miniature_filename: PropTypes.string,
-      miniature_url: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      videoUrl: PropTypes.string,
-      duration: PropTypes.number.isRequired,
-      year: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      IsAvailable: PropTypes.number.isRequired,
-    })
-  ),
+  selectedMovies: PropTypes.instanceOf(Set),
   setSelectedMovies: PropTypes.func,
+  originalSelectedMovies: PropTypes.instanceOf(Set).isRequired,
 };
 
 MovieLink.defaultProps = {
-  selectedMovies: [],
+  selectedMovies: new Set(),
   setSelectedMovies: () => {},
 };
 

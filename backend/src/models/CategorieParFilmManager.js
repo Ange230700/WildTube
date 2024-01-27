@@ -30,11 +30,11 @@ class CategorieParFilmManager extends AbstractManager {
     return result;
   }
 
-  async createFilmInOneCategory({ filmId, categorieId }) {
+  async createFilmInOneCategory({ filmId, categorieId, unique_key }) {
     // Execute the SQL INSERT query to add a new categorieParFilm to the "categorieParFilm" table
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (filmId, categorieId) VALUES (?, ?)`,
-      [filmId, categorieId]
+      `INSERT INTO ${this.table} (filmId, categorieId, unique_key) VALUES (?, ?, ?)`,
+      [filmId, categorieId, unique_key]
     );
 
     // Return the ID of the newly inserted categorieParFilm

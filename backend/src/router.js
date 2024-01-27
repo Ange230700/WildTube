@@ -75,7 +75,7 @@ router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 router.post("/comments", commentaireFilmControllers.addComment);
 router.post("/films", uploadImages.array("images", 2), filmControllers.add);
 router.post(
-  "/film/category/:categoryId",
+  "/film/:filmId/category/:categoryId",
   categorieParFilmControllers.addFilmToCategory
 );
 router.post(

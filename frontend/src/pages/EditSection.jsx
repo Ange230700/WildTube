@@ -1,24 +1,38 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useMovies } from "../contexts/MovieContext";
 import MovieLink from "../components/MovieLink";
 import { useUser } from "../contexts/UserContext";
+import { useAdminMode } from "../contexts/AdminModeContext";
 
 function EditSection() {
-  const [searchValue, setSearchValue] = useState("");
+  const { setIsAdminMode } = useAdminMode();
   const { sectionId } = useParams();
   const { movies } = useMovies();
   const { user } = useUser();
-  const [selectedMovies, setSelectedMovies] = useState(new Set());
+  const [searchValue, setSearchValue] = useState("");
   const [categoryName, setCategoryName] = useState("");
+  const [originalCategoryName, setOriginalCategoryName] = useState("");
+  const [selectedMovies, setSelectedMovies] = useState(new Set());
+  const [originalSelectedMovies, setOriginalSelectedMovies] = useState(
+    new Set()
+  );
+  const [isSaving, setIsSaving] = useState(false);
+  const navigate = useNavigate();
 
   function fetchCategory() {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/category/${sectionId}`)
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/category/${parseInt(
+          sectionId,
+          10
+        )}`
+      )
       .then((response) => {
         setCategoryName(response.data.name);
+        setOriginalCategoryName(response.data.name);
       })
       .catch((error) => console.error(error));
   }
@@ -26,11 +40,14 @@ function EditSection() {
   function fetchMoviesInThisCategory() {
     axios
       .get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${sectionId}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${parseInt(
+          sectionId,
+          10
+        )}`
       )
       .then((response) => {
         const sectionMovies = response.data.map((movie) => movie);
-        setSelectedMovies(new Set(sectionMovies));
+        setOriginalSelectedMovies(new Set(sectionMovies));
       })
       .catch((error) => console.error(error));
   }
@@ -43,82 +60,81 @@ function EditSection() {
     setCategoryName(event.target.value);
   }
 
-  const handleSubmit = async (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-
-    if (categoryName) {
-      axios
-        .put(`${import.meta.env.VITE_BACKEND_URL}/api/category/${sectionId}`, {
-          name: categoryName,
-        })
-        .then(() => {
-          toast.success("Category name updated");
-        })
-        .catch((error) => {
-          console.error(error);
-          toast.error("An error occurred");
-        });
-    }
-
-    const moviesToAdd = [];
-
-    movies.forEach((selectedMovie) => {
-      if (!moviesToAdd.includes(selectedMovie)) {
-        moviesToAdd.push(selectedMovie);
-      } else {
-        moviesToAdd.splice(moviesToAdd.indexOf(selectedMovie), 1);
-      }
-    });
-
-    const moviesToRemove = [];
-
-    movies.forEach((movie) => {
-      if (!selectedMovies.has(movie)) {
-        moviesToRemove.push(movie);
-      } else {
-        moviesToRemove.splice(moviesToRemove.indexOf(movie), 1);
-      }
-    });
-
-    // Send requests to backend to update the section
+    setIsSaving(true);
     const requests = [];
 
-    moviesToAdd.forEach(() => {
-      requests.push(
+    try {
+      if (categoryName !== originalCategoryName) {
         axios
-          .post(
-            `${import.meta.env.VITE_BACKEND_URL}/api/film/category/${sectionId}`
+          .put(
+            `${import.meta.env.VITE_BACKEND_URL}/api/category/${parseInt(
+              sectionId,
+              10
+            )}`,
+            {
+              name: categoryName,
+            }
           )
           .then(() => {
-            toast.success("Movie added to category");
+            toast.success("Category name updated");
           })
           .catch((error) => {
             console.error(error);
             toast.error("An error occurred");
-          })
-      );
-    });
+          });
+      }
 
-    moviesToRemove.forEach((movie) => {
-      requests.push(
-        axios
-          .delete(
+      // Find movies to add and remove
+      const moviesToAdd = [...selectedMovies].filter(
+        (movie) => !originalSelectedMovies.has(movie)
+      );
+      const moviesToRemove = [...originalSelectedMovies].filter(
+        (movie) => !selectedMovies.has(movie)
+      );
+
+      // Add or remove movies in parallel
+      await Promise.all([
+        ...moviesToAdd.map((movie) =>
+          axios.post(
             `${import.meta.env.VITE_BACKEND_URL}/api/film/${
               movie.id
-            }/category/${sectionId}`
+            }/category/${parseInt(sectionId, 10)}`,
+            {
+              filmId: movie.id,
+              categorieId: parseInt(sectionId, 10),
+              unique_key: `${movie.id}-${parseInt(sectionId, 10)}`,
+            }
           )
-          .then(() => {
-            toast.success("Movie removed from category");
-          })
-          .catch((error) => {
-            console.error(error);
-            toast.error("An error occurred");
-          })
-      );
-    });
+        ),
+        ...moviesToRemove.map((movie) =>
+          axios.delete(
+            `${import.meta.env.VITE_BACKEND_URL}/api/film/${
+              movie.id
+            }/category/${parseInt(sectionId, 10)}`
+          )
+        ),
+      ]);
 
-    await Promise.all(requests);
+      // if all requests are successful, notify a success
+      if (requests.every((response) => response.status === 200)) {
+        toast.success("Changes saved");
+        setIsAdminMode(false);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred");
+    } finally {
+      setIsSaving(false);
+    }
   };
+
+  const hasChanges =
+    categoryName !== originalCategoryName ||
+    ![...selectedMovies].every((movie) => originalSelectedMovies.has(movie)) ||
+    originalSelectedMovies.size !== selectedMovies.size;
 
   useEffect(() => {
     fetchCategory();
@@ -127,10 +143,13 @@ function EditSection() {
 
   return (
     <div className="search">
-      <form className="search-display-section" onSubmit={handleSubmit}>
+      <form className="search-display-section" onSubmit={handleSave}>
         <div className="titleContainer">
           <h2 className="title">
-            Modification de la section '{categoryName && categoryName}'
+            Modification de la section '
+            {(categoryName && categoryName) ||
+              (originalCategoryName && originalCategoryName)}
+            '
           </h2>
         </div>
         {user && user.IsAdmin && (
@@ -165,9 +184,10 @@ function EditSection() {
                   <MovieLink
                     key={movie.id}
                     movie={movie}
-                    sectionId={sectionId}
-                    selectedMovies={Array.from(selectedMovies)}
+                    selectedMovies={selectedMovies}
                     setSelectedMovies={setSelectedMovies}
+                    originalSelectedMovies={originalSelectedMovies}
+                    setOriginalSelectedMovies={setOriginalSelectedMovies}
                   />
                 ))}
             </>
@@ -177,16 +197,21 @@ function EditSection() {
                 <MovieLink
                   key={movie.id}
                   movie={movie}
-                  sectionId={sectionId}
-                  selectedMovies={Array.from(selectedMovies)}
+                  selectedMovies={selectedMovies}
                   setSelectedMovies={setSelectedMovies}
+                  originalSelectedMovies={originalSelectedMovies}
+                  setOriginalSelectedMovies={setOriginalSelectedMovies}
                 />
               ))}
             </>
           )}
         </div>
-        <button type="submit" className="sort-button">
-          Edit category
+        <button
+          type="submit"
+          className="sort-button"
+          disabled={!hasChanges || isSaving}
+        >
+          Save
         </button>
       </form>
     </div>

@@ -78,16 +78,17 @@ const destroy = async (req, res, next) => {
 // The A of BREAD - Add operation
 
 const addFilmToCategory = async (req, response, next) => {
-  const { filmId, categorieId } = req.params;
+  const { filmId, categorieId, unique_key } = req.body;
   try {
     // Create a new item in the database
     const result = await tables.Categorie_par_film.createFilmInOneCategory({
       filmId,
       categorieId,
+      unique_key,
     });
 
     // Respond with the newly created item
-    response.status(201).json(result);
+    response.status(200).json(result);
   } catch (error) {
     // Pass any errors to the error-handling middleware
     next(error);
