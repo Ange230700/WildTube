@@ -154,14 +154,7 @@ function CategoryDisplay({ categorie, getCategories }) {
           swipeable
         >
           {allMoviesForOneCategorie.map((movie) => {
-            return (
-              <MovieLink
-                key={movie.id}
-                movie={movie}
-                categorie={categorie}
-                fetchMoviesByCategorie={fetchMoviesByCategorie}
-              />
-            );
+            return <MovieLink key={movie.id} movie={movie} />;
           })}
         </Carousel>
       </section>

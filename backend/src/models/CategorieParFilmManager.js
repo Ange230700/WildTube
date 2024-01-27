@@ -93,7 +93,6 @@ class CategorieParFilmManager extends AbstractManager {
       `DELETE FROM ${this.table} WHERE filmId = ? AND categorieId = ?`,
       [filmId, categorieId]
     );
-    console.warn("result", result);
 
     // Return the number of rows deleted (should be 1)
     return result;

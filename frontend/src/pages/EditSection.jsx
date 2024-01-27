@@ -29,7 +29,8 @@ function EditSection() {
         `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${sectionId}`
       )
       .then((response) => {
-        setSelectedMovies(response.data);
+        const sectionMovies = response.data.map((movie) => movie.id);
+        setSelectedMovies(new Set(sectionMovies));
       })
       .catch((error) => console.error(error));
   }

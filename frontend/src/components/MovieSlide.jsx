@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-// import axios from "axios";
 // import { toast } from "react-hot-toast";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
@@ -26,10 +25,6 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
     user.IsAdmin &&
     isAdminMode
   ) {
-    console.warn(
-      "selectedMovies && selectedMovies.includes(movie)",
-      selectedMovies && selectedMovies.includes(movie)
-    );
     return (
       <label className="movie-checkbox-label">
         <input
@@ -69,9 +64,7 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
             <img
               className="lock-icon"
               src={`/src/assets/icons/${
-                selectedMovies && selectedMovies.includes(movie)
-                  ? "remove2"
-                  : "add4"
+                selectedMovies.includes(movie.id) ? "remove2" : "add4"
               }.svg`}
               alt="lock icon"
             />
