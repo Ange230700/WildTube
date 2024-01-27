@@ -29,7 +29,7 @@ function EditSection() {
         `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${sectionId}`
       )
       .then((response) => {
-        const sectionMovies = response.data.map((movie) => movie.id);
+        const sectionMovies = response.data.map((movie) => movie);
         setSelectedMovies(new Set(sectionMovies));
       })
       .catch((error) => console.error(error));
@@ -62,7 +62,7 @@ function EditSection() {
 
     const moviesToAdd = [];
 
-    selectedMovies.forEach((selectedMovie) => {
+    movies.forEach((selectedMovie) => {
       if (!moviesToAdd.includes(selectedMovie)) {
         moviesToAdd.push(selectedMovie);
       } else {

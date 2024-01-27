@@ -12,9 +12,9 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
   const handleCheck = (e) => {
     const newSelectedMovies = new Set(selectedMovies);
     if (e.target.checked) {
-      newSelectedMovies.add(movie);
+      newSelectedMovies.delete(e.target.value);
     } else {
-      newSelectedMovies.delete(movie);
+      newSelectedMovies.add(e.target.value);
     }
     setSelectedMovies(newSelectedMovies);
   };
@@ -32,6 +32,7 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
           className="movie-checkbox-input"
           checked={selectedMovies && selectedMovies.includes(movie)}
           onChange={handleCheck}
+          value={movie}
         />
         <span className="custom-checkbox" />
         <div
@@ -64,7 +65,7 @@ function MovieSlide({ movie, selectedMovies, setSelectedMovies }) {
             <img
               className="lock-icon"
               src={`/src/assets/icons/${
-                selectedMovies.includes(movie.id) ? "remove2" : "add4"
+                selectedMovies.includes(movie) ? "remove2" : "add4"
               }.svg`}
               alt="lock icon"
             />
