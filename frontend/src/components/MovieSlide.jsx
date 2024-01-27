@@ -35,9 +35,7 @@ function MovieSlide({
         <input
           type="checkbox"
           className="movie-checkbox-input"
-          checked={
-            selectedMovies.has(movie) || originalSelectedMovies.has(movie)
-          }
+          checked={selectedMovies.has(movie)}
           onChange={handleCheck}
         />
         <span className="custom-checkbox" />
@@ -139,12 +137,13 @@ MovieSlide.propTypes = {
   }).isRequired,
   selectedMovies: PropTypes.instanceOf(Set),
   setSelectedMovies: PropTypes.func,
-  originalSelectedMovies: PropTypes.instanceOf(Set).isRequired,
+  originalSelectedMovies: PropTypes.instanceOf(Set),
 };
 
 MovieSlide.defaultProps = {
   selectedMovies: new Set(),
   setSelectedMovies: () => {},
+  originalSelectedMovies: new Set(),
 };
 
 export default MovieSlide;

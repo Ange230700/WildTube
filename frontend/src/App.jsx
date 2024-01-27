@@ -9,11 +9,11 @@ import { useAdminMode } from "./contexts/AdminModeContext";
 function App() {
   const location = useLocation();
   const { user, fetchUser } = useUser();
-  const { fetchAdminMode, setIsAdminMode } = useAdminMode();
+  const { isAdminMode, setIsAdminMode } = useAdminMode();
 
   useEffect(() => {
     fetchUser();
-    setIsAdminMode(fetchAdminMode);
+    setIsAdminMode(isAdminMode);
   }, []);
 
   return (

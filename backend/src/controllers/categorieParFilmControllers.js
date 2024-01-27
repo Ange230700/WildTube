@@ -108,8 +108,6 @@ const removeFilmFromCategory = async (req, response, next) => {
 
     if (result.affectedRows) {
       response.sendStatus(200);
-    } else {
-      response.sendStatus(404);
     }
   } catch (error) {
     // Pass any errors to the error-handling middleware

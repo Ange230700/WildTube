@@ -9,6 +9,7 @@ function MovieLink({
   selectedMovies,
   setSelectedMovies,
   originalSelectedMovies,
+  setOriginalSelectedMovies,
 }) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
@@ -27,6 +28,7 @@ function MovieLink({
         selectedMovies={selectedMovies}
         setSelectedMovies={setSelectedMovies}
         originalSelectedMovies={originalSelectedMovies}
+        setOriginalSelectedMovies={setOriginalSelectedMovies}
       />
     </NavLink>
   );
@@ -48,12 +50,15 @@ MovieLink.propTypes = {
   }).isRequired,
   selectedMovies: PropTypes.instanceOf(Set),
   setSelectedMovies: PropTypes.func,
-  originalSelectedMovies: PropTypes.instanceOf(Set).isRequired,
+  originalSelectedMovies: PropTypes.instanceOf(Set),
+  setOriginalSelectedMovies: PropTypes.func,
 };
 
 MovieLink.defaultProps = {
   selectedMovies: new Set(),
   setSelectedMovies: () => {},
+  originalSelectedMovies: new Set(),
+  setOriginalSelectedMovies: () => {},
 };
 
 export default MovieLink;

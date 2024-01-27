@@ -8,7 +8,7 @@ import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
 
 function EditSection() {
-  const { setIsAdminMode } = useAdminMode();
+  const { isAdminMode, setIsAdminMode } = useAdminMode();
   const { sectionId } = useParams();
   const { movies } = useMovies();
   const { user } = useUser();
@@ -120,7 +120,7 @@ function EditSection() {
       // if all requests are successful, notify a success
       if (requests.every((response) => response.status === 200)) {
         toast.success("Changes saved");
-        setIsAdminMode(false);
+        setIsAdminMode(!isAdminMode);
         navigate("/");
       }
     } catch (error) {
@@ -148,7 +148,8 @@ function EditSection() {
           <h2 className="title">
             Modification de la section '
             {(categoryName && categoryName) ||
-              (originalCategoryName && originalCategoryName)}
+              (originalCategoryName && originalCategoryName) ||
+              ""}
             '
           </h2>
         </div>
