@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Carousel from "react-multi-carousel";
 import axios from "axios";
@@ -44,7 +44,7 @@ function CategoryDisplay({ categorie, getCategories }) {
   const { isAdminMode } = useAdminMode();
   const [allMoviesForOneCategorie, setAllMoviesForOneCategorie] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const fetchMoviesByCategorie = () => {
     axios
@@ -59,9 +59,9 @@ function CategoryDisplay({ categorie, getCategories }) {
       });
   };
 
-  // const handleNavigationToCategoryEdition = () => {
-  //   navigate(`/EditSection/${categorie.id}`);
-  // };
+  const handleNavigationToCategoryEdition = () => {
+    navigate(`/EditSection/${categorie.id}`);
+  };
 
   const handleCategoryDeletion = async () => {
     setIsDeleting(true);
@@ -108,13 +108,13 @@ function CategoryDisplay({ categorie, getCategories }) {
           </h1>
           {isAdminMode && (
             <>
-              {/* <button
+              <button
                 className="add-movie-container"
                 type="button"
                 onClick={handleNavigationToCategoryEdition}
               >
                 <img src="/src/assets/icons/edit.png" alt="edit button" />
-              </button> */}
+              </button>
               <button
                 className="add-movie-container"
                 type="button"

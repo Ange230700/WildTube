@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
 import { useMovies } from "../contexts/MovieContext";
 import MovieLink from "../components/MovieLink";
 import { useUser } from "../contexts/UserContext";
@@ -11,6 +12,7 @@ function AddSection() {
   const { user } = useUser();
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
+  // const navigate = useNavigate();
 
   function handleSearchChange(event) {
     setSearchValue(event.target.value);
@@ -20,7 +22,9 @@ function AddSection() {
     setCategoryName(e.target.value);
   };
 
-  const postCategory = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
       const result = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/category`,
@@ -30,24 +34,13 @@ function AddSection() {
       );
       if (result.status === 200) {
         toast.success("Category created");
-        return result.insertId;
       }
-
-      toast.error("Failed to create category");
     } catch (error) {
       console.error("Error creating category:", error);
       toast.error("Failed to create category");
     } finally {
       setLoading(false);
     }
-
-    return null;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    postCategory();
   };
 
   return (
@@ -60,7 +53,7 @@ function AddSection() {
           <form className="sort-container" onSubmit={handleSubmit}>
             <input
               type="text"
-              value={categoryName}
+              value={categoryName || ""}
               onChange={handleCategoryNameChange}
               placeholder="Enter category name"
               disabled={loading}

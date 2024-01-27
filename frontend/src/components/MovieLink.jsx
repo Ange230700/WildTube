@@ -32,8 +32,13 @@ MovieLink.propTypes = {
   }).isRequired,
   categorie: PropTypes.shape({
     id: PropTypes.number.isRequired,
-  }).isRequired,
-  fetchMoviesByCategorie: PropTypes.func.isRequired,
+  }),
+  fetchMoviesByCategorie: PropTypes.func,
+};
+
+MovieLink.defaultProps = {
+  categorie: null,
+  fetchMoviesByCategorie: null,
 };
 
 export default MovieLink;

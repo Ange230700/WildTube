@@ -64,7 +64,7 @@ router.get(
 router.put("/user/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
 router.put("/films/:id", filmControllers.edit);
-router.put("/categories/:id", categorieControllers.edit);
+router.put("/category/:id", categorieControllers.edit);
 
 // Route to add a new item
 router.post("/login", authControllers.login);
@@ -81,6 +81,7 @@ router.post(
   "/categoriesParFilm",
   categorieParFilmControllers.AddCategoriesToFilm
 );
+router.post("/category", categorieControllers.add);
 
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);

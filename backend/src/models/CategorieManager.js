@@ -8,6 +8,16 @@ class CategorieManager extends AbstractManager {
   }
 
   // The C of CRUD - Create operation
+  async create({ name }) {
+    // Execute the SQL INSERT query to add a new categorie to the "categorie" table
+    const [result] = await this.database.query(
+      `INSERT INTO ${this.table} (name) VALUES (?)`,
+      [name]
+    );
+
+    // Return the ID of the newly inserted categorie
+    return result;
+  }
 
   // The Rs of CRUD - Read operations
 

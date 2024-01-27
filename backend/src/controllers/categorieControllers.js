@@ -42,6 +42,19 @@ const edit = async (request, response, next) => {
 };
 
 // The A of BREAD - Add (Create) operation
+const add = async (req, res, next) => {
+  try {
+    const result = await tables.Categorie.create(req.body);
+
+    if (result.insertId) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 // The D of BREAD - Destroy (Delete) operation
 
@@ -70,5 +83,6 @@ const removeCategory = async (req, res, next) => {
 module.exports = {
   browse,
   edit,
+  add,
   removeCategory,
 };
