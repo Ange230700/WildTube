@@ -4,7 +4,7 @@ import MovieSlide from "./MovieSlide";
 import { useUser } from "../contexts/UserContext";
 import { useAdminMode } from "../contexts/AdminModeContext";
 
-function MovieLink({ movie, categorie, fetchMoviesByCategorie }) {
+function MovieLink({ movie, selectedMovies, setSelectedMovies }) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
 
@@ -19,8 +19,8 @@ function MovieLink({ movie, categorie, fetchMoviesByCategorie }) {
     >
       <MovieSlide
         movie={movie}
-        categorie={categorie}
-        fetchMoviesByCategorie={fetchMoviesByCategorie}
+        selectedMovies={selectedMovies}
+        setSelectedMovies={setSelectedMovies}
       />
     </NavLink>
   );
@@ -29,16 +29,36 @@ function MovieLink({ movie, categorie, fetchMoviesByCategorie }) {
 MovieLink.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    miniature_url: PropTypes.string,
+    miniature_filename: PropTypes.string,
+    cover_url: PropTypes.string,
+    cover_filename: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    videoUrl: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    year: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    IsAvailable: PropTypes.number.isRequired,
   }).isRequired,
-  categorie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  }),
-  fetchMoviesByCategorie: PropTypes.func,
+  selectedMovies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      miniature_filename: PropTypes.string,
+      miniature_url: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      videoUrl: PropTypes.string,
+      duration: PropTypes.number.isRequired,
+      year: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      IsAvailable: PropTypes.number.isRequired,
+    })
+  ),
+  setSelectedMovies: PropTypes.func,
 };
 
 MovieLink.defaultProps = {
-  categorie: null,
-  fetchMoviesByCategorie: null,
+  selectedMovies: [],
+  setSelectedMovies: () => {},
 };
 
 export default MovieLink;

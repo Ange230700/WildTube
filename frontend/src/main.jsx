@@ -123,7 +123,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/editSection/:sectionId",
+        path: "/EditSection/:sectionId",
         element: (
           <ProtectedRoute>
             <EditSection />

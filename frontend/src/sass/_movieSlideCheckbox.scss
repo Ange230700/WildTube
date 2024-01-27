@@ -1,0 +1,47 @@
+.movie-checkbox-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  .movie-checkbox-input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .custom-checkbox {
+    position: absolute;
+    top: 10px; // adjust as needed
+    left: 10px; // adjust as needed
+    height: 25px; // adjust as needed
+    width: 25px; // adjust as needed
+    background-color: #eee;
+    border-radius: 4px;
+    // Add more styles as needed (like border, box-shadow, etc.)
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+  }
+
+  .movie-checkbox-input:checked ~ .custom-checkbox {
+    background-color: #2196f3; // Change to your desired color
+  }
+
+  .movie-checkbox-input:checked ~ .custom-checkbox:after {
+    display: block;
+  }
+
+  .custom-checkbox:after {
+    // Style for the checkmark or custom icon
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+}
