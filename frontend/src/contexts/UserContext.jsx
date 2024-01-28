@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useMemo } from "react";
 import { PropTypes } from "prop-types";
 import axios from "axios";
+import isTokenExpired from "../utils/utils";
 
 const UserContext = createContext();
 
@@ -11,10 +12,27 @@ export function UserProvider({ children }) {
     setUser(newUser);
   };
 
+  const logout = (navigate) => {
+    setUser(null);
+    localStorage.removeItem("token");
+    if (localStorage.getItem("isAdminMode")) {
+      localStorage.removeItem("isAdminMode");
+    }
+    // Navigate to login page
+    if (navigate) {
+      navigate("/connection");
+    }
+  };
+
   const fetchUser = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
+      if (isTokenExpired(token)) {
+        logout();
+        return;
+      }
+
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/userByToken`, {
           headers: {
@@ -22,13 +40,6 @@ export function UserProvider({ children }) {
           },
         })
         .then((response) => {
-          if (response.status === 401) {
-            localStorage.removeItem("token");
-            if (localStorage.getItem("isAdminMode")) {
-              localStorage.removeItem("isAdminMode");
-            }
-            updateUser(null);
-          }
           updateUser(response.data[0]);
         })
         .catch((error) => {
@@ -38,8 +49,8 @@ export function UserProvider({ children }) {
   };
 
   const contexValue = useMemo(() => {
-    return { user, updateUser, fetchUser };
-  }, [user, updateUser, fetchUser]);
+    return { user, updateUser, fetchUser, logout };
+  }, [user, updateUser, fetchUser, logout]);
 
   return (
     <UserContext.Provider value={contexValue}>{children}</UserContext.Provider>

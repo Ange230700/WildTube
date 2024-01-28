@@ -130,7 +130,7 @@ MovieSlide.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     miniature_filename: PropTypes.string,
-    miniature_url: PropTypes.string.isRequired,
+    miniature_url: PropTypes.string,
     title: PropTypes.string.isRequired,
     videoUrl: PropTypes.string,
     duration: PropTypes.number.isRequired,

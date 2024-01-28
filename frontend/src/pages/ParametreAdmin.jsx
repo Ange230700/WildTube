@@ -2,13 +2,14 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function ParametreAdmin() {
-  const { user, updateUser } = useUser();
+  const { user, logout } = useUser();
   const location = useLocation();
   const navigate = useNavigate();
+
   const handleLogOut = () => {
-    updateUser(null);
-    navigate("/");
+    logout(navigate);
   };
+
   return (
     <div
       className="ProfileDisplaySection"

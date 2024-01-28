@@ -1,23 +1,25 @@
 import { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
+import isTokenExpired from "../utils/utils";
 
 function ProtectedRoute({ children }) {
-  const { fetchUser } = useUser();
+  const { fetchUser, logout } = useUser();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    try {
-      fetchUser();
+  const handleLogout = () => {
+    logout(navigate);
+  };
 
-      if (!localStorage.getItem("token")) {
-        navigate("/connection");
-      }
-    } catch (error) {
-      console.error(error);
-      navigate("/connection");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token || isTokenExpired(token)) {
+      handleLogout();
     }
+
+    fetchUser();
   }, []);
 
   return children;

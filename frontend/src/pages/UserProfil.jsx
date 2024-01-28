@@ -2,14 +2,12 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
-  const { user, updateUser } = useUser();
+  const { user, logout } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogOut = () => {
-    updateUser(null);
-    localStorage.removeItem("token");
-    navigate("/");
+    logout(navigate);
   };
 
   return (
