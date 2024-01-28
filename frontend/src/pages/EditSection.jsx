@@ -46,8 +46,9 @@ function EditSection() {
         )}`
       )
       .then((response) => {
-        const sectionMovies = response.data.map((movie) => movie);
-        setOriginalSelectedMovies(new Set(sectionMovies));
+        const movieIds = new Set(response.data.map((movie) => movie.id));
+        setSelectedMovies(new Set(movieIds));
+        setOriginalSelectedMovies(new Set(movieIds));
       })
       .catch((error) => console.error(error));
   }
@@ -87,22 +88,23 @@ function EditSection() {
       }
 
       // Find movies to add and remove
-      const moviesToAdd = [...selectedMovies].filter(
-        (movie) => !originalSelectedMovies.has(movie)
-      );
-      const moviesToRemove = [...originalSelectedMovies].filter(
-        (movie) => !selectedMovies.has(movie)
-      );
+      const moviesToAdd = [...selectedMovies]
+        .filter((movieId) => !originalSelectedMovies.has(movieId))
+        .map((movieId) => movies.find((movie) => movie.id === movieId));
+
+      const moviesToRemove = [...originalSelectedMovies]
+        .filter((movieId) => !selectedMovies.has(movieId))
+        .map((movieId) => movies.find((movie) => movie.id === movieId));
 
       // Add or remove movies in parallel
       await Promise.all([
         ...moviesToAdd.map((movie) =>
           axios.post(
             `${import.meta.env.VITE_BACKEND_URL}/api/film/${
-              movie.id
+              movie?.id
             }/category/${parseInt(sectionId, 10)}`,
             {
-              filmId: movie.id,
+              filmId: movie?.id,
               categorieId: parseInt(sectionId, 10),
               unique_key: `${movie.id}-${parseInt(sectionId, 10)}`,
             }
@@ -111,7 +113,7 @@ function EditSection() {
         ...moviesToRemove.map((movie) =>
           axios.delete(
             `${import.meta.env.VITE_BACKEND_URL}/api/film/${
-              movie.id
+              movie?.id
             }/category/${parseInt(sectionId, 10)}`
           )
         ),
@@ -188,7 +190,6 @@ function EditSection() {
                     selectedMovies={selectedMovies}
                     setSelectedMovies={setSelectedMovies}
                     originalSelectedMovies={originalSelectedMovies}
-                    setOriginalSelectedMovies={setOriginalSelectedMovies}
                   />
                 ))}
             </>
@@ -201,7 +202,6 @@ function EditSection() {
                   selectedMovies={selectedMovies}
                   setSelectedMovies={setSelectedMovies}
                   originalSelectedMovies={originalSelectedMovies}
-                  setOriginalSelectedMovies={setOriginalSelectedMovies}
                 />
               ))}
             </>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 // import { toast } from "react-hot-toast";
@@ -13,16 +14,21 @@ function MovieSlide({
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
   const location = useLocation();
+  const [isChecked, setIsChecked] = useState(selectedMovies.has(movie.id));
 
   const handleCheck = () => {
     const newSelectedMovies = new Set(selectedMovies);
-    if (newSelectedMovies.has(movie)) {
-      newSelectedMovies.delete(movie);
+    if (newSelectedMovies.has(movie.id)) {
+      newSelectedMovies.delete(movie.id);
     } else {
-      newSelectedMovies.add(movie);
+      newSelectedMovies.add(movie.id);
     }
     setSelectedMovies(newSelectedMovies);
   };
+
+  useEffect(() => {
+    setIsChecked(selectedMovies.has(movie.id));
+  }, [selectedMovies, originalSelectedMovies, movie.id]);
 
   if (
     location.pathname.includes("/EditSection/") &&
@@ -35,7 +41,7 @@ function MovieSlide({
         <input
           type="checkbox"
           className="movie-checkbox-input"
-          checked={selectedMovies.has(movie)}
+          checked={isChecked}
           onChange={handleCheck}
         />
         <span className="custom-checkbox" />
@@ -68,12 +74,8 @@ function MovieSlide({
           <div className="lock-icon-container">
             <img
               className="lock-icon"
-              src={`/src/assets/icons/${
-                selectedMovies.has(movie) || originalSelectedMovies.has(movie)
-                  ? "remove2"
-                  : "add4"
-              }.svg`}
-              alt="lock icon"
+              src={`/src/assets/icons/${isChecked ? "remove2" : "add4"}.svg`}
+              alt={isChecked ? "Remove" : "Add"}
             />
           </div>
         </div>
