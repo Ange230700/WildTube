@@ -13,7 +13,9 @@ function App() {
 
   useEffect(() => {
     fetchUser();
-    setIsAdminMode(isAdminMode);
+    if (user && user.IsAdmin) {
+      setIsAdminMode(isAdminMode);
+    }
   }, []);
 
   return (

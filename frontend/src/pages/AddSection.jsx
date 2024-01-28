@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -14,25 +14,8 @@ function AddSection() {
   const [searchValue, setSearchValue] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [selectedMovies, setSelectedMovies] = useState(new Set());
-  const [isSaving, setIsSaving] = useState(false);
+  // const [isSaving, setIsSaving] = useState(false);
   const navigate = useNavigate();
-
-  function fetchNumberOfCategories() {
-    try {
-      const result = axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/category/count`
-      );
-      console.warn("result", result.data);
-
-      if (result.status === 200) {
-        return result.data[0]["COUNT(*)"];
-      }
-    } catch (error) {
-      console.error(error);
-    }
-
-    return null;
-  }
 
   function handleSearchChange(event) {
     setSearchValue(event.target.value);
@@ -42,17 +25,24 @@ function AddSection() {
     setCategoryName(e.target.value);
   };
 
-  const addCategory = () => {
+  const addCategory = async () => {
     if (categoryName) {
-      const result = axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/category`,
-        {
-          name: categoryName,
-        }
-      );
+      try {
+        const result = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/category`,
+          {
+            name: categoryName,
+          }
+        );
 
-      if (result.status === 200) {
+        // if (result.status === 200) {
+        // }
+        console.warn("categoryName =>", categoryName);
         toast.success("Category created");
+        return result.data.id;
+      } catch (error) {
+        console.error("Souci:", error);
+        toast.error("Failed to add category");
       }
     }
 
@@ -61,56 +51,37 @@ function AddSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSaving(true);
-    const requests = [];
+    // setIsSaving(true);
 
     try {
-      addCategory();
+      const newCategoryId = await addCategory();
+      console.warn("newCategoryId =>", newCategoryId);
 
-      const categoryId = fetchNumberOfCategories() + 1;
-      console.warn("categoryId", categoryId);
-
-      const moviesToAdd = [...selectedMovies].map((movieId) =>
-        movies.find((movie) => movie.id === movieId)
-      );
-
-      await Promise.all([
-        ...moviesToAdd.map((movie) =>
+      if (newCategoryId) {
+        const movieAddPromises = Array.from(selectedMovies).map((movieId) =>
           axios.post(
-            `${import.meta.env.VITE_BACKEND_URL}/api/films/${
-              movie.id
-            }/category/${categoryId}`,
+            `${
+              import.meta.env.VITE_BACKEND_URL
+            }/api/film/${movieId}/category/${newCategoryId}`,
             {
-              filmId: movie.id,
-              categorieId: categoryId,
-              unique_key: `${movie.id}-${categoryId}`,
+              filmId: movieId,
+              categorieId: newCategoryId,
+              unique_key: `${movieId}-${newCategoryId}`,
             }
           )
-        ),
-      ]);
+        );
 
-      if (requests.every((response) => response.status === 200)) {
+        await Promise.all(movieAddPromises);
+
         toast.success("Category created");
         setIsAdminMode(!isAdminMode);
         navigate("/");
       }
     } catch (error) {
       console.error("Error creating category:", error);
-      toast.error("Failed to create category");
-    } finally {
-      setIsSaving(false);
+      toast.error("Error creating category");
     }
   };
-
-  const hasAllThatIsSelected =
-    (categoryName && categoryName.length > 0) ||
-    ![...selectedMovies].every((movieId) =>
-      movies.find((m) => m.id === movieId)
-    );
-
-  useEffect(() => {
-    fetchNumberOfCategories();
-  }, []);
 
   return (
     <div className="search">
@@ -168,11 +139,7 @@ function AddSection() {
             </>
           )}
         </div>
-        <button
-          type="submit"
-          disabled={!hasAllThatIsSelected || isSaving}
-          className="sort-button"
-        >
+        <button type="submit" className="sort-button">
           Create category
         </button>
       </form>

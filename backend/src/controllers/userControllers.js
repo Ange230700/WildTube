@@ -178,7 +178,7 @@ const add = async (req, res, next) => {
         { sub: newUser.id, email: newUser.email },
         process.env.APP_SECRET,
         {
-          expiresIn: "1h",
+          expiresIn: "2m",
         }
       );
       res.status(201).json({

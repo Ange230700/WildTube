@@ -151,13 +151,13 @@ function AddVideos() {
               <div className="imageContainer">
                 {previewFile && <img src={previewFile} alt="miniature" />}
               </div>
-              <input
-                className="input"
-                onChange={(e) => setFile(e.target.files[0])}
-                type="file"
-                accept="image/*"
-              />
             </div>
+            <input
+              className="input"
+              onChange={(e) => setFile(e.target.files[0])}
+              type="file"
+              accept="image/*"
+            />
           </div>
           <div className="Outlineimageuploader">
             <div className="Frame4">
@@ -165,13 +165,13 @@ function AddVideos() {
               <div className="imageContainer2">
                 {previewCover && <img src={previewCover} alt="cover" />}
               </div>
-              <input
-                className="input"
-                onChange={(e) => setCover(e.target.files[0])}
-                type="file"
-                accept="image/*"
-              />
             </div>
+            <input
+              className="input"
+              onChange={(e) => setCover(e.target.files[0])}
+              type="file"
+              accept="image/*"
+            />
           </div>
         </div>
         <div className="inputContainer">
@@ -251,7 +251,8 @@ function AddVideos() {
             value="0"
             className="radioButton"
             onClick={(e) => setIsAvailable(e.target.value)}
-            checked={isAvailable === "0"}
+            checked={isAvailable === "0" || ""}
+            onChange={(e) => setIsAvailable(e.target.value)}
           />
           <div className="Visiteur">Visiteur</div>
         </div>
@@ -262,7 +263,8 @@ function AddVideos() {
             value="1"
             className="radioButton"
             onClick={(e) => setIsAvailable(e.target.value)}
-            checked={isAvailable === "1"}
+            checked={isAvailable === "1" || ""}
+            onChange={(e) => setIsAvailable(e.target.value)}
           />
           <div className="Visiteur">Utilisateur</div>
         </div>

@@ -78,7 +78,7 @@ const add = async (req, res, next) => {
     const result = await tables.Categorie.create(req.body);
 
     if (result.insertId) {
-      res.sendStatus(200);
+      res.status(200).json({ id: result.insertId });
     }
   } catch (err) {
     next(err);
