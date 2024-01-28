@@ -29,6 +29,16 @@ class CategorieManager extends AbstractManager {
     return rows;
   }
 
+  async count() {
+    // Execute the SQL SELECT query to retrieve all categories from the "categorie" table
+    const [rows] = await this.database.query(
+      `SELECT COUNT(*) FROM ${this.table}`
+    );
+
+    // Return the array of categories
+    return rows;
+  }
+
   async read(id) {
     // Execute the SQL SELECT query to retrieve the category with the given ID
     const [rows] = await this.database.query(

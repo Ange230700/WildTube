@@ -10,6 +10,10 @@ function ProtectedRoute({ children }) {
   useEffect(() => {
     try {
       fetchUser();
+
+      if (!localStorage.getItem("token")) {
+        navigate("/connection");
+      }
     } catch (error) {
       console.error(error);
       navigate("/connection");

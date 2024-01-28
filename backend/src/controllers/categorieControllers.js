@@ -15,6 +15,20 @@ const browse = async (request, response, next) => {
   }
 };
 
+const count = async (request, response, next) => {
+  try {
+    // Fetch all items from the database
+    const categories = await tables.Categorie.count();
+    console.warn(categories);
+
+    // Respond with the items in JSON format
+    response.json(categories);
+  } catch (error) {
+    // Pass any errors to the error-handling middleware
+    next(error);
+  }
+};
+
 // The R of BREAD - Read operation
 const read = async (request, response, next) => {
   try {
@@ -65,8 +79,6 @@ const add = async (req, res, next) => {
 
     if (result.insertId) {
       res.sendStatus(200);
-    } else {
-      res.sendStatus(404);
     }
   } catch (err) {
     next(err);
@@ -99,6 +111,7 @@ const removeCategory = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
+  count,
   read,
   edit,
   add,

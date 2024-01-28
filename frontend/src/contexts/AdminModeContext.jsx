@@ -1,22 +1,22 @@
-import { createContext, useContext, useState, useMemo } from "react";
-import { PropTypes } from "prop-types";
+import { useEffect, createContext, useContext, useState, useMemo } from "react";
+import PropTypes from "prop-types";
 
 const AdminModeContext = createContext();
 
 export function AdminModeProvider({ children }) {
-  const [isAdminMode, setIsAdminMode] = useState(false);
+  const initialAdminMode = localStorage.getItem("isAdminMode") === "true";
+  const [isAdminMode, setIsAdminMode] = useState(initialAdminMode);
 
   localStorage.setItem("isAdminMode", isAdminMode);
 
-  const fetchAdminMode = () => {
-    const adminMode = localStorage.getItem("isAdminMode");
-
-    return adminMode;
-  };
+  // Update localStorage whenever isAdminMode changes
+  useEffect(() => {
+    localStorage.setItem("isAdminMode", isAdminMode);
+  }, [isAdminMode]);
 
   const contextValue = useMemo(() => {
-    return { isAdminMode, setIsAdminMode, fetchAdminMode };
-  }, [isAdminMode, setIsAdminMode, fetchAdminMode]);
+    return { isAdminMode, setIsAdminMode };
+  }, [isAdminMode, setIsAdminMode]);
 
   return (
     <AdminModeContext.Provider value={contextValue}>

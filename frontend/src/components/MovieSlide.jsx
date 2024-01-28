@@ -31,7 +31,8 @@ function MovieSlide({
   }, [selectedMovies, originalSelectedMovies, movie.id]);
 
   if (
-    location.pathname.includes("/EditSection/") &&
+    (location.pathname.includes("/EditSection/") ||
+      location.pathname.includes("/AddSection")) &&
     user &&
     user.IsAdmin &&
     isAdminMode

@@ -22,6 +22,13 @@ export function UserProvider({ children }) {
           },
         })
         .then((response) => {
+          if (response.status === 401) {
+            localStorage.removeItem("token");
+            if (localStorage.getItem("isAdminMode")) {
+              localStorage.removeItem("isAdminMode");
+            }
+            updateUser(null);
+          }
           updateUser(response.data[0]);
         })
         .catch((error) => {

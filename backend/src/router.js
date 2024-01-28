@@ -28,6 +28,7 @@ router.get("/films", filmControllers.browse);
 router.get("/films/:id", filmControllers.read);
 router.get("/categories/film/:id", filmControllers.getFilmByCategorie);
 router.get("/categories", categorieControllers.browse);
+router.get("/category/count", categorieControllers.count);
 router.get("/avatars", avatarControllers.browse);
 router.get(
   "/watchlist/film/:userId",

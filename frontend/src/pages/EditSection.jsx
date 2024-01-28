@@ -146,6 +146,15 @@ function EditSection() {
   return (
     <div className="search">
       <form className="search-display-section" onSubmit={handleSave}>
+        <div className="search-bar-container">
+          <input
+            className="search-bar"
+            type="search"
+            placeholder="Rechercher un film"
+            value={searchValue || ""}
+            onChange={handleSearchChange}
+          />
+        </div>
         <div className="titleContainer">
           <h2 className="title">
             Modification de la section '
@@ -166,15 +175,6 @@ function EditSection() {
             />
           </div>
         )}
-        <div className="search-bar-container">
-          <input
-            className="search-bar"
-            type="search"
-            placeholder="Rechercher un film"
-            value={searchValue || ""}
-            onChange={handleSearchChange}
-          />
-        </div>
 
         <div className="search-result-container">
           {searchValue.length > 0 ? (
