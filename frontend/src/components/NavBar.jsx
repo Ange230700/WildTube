@@ -40,7 +40,9 @@ function NavBar() {
           <NavLink to="/" className="div-icon">
             <img
               className="icon"
-              src="/src/assets/icons/home_icon.svg"
+              src={`${
+                import.meta.env.VITE_BACKEND_URL
+              }/assets/icons/home_icon.svg`}
               alt="home icon"
             />
           </NavLink>
@@ -49,7 +51,9 @@ function NavBar() {
           <NavLink to="/search" className="div-icon">
             <img
               className="icon"
-              src="/src/assets/icons/search_icon.svg"
+              src={`${
+                import.meta.env.VITE_BACKEND_URL
+              }/assets/icons/search_icon.svg`}
               alt="search icon"
             />
           </NavLink>
@@ -60,7 +64,11 @@ function NavBar() {
               <img
                 className="icon avatar"
                 src={
-                  (user && user.avatar_filename) ||
+                  (user &&
+                    user.avatar_filename &&
+                    `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                      user?.avatar_filename
+                    }`) ||
                   (user && user.avatar_url) ||
                   "https://avatars.githubusercontent.com/u/97165289"
                 }
@@ -69,7 +77,9 @@ function NavBar() {
             ) : (
               <img
                 className="icon"
-                src="/src/assets/icons/profile_icon.svg"
+                src={`${
+                  import.meta.env.VITE_BACKEND_URL
+                }/assets/icons/profile_icon.svg`}
                 alt="connexion"
               />
             )}

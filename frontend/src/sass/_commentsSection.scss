@@ -133,6 +133,14 @@
             color: var(--background-color);
             flex: 1;
           }
+
+          .EditButton {
+            cursor: pointer;
+          }
+
+          .DeleteButton {
+            cursor: pointer;
+          }
         }
 
         .CommentDateContainer {
@@ -168,7 +176,7 @@
       height: clamp(
         calc(var(--comment-container-height, 48px) * 1),
         calc(15vw * 1),
-        calc(var(--comment-container-height, 48px) * 1.5)
+        calc(var(--comment-container-height, 48px) * 1 * 1.5)
       );
       align-items: center;
       gap: clamp(
@@ -182,6 +190,7 @@
       .CommentInputContainer {
         flex: 1;
         position: relative;
+        height: 100%;
 
         .CommentInput {
           height: 100%;

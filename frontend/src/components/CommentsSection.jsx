@@ -165,7 +165,9 @@ function CommentsSection({ filmId }) {
                               onClick={() => handleEditComment(comment.id)}
                             >
                               <img
-                                src="/src/assets/icons/modifier.png"
+                                src={`${
+                                  import.meta.env.VITE_BACKEND_URL
+                                }/assets/icons/modifier.png`}
                                 alt="Modifier"
                               />
                             </button>
@@ -175,7 +177,9 @@ function CommentsSection({ filmId }) {
                               onClick={() => handleDeleteComment(comment.id)}
                             >
                               <img
-                                src="/src/assets/icons/supprimer.png"
+                                src={`${
+                                  import.meta.env.VITE_BACKEND_URL
+                                }/assets/icons/supprimer.png`}
                                 alt="Supprimer"
                               />
                             </button>
@@ -194,7 +198,7 @@ function CommentsSection({ filmId }) {
         <div className="CommentsInput">
           <div className="CommentContainer">
             <div className="CommentInputContainer">
-              <textarea
+              <input
                 className="CommentInput"
                 value={commentContent} // Bind textarea to state
                 onChange={handleTextareaChange} // Handle change
@@ -212,7 +216,9 @@ function CommentsSection({ filmId }) {
                 <img
                   alt="Send"
                   className="Vector"
-                  src="/src/assets/icons/vector.svg"
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/vector.svg`}
                 />
               </button>
             </div>
@@ -291,7 +297,9 @@ function CommentsSection({ filmId }) {
               <img
                 alt="Send"
                 className="Vector"
-                src="/src/assets/icons/vector.svg"
+                src={`${
+                  import.meta.env.VITE_BACKEND_URL
+                }/assets/icons/vector.svg`}
               />
             </button>
           </div>

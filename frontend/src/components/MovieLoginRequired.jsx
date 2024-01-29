@@ -15,14 +15,22 @@ function MovieLoginRequired({ movie }) {
           <div className="thumbnail-container">
             <img
               className="movie-cover"
-              src={movie?.cover_filename || movie?.cover_url}
+              src={
+                (movie.cover_filename &&
+                  `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                    movie.cover_filename
+                  }`) ||
+                movie.cover_url
+              }
               alt={movie.title}
             />
             <div className="upper-layer">
               <div className="play-button-container">
                 <img
                   className="play-button"
-                  src="/src/assets/icons/play_button_icon.svg"
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/play_button_icon.svg`}
                   alt="play button"
                 />
               </div>
