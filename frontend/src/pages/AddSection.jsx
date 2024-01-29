@@ -96,7 +96,7 @@ function AddSection() {
           />
         </div>
         <div className="titleContainer">
-          <h2 className="title">Ajouter une section</h2>
+          <h2 className="title">Add a section</h2>
         </div>
         {user && user.IsAdmin && (
           <div className="sort-container">

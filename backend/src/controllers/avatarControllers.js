@@ -11,7 +11,7 @@ const browse = async (request, response, next) => {
     if (avatars) {
       response.status(200).json(avatars);
     } else {
-      response.status(404).json({ error: "Aucun avatar trouvé" });
+      response.status(404).json({ error: "No avatar found" });
     }
   } catch (error) {
     // Pass any errors to the error-handling middleware

@@ -150,14 +150,14 @@ function EditSection() {
           <input
             className="search-bar"
             type="search"
-            placeholder="Rechercher un film"
+            placeholder="Search for a movie"
             value={searchValue || ""}
             onChange={handleSearchChange}
           />
         </div>
         <div className="titleContainer">
           <h2 className="title">
-            Modification de la section '
+            Editing the section '
             {(categoryName && categoryName) ||
               (originalCategoryName && originalCategoryName) ||
               ""}
