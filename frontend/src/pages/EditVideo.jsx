@@ -157,10 +157,17 @@ function EditVideo() {
       return URL.createObjectURL(selectedFile);
     }
     if (video.miniature_filename) {
-      return video.miniature_filename;
+      return (
+        video.miniature_filename &&
+        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+          video.miniature_filename
+        }`
+      );
     }
     return video.miniature_url;
   };
+
+  console.warn(imageSrc());
 
   return (
     <div className="ContainerEditVideo">
