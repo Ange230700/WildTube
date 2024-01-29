@@ -96,7 +96,6 @@ class CategorieParFilmManager extends AbstractManager {
     return result;
   }
   // The D of CRUD - Delete operation
-
 }
 
 // Ready to export the manager
