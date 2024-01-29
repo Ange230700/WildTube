@@ -263,10 +263,12 @@ function Inscription() {
                   <img
                     className="avatarPreview"
                     src={
-                      `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                        selectedAvatar.avatar_filename
-                      }` ||
-                      selectedAvatar.avatar_url ||
+                      (selectedAvatar.avatar_filename &&
+                        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                          selectedAvatar?.avatar_filename
+                        }`) ||
+                      (selectedAvatar.avatar_url &&
+                        selectedAvatar?.avatar_url) ||
                       "https://avatars.githubusercontent.com/u/97165289"
                     }
                     alt="Avatar"
@@ -295,9 +297,11 @@ function Inscription() {
                     <img
                       className="avatar"
                       src={
-                        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                          avatar.avatar_filename
-                        }` || avatar.avatar_url
+                        (avatar.avatar_filename &&
+                          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            avatar?.avatar_filename
+                          }`) ||
+                        (avatar.avatar_url && avatar?.avatar_url)
                       }
                       alt="Avatar"
                     />

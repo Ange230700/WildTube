@@ -16,9 +16,11 @@ function MovieLoginRequired({ movie }) {
             <img
               className="movie-cover"
               src={
-                `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                  movie?.cover_filename
-                }` || movie?.cover_url
+                (movie.cover_filename &&
+                  `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                    movie.cover_filename
+                  }`) ||
+                movie.cover_url
               }
               alt={movie.title}
             />
