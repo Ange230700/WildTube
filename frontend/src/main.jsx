@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import axios from "axios";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
 import { UserProvider } from "./contexts/UserContext";
 import { AdminModeProvider } from "./contexts/AdminModeContext";
-import App from "./App";
+import AppWrapper from "./AppWrapper";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
@@ -24,29 +23,12 @@ import AddSection from "./pages/AddSection";
 import EditSection from "./pages/EditSection";
 import AddVideos from "./pages/AddVideos";
 import ProtectedRoute from "./components/ProtectedRoute";
-import isTokenExpired from "./utils/utils";
 import "./sass/index.scss";
-
-axios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (
-      error.response.status === 401 &&
-      isTokenExpired(localStorage.getItem("token"))
-    ) {
-      // Handle token expiration
-      localStorage.removeItem("token");
-      localStorage.removeItem("isAdminMode");
-      window.location.href = "/connection"; // Redirect to login page
-    }
-    return Promise.reject(error);
-  }
-);
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <AppWrapper />,
     children: [
       {
         index: true,
