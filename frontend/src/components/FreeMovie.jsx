@@ -206,7 +206,11 @@ function FreeMovie({ movie }) {
                   className="ThumbsUpRegular1"
                   onClick={() => handleshare(movie)}
                 >
-                  <img src="/src/assets/icons/partage.svg" alt="partage" />
+                  <img
+                    className="favourite-icon"
+                    src="/src/assets/icons/partage.svg"
+                    alt="partage"
+                  />
                 </button>
                 <button
                   className="ThumbsUpRegular1"
