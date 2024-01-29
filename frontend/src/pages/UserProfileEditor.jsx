@@ -111,7 +111,7 @@ function UserProfileEditor() {
         fetchUser();
         toggleModal();
         setTimeout(() => {
-          navigate("/profil");
+          navigate("/");
         }, 2000);
       }
     } catch (error) {
