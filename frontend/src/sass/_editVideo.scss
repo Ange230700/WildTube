@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     padding-top: 2vh;
-    padding-bottom: 5vh;
+    padding-bottom: 2vh;
   }
   .containerFormMiniature {
     display: flex;
@@ -28,6 +28,7 @@
       color: var(--text-field-background-color);
       font-size: 0.8rem;
       background-color: #ff509a;
+      cursor: pointer;
       button {
         border: none;
       }
@@ -36,13 +37,14 @@
   .containerFormEdit {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
     .edit {
       color: var(--text-field-background-color);
       border: none;
       background: rgba(238, 226, 226, 0.1);
       height: 7vh;
+      padding-inline-start: 5px;
       border-radius: 10px;
       border-bottom: 1px #ff509a solid;
       &::placeholder {
@@ -64,7 +66,7 @@
   }
   .containerButtonEdit {
     display: flex;
-    padding-top: 15vh;
+    padding-top: 10vh;
     gap: 50px;
     justify-content: center;
     align-items: center;
