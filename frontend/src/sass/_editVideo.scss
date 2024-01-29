@@ -6,7 +6,7 @@
   .titlePage {
     display: flex;
     justify-content: center;
-    padding-top: 8vh;
+    padding-top: 2vh;
     padding-bottom: 5vh;
   }
   .containerFormMiniature {
@@ -23,7 +23,7 @@
       max-width: 350px;
     }
     .min {
-      position: absolute;
+      position: fixed;
       border-radius: 5px;
       color: var(--text-field-background-color);
       font-size: 0.8rem;
