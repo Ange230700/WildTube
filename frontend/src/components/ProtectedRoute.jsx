@@ -1,33 +1,25 @@
 import { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import PropTypes from "prop-types";
 import { useUser } from "../contexts/UserContext";
+import isTokenExpired from "../utils/utils";
 
 function ProtectedRoute({ children }) {
-  const { updateUser } = useUser();
+  const { fetchUser, logout } = useUser();
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(navigate);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (token) {
-      axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/api/userByToken`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          updateUser(response.data[0]);
-        })
-        .catch((error) => {
-          navigate("/connection");
-          console.error(error);
-        });
-    } else {
-      navigate("/connection");
+    if (!token || isTokenExpired(token)) {
+      handleLogout();
     }
+
+    fetchUser();
   }, []);
 
   return children;

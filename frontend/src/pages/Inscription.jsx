@@ -6,6 +6,7 @@ import { useUser } from "../contexts/UserContext";
 import ModalInscription from "../components/ModalInscription";
 
 function Inscription() {
+  const { fetchUser } = useUser();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -103,6 +104,7 @@ function Inscription() {
         updateUser(authentication.newUser);
         localStorage.setItem("token", authentication.token);
 
+        fetchUser();
         toggleModal();
         setTimeout(() => {
           navigate("/");

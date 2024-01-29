@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class FilmManager extends AbstractManager {
   constructor() {
-    super({ table: "film" });
+    super({ table: "Film" });
   }
 
   async create({

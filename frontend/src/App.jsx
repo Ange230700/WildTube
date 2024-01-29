@@ -1,31 +1,20 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import axios from "axios";
 import NavBar from "./components/NavBar";
 import NavBarDesktop from "./components/NavBarDesktop";
 import { useUser } from "./contexts/UserContext";
+import { useAdminMode } from "./contexts/AdminModeContext";
 
 function App() {
   const location = useLocation();
-  const { updateUser, user } = useUser();
+  const { user, fetchUser } = useUser();
+  const { isAdminMode, setIsAdminMode } = useAdminMode();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/api/userByToken`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          updateUser(response.data[0]);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    fetchUser();
+    if (user && user.IsAdmin) {
+      setIsAdminMode(isAdminMode);
     }
   }, []);
 

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import ModalInscription from "../components/ModalInscription";
 import LogoContainer from "../components/LogoContainer";
 import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
 import { useUser } from "../contexts/UserContext";
 
 function UserProfileEditor() {
   const { userId } = useParams();
-  const { user, updateUser } = useUser();
+  const { user, fetchUser } = useUser();
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -23,8 +24,12 @@ function UserProfileEditor() {
 
   const navigate = useNavigate();
 
-  // eslint-disable-next-line no-unused-vars
-  const [selectedAvatar, setSelectedAvatar] = useState(null); // Avatar principal
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   // Update these handlers to capture the new and old password inputs
   // const handleNewPasswordChange = (e) => {
@@ -103,20 +108,11 @@ function UserProfileEditor() {
       );
 
       if (result.status === 200) {
-        const token = localStorage.getItem("token");
-        axios
-          .get(`${import.meta.env.VITE_BACKEND_URL}/api/userByToken`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((response) => {
-            updateUser(response.data[0]);
-            navigate("/profil");
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        fetchUser();
+        toggleModal();
+        setTimeout(() => {
+          navigate("/profil");
+        }, 2000);
       }
     } catch (error) {
       // Handle error...
@@ -181,7 +177,7 @@ function UserProfileEditor() {
                     type="text"
                     name="name"
                     className="input"
-                    value={formData?.name}
+                    value={formData?.name || ""}
                     onChange={handleInputChange}
                     placeholder="Nom"
                   />
@@ -331,6 +327,12 @@ function UserProfileEditor() {
                   <p className="inscription">Modifier</p>
                 </button>
               </div>
+              {showModal && (
+                <ModalInscription
+                  toggleModal={toggleModal}
+                  showModal={setShowModal}
+                />
+              )}
             </div>
           </form>
         </div>

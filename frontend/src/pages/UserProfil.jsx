@@ -2,14 +2,12 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
-  const { user, updateUser } = useUser();
+  const { user, logout } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogOut = () => {
-    updateUser(null);
-    localStorage.removeItem("token");
-    navigate("/");
+    logout(navigate);
   };
 
   return (
@@ -63,11 +61,11 @@ function UserProfil() {
         </div>
         <div className="Useroption">
           <button
-            className="RegarderPlusTardButton"
+            className="RegarderPlusTard"
             type="button"
             onClick={handleLogOut}
           >
-            Déconnexion
+            <h3>Déconnexion</h3>
           </button>
         </div>
       </section>

@@ -21,7 +21,9 @@ function NavBar() {
       style={
         location.pathname.includes("/movies/") ||
         location.pathname.includes("/profil") ||
-        location.pathname.includes("/addvideos")
+        location.pathname.includes("/Parametre") ||
+        location.pathname.includes("/addvideos") ||
+        location.pathname.includes("/EditVideo/")
           ? {
               position: "fixed",
               bottom: "0",
@@ -58,8 +60,8 @@ function NavBar() {
               <img
                 className="icon avatar"
                 src={
-                  (user && user?.avatar_filename) ||
-                  (user && user?.avatar_url) ||
+                  (user && user.avatar_filename) ||
+                  (user && user.avatar_url) ||
                   "https://avatars.githubusercontent.com/u/97165289"
                 }
                 alt="avatar"
