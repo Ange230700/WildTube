@@ -124,7 +124,12 @@ function CategoryDisplay({ categorie, getCategories }) {
                 type="button"
                 onClick={handleCategoryDeletion}
               >
-                <img src="/src/assets/icons/remove.svg" alt="edit button" />
+                <img
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/remove.svg`}
+                  alt="edit button"
+                />
               </button>
             </>
           )}

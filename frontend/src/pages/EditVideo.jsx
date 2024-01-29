@@ -2,7 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import croixRouge from "../assets/icons/croix-rouge.png";
+// eslint-disable-next-line import/no-unresolved
+import croixRouge from "../../../backend/public/assets/images/croixRouge.png";
 
 function EditVideo() {
   const { movieId } = useParams();
@@ -157,10 +158,17 @@ function EditVideo() {
       return URL.createObjectURL(selectedFile);
     }
     if (video.miniature_filename) {
-      return video.miniature_filename;
+      return (
+        video.miniature_filename &&
+        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+          video.miniature_filename
+        }`
+      );
     }
     return video.miniature_url;
   };
+
+  console.warn(imageSrc());
 
   return (
     <div className="ContainerEditVideo">

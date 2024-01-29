@@ -111,7 +111,11 @@ function UserProfileEditor() {
         fetchUser();
         toggleModal();
         setTimeout(() => {
-          navigate("/");
+          if (user?.IsAdmin) {
+            navigate("/Parametre");
+          } else {
+            navigate("/profil");
+          }
         }, 2000);
       }
     } catch (error) {
