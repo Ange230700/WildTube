@@ -187,7 +187,9 @@ function FreeMovie({ movie }) {
               >
                 <img
                   className="play-button"
-                  src="/src/assets/icons/play_button_icon.svg"
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/play_button_icon.svg`}
                   alt="play button"
                 />
               </NavLink>
@@ -208,7 +210,9 @@ function FreeMovie({ movie }) {
                 >
                   <img
                     className="favourite-icon"
-                    src="/src/assets/icons/partage.svg"
+                    src={`${
+                      import.meta.env.VITE_BACKEND_URL
+                    }/assets/icons/partage.svg`}
                     alt="partage"
                   />
                 </button>
@@ -221,8 +225,12 @@ function FreeMovie({ movie }) {
                     className="favourite-icon"
                     src={
                       !isFavorited
-                        ? "/src/assets/icons/favourite-icon.svg"
-                        : "/src/assets/icons/thumbs-up-solid.svg"
+                        ? `${
+                            import.meta.env.VITE_BACKEND_URL
+                          }/assets/icons/favourite-icon.svg`
+                        : `${
+                            import.meta.env.VITE_BACKEND_URL
+                          }/assets/icons/thumbs-up-solid.svg`
                     }
                     alt="favourite icon"
                   />
@@ -235,7 +243,9 @@ function FreeMovie({ movie }) {
                   >
                     <img
                       className="favourite-icon"
-                      src="/src/assets/icons/edit.png"
+                      src={`${
+                        import.meta.env.VITE_BACKEND_URL
+                      }/assets/icons/edit.png`}
                       alt="edit icon"
                     />
                   </button>
@@ -249,8 +259,12 @@ function FreeMovie({ movie }) {
                     className="favourite-icon"
                     src={
                       !isWatchlisted
-                        ? "/src/assets/icons/watchlist-icon.svg"
-                        : "/src/assets/icons/check-solid.svg"
+                        ? `${
+                            import.meta.env.VITE_BACKEND_URL
+                          }/assets/icons/watchlist-icon.svg`
+                        : `${
+                            import.meta.env.VITE_BACKEND_URL
+                          }/assets/icons/check-solid.svg`
                     }
                     alt="watchlist icon"
                   />

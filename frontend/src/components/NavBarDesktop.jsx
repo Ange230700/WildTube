@@ -17,7 +17,11 @@ function NavBarDesktop() {
 
   return (
     <div className="navbar-desktop">
-      <img className="logo" src="/src/assets/icons/logo.svg" alt="logo" />
+      <img
+        className="logo"
+        src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/logo.svg`}
+        alt="logo"
+      />
       <div className="links-container">
         <div className="links-wrapper">
           <NavLink className="link" to="/">
@@ -51,7 +55,11 @@ function NavBarDesktop() {
             <img
               className="icon avatar"
               src={
-                (user && user.avatar_filename && user.avatar_filename) ||
+                (user &&
+                  user.avatar_filename &&
+                  `${import.meta.env.VITE_BACKEND_URL}${
+                    user.avatar_filename
+                  }`) ||
                 (user && user.avatar_url) ||
                 "https://avatars.githubusercontent.com/u/97165289"
               }
@@ -60,7 +68,9 @@ function NavBarDesktop() {
           ) : (
             <img
               className="icon"
-              src="/src/assets/icons/profile_icon.svg"
+              src={`${
+                import.meta.env.VITE_BACKEND_URL
+              }/assets/icons/profile_icon.svg`}
               alt="connexion"
             />
           )}
