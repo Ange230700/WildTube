@@ -156,31 +156,30 @@ function CommentsSection({ filmId }) {
                   <div className="FrameContainer">
                     <div className="Frame1">
                       <p className="CommentText">{comment.content}</p>
-                      {(user && user.id === comment.userId) ||
-                        (user.IsAdmin && (
-                          <div className="CommentActionButtons">
-                            <button
-                              type="button"
-                              className="EditButton"
-                              onClick={() => handleEditComment(comment.id)}
-                            >
-                              <img
-                                src="/src/assets/icons/modifier.png"
-                                alt="Modifier"
-                              />
-                            </button>
-                            <button
-                              type="button"
-                              className="DeleteButton"
-                              onClick={() => handleDeleteComment(comment.id)}
-                            >
-                              <img
-                                src="/src/assets/icons/supprimer.png"
-                                alt="Supprimer"
-                              />
-                            </button>
-                          </div>
-                        ))}
+                      {user && user.id === comment.userId && (
+                        <div className="CommentActionButtons">
+                          <button
+                            type="button"
+                            className="EditButton"
+                            onClick={() => handleEditComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/modifier.png"
+                              alt="Modifier"
+                            />
+                          </button>
+                          <button
+                            type="button"
+                            className="DeleteButton"
+                            onClick={() => handleDeleteComment(comment.id)}
+                          >
+                            <img
+                              src="/src/assets/icons/supprimer.png"
+                              alt="Supprimer"
+                            />
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="CommentDateContainer">
                       <h6 className="CommentDate">{formattedDate}</h6>
