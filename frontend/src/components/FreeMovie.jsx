@@ -155,7 +155,6 @@ function FreeMovie({ movie }) {
       window.location.href = mailToLink;
     }
   };
-
   return (
     movie && (
       <div className="movie-page-details" key={movie.id}>
@@ -175,9 +174,9 @@ function FreeMovie({ movie }) {
               src={
                 (movie.cover_filename &&
                   `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                    movie?.cover_filename
+                    movie.cover_filename
                   }`) ||
-                movie?.cover_url
+                movie.cover_url
               }
               alt={movie.title}
             />
@@ -207,7 +206,11 @@ function FreeMovie({ movie }) {
                   className="ThumbsUpRegular1"
                   onClick={() => handleshare(movie)}
                 >
-                  <img src="/src/assets/icons/partage.svg" alt="partage" />
+                  <img
+                    className="favourite-icon"
+                    src="/src/assets/icons/partage.svg"
+                    alt="partage"
+                  />
                 </button>
                 <button
                   className="ThumbsUpRegular1"
@@ -224,7 +227,7 @@ function FreeMovie({ movie }) {
                     alt="favourite icon"
                   />
                 </button>
-                {user && user.IsAdmin === 1 ? (
+                {user.IsAdmin === 1 && (
                   <button
                     className="ThumbsUpRegular1"
                     type="button"
@@ -236,8 +239,6 @@ function FreeMovie({ movie }) {
                       alt="edit icon"
                     />
                   </button>
-                ) : (
-                  ""
                 )}
                 <button
                   className="ThumbsUpRegular1"

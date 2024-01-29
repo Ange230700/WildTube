@@ -194,7 +194,7 @@ function CommentsSection({ filmId }) {
         <div className="CommentsInput">
           <div className="CommentContainer">
             <div className="CommentInputContainer">
-              <textarea
+              <input
                 className="CommentInput"
                 value={commentContent} // Bind textarea to state
                 onChange={handleTextareaChange} // Handle change

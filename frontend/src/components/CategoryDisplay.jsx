@@ -112,7 +112,12 @@ function CategoryDisplay({ categorie, getCategories }) {
                 type="button"
                 onClick={handleNavigationToCategoryEdition}
               >
-                <img src="/src/assets/icons/edit.png" alt="edit button" />
+                <img
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/edit.png`}
+                  alt="edit button"
+                />
               </button>
               <button
                 className="add-movie-container"
