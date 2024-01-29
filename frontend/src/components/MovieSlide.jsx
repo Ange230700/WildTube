@@ -115,7 +115,9 @@ function MovieSlide({
           <div className="lock-icon-container">
             <img
               className="lock-icon"
-              src={`/src/assets/icons/${isChecked ? "remove2" : "add4"}.svg`}
+              src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/${
+                isChecked ? "remove2" : "add4"
+              }.svg`}
               alt={isChecked ? "Remove" : "Add"}
             />
           </div>
@@ -159,7 +161,9 @@ function MovieSlide({
             <div className="lock-icon-container">
               <img
                 className="lock-icon"
-                src="/src/assets/icons/remove2.svg"
+                src={`${
+                  import.meta.env.VITE_BACKEND_URL
+                }/assets/icons/remove2.svg`}
                 alt="Remove"
               />
             </div>
@@ -203,7 +207,9 @@ function MovieSlide({
         <div className="lock-icon-container">
           <img
             className="lock-icon"
-            src="/src/assets/icons/lock_icon.svg"
+            src={`${
+              import.meta.env.VITE_BACKEND_URL
+            }/assets/icons/lock_icon.svg`}
             alt="lock icon"
           />
         </div>

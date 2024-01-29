@@ -56,7 +56,14 @@ function Home() {
             window.open("https://open.spotify.com/intl-fr", "_blank")
           }
         >
-          {!user && <img src="/src/assets/icons/pub_spotify.jpg" alt="pub" />}
+          {!user && (
+            <img
+              src={`${
+                import.meta.env.VITE_BACKEND_URL
+              }/assets/icons/pub_spotify.jpg`}
+              alt="pub"
+            />
+          )}
         </button>
         <MovieGenreTabsContainer categories={categories} />
         {isAdminMode && (
@@ -65,7 +72,10 @@ function Home() {
             type="button"
             onClick={handleAddCategory}
           >
-            <img src="/src/assets/icons/add.svg" alt="add" />
+            <img
+              src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/add.svg`}
+              alt="add"
+            />
           </button>
         )}
         {categories.map(

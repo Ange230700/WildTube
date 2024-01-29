@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import croixRouge from "../assets/icons/croix-rouge.png";
+import croixRouge from "../../public/assets/icons/croix-rouge.png";
 
 function EditVideo() {
   const { movieId } = useParams();
