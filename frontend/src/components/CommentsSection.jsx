@@ -126,11 +126,11 @@ function CommentsSection({ filmId }) {
     return (
       <section className="CommentsSection">
         <div className="CommentsSectionTitle">
-          <h3 className="Commentaires">Commentaires</h3>
+          <h3 className="Commentaires">Comments</h3>
         </div>
         <div className="CommentsWrapper" ref={commentsWrapperRef}>
           {comments.length === 0 ? (
-            <h4>Soyez le premier à commenter ce film !</h4>
+            <h4>Be the first to comment on this movie !</h4>
           ) : (
             comments.map((comment) => {
               const formattedDate = comment.date.slice(0, 19).replace("T", " ");
@@ -243,11 +243,11 @@ function CommentsSection({ filmId }) {
   return (
     <section className="CommentsSection">
       <div className="CommentsSectionTitle">
-        <h3 className="Commentaires">Commentaires</h3>
+        <h3 className="Commentaires">Comments</h3>
       </div>
       <div className="CommentsWrapper" ref={commentsWrapperRef}>
         {comments.length === 0 ? (
-          <h4>Connectez-vous pour laisser un commentaires.</h4>
+          <h4>Log in to leave a comment.</h4>
         ) : (
           comments.map((comment) => {
             const formattedDate = comment.date.slice(0, 19).replace("T", " ");
@@ -290,7 +290,7 @@ function CommentsSection({ filmId }) {
           <div className="CommentInputContainer">
             <textarea
               className="CommentInput"
-              placeholder="Connectez-vous pour laisser un commentaire"
+              placeholder="Log in to leave a comment"
               disabled
             />
             <button type="button" className="SendSvgrepoCom2" disabled>

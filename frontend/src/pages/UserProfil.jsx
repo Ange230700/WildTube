@@ -41,21 +41,21 @@ function UserProfil() {
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/favorites">
-              <h3>Favoris</h3>
+              <h3>Favorites</h3>
             </Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/watchlist">
-              <h3>À regarder plus tard</h3>
+              <h3>To watch later</h3>
             </Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to={`/account/${user && user.id}`}>
-              <h3>Informations du compte</h3>
+              <h3>Account information</h3>
             </Link>
           </div>
         </div>
@@ -65,7 +65,7 @@ function UserProfil() {
             type="button"
             onClick={handleLogOut}
           >
-            <h3>Déconnexion</h3>
+            <h3>Disconnect</h3>
           </button>
         </div>
       </section>

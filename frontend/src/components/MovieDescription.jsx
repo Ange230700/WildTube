@@ -8,7 +8,7 @@ function MovieDescription({ movie }) {
   const { user } = useUser();
   const { movieId } = useParams();
   if (!movieId) {
-    return <h1>Aucun film trouvé.</h1>;
+    return <h1>No films found.</h1>;
   }
   if (movie.IsAvailable || user) {
     return <FreeMovie movie={movie} />;

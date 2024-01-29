@@ -45,7 +45,7 @@ const add = async (req, res, next) => {
     req.body.miniature_filename = miniature;
     req.body.cover_filename = cover;
   } else {
-    res.status(403).send({ message: "Fichier manquant" });
+    res.status(403).send({ message: "Missing file" });
   }
 
   const film = req.body;
@@ -81,12 +81,10 @@ const add = async (req, res, next) => {
       if (response) {
         res.status(200).json({ insertId });
       } else {
-        res
-          .status(500)
-          .send({ message: "Erreur lors de l'insertion de la categorie" });
+        res.status(500).send({ message: "Error inserting category" });
       }
     } else {
-      res.status(500).send({ message: "Erreur lors de l'insertion du film" });
+      res.status(500).send({ message: "Error inserting film" });
     }
   } catch (err) {
     next(err);

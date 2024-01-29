@@ -7,7 +7,7 @@ function ModalInscription() {
     return (
       <div className="modal">
         <div className="modal-content">
-          <p>Votre inscription a été effectuée avec succès</p>
+          <p>Your registration has been done successfully</p>
         </div>
       </div>
     );
@@ -17,7 +17,7 @@ function ModalInscription() {
     return (
       <div className="modal">
         <div className="modal-content">
-          <p>Votre compte a été modifié avec succès</p>
+          <p>Your account has been successfully modified</p>
         </div>
       </div>
     );

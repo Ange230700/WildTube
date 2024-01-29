@@ -25,10 +25,10 @@ function NavBarDesktop() {
       <div className="links-container">
         <div className="links-wrapper">
           <NavLink className="link" to="/">
-            <p className="link-text">Accueil</p>
+            <p className="link-text">Home</p>
           </NavLink>
           <NavLink className="link" to="/search">
-            <p className="link-text">Recherche</p>
+            <p className="link-text">Research</p>
           </NavLink>
         </div>
         {user && user.IsAdmin ? (
@@ -44,7 +44,7 @@ function NavBarDesktop() {
               !location.pathname.includes("/category/") &&
               !location.pathname.includes("favorites") && (
                 <>
-                  <h6>Mode admin :</h6>
+                  <h6>Admin mode :</h6>
                   <ToggleSwitch user={user} />
                 </>
               )}
