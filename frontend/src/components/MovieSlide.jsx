@@ -89,7 +89,7 @@ function MovieSlide({
         <div
           className="movie-slide-requiring-registration"
           style={{
-            filter: "none",
+            filter: "blur(0px)",
           }}
         >
           <img
