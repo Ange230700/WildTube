@@ -23,6 +23,7 @@ function NavBar() {
         location.pathname.includes("/profil") ||
         location.pathname.includes("/Parametre") ||
         location.pathname.includes("/addvideos") ||
+        location.pathname.includes("/AjoutAdmin") ||
         location.pathname.includes("/EditVideo/")
           ? {
               position: "fixed",

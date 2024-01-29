@@ -42,6 +42,7 @@ function NavBarDesktop() {
               !location.pathname.includes("/movies/") &&
               !location.pathname.includes("/EditVideo/") &&
               !location.pathname.includes("/category/") &&
+              !location.pathname.includes("/connection") &&
               !location.pathname.includes("favorites") && (
                 <>
                   <h6>Mode admin :</h6>

@@ -4,7 +4,7 @@ const { faker } = require("@faker-js/faker");
 
 const users = [];
 
-const userLength = 99;
+const userLength = 15;
 
 for (let i = 0; i < userLength; i += 1) {
   const randomDate = faker.date.past().toISOString().split("T")[0];

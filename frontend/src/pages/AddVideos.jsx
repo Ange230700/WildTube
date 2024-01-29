@@ -266,7 +266,7 @@ function AddVideos() {
             checked={isAvailable === "1" || ""}
             onChange={(e) => setIsAvailable(e.target.value)}
           />
-          <div className="Visiteur">Utilisateur</div>
+          <div className="Visiteur">Subscriber</div>
         </div>
       </div>
       <div className="Titleinputcontainer">

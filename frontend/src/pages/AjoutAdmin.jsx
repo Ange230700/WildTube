@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useUser } from "../contexts/UserContext";
-import LogoContainer from "../components/LogoContainer";
 
 function AjoutAdmin() {
   const { user: currentUser } = useUser();
@@ -53,7 +52,6 @@ function AjoutAdmin() {
 
   return (
     <div className="ContainerAjoutAdmin">
-      <LogoContainer />
       <div className="NamePage">
         <h3>Ajouter des Administrateurs</h3>
       </div>
