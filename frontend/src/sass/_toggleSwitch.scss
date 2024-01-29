@@ -64,5 +64,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  transform: translateX(calc(20px));
+  transform: translateX(
+    clamp(calc(26px * 1 / 2), calc(8.125vw * 1 / 2), calc(26px * 1 / 2 * 1.5))
+  );
 }
