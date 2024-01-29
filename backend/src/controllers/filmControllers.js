@@ -2,7 +2,7 @@ const tables = require("../tables");
 
 const browse = async (req, res, next) => {
   try {
-    const films = await tables.film.readAll();
+    const films = await tables.Film.readAll();
     res.json(films);
   } catch (err) {
     next(err);
@@ -11,7 +11,7 @@ const browse = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    const film = await tables.film.read(req.params.id);
+    const film = await tables.Film.read(req.params.id);
     if (film == null) {
       res.sendStatus(404);
     } else {
@@ -26,7 +26,7 @@ const edit = async (req, res, next) => {
   const { id } = req.params;
   req.body.id = id;
   try {
-    const result = await tables.film.update(req.body);
+    const result = await tables.Film.update(req.body);
     if (result) {
       // res.json(result);
       res.sendStatus(204);
@@ -52,7 +52,7 @@ const add = async (req, res, next) => {
 
   try {
     // 1. Ajouter le film
-    const insertId = await tables.film.create(film);
+    const insertId = await tables.Film.create(film);
 
     // 2. Faire la connexion avec les catégories
     const categories = JSON.parse(req.body.category);
@@ -62,7 +62,7 @@ const add = async (req, res, next) => {
 
     // Assurez-vous que l'ID du film est disponible
     if (insertId) {
-      const response = await tables.categorie_par_film.create({
+      const response = await tables.Categorie_par_film.create({
         filmId: insertId,
         categoriesIds,
       });
@@ -109,7 +109,7 @@ const getFilmByCategorie = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const [result] = await tables.film.delete(id);
+    const [result] = await tables.Film.delete(id);
     if (result.affectedRows) {
       res.sendStatus(200);
     } else {

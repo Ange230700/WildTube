@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import axios from "axios";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
 import { UserProvider } from "./contexts/UserContext";
+import { AdminModeProvider } from "./contexts/AdminModeContext";
 import App from "./App";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
@@ -18,9 +20,28 @@ import UserProfil from "./pages/UserProfil";
 import UserProfileEditor from "./pages/UserProfileEditor";
 import AjoutAdmin from "./pages/AjoutAdmin";
 import EditVideo from "./pages/EditVideo";
+import AddSection from "./pages/AddSection";
+import EditSection from "./pages/EditSection";
 import AddVideos from "./pages/AddVideos";
 import ProtectedRoute from "./components/ProtectedRoute";
+import isTokenExpired from "./utils/utils";
 import "./sass/index.scss";
+
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (
+      error.response.status === 401 &&
+      isTokenExpired(localStorage.getItem("token"))
+    ) {
+      // Handle token expiration
+      localStorage.removeItem("token");
+      localStorage.removeItem("isAdminMode");
+      window.location.href = "/connection"; // Redirect to login page
+    }
+    return Promise.reject(error);
+  }
+);
 
 const router = createBrowserRouter([
   {
@@ -112,6 +133,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/addSection",
+        element: (
+          <ProtectedRoute>
+            <AddSection />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/EditSection/:sectionId",
+        element: (
+          <ProtectedRoute>
+            <EditSection />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "/addvideos",
         element: (
           <ProtectedRoute>
@@ -127,10 +164,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <UserProvider>
-      <MovieProvider>
-        <RouterProvider router={router} />
-      </MovieProvider>
-    </UserProvider>
+    <AdminModeProvider>
+      <UserProvider>
+        <MovieProvider>
+          <RouterProvider router={router} />
+        </MovieProvider>
+      </UserProvider>
+    </AdminModeProvider>
   </React.StrictMode>
 );

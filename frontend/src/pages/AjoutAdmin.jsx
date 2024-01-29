@@ -28,7 +28,7 @@ function AjoutAdmin() {
     if (user !== null) {
       try {
         await axios.put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/user/${user.id}`,
           {
             ...user,
             IsAdmin: !user.IsAdmin,

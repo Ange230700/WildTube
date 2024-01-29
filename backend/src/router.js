@@ -28,6 +28,7 @@ router.get("/films", filmControllers.browse);
 router.get("/films/:id", filmControllers.read);
 router.get("/categories/film/:id", filmControllers.getFilmByCategorie);
 router.get("/categories", categorieControllers.browse);
+router.get("/category/count", categorieControllers.count);
 router.get("/avatars", avatarControllers.browse);
 router.get(
   "/watchlist/film/:userId",
@@ -55,11 +56,17 @@ router.get(
   "/comments/film/:filmId",
   commentaireFilmControllers.browseCommentsByFilmId
 );
+router.get(
+  "/film/:filmId/category/:categoryId",
+  categorieParFilmControllers.readOneFilmFromOneCategory
+);
+router.get("/category/:id", categorieControllers.read);
 
 // Route to edit a specific item by ID
-router.put("/users/:id", userControllers.edit);
+router.put("/user/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
 router.put("/films/:id", filmControllers.edit);
+router.put("/category/:id", categorieControllers.edit);
 
 // Route to add a new item
 router.post("/login", authControllers.login);
@@ -69,9 +76,14 @@ router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 router.post("/comments", commentaireFilmControllers.addComment);
 router.post("/films", uploadImages.array("images", 2), filmControllers.add);
 router.post(
+  "/film/:filmId/category/:categoryId",
+  categorieParFilmControllers.addFilmToCategory
+);
+router.post(
   "/categoriesParFilm",
   categorieParFilmControllers.AddCategoriesToFilm
 );
+router.post("/category", categorieControllers.add);
 
 // Route to delete a specific item by ID
 router.delete("/favorites/film/:userId/:filmId", favoriFilmControllers.destroy);
@@ -82,5 +94,10 @@ router.delete(
   "/categoriesParFilm/:unique_key",
   categorieParFilmControllers.destroy
 );
+router.delete(
+  "/film/:filmId/category/:categorieId",
+  categorieParFilmControllers.removeFilmFromCategory
+);
+router.delete("/category/:id", categorieControllers.removeCategory);
 
 module.exports = router;
