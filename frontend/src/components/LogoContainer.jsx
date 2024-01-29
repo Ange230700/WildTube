@@ -1,8 +1,10 @@
+import { useLocation } from "react-router-dom";
 import ToggleSwitch from "./ToggleSwitch";
 import { useUser } from "../contexts/UserContext";
 
 function LogoContainer() {
   const { user } = useUser();
+  const location = useLocation();
 
   return (
     <div className="logo-container">
@@ -13,8 +15,13 @@ function LogoContainer() {
       />
       {user && user.IsAdmin ? (
         <div className="switchContainer">
-          <h6>Mode admin :</h6>
-          <ToggleSwitch />
+          {!location.pathname.includes("/AjoutAdmin") &&
+            !location.pathname.includes("/account/") && (
+              <>
+                <h6>Mode admin :</h6>
+                <ToggleSwitch user={user} />
+              </>
+            )}
         </div>
       ) : null}
     </div>
