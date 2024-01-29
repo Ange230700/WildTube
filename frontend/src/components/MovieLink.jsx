@@ -6,9 +6,13 @@ import { useAdminMode } from "../contexts/AdminModeContext";
 
 function MovieLink({
   movie,
+  categorie,
   selectedMovies,
   setSelectedMovies,
   originalSelectedMovies,
+  fetchMoviesByCategorie,
+  isDeleting,
+  setIsDeleting,
 }) {
   const { user } = useUser();
   const { isAdminMode } = useAdminMode();
@@ -24,9 +28,13 @@ function MovieLink({
     >
       <MovieSlide
         movie={movie}
+        categorie={categorie}
         selectedMovies={selectedMovies}
         setSelectedMovies={setSelectedMovies}
         originalSelectedMovies={originalSelectedMovies}
+        fetchMoviesByCategorie={fetchMoviesByCategorie}
+        isDeleting={isDeleting}
+        setIsDeleting={setIsDeleting}
       />
     </NavLink>
   );
@@ -49,12 +57,23 @@ MovieLink.propTypes = {
   selectedMovies: PropTypes.instanceOf(Set),
   setSelectedMovies: PropTypes.func,
   originalSelectedMovies: PropTypes.instanceOf(Set),
+  categorie: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }),
+  fetchMoviesByCategorie: PropTypes.func,
+  isDeleting: PropTypes.bool,
+  setIsDeleting: PropTypes.func,
 };
 
 MovieLink.defaultProps = {
   selectedMovies: new Set(),
   setSelectedMovies: () => {},
   originalSelectedMovies: new Set(),
+  fetchMoviesByCategorie: () => {},
+  isDeleting: false,
+  setIsDeleting: () => {},
+  categorie: {},
 };
 
 export default MovieLink;
