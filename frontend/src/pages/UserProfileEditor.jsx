@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ModalInscription from "../components/ModalInscription";
-import LogoContainer from "../components/LogoContainer";
 import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
 import { useUser } from "../contexts/UserContext";
 
@@ -172,9 +171,9 @@ function UserProfileEditor() {
     user && (
       <div className="signUpPageMockupGuest">
         <div className="searchDisplaySection">
-          <LogoContainer />
           <form className="form" onSubmit={handleSubmit}>
             <div className="signUpWrapper">
+              <h3>Profil Editor</h3>
               <div className="inputs">
                 <div className="inputContainer">
                   <input

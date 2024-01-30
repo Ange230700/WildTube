@@ -7,25 +7,26 @@
   align-items: center;
   .namePage,
   h3 {
-    padding-bottom: 8rem;
+    padding-bottom: 5rem;
+    padding-top: 1rem;
+    font-size: calc(var(--font-size-constant) * 2.4);
   }
 
   .containerUser {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 600px;
+    padding: 1vw;
     gap: 5px;
     background: rgba(238, 226, 226, 0.1);
     border-bottom: 1px #ff509a solid;
-    height: 45vh;
-    overflow: auto;
     width: 80%;
     .borderUser {
       background-color: transparent;
       border: 1px solid #ff509a;
       border-radius: 3px;
       width: 18vw;
+      height: 4vh;
       cursor: pointer;
       color: hsla(0, 0%, 86%, 1);
     }

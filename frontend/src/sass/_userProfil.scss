@@ -88,6 +88,12 @@
         h3 {
           text-decoration: none;
           color: var(--neutral-color);
+          cursor: pointer;
+          font-size: clamp(
+            calc(var(--font-size-constant) * 1.6),
+            calc(3.125vw * 1.6),
+            calc(var(--font-size-constant) * 1.6 * 1.5)
+          );
         }
       }
     }
