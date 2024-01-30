@@ -105,7 +105,6 @@ function UserProfileEditor() {
           },
         }
       );
-      console.warn(result);
 
       if (result.status === 200) {
         fetchUser();
@@ -118,13 +117,8 @@ function UserProfileEditor() {
           }
         }, 2000);
       }
-
-      if (result.status === 400) {
-        toast.error("Mot de passe actuel incorrect");
-      }
     } catch (error) {
-      // Handle error...
-      toast.error("Erreur lors de la modification du profil");
+      toast.error("Current password is incorrect");
       console.error(error);
     }
   };
@@ -198,7 +192,8 @@ function UserProfileEditor() {
                     type="email"
                     name="email"
                     className={`input ${
-                      user.email && !emailRegex.test(user.email)
+                      (formData?.email || user.email) &&
+                      !emailRegex.test(user.email)
                         ? "errorEmail"
                         : ""
                     }`}
@@ -317,17 +312,6 @@ function UserProfileEditor() {
                   )}
                 </div>
                 <div className="avatar-choice">
-                  <button
-                    className="avatarButton"
-                    type="button"
-                    onClick={() => handleAvatarChange(null)}
-                  >
-                    <img
-                      className="avatar"
-                      src="https://avatars.githubusercontent.com/u/97165289"
-                      alt="Avatar"
-                    />
-                  </button>
                   {avatars.map((avatar) => (
                     <button
                       key={avatar?.id}
