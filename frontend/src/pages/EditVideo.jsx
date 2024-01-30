@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import croixRouge from "../assets/icons/croix-rouge.png";
+import croixRouge from "../../public/assets/icons/croix-rouge.png";
 
 function EditVideo() {
   const { movieId } = useParams();
@@ -128,10 +128,10 @@ function EditVideo() {
         video
       );
       if (response.status === 204) {
-        toast.success("Video modifié");
+        toast.success("Edited video");
         navigate("/");
       } else {
-        toast.error("Aie un soucis est apparue");
+        toast.error("A problem appeared");
       }
     } catch (e) {
       console.error("Error for editing");
@@ -157,10 +157,17 @@ function EditVideo() {
       return URL.createObjectURL(selectedFile);
     }
     if (video.miniature_filename) {
-      return video.miniature_filename;
+      return (
+        video.miniature_filename &&
+        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+          video.miniature_filename
+        }`
+      );
     }
     return video.miniature_url;
   };
+
+  console.warn(imageSrc());
 
   return (
     <div className="ContainerEditVideo">
@@ -226,7 +233,7 @@ function EditVideo() {
               type="button"
               onClick={() => handleDeleteCategorie(categorie.unique_key)}
             >
-              <img className="imgCroix" src={croixRouge} alt="croix-rouge" />
+              <img className="imgCroix" src={croixRouge} alt="Red Cross" />
             </button>
           </div>
         ))}
@@ -236,7 +243,7 @@ function EditVideo() {
           name="category"
           value={video.categorie}
         >
-          <option value="">Choisir une catégorie</option>
+          <option value="">Choose a category</option>
           {categories
             .filter(
               (category) =>
@@ -253,10 +260,10 @@ function EditVideo() {
       </form>
       <div className="containerButtonEdit">
         <button className="editButton" type="button" onClick={handleEditClick}>
-          Éditer
+          Edit
         </button>
         <button className="delete" type="button" onClick={handleDelete}>
-          Supprimer
+          Delete
         </button>
       </div>
     </div>

@@ -166,7 +166,7 @@ function Inscription() {
                   className="input"
                   value={user.name}
                   onChange={handleInputChange}
-                  placeholder="Nom"
+                  placeholder="Name"
                 />
               </div>
               <div className="inputContainer">
@@ -180,7 +180,7 @@ function Inscription() {
                   }`}
                   value={user.email}
                   onChange={handleEmailChange}
-                  placeholder="Adresse Mail"
+                  placeholder="Mail address"
                 />
                 {emailError && <p className="errorMessage">{emailError}</p>}
               </div>
@@ -196,10 +196,10 @@ function Inscription() {
                   minLength="8"
                   value={user.password}
                   onChange={handleInputChange}
-                  placeholder="Mot de passe"
+                  placeholder="Password"
                 />
                 {user.password && user.password.length < 8 && (
-                  <p className="errorMessage">Min 8 caractères</p>
+                  <p className="errorMessage">Min 8 characters</p>
                 )}
               </div>
               <div className="inputContainer">
@@ -212,7 +212,7 @@ function Inscription() {
                   }`}
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
-                  placeholder="Confirmation du mot de passe"
+                  placeholder="Password Confirmation"
                 />
               </div>
             </div>
@@ -221,7 +221,7 @@ function Inscription() {
               <div className="orientationContainer">
                 <div className="orientationOption">
                   <label className="orientationText">
-                    Madame
+                    Madam
                     <input
                       name="civility"
                       type="radio"
@@ -234,7 +234,7 @@ function Inscription() {
                 </div>
                 <div className="orientationOption">
                   <label className="orientationText">
-                    Monsieur
+                    Sir
                     <input
                       name="civility"
                       type="radio"
@@ -246,7 +246,7 @@ function Inscription() {
                   </label>
                 </div>
               </div>
-              <h4 className="birthday">Date de naissance :</h4>
+              <h4 className="birthday">Date of birth :</h4>
               <div className="orientationContainer">
                 <input
                   className="inputDate"
@@ -257,14 +257,18 @@ function Inscription() {
                   onChange={handleInputChange}
                 />
               </div>
-              <h4>Choisissez un avatar :</h4>
+              <h4>Choose an avatar :</h4>
               <div className="preview">
                 {selectedAvatar && (
                   <img
                     className="avatarPreview"
                     src={
-                      selectedAvatar.avatar_filename ||
-                      selectedAvatar.avatar_url ||
+                      (selectedAvatar.avatar_filename &&
+                        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                          selectedAvatar?.avatar_filename
+                        }`) ||
+                      (selectedAvatar.avatar_url &&
+                        selectedAvatar?.avatar_url) ||
                       "https://avatars.githubusercontent.com/u/97165289"
                     }
                     alt="Avatar"
@@ -292,7 +296,13 @@ function Inscription() {
                   >
                     <img
                       className="avatar"
-                      src={avatar.avatar_filename || avatar.avatar_url}
+                      src={
+                        (avatar.avatar_filename &&
+                          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            avatar?.avatar_filename
+                          }`) ||
+                        (avatar.avatar_url && avatar?.avatar_url)
+                      }
                       alt="Avatar"
                     />
                   </button>
@@ -313,7 +323,7 @@ function Inscription() {
                   user?.password !== confirmPassword
                 }
               >
-                <p className="inscription">Inscription</p>
+                <p className="inscription">Registration</p>
               </button>
             </div>
             {showModal && (
