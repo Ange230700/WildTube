@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import ModalInscription from "../components/ModalInscription";
 import LogoContainer from "../components/LogoContainer";
@@ -21,8 +22,6 @@ function UserProfileEditor() {
     email: user?.email || "",
     naissance: user?.naissance || "",
     civility: user?.civility || "",
-    currentPassword: currentPassword || "",
-    newPassword: newPassword || "",
     avatarId: user?.avatarId || "",
   });
 
@@ -64,15 +63,15 @@ function UserProfileEditor() {
       value = formatDate(value);
     }
 
-    if (name === "current password") {
+    if (name === "current_password") {
       setCurrentPassword(e.target.value);
     }
 
-    if (name === "new password") {
+    if (name === "new_password") {
       setNewPassword(e.target.value);
     }
 
-    if (name === "confirm new password") {
+    if (name === "confirm_new_password") {
       setConfirmNewPassword(e.target.value);
     }
 
@@ -87,7 +86,11 @@ function UserProfileEditor() {
 
     // Append modified fields to FormData
     Object.keys(formData).forEach((key) => {
-      if (formData[key] && formData[key] !== user[key]) {
+      if (
+        formData[key] &&
+        formData[key] !== user[key] &&
+        key !== "confirm_new_password"
+      ) {
         updateData.append(key, formData[key]);
       }
     });
@@ -102,6 +105,7 @@ function UserProfileEditor() {
           },
         }
       );
+      console.warn(result);
 
       if (result.status === 200) {
         fetchUser();
@@ -114,8 +118,13 @@ function UserProfileEditor() {
           }
         }, 2000);
       }
+
+      if (result.status === 400) {
+        toast.error("Mot de passe actuel incorrect");
+      }
     } catch (error) {
       // Handle error...
+      toast.error("Erreur lors de la modification du profil");
       console.error(error);
     }
   };
@@ -150,12 +159,14 @@ function UserProfileEditor() {
         email: user?.email,
         naissance: formatDate(user?.naissance),
         civility: user?.civility,
-        password: user?.password,
         avatarId: user?.avatarId,
       });
 
       setSelectedAvatar(
-        user?.avatar_filename ||
+        (user?.avatar_filename &&
+          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+            user?.avatar_filename
+          }`) ||
           user?.avatar_url ||
           "https://avatars.githubusercontent.com/u/97165289"
       );
@@ -199,7 +210,7 @@ function UserProfileEditor() {
                 <div className="inputContainer">
                   <input
                     type="password"
-                    name="current password"
+                    name="current_password"
                     className="input"
                     value={currentPassword}
                     onChange={handleInputChange}
@@ -209,7 +220,7 @@ function UserProfileEditor() {
                 <div className="inputContainer">
                   <input
                     type="password"
-                    name="new password"
+                    name="new_password"
                     className={`input ${
                       newPassword && newPassword.length < 8
                         ? "errorPassword"
@@ -227,7 +238,7 @@ function UserProfileEditor() {
                 <div className="inputContainer">
                   <input
                     type="password"
-                    name="confirm new password"
+                    name="confirm_new_password"
                     className={`input ${
                       confirmNewPassword && confirmNewPassword !== newPassword
                         ? "errorPassword"
