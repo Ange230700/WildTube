@@ -133,13 +133,41 @@
             color: var(--background-color);
             flex: 1;
           }
+          .CommentActionButtons {
+            width: 6vw;
+            padding: 2px;
+            justify-content: space-between;
+            height: 5vh;
+            display: flex;
+            // justify-content: center;
+          }
 
           .EditButton {
             cursor: pointer;
+            background: none;
+            border: none;
+            padding-right: 5px;
+          }
+          .colorEditButton {
+            border: 2px solid green;
+            border-radius: 3px;
+            animation: blink 1s infinite;
+          }
+          @keyframes blink {
+            0%,
+            100% {
+              border-color: transparent;
+            }
+            50% {
+              border-color: green;
+              scale: 1.2;
+            }
           }
 
           .DeleteButton {
             cursor: pointer;
+            background: none;
+            border: none;
           }
         }
 

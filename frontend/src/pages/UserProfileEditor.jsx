@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import ModalInscription from "../components/ModalInscription";
-import LogoContainer from "../components/LogoContainer";
 import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
 import { useUser } from "../contexts/UserContext";
 
@@ -173,9 +172,9 @@ function UserProfileEditor() {
     user && (
       <div className="signUpPageMockupGuest">
         <div className="searchDisplaySection">
-          <LogoContainer />
           <form className="form" onSubmit={handleSubmit}>
             <div className="signUpWrapper">
+              <h3>Profil Editor</h3>
               <div className="inputs">
                 <div className="inputContainer">
                   <input
@@ -224,7 +223,7 @@ function UserProfileEditor() {
                     minLength="8"
                     value={newPassword}
                     onChange={handleInputChange}
-                    placeholder="Nouveau mot de passe"
+                    placeholder="New Password"
                   />
                   {newPassword && newPassword.length < 8 && (
                     <p className="errorMessage">Min 8 caractères</p>
@@ -251,7 +250,7 @@ function UserProfileEditor() {
                 <div className="orientationContainer">
                   <div className="orientationOption">
                     <label className="orientationText">
-                      Madame
+                      Madam
                       <input
                         name="civility"
                         type="radio"
@@ -266,7 +265,7 @@ function UserProfileEditor() {
                   </div>
                   <div className="orientationOption">
                     <label className="orientationText">
-                      Monsieur
+                      Sir
                       <input
                         name="civility"
                         type="radio"
@@ -278,7 +277,7 @@ function UserProfileEditor() {
                     </label>
                   </div>
                 </div>
-                <h4 className="birthday">Date de naissance :</h4>
+                <h4 className="birthday">Date of birth :</h4>
                 <div className="orientationContainer">
                   <input
                     className="inputDate"
@@ -288,7 +287,7 @@ function UserProfileEditor() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <h4>Choisissez un nouvel avatar :</h4>
+                <h4>Choose a new avatar :</h4>
                 <div className="preview">
                   {selectedAvatar && (
                     <img
@@ -337,7 +336,7 @@ function UserProfileEditor() {
               </div>
               <div className="buttonContainer">
                 <button className="signUpButton" type="submit">
-                  <p className="inscription">Modifier</p>
+                  <p className="inscription">To modify</p>
                 </button>
               </div>
               {showModal && (

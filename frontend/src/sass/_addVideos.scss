@@ -361,8 +361,9 @@
         display: flex;
 
         .tab {
+          width: 100%;
           display: flex;
-          flex-direction: column;
+          flex-wrap: wrap;
           gap: clamp(
             calc(var(--spacing-constant) * 1),
             calc(2.5vw * 1),
@@ -661,6 +662,7 @@
           calc(var(--spacing-constant) * 2 * 1.5)
         );
         font-weight: 600;
+        cursor: pointer;
       }
     }
   }

@@ -39,7 +39,7 @@ function Connection() {
         navigate("/");
       }
     } catch (err) {
-      toast.error("Email ou mot de passe incorrect");
+      toast.error("Incorrect email or password");
       console.error("Incorrect email or password");
     }
   };
@@ -61,7 +61,7 @@ function Connection() {
               className="input"
               name="email"
               value={user.email}
-              placeholder="Adresse Mail :"
+              placeholder="Mail address :"
               onChange={handleInputChange}
             />
           </div>
@@ -71,30 +71,28 @@ function Connection() {
               name="password"
               value={user.password}
               className="input"
-              placeholder="Mot de passe :"
+              placeholder="Password :"
               onChange={handleInputChange}
             />
           </div>
           <div className="buttonContainer">
             <div className="connectionButton">
               <button type="submit" className="connexion">
-                connexion
+                connection
               </button>
             </div>
           </div>
         </div>
         <div className="signUpText">
           <p className="tuNAsPasDeCompte">
-            Tu n’as pas de compte ?<span> </span>
+            You don't have an account ?<span> </span>
             <span>
               <NavLink to="/Inscription" className="inscrisToiIci">
-                Inscris toi ici
+                Register here
               </NavLink>
             </span>
             <span> </span>
-            <span className="catalogue">
-              pour débloquer l’entièreté du catalogue.
-            </span>
+            <span className="catalogue">to unlock the entire catalog.</span>
           </p>
         </div>
       </form>

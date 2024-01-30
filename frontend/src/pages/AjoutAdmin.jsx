@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useUser } from "../contexts/UserContext";
-import LogoContainer from "../components/LogoContainer";
 
 function AjoutAdmin() {
   const { user: currentUser } = useUser();
@@ -22,7 +21,7 @@ function AjoutAdmin() {
 
   const handleClick = async (user) => {
     if (currentUser.id === user.id) {
-      toast.error("Vous ne pouvez pas supprimer votre propre compte");
+      toast.error("You cannot delete your own account");
       return;
     }
     if (user !== null) {
@@ -35,9 +34,9 @@ function AjoutAdmin() {
           }
         );
         if (user.IsAdmin) {
-          toast.success("Admin supprimé");
+          toast.success("Admin deleted");
         } else {
-          toast.success("Admin ajouté");
+          toast.success("Admin added");
         }
 
         fetch();
@@ -53,9 +52,8 @@ function AjoutAdmin() {
 
   return (
     <div className="ContainerAjoutAdmin">
-      <LogoContainer />
       <div className="NamePage">
-        <h3>Ajouter des Administrateurs</h3>
+        <h3>Add Administrators</h3>
       </div>
       <div className="containerUser">
         {users.map((userItem) => (

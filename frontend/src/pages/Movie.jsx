@@ -7,7 +7,7 @@ function Movie() {
   const { movies } = useMovies();
 
   if (!movieId) {
-    return <h1>Aucun film trouvé.</h1>;
+    return <h1>No films found.</h1>;
   }
   return (
     <>

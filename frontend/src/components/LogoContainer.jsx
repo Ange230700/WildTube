@@ -16,6 +16,7 @@ function LogoContainer() {
       {user && user.IsAdmin ? (
         <div className="switchContainer">
           {!location.pathname.includes("/AjoutAdmin") &&
+            !location.pathname.includes("/connection") &&
             !location.pathname.includes("/account/") && (
               <>
                 <h6>Mode admin :</h6>
