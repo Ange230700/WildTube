@@ -2,11 +2,13 @@ import { createContext, useContext, useState, useMemo } from "react";
 import { PropTypes } from "prop-types";
 import axios from "axios";
 import isTokenExpired from "../utils/utils";
+import { useAdminMode } from "./AdminModeContext";
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
+  const { setIsAdminMode } = useAdminMode();
 
   const updateUser = (newUser) => {
     setUser(newUser);
@@ -16,6 +18,7 @@ export function UserProvider({ children }) {
     setUser(null);
     localStorage.removeItem("token");
     if (localStorage.getItem("isAdminMode")) {
+      setIsAdminMode(false);
       localStorage.removeItem("isAdminMode");
     }
     // Navigate to login page

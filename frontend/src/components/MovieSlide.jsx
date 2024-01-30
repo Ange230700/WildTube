@@ -68,7 +68,7 @@ function MovieSlide({
     if (typeof fetchMoviesByCategorie === "function") {
       fetchMoviesByCategorie();
     }
-  }, [movie.id, fetchMoviesByCategorie]);
+  }, [movie.id]);
 
   if (
     (location.pathname.includes("/EditSection/") ||

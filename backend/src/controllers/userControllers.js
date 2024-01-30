@@ -83,7 +83,15 @@ const getByToken = async (req, res) => {
 // Modify the edit function
 const edit = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, naissance, civility, password, avatarId } = req.body;
+  const {
+    name,
+    email,
+    naissance,
+    civility,
+    currentPassword,
+    newPassword,
+    avatarId,
+  } = req.body;
 
   try {
     // Optional: Verify old password before updating to new one
@@ -98,9 +106,21 @@ const edit = async (req, res, next) => {
       res.status(404).json({ error: "User not found" });
     }
 
-    if (password) {
-      const hashedNewPassword = await argon2.hash(password);
-      req.body.hashed_password = hashedNewPassword;
+    if (currentPassword && newPassword) {
+      const isPasswordCorrect = await argon2.verify(
+        currentUser.hashed_password,
+        currentPassword
+      );
+      if (!isPasswordCorrect) {
+        return res.status(400).json({ error: "Incorrect current password" });
+      }
+
+      // Validate new password (e.g., check length)
+      if (newPassword.length < 8) {
+        return res.status(400).json({ error: "New password is too short" });
+      }
+
+      req.body.hashed_password = await argon2.hash(newPassword);
     }
 
     // Update user data (excluding the password if no new password is provided)
@@ -111,13 +131,11 @@ const edit = async (req, res, next) => {
       civility,
       hashed_password: req.body.hashed_password,
       avatarId,
-      IsAdmin:
-        req.body.IsAdmin !== undefined ? req.body.IsAdmin : currentUser.IsAdmin,
+      IsAdmin: req.body.IsAdmin || currentUser.IsAdmin,
     });
 
     if (!updatedUser) {
-      res.status(404).json({ error: "User not found" });
-      return;
+      return res.status(404).json({ error: "User not found" });
     }
 
     // eslint-disable-next-line camelcase
@@ -128,6 +146,8 @@ const edit = async (req, res, next) => {
     console.error(err);
     next(err);
   }
+
+  return null;
 };
 
 // The A of BREAD - Add (Create) operation
@@ -179,12 +199,14 @@ const add = async (req, res, next) => {
         { sub: newUser.id, email: newUser.email },
         process.env.APP_SECRET,
         {
-          expiresIn: "30m",
+          expiresIn: "1h",
         }
       );
+      const { hashed_password: newUserPassword, ...newUserWithoutPassword } =
+        newUser;
       res.status(201).json({
         token: userToken,
-        newUser,
+        newUserWithoutPassword,
       });
     } else {
       res.status(400).json({ error: "Unable to create user" });

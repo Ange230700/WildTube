@@ -9,40 +9,28 @@ import { useUser } from "../contexts/UserContext";
 function UserProfileEditor() {
   const { userId } = useParams();
   const { user, fetchUser } = useUser();
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [avatars, setAvatars] = useState([]);
+  const navigate = useNavigate();
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
     naissance: user?.naissance || "",
     civility: user?.civility || "",
-    password: user?.password || "",
+    currentPassword: currentPassword || "",
+    newPassword: newPassword || "",
     avatarId: user?.avatarId || "",
   });
-  // const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  const [avatars, setAvatars] = useState([]);
-
-  const navigate = useNavigate();
-
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-  // Update these handlers to capture the new and old password inputs
-  // const handleNewPasswordChange = (e) => {
-  //   setNewPassword(e.target.value);
-  // };
-
-  // const handleCurrentPassword = (e) => {
-  //   setCurrentPassword(e.target.value);
-  // };
-
-  // const handleConfirmPasswordChange = (e) => {
-  //   setConfirmPassword(e.target.value);
-  // };
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleAvatarChange = (avatar) => {
     try {
@@ -76,8 +64,16 @@ function UserProfileEditor() {
       value = formatDate(value);
     }
 
-    if (name === "password") {
+    if (name === "current password") {
+      setCurrentPassword(e.target.value);
+    }
+
+    if (name === "new password") {
       setNewPassword(e.target.value);
+    }
+
+    if (name === "confirm new password") {
+      setConfirmNewPassword(e.target.value);
     }
 
     setFormData({ ...formData, [name]: value });
@@ -190,40 +186,58 @@ function UserProfileEditor() {
                   <input
                     type="email"
                     name="email"
-                    className="input"
+                    className={`input ${
+                      user.email && !emailRegex.test(user.email)
+                        ? "errorEmail"
+                        : ""
+                    }`}
                     value={formData?.email}
                     onChange={handleInputChange}
                     placeholder="Email"
                   />
                 </div>
-                {/* <div className="inputContainer">
-              <input
-                type="password"
-                className="input"
-                value={currentPassword}
-                onChange={handleInputChange}
-                placeholder="Ancien mot de passe"
-              />
-            </div> */}
                 <div className="inputContainer">
                   <input
                     type="password"
-                    name="password"
+                    name="current password"
                     className="input"
+                    value={currentPassword}
+                    onChange={handleInputChange}
+                    placeholder="Mot de passe actuel"
+                  />
+                </div>
+                <div className="inputContainer">
+                  <input
+                    type="password"
+                    name="new password"
+                    className={`input ${
+                      newPassword && newPassword.length < 8
+                        ? "errorPassword"
+                        : ""
+                    }`}
+                    minLength="8"
                     value={newPassword}
                     onChange={handleInputChange}
                     placeholder="Nouveau mot de passe"
                   />
+                  {newPassword && newPassword.length < 8 && (
+                    <p className="errorMessage">Min 8 caractères</p>
+                  )}
                 </div>
-                {/* <div className="inputContainer">
-              <input
-                type="password"
-                className="input"
-                value={confirmPassword}
-                onChange={handleInputChange}
-                placeholder="Confirmation du nouveau mot de passe"
-              />
-            </div> */}
+                <div className="inputContainer">
+                  <input
+                    type="password"
+                    name="confirm new password"
+                    className={`input ${
+                      confirmNewPassword && confirmNewPassword !== newPassword
+                        ? "errorPassword"
+                        : ""
+                    }`}
+                    value={confirmNewPassword}
+                    onChange={handleInputChange}
+                    placeholder="Confirmation du nouveau mot de passe"
+                  />
+                </div>
               </div>
 
               <div className="additionalInformation">

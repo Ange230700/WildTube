@@ -30,8 +30,12 @@ function Connection() {
       );
 
       if (result.status === 200) {
-        updateUser(result.data.user);
+        updateUser(result.data.userWithoutPassword);
         localStorage.setItem("token", result.data.token);
+
+        if (result.data.userWithoutPassword.IsAdmin) {
+          localStorage.setItem("isAdminMode", false);
+        }
         navigate("/");
       }
     } catch (err) {

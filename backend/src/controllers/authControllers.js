@@ -16,15 +16,17 @@ const login = async (req, res, next) => {
         user.hashed_password,
         req.body.password
       );
+      console.warn("verified =>", verified);
 
       if (verified) {
         // delete user.hashed_password;
         const token = await jwt.sign({ sub: user.id }, process.env.APP_SECRET, {
-          expiresIn: "30m",
+          expiresIn: "1h",
         });
+        const { hashed_password, ...userWithoutPassword } = user;
         res.status(200).json({
           token,
-          user,
+          userWithoutPassword,
           message: "Logged in successfully",
         });
       } else {
