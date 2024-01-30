@@ -89,14 +89,14 @@ function AddVideos() {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(() => {
-        toast.success("Film ajouté avec succès");
+        toast.success("Movie added successfully");
         setTimeout(() => {
           fetchMovies();
         }, 1);
         navigate("/");
       })
       .catch(() => {
-        toast.error("Erreur lors de l'ajout du film");
+        toast.error("Error adding movie");
         setTimeout(() => {
           fetchMovies();
         }, 1);
@@ -132,7 +132,7 @@ function AddVideos() {
   return (
     <form className="ProfileDisplaySection2" onSubmit={submit}>
       <div className="SearchBarContainer">
-        <h2 className="AjouterUneVideo">Ajouter une video</h2>
+        <h2 className="AjouterUneVideo">Add a video</h2>
       </div>
       <div className="Emptyfieldscontainer">
         <div className="Imageuploadercontainer">
@@ -147,7 +147,7 @@ function AddVideos() {
           </div>
           <div className="Outlineimageuploader">
             <div className="Frame4">
-              <h4 className="AjouterUneMiniature">Ajouter une miniature</h4>
+              <h4 className="AjouterUneMiniature">Add a thumbnail</h4>
               <div className="imageContainer">
                 {previewFile && <img src={previewFile} alt="miniature" />}
               </div>
@@ -161,7 +161,7 @@ function AddVideos() {
           </div>
           <div className="Outlineimageuploader">
             <div className="Frame4">
-              <h4 className="AjouterUneMiniature">Ajouter une cover</h4>
+              <h4 className="AjouterUneMiniature">Add a cover</h4>
               <div className="imageContainer2">
                 {previewCover && <img src={previewCover} alt="cover" />}
               </div>
@@ -180,7 +180,8 @@ function AddVideos() {
             name="name"
             className="input"
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Titre du film"
+            placeholder="
+Movie title"
           />
         </div>
         <div className="inputContainer">
@@ -189,7 +190,7 @@ function AddVideos() {
             name="name"
             className="input"
             onChange={(e) => setDuration(e.target.value)}
-            placeholder="Durée du film"
+            placeholder="Duration of the movie"
           />
         </div>
         <div className="inputContainer">
@@ -198,7 +199,7 @@ function AddVideos() {
             name="name"
             className="input"
             onChange={(e) => setYear(e.target.value)}
-            placeholder="Année de sortie"
+            placeholder="Release year"
           />
         </div>
         <h4>Catégorie du film</h4>
@@ -231,7 +232,7 @@ function AddVideos() {
             </div>
           </div>
         </div>
-        <div className="DescriptifDuFilm">Descriptif du film</div>
+        <div className="DescriptifDuFilm">Description of the film</div>
         <div className="Titleinputcontainer4">
           <div className="Input">
             <textarea
@@ -243,7 +244,7 @@ function AddVideos() {
         </div>
       </div>
       <div className="Grantingscontainer">
-        <div className="Autorisation">Autorisation</div>
+        <div className="Autorisation">Authorisation</div>
         <div className="Input">
           <input
             name="visiteur"
@@ -254,7 +255,7 @@ function AddVideos() {
             checked={isAvailable === "0" || ""}
             onChange={(e) => setIsAvailable(e.target.value)}
           />
-          <div className="Visiteur">Visiteur</div>
+          <div className="Visiteur">Visitor</div>
         </div>
         <div className="Input">
           <input
@@ -266,7 +267,7 @@ function AddVideos() {
             checked={isAvailable === "1" || ""}
             onChange={(e) => setIsAvailable(e.target.value)}
           />
-          <div className="Visiteur">Subscriber</div>
+          <div className="Visiteur">User</div>
         </div>
       </div>
       <div className="Titleinputcontainer">

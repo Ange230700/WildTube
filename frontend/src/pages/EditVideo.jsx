@@ -128,10 +128,10 @@ function EditVideo() {
         video
       );
       if (response.status === 204) {
-        toast.success("Video modifié");
+        toast.success("Edited video");
         navigate("/");
       } else {
-        toast.error("Aie un soucis est apparue");
+        toast.error("A problem appeared");
       }
     } catch (e) {
       console.error("Error for editing");
@@ -233,7 +233,7 @@ function EditVideo() {
               type="button"
               onClick={() => handleDeleteCategorie(categorie.unique_key)}
             >
-              <img className="imgCroix" src={croixRouge} alt="croix-rouge" />
+              <img className="imgCroix" src={croixRouge} alt="Red Cross" />
             </button>
           </div>
         ))}
@@ -243,7 +243,7 @@ function EditVideo() {
           name="category"
           value={video.categorie}
         >
-          <option value="">Choisir une catégorie</option>
+          <option value="">Choose a category</option>
           {categories
             .filter(
               (category) =>
@@ -260,10 +260,10 @@ function EditVideo() {
       </form>
       <div className="containerButtonEdit">
         <button className="editButton" type="button" onClick={handleEditClick}>
-          Éditer
+          Edit
         </button>
         <button className="delete" type="button" onClick={handleDelete}>
-          Supprimer
+          Delete
         </button>
       </div>
     </div>

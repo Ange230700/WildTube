@@ -18,7 +18,7 @@ function Search() {
           <input
             className="search-bar"
             type="search"
-            placeholder="Rechercher un film"
+            placeholder="Search for a movie"
             value={searchValue}
             onChange={handleSearchChange}
           />

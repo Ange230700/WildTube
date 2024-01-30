@@ -211,7 +211,7 @@ function UserProfileEditor() {
                     className="input"
                     value={newPassword}
                     onChange={handleInputChange}
-                    placeholder="Nouveau mot de passe"
+                    placeholder="New Password"
                   />
                 </div>
                 {/* <div className="inputContainer">
@@ -230,7 +230,7 @@ function UserProfileEditor() {
                 <div className="orientationContainer">
                   <div className="orientationOption">
                     <label className="orientationText">
-                      Madame
+                      Madam
                       <input
                         name="civility"
                         type="radio"
@@ -245,7 +245,7 @@ function UserProfileEditor() {
                   </div>
                   <div className="orientationOption">
                     <label className="orientationText">
-                      Monsieur
+                      Sir
                       <input
                         name="civility"
                         type="radio"
@@ -257,7 +257,7 @@ function UserProfileEditor() {
                     </label>
                   </div>
                 </div>
-                <h4 className="birthday">Date de naissance :</h4>
+                <h4 className="birthday">Date of birth :</h4>
                 <div className="orientationContainer">
                   <input
                     className="inputDate"
@@ -267,7 +267,7 @@ function UserProfileEditor() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <h4>Choisissez un nouvel avatar :</h4>
+                <h4>Choose a new avatar :</h4>
                 <div className="preview">
                   {selectedAvatar && (
                     <img
@@ -327,7 +327,7 @@ function UserProfileEditor() {
               </div>
               <div className="buttonContainer">
                 <button className="signUpButton" type="submit">
-                  <p className="inscription">Modifier</p>
+                  <p className="inscription">To modify</p>
                 </button>
               </div>
               {showModal && (

@@ -52,7 +52,7 @@ function MovieLoginRequired({ movie }) {
         <div className="upper-layer">
           <div className="registration-invitation-container">
             <p className="registration-invitation">
-              Connectez-vous pour regarder ce film.
+              Log in to watch this movie.
             </p>
           </div>
         </div>
