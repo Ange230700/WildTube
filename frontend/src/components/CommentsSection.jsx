@@ -6,7 +6,8 @@ import { useUser } from "../contexts/UserContext";
 function CommentsSection({ filmId }) {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
-  const [editableComment, setEditableComment] = useState(null); // New state to track the comment being edited
+  const [editableComment, setEditableComment] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const commentsWrapperRef = useRef(null); // Ref for the comments wrapper
 
   const { user } = useUser();
@@ -94,6 +95,7 @@ function CommentsSection({ filmId }) {
     // Set the comment content in the textarea and update editableComment state
     setCommentContent(commentToEdit.content);
     setEditableComment(commentToEdit);
+    setIsEditing(true);
 
     // Implement the editing logic here using editableComment
     if (editableComment) {
@@ -119,6 +121,7 @@ function CommentsSection({ filmId }) {
         // Reset editableComment state and clear commentContent
         setEditableComment(null);
         setCommentContent("");
+        setIsEditing(false);
       }
     }
   };
@@ -156,35 +159,43 @@ function CommentsSection({ filmId }) {
                   <div className="FrameContainer">
                     <div className="Frame1">
                       <p className="CommentText">{comment.content}</p>
-                      {(user && user.id === comment.userId) ||
-                        (user.IsAdmin && (
-                          <div className="CommentActionButtons">
-                            <button
-                              type="button"
-                              className="EditButton"
-                              onClick={() => handleEditComment(comment.id)}
-                            >
-                              <img
-                                src={`${
-                                  import.meta.env.VITE_BACKEND_URL
-                                }/assets/icons/modifier.png`}
-                                alt="Modifier"
-                              />
-                            </button>
-                            <button
-                              type="button"
-                              className="DeleteButton"
-                              onClick={() => handleDeleteComment(comment.id)}
-                            >
-                              <img
-                                src={`${
-                                  import.meta.env.VITE_BACKEND_URL
-                                }/assets/icons/supprimer.png`}
-                                alt="Supprimer"
-                              />
-                            </button>
-                          </div>
-                        ))}
+                      {((user && user.id === comment.userId) ||
+                        user.IsAdmin) && (
+                        <div className="CommentActionButtons">
+                          <button
+                            type="button"
+                            className={`EditButton ${
+                              editableComment &&
+                              editableComment.id === comment.id
+                                ? "colorEditButton"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              handleEditComment(comment.id);
+                            }}
+                            disabled={
+                              editableComment &&
+                              editableComment.id !== comment.id
+                            }
+                          >
+                            <img
+                              src="/src/assets/icons/modifier.png"
+                              alt="Modifier"
+                            />
+                          </button>
+                          <button
+                            type="button"
+                            className="DeleteButton"
+                            onClick={() => handleDeleteComment(comment.id)}
+                            disabled={isEditing}
+                          >
+                            <img
+                              src="/src/assets/icons/supprimer.png"
+                              alt="Supprimer"
+                            />
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="CommentDateContainer">
                       <h6 className="CommentDate">{formattedDate}</h6>
