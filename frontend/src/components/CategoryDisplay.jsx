@@ -107,7 +107,7 @@ function CategoryDisplay({ categorie, getCategories }) {
           >
             {categorie.name}
           </h1>
-          {(user.IsAdmin && isAdminMode && (
+          {(user && user.IsAdmin && isAdminMode && (
             <>
               <button
                 className="add-movie-container"

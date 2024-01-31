@@ -16,7 +16,7 @@ function UserProfil() {
       style={
         location.pathname.includes("/profil")
           ? {
-              marginBottom: "9.375vw",
+              marginBottom: "19.6875vw",
             }
           : {}
       }

@@ -1,11 +1,11 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import croixRouge from "../../../backend/public/assets/icons/croix-rouge.png";
 
 function EditVideo() {
   const { movieId } = useParams();
+  const location = useLocation();
   const [categories, setCategories] = useState([]);
   const [categorieVideo, setCategorieVideo] = useState([]);
   const navigate = useNavigate();
@@ -170,8 +170,16 @@ function EditVideo() {
   console.warn(imageSrc());
 
   return (
-    <div className="ContainerEditVideo">
-      <div className="containerImage" />
+    <div
+      className="ContainerEditVideo"
+      style={
+        location.pathname.includes("/EditVideo/")
+          ? {
+              marginBottom: "19.6875vw",
+            }
+          : {}
+      }
+    >
       <div className="titlePage">
         <h3 className="Edit">Edit video</h3>
       </div>
@@ -217,26 +225,34 @@ function EditVideo() {
           value={video.year}
           onChange={handleInputChange}
         />
-        <input
+        <textarea
           className="edit"
           type="text"
           name="description"
           value={video.description}
           onChange={handleInputChange}
         />
-        {categorieVideo.map((categorie) => (
-          <div className="containerCategorie" key={categorie.unique_key}>
-            {categorie.name}
+        <div className="categories">
+          {categorieVideo.map((categorie) => (
+            <div className="containerCategorie" key={categorie.unique_key}>
+              {categorie.name}
 
-            <button
-              className="buttonDelete"
-              type="button"
-              onClick={() => handleDeleteCategorie(categorie.unique_key)}
-            >
-              <img className="imgCroix" src={croixRouge} alt="Red Cross" />
-            </button>
-          </div>
-        ))}
+              <button
+                className="buttonDelete"
+                type="button"
+                onClick={() => handleDeleteCategorie(categorie.unique_key)}
+              >
+                <img
+                  className="imgCroix"
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/xmark-solid.svg`}
+                  alt="Red Cross"
+                />
+              </button>
+            </div>
+          ))}
+        </div>
         <select
           onChange={(e) => handleAddCategorie(e.target.value)}
           className="edit"
@@ -257,15 +273,19 @@ function EditVideo() {
               </option>
             ))}
         </select>
+        <div className="containerButtonEdit">
+          <button
+            className="editButton"
+            type="button"
+            onClick={handleEditClick}
+          >
+            Edit
+          </button>
+          <button className="delete" type="button" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
       </form>
-      <div className="containerButtonEdit">
-        <button className="editButton" type="button" onClick={handleEditClick}>
-          Edit
-        </button>
-        <button className="delete" type="button" onClick={handleDelete}>
-          Delete
-        </button>
-      </div>
     </div>
   );
 }

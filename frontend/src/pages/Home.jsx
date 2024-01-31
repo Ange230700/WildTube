@@ -66,7 +66,7 @@ function Home() {
           )}
         </button>
         <MovieGenreTabsContainer categories={categories} />
-        {(user.IsAdmin && isAdminMode && (
+        {(user && user.IsAdmin && isAdminMode && (
           <button
             className="add-category-container"
             type="button"

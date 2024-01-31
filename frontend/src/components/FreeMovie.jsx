@@ -163,7 +163,7 @@ function FreeMovie({ movie }) {
           style={
             location.pathname.includes("/movies/")
               ? {
-                  paddingBottom: "9.375vw",
+                  paddingBottom: "19.6875vw",
                 }
               : {}
           }
