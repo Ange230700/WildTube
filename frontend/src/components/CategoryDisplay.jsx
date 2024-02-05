@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Carousel from "react-multi-carousel";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 import MovieLink from "./MovieLink";
+import { useAdminMode } from "../contexts/AdminModeContext";
+import { useUser } from "../contexts/UserContext";
 
 const responsive = {
   superLargeDesktop: {
@@ -37,9 +41,14 @@ const responsive = {
   },
 };
 
-function CategoryDisplay({ categorie }) {
+function CategoryDisplay({ categorie, getCategories }) {
+  const { isAdminMode } = useAdminMode();
+  const { user } = useUser();
   const [allMoviesForOneCategorie, setAllMoviesForOneCategorie] = useState([]);
-  useEffect(() => {
+  const [isDeleting, setIsDeleting] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchMoviesByCategorie = () => {
     axios
       .get(
         `${import.meta.env.VITE_BACKEND_URL}/api/films/category/${categorie.id}`
@@ -50,13 +59,83 @@ function CategoryDisplay({ categorie }) {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const handleNavigationToCategoryEdition = () => {
+    navigate(`/EditSection/${categorie.id}`);
+  };
+
+  const handleCategoryDeletion = async () => {
+    setIsDeleting(true);
+
+    try {
+      const result = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/category/${categorie.id}`
+      );
+
+      if (result.status === 200) {
+        toast.success("Category deleted");
+        getCategories();
+      } else {
+        toast.error("An error occurred");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMoviesByCategorie();
   }, [categorie.id]);
 
-  if (allMoviesForOneCategorie.length) {
-    return (
+  return (
+    (!isDeleting && allMoviesForOneCategorie.length && (
       <section className="category-movie-display-container">
         <div className="category-title-container">
-          <div className="category-title">{categorie.name}</div>
+          <h1
+            className="category-title"
+            style={
+              isAdminMode
+                ? {
+                    fontSize: "2em",
+                  }
+                : {}
+            }
+          >
+            {categorie.name}
+          </h1>
+          {(user && user.IsAdmin && isAdminMode && (
+            <>
+              <button
+                className="add-movie-container"
+                type="button"
+                onClick={handleNavigationToCategoryEdition}
+              >
+                <img
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/edit.png`}
+                  alt="edit button"
+                />
+              </button>
+              <button
+                className="add-movie-container"
+                type="button"
+                onClick={handleCategoryDeletion}
+              >
+                <img
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/remove.svg`}
+                  alt="edit button"
+                />
+              </button>
+            </>
+          )) ||
+            null}
         </div>
         <Carousel
           additionalTransfrom={0}
@@ -69,7 +148,7 @@ function CategoryDisplay({ categorie }) {
           draggable
           focusOnSelect={false}
           infinite={false}
-          itemClass=""
+          itemClass="static-slider-item"
           keyBoardControl
           minimumTouchDrag={80}
           pauseOnHover
@@ -87,14 +166,23 @@ function CategoryDisplay({ categorie }) {
           slidesToSlide={1}
           swipeable
         >
-          {allMoviesForOneCategorie.map((movie) => (
-            <MovieLink key={movie.id} movie={movie} />
-          ))}
+          {allMoviesForOneCategorie.map((movie) => {
+            return (
+              <MovieLink
+                key={movie.id}
+                movie={movie}
+                categorie={categorie}
+                fetchMoviesByCategorie={fetchMoviesByCategorie}
+                isDeleting={isDeleting}
+                setIsDeleting={setIsDeleting}
+              />
+            );
+          })}
         </Carousel>
       </section>
-    );
-  }
-  return null;
+    )) ||
+    null
+  );
 }
 
 CategoryDisplay.propTypes = {
@@ -102,6 +190,7 @@ CategoryDisplay.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
+  getCategories: PropTypes.func.isRequired,
 };
 
 export default CategoryDisplay;

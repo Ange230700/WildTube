@@ -36,6 +36,8 @@
 
         .link {
           text-decoration: none;
+          display: flex;
+          gap: 8px;
 
           .link-text {
             color: white;

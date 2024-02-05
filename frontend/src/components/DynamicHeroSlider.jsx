@@ -5,30 +5,29 @@ import "react-multi-carousel/lib/styles.css";
 import HeroMovieSlideLink from "./HeroMovieSlideLink";
 
 const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 1601 },
+    items: 1,
+  },
   desktop: {
     breakpoint: { max: 1600, min: 1025 },
     items: 1,
-    // partialVisible: true,
   },
   landscapeTablet: {
     breakpoint: { max: 1024, min: 835 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
   tablet: {
     breakpoint: { max: 834, min: 769 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
   landscapeMobile: {
     breakpoint: { max: 768, min: 481 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
   mobile: {
     breakpoint: { max: 480, min: 320 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
 };
 
@@ -39,14 +38,12 @@ function DynamicHeroSlider({ movies }) {
       arrows
       autoPlay
       autoPlaySpeed={3000}
-      // centerMode
       containerClass="dynamic-hero-slider-container"
       draggable
       infinite
       itemClass="slider-item"
       keyBoardControl
       minimumTouchDrag={80}
-      // partialVisible
       removeArrowOnDeviceType={["landscapeMobile", "mobile"]}
       responsive={responsive}
       sliderClass="inner-slider-container"
@@ -68,7 +65,8 @@ DynamicHeroSlider.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      cover: PropTypes.string.isRequired,
+      cover_filename: PropTypes.string,
+      cover_url: PropTypes.string,
       title: PropTypes.string.isRequired,
       videoUrl: PropTypes.string,
       duration: PropTypes.number.isRequired,

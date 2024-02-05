@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
 import { UserProvider } from "./contexts/UserContext";
-import App from "./App";
+import { AdminModeProvider } from "./contexts/AdminModeContext";
+import AppWrapper from "./AppWrapper";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
@@ -16,15 +17,18 @@ import Connection from "./pages/Connection";
 import ParametreAdmin from "./pages/ParametreAdmin";
 import UserProfil from "./pages/UserProfil";
 import UserProfileEditor from "./pages/UserProfileEditor";
-import AccountInfo from "./pages/AccountInfo";
-import "./sass/index.scss";
 import AjoutAdmin from "./pages/AjoutAdmin";
 import EditVideo from "./pages/EditVideo";
+import AddSection from "./pages/AddSection";
+import EditSection from "./pages/EditSection";
+import AddVideos from "./pages/AddVideos";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./sass/index.scss";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <AppWrapper />,
     children: [
       {
         index: true,
@@ -36,15 +40,19 @@ const router = createBrowserRouter([
       },
       {
         path: "favorites/",
-        element: <Favorites />,
+        element: (
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "watchlist/",
-        element: <Watchlist />,
-      },
-      {
-        path: "accountinfo/",
-        element: <AccountInfo />,
+        element: (
+          <ProtectedRoute>
+            <Watchlist />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "category/:catId",
@@ -68,23 +76,67 @@ const router = createBrowserRouter([
       },
       {
         path: "/Parametre",
-        element: <ParametreAdmin />,
+        element: (
+          <ProtectedRoute>
+            <ParametreAdmin />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profil",
-        element: <UserProfil />,
+        element: (
+          <ProtectedRoute>
+            <UserProfil />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/profileEditor",
-        element: <UserProfileEditor />,
+        path: "/account/:userId",
+        element: (
+          <ProtectedRoute>
+            <UserProfileEditor />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/AjoutAdmin",
-        element: <AjoutAdmin />,
+        element: (
+          <ProtectedRoute>
+            <AjoutAdmin />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/EditVideo",
-        element: <EditVideo />,
+        path: "/EditVideo/:movieId",
+        element: (
+          <ProtectedRoute>
+            <EditVideo />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/addSection",
+        element: (
+          <ProtectedRoute>
+            <AddSection />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/EditSection/:sectionId",
+        element: (
+          <ProtectedRoute>
+            <EditSection />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/addvideos",
+        element: (
+          <ProtectedRoute>
+            <AddVideos />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -94,10 +146,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <UserProvider>
-      <MovieProvider>
-        <RouterProvider router={router} />
-      </MovieProvider>
-    </UserProvider>
+    <AdminModeProvider>
+      <UserProvider>
+        <MovieProvider>
+          <RouterProvider router={router} />
+        </MovieProvider>
+      </UserProvider>
+    </AdminModeProvider>
   </React.StrictMode>
 );

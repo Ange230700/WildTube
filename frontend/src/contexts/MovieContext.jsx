@@ -7,7 +7,7 @@ const MovieContext = createContext();
 export function MovieProvider({ children }) {
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
+  const fetchMovies = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/films`)
       .then((response) => {
@@ -16,9 +16,16 @@ export function MovieProvider({ children }) {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
 
-  const value = useMemo(() => ({ movies, setMovies }), [movies, setMovies]);
+  useEffect(() => {
+    fetchMovies();
+  }, [setMovies]);
+
+  const value = useMemo(
+    () => ({ movies, setMovies, fetchMovies }),
+    [movies, setMovies, fetchMovies]
+  );
 
   return (
     <MovieContext.Provider value={value}>{children}</MovieContext.Provider>

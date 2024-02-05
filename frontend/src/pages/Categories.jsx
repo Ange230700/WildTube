@@ -54,25 +54,24 @@ function Categories() {
           <input
             className="search-bar"
             type="search"
-            placeholder="Rechercher un film"
+            placeholder="Search for a movie"
             value={searchValue}
             onChange={handleSearchChange}
           />
         </div>
-        {/* <div className="sort-container">
-          <button type="button" className="sort-button">
-            <p className="sort-text">Trier</p>
-            <img
-              className="sort-icon"
-              src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/sort_icon.svg"
-              alt="sort icon"
-            />
-          </button>
-        </div> */}
 
         <MovieGenreTabsContainer categories={categories} />
         <div className="display-container">
-          <div className="display">
+          <div
+            className="display"
+            style={
+              pathname.includes("/category/")
+                ? {
+                    justifyContent: "center",
+                  }
+                : {}
+            }
+          >
             {searchValue.length > 0 ? (
               <>
                 {reqOneCount

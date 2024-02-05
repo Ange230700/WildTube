@@ -17,7 +17,7 @@
   },
   "plugins": ["react", "import"],
   "rules": {
-    "no-console": "off",
+    "no-console": 0,
     "no-restricted-syntax": [
       "error",
       {
@@ -28,15 +28,7 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/no-unescaped-entities": "off",
-    "jsx-a11y/label-has-associated-control": [
-      "error",
-      {
-        "assert": "either"
-      }
-    ]
-    // "import/no-extraneous-dependencies": [
-    //   "error",
-    //   { "devDependencies": ["**/src/components/MovieGenreTabsContainer.jsx"] }
-    // ]
+    "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/label-has-associated-control": "off"
   }
 }

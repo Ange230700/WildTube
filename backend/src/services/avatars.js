@@ -1,17 +1,34 @@
-// const fs = require("fs");
-// const path = require("path");
+const avatars = [
+  {
+    avatar_url: "https://avatars.githubusercontent.com/u/89375707",
+  },
+  {
+    avatar_url: "https://avatars.githubusercontent.com/u/47485900",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/71630996",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/55088281",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/64478677",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/23978805",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/46328867",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/70519154",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/27199224",
+  },
+  {
+    avatar_url: "	https://avatars.githubusercontent.com/u/9068852",
+  },
+];
 
-// const avatarsDirectory = path.join(__dirname, "../public/avatars"); // Adjust the path according to your directory structure
-
-// // Asynchronously read directory contents
-// fs.readdir(avatarsDirectory, (err, files) => {
-//   if (err) {
-//     console.error("Error reading avatars directory:", err);
-//     return;
-//   }
-
-//   const avatars = files.filter((file) => path.extname(file) === ".svg"); // Filter only .svg files if necessary
-//   console.log(avatars); // Do something with the avatars array
-// });
-
-// module.exports = avatars;
+module.exports = avatars;

@@ -1,18 +1,19 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { useState } from "react";
+import { useAdminMode } from "../contexts/AdminModeContext";
 
 function ToggleSwitch() {
-  const [isToggled, setIsToggled] = useState(false);
+  const { isAdminMode, setIsAdminMode } = useAdminMode();
 
-  const handleToggle = () => setIsToggled(!isToggled);
+  const handleToggleAdminMode = () => {
+    setIsAdminMode(!isAdminMode);
+  };
 
   return (
     <div className="toggle-switch">
       <input
         id="toggle-switch-checkbox"
         type="checkbox"
-        checked={isToggled}
-        onChange={handleToggle}
+        checked={isAdminMode}
+        onChange={handleToggleAdminMode}
       />
       <label htmlFor="toggle-switch-checkbox" className="slider" />
     </div>

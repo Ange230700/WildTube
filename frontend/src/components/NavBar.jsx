@@ -20,7 +20,11 @@ function NavBar() {
       className="navbar"
       style={
         location.pathname.includes("/movies/") ||
-        location.pathname.includes("/profil")
+        location.pathname.includes("/profil") ||
+        location.pathname.includes("/Parametre") ||
+        location.pathname.includes("/addvideos") ||
+        location.pathname.includes("/AjoutAdmin") ||
+        location.pathname.includes("/EditVideo/")
           ? {
               position: "fixed",
               bottom: "0",
@@ -61,9 +65,13 @@ function NavBar() {
               <img
                 className="icon avatar"
                 src={
-                  user.avatar
-                    ? user.avatar
-                    : "https://avatars.githubusercontent.com/u/97165289"
+                  (user &&
+                    user.avatar_filename &&
+                    `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                      user?.avatar_filename
+                    }`) ||
+                  (user && user.avatar_url) ||
+                  "https://avatars.githubusercontent.com/u/97165289"
                 }
                 alt="avatar"
               />
