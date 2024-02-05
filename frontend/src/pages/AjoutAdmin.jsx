@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import LogoContainer from "../components/LogoContainer";
+import { useUser } from "../contexts/UserContext";
 
 function AjoutAdmin() {
+  const { user: currentUser } = useUser();
   const [users, setUsers] = useState([]);
 
   const fetch = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users`
+        `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+        { withCredentials: true }
       );
       setUsers(response.data);
     } catch (err) {
@@ -18,24 +20,34 @@ function AjoutAdmin() {
   };
 
   const handleClick = async (user) => {
+    if (currentUser.id === user.id) {
+      toast.error("You cannot delete your own account");
+      return;
+    }
+
+    if (user.name === "Admin") {
+      toast.error("You cannot modify the super admin's status.");
+      return;
+    }
+
     if (user !== null) {
       try {
         await axios.put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/user/${user.id}`,
           {
             ...user,
             IsAdmin: !user.IsAdmin,
           }
         );
         if (user.IsAdmin) {
-          toast.success("Admin supprimé");
+          toast.success("Admin deleted");
         } else {
-          toast.success("Admin ajouté");
+          toast.success("Admin added");
         }
 
         fetch();
-      } catch (e) {
-        console.error("Error updating user", e);
+      } catch (err) {
+        console.error("Error updating user", err);
       }
     }
   };
@@ -46,9 +58,8 @@ function AjoutAdmin() {
 
   return (
     <div className="ContainerAjoutAdmin">
-      <LogoContainer />
       <div className="NamePage">
-        <h3>Ajouter des Administrateurs</h3>
+        <h3>Add administrators</h3>
       </div>
       <div className="containerUser">
         {users.map((userItem) => (

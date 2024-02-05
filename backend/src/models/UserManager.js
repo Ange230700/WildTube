@@ -8,25 +8,40 @@ class UserManager extends AbstractManager {
   }
 
   // The C of CRUD - Create operation
-  async create({ name, email, naissance, civility, hashedPassword }) {
+  async create({
+    name,
+    email,
+    naissance,
+    civility,
+    hashed_password,
+    avatarId,
+  }) {
     // Execute the SQL INSERT query to insert a new item into the "user" table
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (name, email, naissance, civility, hashed_password) VALUES (?, ?, ?, ?, ?)`,
-      [name, email, naissance, civility, hashedPassword]
+      `INSERT INTO ${this.table} (name, email, naissance, civility, hashed_password, avatarId) VALUES (?, ?, ?, ?, ?, ?)`,
+      [name, email, naissance, civility, hashed_password, avatarId]
     );
 
     // Get the ID of the newly inserted item
     const createdId = result.insertId;
 
     // Return the newly created item
-    return { id: createdId, name, email, naissance, civility, hashedPassword };
+    return {
+      id: createdId,
+      name,
+      email,
+      naissance,
+      civility,
+      hashed_password,
+      avatarId,
+    };
   }
   // The Rs of CRUD - Read operations
 
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `SELECT * FROM ${this.table} WHERE id = ?`,
       [id]
     );
 
@@ -34,37 +49,65 @@ class UserManager extends AbstractManager {
     return rows;
   }
 
+  async readUserWithAvatar(user_id) {
+    // Execute the SQL SELECT query to retrieve a specific item by its ID
+    const [rows] = await this.database.query(
+      `SELECT ${this.table}.id, ${this.table}.name, ${this.table}.email, ${this.table}.naissance, ${this.table}.civility, ${this.table}.hashed_password, ${this.table}.IsAdmin, ${this.table}.avatarId, Avatar.avatar_url, Avatar.avatar_filename FROM ${this.table} JOIN Avatar ON ${this.table}.avatarId = Avatar.id WHERE ${this.table}.id = ?`,
+      [user_id]
+    );
+
+    // Return the first row of the result, which represents the item
+    return rows;
+  }
+
+  async readByEmail(email) {
+    // Execute the SQL SELECT query to retrieve a specific item by its ID
+    const [result] = await this.database.query(
+      `SELECT ${this.table}.id, ${this.table}.name, ${this.table}.email, ${this.table}.naissance, ${this.table}.civility, ${this.table}.hashed_password, ${this.table}.IsAdmin, ${this.table}.avatarId, Avatar.avatar_url, Avatar.avatar_filename FROM ${this.table} JOIN Avatar ON ${this.table}.avatarId = Avatar.id WHERE ${this.table}.email = ?`,
+      [email]
+    );
+
+    // Return the first row of the result, which represents the item
+    return result[0];
+  }
+
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "user" table
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `SELECT id, name, email, naissance, civility, IsAdmin, avatarId FROM ${this.table}`
+    );
 
     // Return the array of items
     return rows;
   }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  async updateAvatar(id, avatar) {
-    // Execute the SQL UPDATE query to update a item to the "user" table
-    const [result] = await this.database.query(
-      `UPDATE ${this.table} SET avatar = ? WHERE id = ?`,
-      [avatar, id]
-    );
-
-    // Return the ID of the newly inserted item
-    return result;
-  }
-
   // The U of CRUD - Update operation
-  async update({ name, email, naissance, civility, IsAdmin, id }) {
-    // Execute the SQL UPDATE query to update a item to the "user" table
-    const [result] = await this.database.query(
-      `UPDATE ${this.table} SET name=?, email=?, naissance=?, civility=?, IsAdmin=?  WHERE id=?`,
-      [name, email, new Date(naissance), civility, IsAdmin, id]
+  async update(
+    id,
+    { name, email, naissance, civility, hashed_password, avatarId, IsAdmin }
+  ) {
+    await this.database.query(
+      `UPDATE ${this.table} SET 
+          name = COALESCE(?, name), 
+          email = COALESCE(?, email), 
+          naissance = COALESCE(?, naissance), 
+          civility = COALESCE(?, civility), 
+          hashed_password = COALESCE(?, hashed_password), 
+          avatarId = COALESCE(?, avatarId),
+          IsAdmin = COALESCE(?, IsAdmin)
+          WHERE ${this.table}.id = ?`,
+      [name, email, naissance, civility, hashed_password, avatarId, IsAdmin, id]
     );
 
-    // Return the ID of the newly inserted item
-    return result;
+    const updatedRows = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE ${this.table}.id = ?`,
+      [id]
+    );
+
+    return updatedRows.length > 0 && updatedRows[0];
   }
 
   // The D of CRUD - Delete operation
@@ -78,17 +121,6 @@ class UserManager extends AbstractManager {
 
     // Return the first row of the result, which represents the item
     return rows;
-  }
-
-  async readByEmail(email) {
-    // Execute the SQL SELECT query to retrieve a specific item by its ID
-    const [result] = await this.database.query(
-      `select * from ${this.table} where email = ?`,
-      [email]
-    );
-
-    // Return the first row of the result, which represents the item
-    return result[0];
   }
 }
 

@@ -1,10 +1,30 @@
 .logo-container {
   display: flex;
   justify-content: center;
+  position: relative;
 
   .logo {
     width: 100%;
     max-width: 100px;
+  }
+
+  .switchContainer {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: clamp(calc(4px * 1), calc(1.25vw * 1), calc(4px * 1 * 1.5));
+    right: clamp(calc(4px * 1), calc(1.25vw * 1), calc(4px * 1 * 1.5));
+
+    h6 {
+      font-size: clamp(
+        calc(0.67em * 1),
+        calc(2.09375vw * 1),
+        calc(0.67em * 1 * 1.5)
+      );
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      max-width: 60px;
+    }
   }
 }
 

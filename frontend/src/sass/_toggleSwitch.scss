@@ -2,14 +2,14 @@
   position: relative;
   display: inline-block;
   width: clamp(
-    calc(60px * 1 / 2),
-    calc(18.75vw * 1 / 2),
-    calc(60px * 1 / 2 * 1.5)
+    calc(60px * 3 / 4),
+    calc(18.75vw * 3 / 4),
+    calc(60px * 3 / 4 * 1.5)
   );
   height: clamp(
-    calc(34px * 1 / 2),
-    calc(10.625vw * 1 / 2),
-    calc(34px * 1 / 2 * 1.5)
+    calc(34px * 3 / 4),
+    calc(10.625vw * 3 / 4),
+    calc(34px * 3 / 4 * 1.5)
   );
 }
 
@@ -29,9 +29,9 @@
   background-color: var(--text-field-background-color);
   transition: 0.4s;
   border-radius: clamp(
-    calc(34px * 1 / 2),
-    calc(10.625vw * 1 / 2),
-    calc(34px * 1 / 2 * 1.5)
+    calc(34px * 3 / 4),
+    calc(10.625vw * 3 / 4),
+    calc(34px * 3 / 4 * 1.5)
   );
 }
 
@@ -39,20 +39,20 @@
   position: absolute;
   content: "";
   height: clamp(
-    calc(26px * 1 / 2),
-    calc(8.125vw * 1 / 2),
-    calc(26px * 1 / 2 * 1.5)
+    calc(26px * 3 / 4),
+    calc(8.125vw * 3 / 4),
+    calc(26px * 3 / 4 * 1.5)
   );
   width: clamp(
-    calc(26px * 1 / 2),
-    calc(8.125vw * 1 / 2),
-    calc(26px * 1 / 2 * 1.5)
+    calc(26px * 3 / 4),
+    calc(8.125vw * 3 / 4),
+    calc(26px * 3 / 4 * 1.5)
   );
-  left: clamp(calc(4px * 1 / 2), calc(1.25vw * 1 / 2), calc(4px * 1 / 2 * 1.5));
+  left: clamp(calc(4px * 3 / 4), calc(1.25vw * 3 / 4), calc(4px * 3 / 4 * 1.5));
   bottom: clamp(
-    calc(4px * 1 / 2),
-    calc(1.25vw * 1 / 2),
-    calc(4px * 1 / 2 * 1.5)
+    calc(4px * 3 / 4),
+    calc(1.25vw * 3 / 4),
+    calc(4px * 3 / 4 * 1.5)
   );
   background-color: var(--neutral-color);
   transition: 0.4s;
@@ -64,5 +64,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  transform: translateX(calc(20px));
+  transform: translateX(
+    clamp(calc(26px * 3 / 4), calc(8.125vw * 3 / 4), calc(26px * 3 / 4 * 1.5))
+  );
 }

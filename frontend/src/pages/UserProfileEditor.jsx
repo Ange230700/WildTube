@@ -1,180 +1,355 @@
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
-import LogoContainer from "../components/LogoContainer";
 import ModalInscription from "../components/ModalInscription";
+import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
+import { useUser } from "../contexts/UserContext";
 
 function UserProfileEditor() {
-  const { user, updateUser } = useUser();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    naissance: "",
-    civility: "",
-    password: "",
-    avatar: "",
-  });
-
+  const { userId } = useParams();
+  const { user, fetchUser } = useUser();
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [avatars, setAvatars] = useState([]);
+  const navigate = useNavigate();
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    naissance: user?.naissance || "",
+    civility: user?.civility || "",
+    avatarId: user?.avatarId || "",
+  });
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
-  useEffect(() => {
-    setFormData({
-      name: user.name || "",
-      email: user.email || "",
-      naissance: user.naissance
-        ? new Date(user.naissance).toISOString().split("T")[0]
-        : "",
-      civility: user.civility || false,
-      password: user.password || "",
-      avatar: user.avatar || "",
-    });
-  }, [user]);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const handleAvatarChange = (avatar) => {
+    try {
+      if (!avatar) {
+        setSelectedAvatar((prevData) => ({
+          ...prevData,
+          avatar_url: "https://avatars.githubusercontent.com/u/97165289",
+        }));
+        return;
+      }
+
+      setSelectedAvatar(avatar);
+      setFormData((prevData) => ({
+        ...prevData,
+        avatarId: avatar.id,
+      }));
+    } catch (someError) {
+      console.error("Error during avatar selection:", someError);
+    }
+  };
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { value } = e.target;
+    const { name } = e.target;
+
+    if (name === "civility") {
+      value = value === "Monsieur";
+    }
+
+    if (name === "naissance") {
+      value = formatDate(value);
+    }
+
+    if (name === "current_password") {
+      setCurrentPassword(e.target.value);
+    }
+
+    if (name === "new_password") {
+      setNewPassword(e.target.value);
+    }
+
+    if (name === "confirm_new_password") {
+      setConfirmNewPassword(e.target.value);
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Create a new FormData instance
     const updateData = new FormData();
 
+    // Append modified fields to FormData
     Object.keys(formData).forEach((key) => {
-      if (formData[key] !== user[key]) {
+      if (
+        formData[key] &&
+        formData[key] !== user[key] &&
+        key !== "confirm_new_password"
+      ) {
         updateData.append(key, formData[key]);
       }
     });
 
     try {
       const result = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
-        updateData
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/${userId}`,
+        { ...formData },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       if (result.status === 200) {
-        updateUser(result.data);
+        fetchUser();
         toggleModal();
+        setTimeout(() => {
+          if (user?.IsAdmin) {
+            navigate("/Parametre");
+          } else {
+            navigate("/profil");
+          }
+        }, 2000);
       }
     } catch (error) {
-      // Handle error...
+      toast.error("Current password is incorrect");
       console.error(error);
     }
   };
 
-  return !user ? null : (
-    <div className="signUpPageMockupGuest">
-      <div className="searchDisplaySection">
-        <LogoContainer />
-        <form className="form">
-          <div className="inputs">
-            <div className="inputContainer">
-              <input
-                type="text"
-                name="name"
-                className="input"
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Nom"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="email"
-                name="email"
-                className="input"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Email"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="password"
-                className="input"
-                placeholder="Ancien mot de passe"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="password"
-                name="password"
-                className="input"
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Nouveau mot de passe"
-              />
-            </div>
-            <div className="inputContainer">
-              <input
-                type="password"
-                className="input"
-                placeholder="Confirmation du nouveau mot de passe"
-              />
-            </div>
-          </div>
+  useEffect(() => {
+    const fetchAvatars = async () => {
+      try {
+        const result = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/avatars`
+        );
 
-          <div className="additionalInformation">
-            <div className="orientation">Civilité :</div>
-            <div className="orientationContainer">
-              <div className="orientationOption">
-                <label className="orientationText">
-                  Madame
+        if (result.status === 200) {
+          setAvatars(result.data);
+
+          setFormData((prevData) => ({
+            ...prevData,
+            avatar: result.data[0],
+          }));
+        }
+      } catch (someError) {
+        console.error("Error during avatar fetching:", someError);
+      }
+    };
+
+    fetchAvatars();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user?.name,
+        email: user?.email,
+        naissance: formatDate(user?.naissance),
+        civility: user?.civility,
+        avatarId: user?.avatarId,
+      });
+
+      setSelectedAvatar(
+        (user?.avatar_filename &&
+          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+            user?.avatar_filename
+          }`) ||
+          user?.avatar_url ||
+          "https://avatars.githubusercontent.com/u/97165289"
+      );
+    } else {
+      navigate("/connection");
+    }
+  }, [user]);
+
+  return (
+    user && (
+      <div className="signUpPageMockupGuest">
+        <div className="searchDisplaySection">
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="signUpWrapper">
+              <h3>Edit my profile</h3>
+              <div className="inputs">
+                <div className="inputContainer">
                   <input
-                    name="civility"
-                    type="radio"
-                    value="Madame"
-                    className="radioButton"
+                    type="text"
+                    name="name"
+                    className="input"
+                    value={formData?.name || ""}
                     onChange={handleInputChange}
-                    checked={formData.civility === "Madame"}
+                    placeholder="Nom"
                   />
-                </label>
-              </div>
-              <div className="orientationOption">
-                <label className="orientationText">
-                  Monsieur
+                </div>
+                <div className="inputContainer">
                   <input
-                    name="civility"
-                    type="radio"
-                    className="radioButton"
+                    type="email"
+                    name="email"
+                    className={`input ${
+                      (formData?.email || user.email) &&
+                      !emailRegex.test(user.email)
+                        ? "errorEmail"
+                        : ""
+                    }`}
+                    value={formData?.email}
                     onChange={handleInputChange}
-                    value="Monsieur"
-                    checked={formData.civility === "Monsieur"}
+                    placeholder="Email"
                   />
-                </label>
+                </div>
+                <div className="inputContainer">
+                  <input
+                    type="password"
+                    name="current_password"
+                    className="input"
+                    value={currentPassword}
+                    onChange={handleInputChange}
+                    placeholder="Mot de passe actuel"
+                  />
+                </div>
+                <div className="inputContainer">
+                  <input
+                    type="password"
+                    name="new_password"
+                    className={`input ${
+                      newPassword && newPassword.length < 8
+                        ? "errorPassword"
+                        : ""
+                    }`}
+                    minLength="8"
+                    value={newPassword}
+                    onChange={handleInputChange}
+                    placeholder="New Password"
+                  />
+                  {newPassword && newPassword.length < 8 && (
+                    <p className="errorMessage">8 characters at least</p>
+                  )}
+                </div>
+                <div className="inputContainer">
+                  <input
+                    type="password"
+                    name="confirm_new_password"
+                    className={`input ${
+                      confirmNewPassword && confirmNewPassword !== newPassword
+                        ? "errorPassword"
+                        : ""
+                    }`}
+                    value={confirmNewPassword}
+                    onChange={handleInputChange}
+                    placeholder="Confirmation du nouveau mot de passe"
+                  />
+                </div>
               </div>
+
+              <div className="additionalInformation">
+                <h4 className="orientation">Gender :</h4>
+                <div className="orientationContainer">
+                  <div className="orientationOption">
+                    <label className="orientationText">
+                      Female
+                      <input
+                        name="civility"
+                        type="radio"
+                        value="Madame"
+                        className="radioButton"
+                        onChange={handleInputChange}
+                        checked={
+                          formData?.civility === false || !user?.civility
+                        }
+                      />
+                    </label>
+                  </div>
+                  <div className="orientationOption">
+                    <label className="orientationText">
+                      Male
+                      <input
+                        name="civility"
+                        type="radio"
+                        className="radioButton"
+                        onChange={handleInputChange}
+                        value="Monsieur"
+                        checked={formData?.civility === true || user?.civility}
+                      />
+                    </label>
+                  </div>
+                </div>
+                <h4 className="birthday">Date of birth :</h4>
+                <div className="orientationContainer">
+                  <input
+                    className="inputDate"
+                    type="date"
+                    name="naissance"
+                    value={formData?.naissance}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <h4>Choose a new avatar :</h4>
+                <div className="preview">
+                  {selectedAvatar && (
+                    <img
+                      className="avatarPreview"
+                      src={
+                        (selectedAvatar.avatar_filename &&
+                          `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            selectedAvatar?.avatar_filename
+                          }`) ||
+                        (user.avatar_filename &&
+                          `
+                          ${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                            user?.avatar_filename
+                          }`) ||
+                        selectedAvatar?.avatar_url ||
+                        user?.avatar_url ||
+                        "https://avatars.githubusercontent.com/u/97165289"
+                      }
+                      alt="Avatar"
+                    />
+                  )}
+                </div>
+                <div className="avatar-choice">
+                  {avatars.map((avatar) => (
+                    <button
+                      key={avatar?.id}
+                      className="avatarButton"
+                      type="button"
+                      onClick={() => handleAvatarChange(avatar)}
+                    >
+                      <img
+                        src={
+                          (avatar.avatar_filename &&
+                            `${
+                              import.meta.env.VITE_BACKEND_URL
+                            }/assets/images/${avatar?.avatar_filename}`) ||
+                          avatar?.avatar_url ||
+                          "https://avatars.githubusercontent.com/u/97165289"
+                        }
+                        alt="Avatar"
+                        className="avatar"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="buttonContainer">
+                <button className="signUpButton" type="submit">
+                  <p className="inscription">Edit</p>
+                </button>
+              </div>
+              {showModal && (
+                <ModalInscription
+                  toggleModal={toggleModal}
+                  showModal={setShowModal}
+                />
+              )}
             </div>
-            <div className="birthday">Date de naissance :</div>
-            <div className="orientationContainer">
-              <input
-                className="inputDate"
-                type="date"
-                name="naissance"
-                value={formData.naissance}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          <div className="buttonContainer">
-            <button
-              className="signUpButton"
-              onClick={handleSubmit}
-              type="button"
-            >
-              <p className="inscription">Modifier</p>
-            </button>
-          </div>
-          {showModal && (
-            <ModalInscription
-              showModal={showModal}
-              setShowModal={setShowModal}
-            />
-          )}
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    )
   );
 }
 

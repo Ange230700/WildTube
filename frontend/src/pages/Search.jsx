@@ -18,21 +18,11 @@ function Search() {
           <input
             className="search-bar"
             type="search"
-            placeholder="Rechercher un film"
+            placeholder="Search for a movie"
             value={searchValue}
             onChange={handleSearchChange}
           />
         </div>
-        {/* <div className="sort-container">
-          <button type="button" className="sort-button">
-            <p className="sort-text">Trier</p>
-            <img
-              className="sort-icon"
-              src="/src/assets/icons/sort_icon.svg"
-              alt="sort icon"
-            />
-          </button>
-        </div> */}
 
         <div className="search-result-container">
           {searchValue.length > 0 ? (

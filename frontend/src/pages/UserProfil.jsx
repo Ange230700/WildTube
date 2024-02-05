@@ -2,22 +2,21 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
 function UserProfil() {
-  const { user } = useUser();
-  const { updateUser } = useUser();
+  const { user, logout } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogOut = () => {
-    updateUser(null);
-    navigate("/");
+    logout(navigate);
   };
+
   return (
     <div
       className="ProfileDisplaySection"
       style={
         location.pathname.includes("/profil")
           ? {
-              marginBottom: "9.375vw",
+              marginBottom: "19.6875vw",
             }
           : {}
       }
@@ -26,37 +25,47 @@ function UserProfil() {
         <img
           className="Avatar1"
           src={
-            user.avatar
-              ? user.avatar
-              : "https://avatars.githubusercontent.com/u/97165289"
+            (user &&
+              user.avatar_filename &&
+              `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                user?.avatar_filename
+              }`) ||
+            user?.avatar_url ||
+            "https://avatars.githubusercontent.com/u/97165289"
           }
           alt="Avatar1"
         />
-        <h2 className="User">{user.name}</h2>
+        <h2 className="User">{user && user.name}</h2>
       </div>
       <section className="Useroptionscontainer">
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to="/favorites">Favoris</Link>
+            <Link to="/favorites">
+              <h3>Favorites</h3>
+            </Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to="/watchlist">À regarder plus tard</Link>
+            <Link to="/watchlist">
+              <h3>To watch later</h3>
+            </Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
-            <Link to="/profileEditor">Informations du compte</Link>
+            <Link to={`/account/${user && user.id}`}>
+              <h3>Edit my profile</h3>
+            </Link>
           </div>
         </div>
         <div className="Useroption">
           <button
-            className="RegarderPlusTardButton"
+            className="RegarderPlusTard"
             type="button"
             onClick={handleLogOut}
           >
-            Déconnexion
+            <h3>Log out</h3>
           </button>
         </div>
       </section>

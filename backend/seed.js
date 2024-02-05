@@ -1,5 +1,3 @@
-/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-
 // Load environment variables from .env file
 require("dotenv").config();
 
@@ -10,66 +8,25 @@ const argon2 = require("argon2");
 // Import database client
 const database = require("./database/client");
 
+const avatars = require("./src/services/avatars");
 const films = require("./src/services/films");
 const categories = require("./src/services/categories");
+const users = require("./src/services/users");
 
-async function insertAdmin() {
-  try {
-    const password = "admin";
-    const hashedPassword = argon2.hash(password); // Hash the password
-
-    hashedPassword.then((hashed) => {
-      return database.query(
-        "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [
-          "Admin",
-          "admin@admin.admin",
-          "2000-01-01 00:00:00",
-          1,
-          hashed,
-          1,
-          "https://avatars.githubusercontent.com/u/97165289",
-        ]
-      );
-    });
-  } catch (err) {
-    console.error("Error inserting admin:", err.message);
-    throw err; // Re-throw the error to be caught in the main seed function
-  }
-}
-
-async function insertUsers() {
+async function insertAvatars() {
   try {
     const queries = [];
-    for (let i = 0; i < 5; i += 1) {
-      const randomDate = faker.date
-        .past()
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " ");
-      const password = faker.internet.password(); // Generate a random password
-      const hashedPassword = argon2.hash(password); // Hash the password
-
+    for (let i = 0; i < avatars.length; i += 1) {
       queries.push(
-        hashedPassword.then((hashed) => {
-          return database.query(
-            "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [
-              faker.person.firstName(),
-              faker.internet.email(),
-              randomDate,
-              faker.number.binary({ min: 0, max: 1 }),
-              hashed,
-              0,
-              faker.image.avatarGitHub(),
-            ]
-          );
-        })
+        database.query(
+          "INSERT INTO `Avatar` (`avatar_url`, `avatar_filename`) VALUES (?, ?)",
+          [avatars[i].avatar_url, avatars[i].avatar_filename]
+        )
       );
     }
     await Promise.all(queries);
   } catch (err) {
-    console.error("Error inserting users:", err.message);
+    console.error("Error inserting avatars:", err.message);
     throw err; // Re-throw the error to be caught in the main seed function
   }
 }
@@ -81,10 +38,10 @@ async function insertFilms() {
     for (let i = 0; i < films.length; i += 1) {
       queries.push(
         database.query(
-          "INSERT INTO `Film` (`miniature`, `cover`, `title`, `videoUrl`, `duration`, `year`, `description`, `IsAvailable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+          "INSERT INTO `Film` (`miniature_url`, `cover_url`, `title`, `videoUrl`, `duration`, `year`, `description`, `IsAvailable`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
           [
-            films[i].miniature,
-            films[i].cover,
+            films[i].miniature_url,
+            films[i].cover_url,
             films[i].title,
             films[i].videoUrl,
             films[i].duration,
@@ -120,79 +77,303 @@ async function insertCategories() {
   }
 }
 
-async function insertCommentaires() {
+async function insertAdmin() {
   try {
-    const queries = [];
-    for (let i = 0; i < 1000; i += 1) {
-      const randomDate = faker.date
-        .past()
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " ");
-      queries.push(
-        database.query(
-          "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `content`, `date`, `unique_key`) VALUES (?, ?, ?, ?, ?)",
-          [
-            faker.number.int({ min: 1, max: 5 }),
-            faker.number.int({ min: 1, max: 27 }),
-            faker.lorem.paragraph(),
-            randomDate,
-            faker.string.uuid(),
-          ]
-        )
+    const password = "admin";
+    const hashedPassword = argon2.hash(password); // Hash the password
+
+    hashedPassword.then((hashed) => {
+      return database.query(
+        "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatarId`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [
+          "Admin",
+          "admin@admin.admin",
+          "2000-01-01",
+          1,
+          hashed,
+          1,
+          faker.number.int({ min: 1, max: avatars.length }),
+        ]
       );
-    }
-    await Promise.all(queries);
+    });
   } catch (err) {
-    console.error("Error inserting commentaires:", err.message);
+    console.error("Error inserting admin:", err.message);
     throw err; // Re-throw the error to be caught in the main seed function
   }
 }
 
+async function insertUsers() {
+  try {
+    const queries = users.map(async (user) => {
+      const hashedPassword = await argon2.hash(user.hashed_password);
+
+      return database.query(
+        "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatarId`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [
+          user.name,
+          user.email,
+          user.naissance,
+          user.civility,
+          hashedPassword,
+          user.IsAdmin,
+          user.avatarId,
+        ]
+      );
+    });
+
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting users:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+// Join tables
+
 async function insertFilmCategorie() {
   try {
+    const [filmsCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Film`"
+    );
+    const [categoriesCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Categorie`"
+    );
+    const uniqueKeysCombinations = new Set();
     const queries = [];
-    for (let i = 0; i < films.length; i += 1) {
-      queries.push(
-        database.query(
-          "INSERT INTO `Categorie_par_film` (`filmId`, `categorieId`) VALUES (?, ?)",
-          [i + 1, faker.number.int({ min: 1, max: categories.length })]
-        )
+    const totalOfUniqueKeysCombinations = categories.length * films.length;
+
+    if (categoriesCountRow[0].count && filmsCountRow[0].count) {
+      while (
+        uniqueKeysCombinations.size <
+        faker.number.int({
+          min: Math.floor(totalOfUniqueKeysCombinations / 4 / 2),
+          max: Math.floor(totalOfUniqueKeysCombinations / 2 / 2),
+        })
+      ) {
+        const filmId = faker.number.int({ min: 1, max: films.length });
+        const categorieId = faker.number.int({
+          min: 1,
+          max: categories.length,
+        });
+        const unique_key = `${filmId}-${categorieId}`;
+
+        if (!uniqueKeysCombinations.has(unique_key)) {
+          uniqueKeysCombinations.add(unique_key);
+          queries.push(
+            database.query(
+              "INSERT INTO `Categorie_par_film` (`filmId`, `categorieId`, `unique_key`) VALUES (?, ?, ?)",
+              [filmId, categorieId, unique_key]
+            )
+          );
+        }
+      }
+
+      await Promise.all(queries);
+    } else {
+      throw new Error(
+        "Not enough data in Film or Categorie tables for seeding Categorie_par_film"
       );
     }
-    await Promise.all(queries);
   } catch (err) {
     console.error("Error inserting film_categorie:", err.message);
     throw err; // Re-throw the error to be caught in the main seed function
   }
 }
 
+async function insertCommentaires() {
+  try {
+    const [filmsCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Film`"
+    );
+    const [usersCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `User`"
+    );
+    const [avatarsCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Avatar`"
+    );
+    const uniqueKeysCombinations = new Set();
+    const queries = [];
+    const totalOfUniqueKeysCombinations =
+      users.length * films.length * avatars.length;
+
+    if (
+      usersCountRow[0].count &&
+      filmsCountRow[0].count &&
+      avatarsCountRow[0].count
+    ) {
+      while (
+        uniqueKeysCombinations.size <
+        faker.number.int({
+          min: 0,
+          max: Math.floor(totalOfUniqueKeysCombinations / 4 / 2 / 2 / 2),
+        })
+      ) {
+        const userId = faker.number.int({ min: 1, max: users.length });
+        const filmId = faker.number.int({ min: 1, max: films.length });
+        const avatarId = faker.number.int({ min: 1, max: avatars.length });
+
+        queries.push(
+          database.query(
+            "INSERT INTO `Commentaire_film` (`userId`, `filmId`, `avatarId`, `content`, `date`, `unique_key`) VALUES (?, ?, ?, ?, ?, ?)",
+            [
+              userId,
+              filmId,
+              avatarId,
+              faker.lorem.paragraph(),
+              faker.date.past(),
+              faker.string.uuid(),
+            ]
+          )
+        );
+      }
+
+      await Promise.all(queries);
+    } else {
+      throw new Error(
+        "Not enough data in User, Film or Avatar tables for seeding Commentaire_film"
+      );
+    }
+  } catch (err) {
+    console.error("Error inserting commentaires:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+async function insertFilmsIntoWatchlist() {
+  try {
+    const [filmsCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Film`"
+    );
+    const [usersCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `User`"
+    );
+    const uniqueKeysCombinations = new Set();
+    const queries = [];
+    const totalOfUniqueKeysCombinations = users.length * films.length;
+
+    if (usersCountRow[0].count && filmsCountRow[0].count) {
+      while (
+        uniqueKeysCombinations.size <
+        faker.number.int({
+          min: 0,
+          max: Math.floor(totalOfUniqueKeysCombinations / 4 / 2),
+        })
+      ) {
+        const userId = faker.number.int({ min: 1, max: users.length });
+        const filmId = faker.number.int({ min: 1, max: films.length });
+        const unique_key = `${userId}-${filmId}`;
+
+        if (!uniqueKeysCombinations.has(unique_key)) {
+          uniqueKeysCombinations.add(unique_key);
+          queries.push(
+            database.query(
+              "INSERT INTO `Watchlist` (`userId`, `filmId`, `unique_key`) VALUES (?, ?, ?)",
+              [userId, filmId, unique_key]
+            )
+          );
+        }
+      }
+
+      await Promise.all(queries);
+    } else {
+      throw new Error(
+        "Not enough data in User or Film tables for seeding Watchlist"
+      );
+    }
+  } catch (err) {
+    console.error("Error inserting films into watchlist:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+async function insertFilmsIntoFavorites() {
+  try {
+    const [filmsCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Film`"
+    );
+    const [usersCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `User`"
+    );
+    const uniqueKeysCombinations = new Set();
+    const queries = [];
+    const totalOfUniqueKeysCombinations = users.length * films.length;
+
+    if (usersCountRow[0].count && filmsCountRow[0].count) {
+      while (
+        uniqueKeysCombinations.size <
+        faker.number.int({
+          min: 0,
+          max: Math.floor(totalOfUniqueKeysCombinations / 4 / 2),
+        })
+      ) {
+        const userId = faker.number.int({ min: 1, max: users.length });
+        const filmId = faker.number.int({ min: 1, max: films.length });
+        const unique_key = `${userId}-${filmId}`;
+
+        if (!uniqueKeysCombinations.has(unique_key)) {
+          uniqueKeysCombinations.add(unique_key);
+          queries.push(
+            database.query(
+              "INSERT INTO `Favori_film` (`userId`, `filmId`, `unique_key`) VALUES (?, ?, ?)",
+              [userId, filmId, unique_key]
+            )
+          );
+        }
+      }
+
+      await Promise.all(queries);
+    } else {
+      throw new Error(
+        "Not enough data in User or Film tables for seeding Favorites"
+      );
+    }
+  } catch (err) {
+    console.error("Error inserting films into favorites:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
+
+// Main seed function
+
 async function seed() {
   try {
     await database.query("SET FOREIGN_KEY_CHECKS = 0");
-    await database.query("TRUNCATE `User`");
+    await database.query("TRUNCATE `Avatar`");
     await database.query("TRUNCATE `Film`");
     await database.query("TRUNCATE `Categorie`");
+    await database.query("TRUNCATE `User`");
     await database.query("TRUNCATE `Categorie_par_film`");
     await database.query("TRUNCATE `Commentaire_film`");
+    await database.query("TRUNCATE `Watchlist`");
+    await database.query("TRUNCATE `Favori_film`");
 
-    await insertAdmin();
-    await insertUsers();
+    await insertAvatars();
     await insertFilms();
     await insertCategories();
+    await insertAdmin();
+    await insertUsers();
 
     // Verify the insertions
-    const [movies] = await database.query(
+    const [avatarsCountRow] = await database.query(
+      "SELECT COUNT(*) AS count FROM `Avatar`"
+    );
+
+    const [filmsCountRow] = await database.query(
       "SELECT COUNT(*) AS count FROM `Film`"
     );
-    const [genres] = await database.query(
+
+    const [categoriesCountRow] = await database.query(
       "SELECT COUNT(*) AS count FROM `Categorie`"
     );
-    const [users] = await database.query(
+
+    const [usersCountRow] = await database.query(
       "SELECT COUNT(*) AS count FROM `User`"
     );
 
-    if (movies[0].count >= films.length && genres[0].count >= genres.length) {
+    if (
+      filmsCountRow[0].count >= films.length &&
+      categoriesCountRow[0].count >= categories.length
+    ) {
       await insertFilmCategorie();
     } else {
       throw new Error(
@@ -200,13 +381,26 @@ async function seed() {
       );
     }
 
-    if (users[0].count >= 5 && movies[0].count >= films.length) {
+    if (
+      usersCountRow[0].count >= users.length &&
+      filmsCountRow[0].count >= films.length &&
+      avatarsCountRow[0].count >= avatars.length
+    ) {
       await insertCommentaires();
     } else {
       throw new Error(
         "Not enough data in User or Film tables for seeding Commentaire_film"
       );
     }
+
+    if (
+      usersCountRow[0].count >= users.length &&
+      filmsCountRow[0].count >= films.length
+    ) {
+      await insertFilmsIntoWatchlist();
+      await insertFilmsIntoFavorites();
+    }
+
     await database.query("SET FOREIGN_KEY_CHECKS = 1");
 
     console.info(`${database.databaseName} filled from ${__filename} 🌱`);

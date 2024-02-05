@@ -1,25 +1,30 @@
+import { useLocation } from "react-router-dom";
+import ToggleSwitch from "./ToggleSwitch";
 import { useUser } from "../contexts/UserContext";
-// import ToggleSwitch from "./ToggleSwitch";
 
 function LogoContainer() {
   const { user } = useUser();
+  const location = useLocation();
 
-  return !(user && user.IsAdmin) ? (
+  return (
     <div className="logo-container">
       <img
         className="logo"
-        src="/src/assets/icons/logo.svg"
+        src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/logo.svg`}
         alt="wildtube logo"
       />
-    </div>
-  ) : (
-    <div className="logo-container">
-      <img
-        className="logo"
-        src="/src/assets/icons/logo.svg"
-        alt="wildtube logo"
-      />
-      {/* <ToggleSwitch /> */}
+      {user && user.IsAdmin ? (
+        <div className="switchContainer">
+          {!location.pathname.includes("/AjoutAdmin") &&
+            !location.pathname.includes("/connection") &&
+            !location.pathname.includes("/account/") && (
+              <>
+                <h6>Admin mode :</h6>
+                <ToggleSwitch user={user} />
+              </>
+            )}
+        </div>
+      ) : null}
     </div>
   );
 }

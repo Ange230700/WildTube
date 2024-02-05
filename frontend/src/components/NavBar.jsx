@@ -20,7 +20,11 @@ function NavBar() {
       className="navbar"
       style={
         location.pathname.includes("/movies/") ||
-        location.pathname.includes("/profil")
+        location.pathname.includes("/profil") ||
+        location.pathname.includes("/Parametre") ||
+        location.pathname.includes("/addvideos") ||
+        location.pathname.includes("/AjoutAdmin") ||
+        location.pathname.includes("/EditVideo/")
           ? {
               position: "fixed",
               bottom: "0",
@@ -37,7 +41,9 @@ function NavBar() {
           <NavLink to="/" className="div-icon">
             <img
               className="icon"
-              src="/src/assets/icons/home_icon.svg"
+              src={`${
+                import.meta.env.VITE_BACKEND_URL
+              }/assets/icons/home_icon.svg`}
               alt="home icon"
             />
           </NavLink>
@@ -46,7 +52,9 @@ function NavBar() {
           <NavLink to="/search" className="div-icon">
             <img
               className="icon"
-              src="/src/assets/icons/search_icon.svg"
+              src={`${
+                import.meta.env.VITE_BACKEND_URL
+              }/assets/icons/search_icon.svg`}
               alt="search icon"
             />
           </NavLink>
@@ -57,16 +65,22 @@ function NavBar() {
               <img
                 className="icon avatar"
                 src={
-                  user.avatar
-                    ? user.avatar
-                    : "https://avatars.githubusercontent.com/u/97165289"
+                  (user &&
+                    user.avatar_filename &&
+                    `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                      user?.avatar_filename
+                    }`) ||
+                  (user && user.avatar_url) ||
+                  "https://avatars.githubusercontent.com/u/97165289"
                 }
                 alt="avatar"
               />
             ) : (
               <img
                 className="icon"
-                src="/src/assets/icons/profile_icon.svg"
+                src={`${
+                  import.meta.env.VITE_BACKEND_URL
+                }/assets/icons/profile_icon.svg`}
                 alt="connexion"
               />
             )}

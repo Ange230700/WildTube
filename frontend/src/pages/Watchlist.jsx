@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
 import MovieLink from "../components/MovieLink";
+import { useUser } from "../contexts/UserContext";
 
 function Watchlist() {
   const { user } = useUser();
   const [watchlistItems, setWatchlistItems] = useState([]);
-
-  // console.warn("user id", user.id);
 
   useEffect(() => {
     if (user) {
@@ -30,16 +28,6 @@ function Watchlist() {
         <div className="search-bar-container">
           <h2>Watchlist</h2>
         </div>
-        {/* <div className="sort-container">
-          <button type="button" className="sort-button">
-            <p className="sort-text">Trier</p>
-            <img
-              className="sort-icon"
-              src="/src/assets/icons/sort_icon.svg"
-              alt="sort icon"
-            />
-          </button>
-        </div> */}
 
         <div className="search-result-container">
           {watchlistItems.map((favoriteMovie) => {

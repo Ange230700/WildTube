@@ -13,7 +13,9 @@ function MoviePlayer() {
         >
           <img
             className="back-arrow"
-            src="/src/assets/icons/circle-arrow-left-solid.svg"
+            src={`${
+              import.meta.env.VITE_BACKEND_URL
+            }/assets/icons/circle-arrow-left-solid.svg`}
             alt="back arrow"
           />
         </NavLink>
