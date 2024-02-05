@@ -14,7 +14,7 @@ for (let i = 0; i < userLength; i += 1) {
     email: faker.internet.email(),
     naissance: randomDate,
     civility: faker.number.binary({ min: 0, max: 1 }),
-    password: faker.internet.password(),
+    hashed_password: faker.internet.password(),
     isAdmin: 0,
     avatar: faker.image.avatarGitHub(),
   });
