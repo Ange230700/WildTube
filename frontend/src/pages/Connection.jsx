@@ -30,8 +30,12 @@ function Connection() {
       );
 
       if (result.status === 200) {
-        updateUser(result.data.user);
+        updateUser(result.data.userWithoutPassword);
         localStorage.setItem("token", result.data.token);
+
+        if (result.data.userWithoutPassword.IsAdmin) {
+          localStorage.setItem("isAdminMode", false);
+        }
         navigate("/");
       }
     } catch (err) {
@@ -39,7 +43,6 @@ function Connection() {
       console.error("Incorrect email or password");
     }
   };
-  // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   return (
     <div className="loginPage">
@@ -74,7 +77,7 @@ function Connection() {
           <div className="buttonContainer">
             <div className="connectionButton">
               <button type="submit" className="connexion">
-                connection
+                Log in
               </button>
             </div>
           </div>
@@ -84,11 +87,11 @@ function Connection() {
             You don't have an account ?<span> </span>
             <span>
               <NavLink to="/Inscription" className="inscrisToiIci">
-                Register here
+                Sign up here
               </NavLink>
             </span>
             <span> </span>
-            <span className="catalogue">to unlock the entire catalog.</span>
+            <span className="catalogue">to get access to all the movies.</span>
           </p>
         </div>
       </form>

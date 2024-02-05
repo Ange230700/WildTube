@@ -16,7 +16,7 @@ function UserProfil() {
       style={
         location.pathname.includes("/profil")
           ? {
-              marginBottom: "9.375vw",
+              marginBottom: "19.6875vw",
             }
           : {}
       }
@@ -55,7 +55,7 @@ function UserProfil() {
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to={`/account/${user && user.id}`}>
-              <h3>Account information</h3>
+              <h3>Edit my profile</h3>
             </Link>
           </div>
         </div>
@@ -65,7 +65,7 @@ function UserProfil() {
             type="button"
             onClick={handleLogOut}
           >
-            <h3>Disconnect</h3>
+            <h3>Log out</h3>
           </button>
         </div>
       </section>

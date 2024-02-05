@@ -130,40 +130,41 @@ function FreeMovie({ movie }) {
   };
 
   useEffect(() => {
-    if (user && movie.id) {
+    if (user && movie?.id) {
       checkIfFavorited(movie.id);
     }
   }, [user, movie.id]);
 
   useEffect(() => {
-    if (user && movie.id) {
+    if (user && movie?.id) {
       checkIfWatchlisted(movie.id);
     }
   }, [user, movie.id]);
 
   const handleshare = () => {
-    const movieUrl = `${import.meta.env.VITE_FRONTEND_URL}/movies/${movie.id}`;
+    const movieUrl = `${import.meta.env.VITE_BACKEND_URL}/movies/${movie?.id}`;
 
     if (navigator.share) {
       navigator.share({
-        title: movie.title,
-        text: movie.description,
+        title: movie?.title,
+        text: movie?.description,
         url: movieUrl,
       });
     } else {
-      const mailToLink = `mailto:?subject=${movie.title}&body=${movie.description} ${movieUrl}`;
+      const mailToLink = `mailto:?subject=${movie?.title}&body=${movie?.description} ${movieUrl}`;
       window.location.href = mailToLink;
     }
   };
+
   return (
     movie && (
-      <div className="movie-page-details" key={movie.id}>
+      <div className="movie-page-details" key={movie?.id}>
         <div
           className="movie-information-display"
           style={
             location.pathname.includes("/movies/")
               ? {
-                  paddingBottom: "9.375vw",
+                  paddingBottom: "19.6875vw",
                 }
               : {}
           }
@@ -172,18 +173,18 @@ function FreeMovie({ movie }) {
             <img
               className="movie-cover"
               src={
-                (movie.cover_filename &&
+                (movie?.cover_filename &&
                   `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                    movie.cover_filename
+                    movie?.cover_filename
                   }`) ||
-                movie.cover_url
+                movie?.cover_url
               }
-              alt={movie.title}
+              alt={movie?.title}
             />
             <div className="upper-layer">
               <NavLink
                 className="play-button-container"
-                to={`/moviePlayer/${movie.id}`}
+                to={`/moviePlayer/${movie?.id}`}
               >
                 <img
                   className="play-button"
@@ -197,9 +198,9 @@ function FreeMovie({ movie }) {
           </div>
           <div className="details-option-wrapper">
             <div className="details-container">
-              <p className="movie-info release-year">{movie.year}</p>
+              <p className="movie-info release-year">{movie?.year}</p>
               <p className="separator">•</p>
-              <p className="movie-info duration">{movie.duration}m</p>
+              <p className="movie-info duration">{movie?.duration}m</p>
             </div>
             {user && (
               <div className="ActionIcons">
@@ -219,7 +220,7 @@ function FreeMovie({ movie }) {
                 <button
                   className="ThumbsUpRegular1"
                   type="button"
-                  onClick={() => handleFavoriteClick(movie.id)}
+                  onClick={() => handleFavoriteClick(movie?.id)}
                 >
                   <img
                     className="favourite-icon"
@@ -253,7 +254,7 @@ function FreeMovie({ movie }) {
                 <button
                   className="ThumbsUpRegular1"
                   type="button"
-                  onClick={() => handleWatchlistClick(movie.id)}
+                  onClick={() => handleWatchlistClick(movie?.id)}
                 >
                   <img
                     className="favourite-icon"
@@ -273,10 +274,10 @@ function FreeMovie({ movie }) {
             )}
           </div>
           <div className="description-container">
-            <p className="movie-title">{movie.title}</p>
-            <p className="movie-description">{movie.description}</p>
+            <p className="movie-title">{movie?.title}</p>
+            <p className="movie-description">{movie?.description}</p>
           </div>
-          <CommentsSection filmId={movie.id} user={user} />
+          <CommentsSection filmId={movie?.id} user={user} />
         </div>
       </div>
     )

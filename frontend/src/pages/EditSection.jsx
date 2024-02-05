@@ -212,7 +212,7 @@ function EditSection() {
           className="sort-button"
           disabled={!hasChanges || isSaving}
         >
-          Save
+          Save changes
         </button>
       </form>
     </div>

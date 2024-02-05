@@ -103,9 +103,11 @@
           calc(2.5vw * 1),
           calc(var(--spacing-constant) * 1 * 1.5)
         );
+        max-width: 100vw;
 
         .Frame1 {
           flex: 1 1 0;
+
           padding: clamp(
               calc(var(--spacing-constant) * 1 / 2),
               calc(2.5vw / 2),
@@ -128,18 +130,21 @@
             calc(var(--spacing-constant) * 1.5)
           );
           display: flex;
+          flex-direction: column;
 
           .CommentText {
             color: var(--background-color);
             flex: 1;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-all;
           }
           .CommentActionButtons {
             width: 6vw;
-            padding: 2px;
-            justify-content: space-between;
+            gap: 10px;
+            justify-content: flex-start;
             height: 5vh;
             display: flex;
-            // justify-content: center;
           }
 
           .EditButton {
@@ -149,7 +154,7 @@
             padding-right: 5px;
           }
           .colorEditButton {
-            border: 2px solid green;
+            border: 2px solid var(--secondary-font-color);
             border-radius: 3px;
             animation: blink 1s infinite;
           }
@@ -159,7 +164,7 @@
               border-color: transparent;
             }
             50% {
-              border-color: green;
+              border-color: var(--secondary-font-color);
               scale: 1.2;
             }
           }
@@ -220,7 +225,7 @@
         position: relative;
         height: 100%;
 
-        .CommentInput {
+        .text {
           height: 100%;
           width: 100%;
           padding: clamp(
@@ -243,6 +248,21 @@
           justify-content: space-between;
           align-items: center;
           display: flex;
+          word-wrap: break-word;
+
+          .CommentInput {
+            border: none;
+            background: var(--text-field-background-color);
+            width: 80%;
+            resize: none;
+          }
+        }
+
+        .CommentInput2 {
+          height: 100%;
+          width: 100%;
+          border-radius: 10px;
+          background: var(--text-field-background-color);
         }
 
         .CommentInput:focus {

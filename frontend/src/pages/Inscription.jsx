@@ -199,7 +199,7 @@ function Inscription() {
                   placeholder="Password"
                 />
                 {user.password && user.password.length < 8 && (
-                  <p className="errorMessage">Min 8 characters</p>
+                  <p className="errorMessage">8 characters at least</p>
                 )}
               </div>
               <div className="inputContainer">
@@ -217,11 +217,11 @@ function Inscription() {
               </div>
             </div>
             <div className="additionalInformation">
-              <h4 className="orientation">Civilité :</h4>
+              <h4 className="orientation">Gender :</h4>
               <div className="orientationContainer">
                 <div className="orientationOption">
                   <label className="orientationText">
-                    Madam
+                    Female
                     <input
                       name="civility"
                       type="radio"
@@ -234,7 +234,7 @@ function Inscription() {
                 </div>
                 <div className="orientationOption">
                   <label className="orientationText">
-                    Sir
+                    Male
                     <input
                       name="civility"
                       type="radio"
@@ -323,7 +323,7 @@ function Inscription() {
                   user?.password !== confirmPassword
                 }
               >
-                <p className="inscription">Registration</p>
+                <p className="inscription">Sign up</p>
               </button>
             </div>
             {showModal && (

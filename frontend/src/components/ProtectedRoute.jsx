@@ -7,20 +7,19 @@ import isTokenExpired from "../utils/utils";
 function ProtectedRoute({ children }) {
   const { fetchUser, logout } = useUser();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const handleLogout = () => {
     logout(navigate);
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     if (!token || isTokenExpired(token)) {
       handleLogout();
     }
 
     fetchUser();
-  }, []);
+  }, [token, isTokenExpired(token)]);
 
   return children;
 }

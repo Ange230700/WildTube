@@ -45,20 +45,6 @@ function ParametreAdmin() {
             </Link>
           </div>
         </div>
-        {/* <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to>
-              <h3>Modifier les sections</h3>
-            </Link>
-          </div>
-        </div> */}
-        {/* <div className="Useroption">
-          <div className="RegarderPlusTard">
-            <Link to>
-              <h3>Gérer les catégories</h3>
-            </Link>
-          </div>
-        </div> */}
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/favorites">
@@ -69,21 +55,21 @@ function ParametreAdmin() {
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to={`/account/${user && user.id}`}>
-              <h3>Account information</h3>
+              <h3>Edit my profile</h3>
             </Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/watchlist">
-              <h3>To watch later</h3>
+              <h3>Watchlist</h3>
             </Link>
           </div>
         </div>
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/AjoutAdmin">
-              <h3>Add Administrators</h3>
+              <h3>Add/Remove administrators</h3>
             </Link>
           </div>
         </div>
@@ -93,7 +79,7 @@ function ParametreAdmin() {
             type="button"
             onClick={handleLogOut}
           >
-            <h3 className="h3">Disconnect</h3>
+            <h3 className="h3">Log out</h3>
           </button>
         </div>
       </section>

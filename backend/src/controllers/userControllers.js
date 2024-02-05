@@ -71,7 +71,9 @@ const getByToken = async (req, res) => {
       return;
     }
 
-    res.status(200).json(user);
+    const { hashed_password, ...userWithoutPassword } = user;
+
+    res.status(200).json(userWithoutPassword);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     console.error(err);
@@ -83,11 +85,19 @@ const getByToken = async (req, res) => {
 // Modify the edit function
 const edit = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, naissance, civility, password, avatarId } = req.body;
+  const {
+    name,
+    email,
+    naissance,
+    civility,
+    current_password,
+    new_password,
+    avatarId,
+  } = req.body;
 
   try {
     // Optional: Verify old password before updating to new one
-    const currentUser = await tables.User.read(id);
+    const [currentUser] = await tables.User.read(id);
 
     let formattedDate = naissance;
     if (!Number.isNaN(Date.parse(naissance))) {
@@ -98,9 +108,42 @@ const edit = async (req, res, next) => {
       res.status(404).json({ error: "User not found" });
     }
 
-    if (password) {
-      const hashedNewPassword = await argon2.hash(password);
-      req.body.hashed_password = hashedNewPassword;
+    console.warn("currentUser =>", currentUser);
+    console.warn("currentUser.hashed_password =>", currentUser.hashed_password);
+
+    console.warn(
+      "currentPassword && newPassword =>",
+      current_password,
+      new_password
+    );
+
+    // Ensure currentUser has a hashed_password and it's not empty
+    if (
+      !currentUser.hashed_password ||
+      typeof currentUser.hashed_password !== "string" ||
+      currentUser.hashed_password.trim() === ""
+    ) {
+      return res
+        .status(500)
+        .json({ error: "Current user password is not set properly" });
+    }
+
+    if (current_password && new_password) {
+      const isPasswordCorrect = await argon2.verify(
+        currentUser.hashed_password,
+        current_password
+      );
+      console.warn("isPasswordCorrect =>", isPasswordCorrect);
+      if (!isPasswordCorrect) {
+        return res.status(400).json({ error: "Incorrect current password" });
+      }
+
+      // Validate new password (e.g., check length)
+      if (new_password.length < 8) {
+        return res.status(400).json({ error: "New password is too short" });
+      }
+
+      req.body.hashed_password = await argon2.hash(new_password);
     }
 
     // Update user data (excluding the password if no new password is provided)
@@ -116,8 +159,7 @@ const edit = async (req, res, next) => {
     });
 
     if (!updatedUser) {
-      res.status(404).json({ error: "User not found" });
-      return;
+      return res.status(404).json({ error: "User not found" });
     }
 
     // eslint-disable-next-line camelcase
@@ -128,6 +170,8 @@ const edit = async (req, res, next) => {
     console.error(err);
     next(err);
   }
+
+  return null;
 };
 
 // The A of BREAD - Add (Create) operation
@@ -179,12 +223,14 @@ const add = async (req, res, next) => {
         { sub: newUser.id, email: newUser.email },
         process.env.APP_SECRET,
         {
-          expiresIn: "30m",
+          expiresIn: "1h",
         }
       );
+      const { hashed_password: newUserPassword, ...newUserWithoutPassword } =
+        newUser;
       res.status(201).json({
         token: userToken,
-        newUser,
+        newUserWithoutPassword,
       });
     } else {
       res.status(400).json({ error: "Unable to create user" });

@@ -66,7 +66,7 @@ function Home() {
           )}
         </button>
         <MovieGenreTabsContainer categories={categories} />
-        {isAdminMode && (
+        {(user && user.IsAdmin && isAdminMode && (
           <button
             className="add-category-container"
             type="button"
@@ -77,7 +77,8 @@ function Home() {
               alt="add"
             />
           </button>
-        )}
+        )) ||
+          null}
         {categories.map(
           (categorie) =>
             (categorie && (

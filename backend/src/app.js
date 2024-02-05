@@ -115,6 +115,7 @@ app.use("/api", router);
 // // Serve react resources
 
 app.use(express.static("./public"));
+// app.use(express.static(reactBuildPath));
 
 // // Redirect unhandled requests to the react index file
 

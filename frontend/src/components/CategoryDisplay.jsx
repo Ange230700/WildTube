@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import MovieLink from "./MovieLink";
 import { useAdminMode } from "../contexts/AdminModeContext";
+import { useUser } from "../contexts/UserContext";
 
 const responsive = {
   superLargeDesktop: {
@@ -42,6 +43,7 @@ const responsive = {
 
 function CategoryDisplay({ categorie, getCategories }) {
   const { isAdminMode } = useAdminMode();
+  const { user } = useUser();
   const [allMoviesForOneCategorie, setAllMoviesForOneCategorie] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
@@ -105,7 +107,7 @@ function CategoryDisplay({ categorie, getCategories }) {
           >
             {categorie.name}
           </h1>
-          {isAdminMode && (
+          {(user && user.IsAdmin && isAdminMode && (
             <>
               <button
                 className="add-movie-container"
@@ -132,7 +134,8 @@ function CategoryDisplay({ categorie, getCategories }) {
                 />
               </button>
             </>
-          )}
+          )) ||
+            null}
         </div>
         <Carousel
           additionalTransfrom={0}

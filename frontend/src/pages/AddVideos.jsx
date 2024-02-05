@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useMovies } from "../contexts/MovieContext";
 
 function AddVideos() {
+  const location = useLocation();
   const [file, setFile] = useState(undefined);
   const [previewFile, setPreviewFile] = useState();
   const [previewCover, setPreviewCover] = useState();
@@ -130,7 +131,17 @@ function AddVideos() {
   }, [file, cover]);
 
   return (
-    <form className="ProfileDisplaySection2" onSubmit={submit}>
+    <form
+      className="ProfileDisplaySection2"
+      onSubmit={submit}
+      style={
+        location.pathname.includes("/profil")
+          ? {
+              marginBottom: "39.375vw",
+            }
+          : {}
+      }
+    >
       <div className="SearchBarContainer">
         <h2 className="AjouterUneVideo">Add a video</h2>
       </div>

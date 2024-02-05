@@ -3,16 +3,25 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: clamp(
+    calc(var(--spacing-constant) * 2),
+    calc(2.5vw * 2),
+    calc(var(--spacing-constant) * 2 * 1.5)
+  );
+
   .titlePage {
     display: flex;
     justify-content: center;
     padding-top: 2vh;
-    padding-bottom: 2vh;
+
+    h3 {
+      padding: 0;
+    }
   }
   .containerFormMiniature {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    position: relative;
     .miniature {
       object-fit: cover;
       border-radius: 5px;
@@ -23,12 +32,13 @@
       max-width: 350px;
     }
     .min {
-      position: fixed;
+      position: absolute;
       border-radius: 5px;
       color: var(--text-field-background-color);
       font-size: 0.8rem;
       background-color: #ff509a;
       cursor: pointer;
+      bottom: 0;
       button {
         border: none;
       }
@@ -37,36 +47,98 @@
   .containerFormEdit {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
     justify-content: center;
     .edit {
       color: var(--text-field-background-color);
       border: none;
       background: rgba(238, 226, 226, 0.1);
-      height: 7vh;
+      height: clamp(
+        calc(46.75px * 1),
+        calc(14.609375vw * 1),
+        calc(46.75px * 1 * 1.5)
+      );
+      width: 80%;
+      max-width: 350px;
       padding-inline-start: 5px;
       border-radius: 10px;
       border-bottom: 1px #ff509a solid;
       &::placeholder {
         color: red;
       }
+
+      option {
+        color: var(--neutral-color-2);
+      }
     }
-    .containerCategorie {
+
+    textarea {
+      resize: none;
+      padding: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      height: clamp(
+        calc(46.75px * 2.5),
+        calc(14.609375vw * 2.5),
+        calc(46.75px * 2.5 * 1.5)
+      ) !important;
+      font-family: "Roboto Flex", sans-serif;
+    }
+
+    .categories {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      .buttonDelete {
-        all: unset;
-        .imgCroix {
-          width: 15px;
-          cursor: pointer;
+      flex-wrap: wrap;
+      width: 80%;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+
+      .containerCategorie {
+        display: flex;
+        align-items: center;
+        gap: clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        );
+        align-items: center;
+        align-items: center;
+        background-color: var(--secondary-font-color);
+        color: var(--neutral-color);
+        padding: clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        );
+        border-radius: clamp(
+          calc(var(--border-radius-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--border-radius-constant) * 1 * 1.5)
+        );
+
+        .buttonDelete {
+          display: flex;
+          align-items: center;
+          all: unset;
+          .imgCroix {
+            width: 15px;
+            cursor: pointer;
+            align-self: center;
+          }
         }
       }
     }
   }
   .containerButtonEdit {
     display: flex;
-    padding-top: 10vh;
     gap: 50px;
     justify-content: center;
     align-items: center;
