@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMovies } from "../contexts/MovieContext";
 import MovieDescription from "../components/MovieDescription";
 
 function Movie() {
   const { movieId } = useParams();
-  const { movies } = useMovies();
+  const { movies, fetchMovies } = useMovies();
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   if (!movieId) {
     return <h1>No films found.</h1>;

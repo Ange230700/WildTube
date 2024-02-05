@@ -19,7 +19,7 @@ function LogoContainer() {
             !location.pathname.includes("/connection") &&
             !location.pathname.includes("/account/") && (
               <>
-                <h6>Mode admin :</h6>
+                <h6>Admin mode :</h6>
                 <ToggleSwitch user={user} />
               </>
             )}

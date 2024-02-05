@@ -174,7 +174,7 @@ function UserProfileEditor() {
         <div className="searchDisplaySection">
           <form className="form" onSubmit={handleSubmit}>
             <div className="signUpWrapper">
-              <h3>Profil Editor</h3>
+              <h3>Edit my profile</h3>
               <div className="inputs">
                 <div className="inputContainer">
                   <input
@@ -226,7 +226,7 @@ function UserProfileEditor() {
                     placeholder="New Password"
                   />
                   {newPassword && newPassword.length < 8 && (
-                    <p className="errorMessage">Min 8 caractères</p>
+                    <p className="errorMessage">8 characters at least</p>
                   )}
                 </div>
                 <div className="inputContainer">
@@ -246,11 +246,11 @@ function UserProfileEditor() {
               </div>
 
               <div className="additionalInformation">
-                <h4 className="orientation">Civilité :</h4>
+                <h4 className="orientation">Gender :</h4>
                 <div className="orientationContainer">
                   <div className="orientationOption">
                     <label className="orientationText">
-                      Madam
+                      Female
                       <input
                         name="civility"
                         type="radio"
@@ -265,7 +265,7 @@ function UserProfileEditor() {
                   </div>
                   <div className="orientationOption">
                     <label className="orientationText">
-                      Sir
+                      Male
                       <input
                         name="civility"
                         type="radio"
@@ -336,7 +336,7 @@ function UserProfileEditor() {
               </div>
               <div className="buttonContainer">
                 <button className="signUpButton" type="submit">
-                  <p className="inscription">To modify</p>
+                  <p className="inscription">Edit</p>
                 </button>
               </div>
               {showModal && (

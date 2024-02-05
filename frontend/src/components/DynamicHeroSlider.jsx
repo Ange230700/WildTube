@@ -12,27 +12,22 @@ const responsive = {
   desktop: {
     breakpoint: { max: 1600, min: 1025 },
     items: 1,
-    // partialVisible: true,
   },
   landscapeTablet: {
     breakpoint: { max: 1024, min: 835 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
   tablet: {
     breakpoint: { max: 834, min: 769 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
   landscapeMobile: {
     breakpoint: { max: 768, min: 481 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
   mobile: {
     breakpoint: { max: 480, min: 320 },
     items: 1,
-    // partialVisibilityGutter: 0,
   },
 };
 
@@ -43,14 +38,12 @@ function DynamicHeroSlider({ movies }) {
       arrows
       autoPlay
       autoPlaySpeed={3000}
-      // centerMode
       containerClass="dynamic-hero-slider-container"
       draggable
       infinite
       itemClass="slider-item"
       keyBoardControl
       minimumTouchDrag={80}
-      // partialVisible
       removeArrowOnDeviceType={["landscapeMobile", "mobile"]}
       responsive={responsive}
       sliderClass="inner-slider-container"

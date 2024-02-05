@@ -20,7 +20,7 @@ export function MovieProvider({ children }) {
 
   useEffect(() => {
     fetchMovies();
-  }, []);
+  }, [setMovies]);
 
   const value = useMemo(
     () => ({ movies, setMovies, fetchMovies }),

@@ -179,7 +179,7 @@ function CommentsSection({ filmId }) {
                             }
                           >
                             <img
-                              src="/src/assets/icons/modifier.png"
+                              src="/assets/icons/modifier.png"
                               alt="Modifier"
                             />
                           </button>
@@ -190,7 +190,7 @@ function CommentsSection({ filmId }) {
                             disabled={isEditing}
                           >
                             <img
-                              src="/src/assets/icons/supprimer.png"
+                              src="/assets/icons/supprimer.png"
                               alt="Supprimer"
                             />
                           </button>
@@ -209,11 +209,13 @@ function CommentsSection({ filmId }) {
         <div className="CommentsInput">
           <div className="CommentContainer">
             <div className="CommentInputContainer">
-              <input
-                className="CommentInput"
-                value={commentContent} // Bind textarea to state
-                onChange={handleTextareaChange} // Handle change
-              />
+              <div className="text">
+                <input
+                  className="CommentInput"
+                  value={commentContent} // Bind textarea to state
+                  onChange={handleTextareaChange} // Handle change
+                />
+              </div>
               <button
                 disabled={editableComment}
                 type="button"
@@ -267,20 +269,7 @@ function CommentsSection({ filmId }) {
             return (
               <div className="CommentContainer" key={commentKey}>
                 {" "}
-                <div className="UserInfo">
-                  {/* <img
-                    alt={comment.username}
-                    className="Avatar2"
-                    src={
-                      comment.avatar_filename
-                        ? `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-                            comment.avatar_filename
-                          }`
-                        : comment.avatar_url
-                    }
-                  />
-                  <h6 className="Username">{comment.name}</h6> */}
-                </div>
+                <div className="UserInfo" />
                 <div className="FrameContainer">
                   <div className="Frame1">
                     <p className="CommentText">{comment.content}</p>
@@ -295,12 +284,11 @@ function CommentsSection({ filmId }) {
         )}
       </div>
 
-      {/* Let know the guest that they should log in to write comments */}
       <div className="CommentsInput">
         <div className="CommentContainer">
           <div className="CommentInputContainer">
-            <textarea
-              className="CommentInput"
+            <input
+              className="CommentInput2"
               placeholder="Log in to leave a comment"
               disabled
             />

@@ -14,7 +14,6 @@ function AddSection() {
   const [searchValue, setSearchValue] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [selectedMovies, setSelectedMovies] = useState(new Set());
-  // const [isSaving, setIsSaving] = useState(false);
   const navigate = useNavigate();
 
   function handleSearchChange(event) {
@@ -35,9 +34,6 @@ function AddSection() {
           }
         );
 
-        // if (result.status === 200) {
-        // }
-        console.warn("categoryName =>", categoryName);
         toast.success("Category created");
         return result.data.id;
       } catch (error) {
@@ -55,7 +51,6 @@ function AddSection() {
 
     try {
       const newCategoryId = await addCategory();
-      console.warn("newCategoryId =>", newCategoryId);
 
       if (newCategoryId) {
         const movieAddPromises = Array.from(selectedMovies).map((movieId) =>

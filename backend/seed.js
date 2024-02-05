@@ -104,28 +104,23 @@ async function insertAdmin() {
 
 async function insertUsers() {
   try {
-    const queries = [];
-    for (let i = 0; i < users.length; i += 1) {
-      const { password } = users[i];
-      const hashedPassword = argon2.hash(password); // Hash the password
+    const queries = users.map(async (user) => {
+      const hashedPassword = await argon2.hash(user.hashed_password);
 
-      queries.push(
-        hashedPassword.then((hashed) => {
-          return database.query(
-            "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatarId`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [
-              users[i].name,
-              users[i].email,
-              users[i].naissance,
-              users[i].civility,
-              hashed,
-              0,
-              faker.number.int({ min: 1, max: avatars.length }),
-            ]
-          );
-        })
+      return database.query(
+        "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatarId`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [
+          user.name,
+          user.email,
+          user.naissance,
+          user.civility,
+          hashedPassword,
+          user.IsAdmin,
+          user.avatarId,
+        ]
       );
-    }
+    });
+
     await Promise.all(queries);
   } catch (err) {
     console.error("Error inserting users:", err.message);

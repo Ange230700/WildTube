@@ -1,10 +1,11 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 
 const { faker } = require("@faker-js/faker");
+const avatars = require("./avatars");
 
 const users = [];
 
-const userLength = 15;
+const userLength = 2;
 
 for (let i = 0; i < userLength; i += 1) {
   const randomDate = faker.date.past().toISOString().split("T")[0];
@@ -15,8 +16,8 @@ for (let i = 0; i < userLength; i += 1) {
     naissance: randomDate,
     civility: faker.number.binary({ min: 0, max: 1 }),
     hashed_password: faker.internet.password(),
-    isAdmin: 0,
-    avatar: faker.image.avatarGitHub(),
+    IsAdmin: 0,
+    avatarId: faker.number.int({ min: 1, max: avatars.length }),
   });
 }
 

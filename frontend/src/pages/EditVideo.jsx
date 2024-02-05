@@ -129,7 +129,7 @@ function EditVideo() {
       );
       if (response.status === 204) {
         toast.success("Edited video");
-        navigate("/");
+        navigate(`/movies/${movieId}`);
       } else {
         toast.error("A problem appeared");
       }
@@ -167,8 +167,6 @@ function EditVideo() {
     return video.miniature_url;
   };
 
-  console.warn(imageSrc());
-
   return (
     <div
       className="ContainerEditVideo"
@@ -188,12 +186,10 @@ function EditVideo() {
         <input type="file" className="min" onChange={handleFileChange} />
       </form>
       <form className="containerFormEdit">
-        {/* <label htmlFor="title">titre</label> */}
         <input
           className="edit"
           name="title"
           type="text"
-          // id="title"
           value={video.title}
           onChange={handleInputChange}
         />

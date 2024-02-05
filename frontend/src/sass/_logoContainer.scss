@@ -21,6 +21,9 @@
         calc(2.09375vw * 1),
         calc(0.67em * 1 * 1.5)
       );
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      max-width: 60px;
     }
   }
 }

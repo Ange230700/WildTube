@@ -24,6 +24,12 @@ function AjoutAdmin() {
       toast.error("You cannot delete your own account");
       return;
     }
+
+    if (user.name === "Admin") {
+      toast.error("You cannot modify the super admin's status.");
+      return;
+    }
+
     if (user !== null) {
       try {
         await axios.put(
@@ -40,8 +46,8 @@ function AjoutAdmin() {
         }
 
         fetch();
-      } catch (e) {
-        console.error("Error updating user", e);
+      } catch (err) {
+        console.error("Error updating user", err);
       }
     }
   };
@@ -53,7 +59,7 @@ function AjoutAdmin() {
   return (
     <div className="ContainerAjoutAdmin">
       <div className="NamePage">
-        <h3>Add Administrators</h3>
+        <h3>Add administrators</h3>
       </div>
       <div className="containerUser">
         {users.map((userItem) => (
