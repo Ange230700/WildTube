@@ -20,7 +20,9 @@ function MovieSlide({ movie }) {
         <div className="lock-icon-container">
           <img
             className="lock-icon"
-            src="/src/assets/icons/lock_icon.svg"
+            src={`${
+              import.meta.env.VITE_BACKEND_URL
+            }/assets/icons/lock_icon.svg`}
             alt="lock icon"
           />
         </div>

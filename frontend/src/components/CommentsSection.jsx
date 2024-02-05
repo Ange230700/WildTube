@@ -128,7 +128,9 @@ function CommentsSection({ filmId, user }) {
                 <img
                   alt="Send"
                   className="Vector"
-                  src="/src/assets/icons/vector.svg"
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/vector.svg`}
                 />
               </button>
             </div>
@@ -204,7 +206,9 @@ function CommentsSection({ filmId, user }) {
               <img
                 alt="Send"
                 className="Vector"
-                src="/src/assets/icons/vector.svg"
+                src={`${
+                  import.meta.env.VITE_BACKEND_URL
+                }/assets/icons/vector.svg`}
               />
             </button>
           </div>

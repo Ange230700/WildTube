@@ -28,7 +28,7 @@ function Search() {
             <p className="sort-text">Trier</p>
             <img
               className="sort-icon"
-              src="/src/assets/icons/sort_icon.svg"
+              src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/sort_icon.svg"
               alt="sort icon"
             />
           </button>

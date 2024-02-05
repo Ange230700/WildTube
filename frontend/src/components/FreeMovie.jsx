@@ -159,7 +159,9 @@ function FreeMovie({ movie }) {
             >
               <img
                 className="play-button"
-                src="/src/assets/icons/play_button_icon.svg"
+                src={`${
+                  import.meta.env.VITE_BACKEND_URL
+                }/assets/icons/play_button_icon.svg`}
                 alt="play button"
               />
             </NavLink>
@@ -182,8 +184,8 @@ function FreeMovie({ movie }) {
                   className="favourite-icon"
                   src={
                     !isFavorited
-                      ? "/src/assets/icons/favourite-icon.svg"
-                      : "/src/assets/icons/thumbs-up-solid.svg"
+                      ? "/assets/icons/favourite-icon.svg"
+                      : "/assets/icons/thumbs-up-solid.svg"
                   }
                   alt="favourite icon"
                 />
@@ -197,8 +199,8 @@ function FreeMovie({ movie }) {
                   className="favourite-icon"
                   src={
                     !isWatchlisted
-                      ? "/src/assets/icons/watchlist-icon.svg"
-                      : "/src/assets/icons/check-solid.svg"
+                      ? "/assets/icons/watchlist-icon.svg"
+                      : "/assets/icons/check-solid.svg"
                   }
                   alt="watchlist icon"
                 />

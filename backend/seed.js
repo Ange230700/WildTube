@@ -38,41 +38,41 @@ async function insertAdmin() {
   }
 }
 
-// async function insertUsers() {
-//   try {
-//     const queries = [];
-//     for (let i = 0; i < 5; i += 1) {
-//       const randomDate = faker.date
-//         .past()
-//         .toISOString()
-//         .slice(0, 19)
-//         .replace("T", " ");
-//       const password = faker.internet.password(); // Generate a random password
-//       const hashedPassword = argon2.hash(password); // Hash the password
+async function insertUsers() {
+  try {
+    const queries = [];
+    for (let i = 0; i < 5; i += 1) {
+      const randomDate = faker.date
+        .past()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
+      const password = faker.internet.password(); // Generate a random password
+      const hashedPassword = argon2.hash(password); // Hash the password
 
-//       queries.push(
-//         hashedPassword.then((hashed) => {
-//           return database.query(
-//             "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-//             [
-//               faker.person.firstName(),
-//               faker.internet.email(),
-//               randomDate,
-//               faker.number.binary({ min: 0, max: 1 }),
-//               hashed,
-//               0,
-//               faker.image.avatarGitHub(),
-//             ]
-//           );
-//         })
-//       );
-//     }
-//     await Promise.all(queries);
-//   } catch (err) {
-//     console.error("Error inserting users:", err.message);
-//     throw err; // Re-throw the error to be caught in the main seed function
-//   }
-// }
+      queries.push(
+        hashedPassword.then((hashed) => {
+          return database.query(
+            "INSERT INTO `User` (`name`, `email`, `naissance`, `civility`, `hashed_password`, `IsAdmin`, `avatar`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [
+              faker.person.firstName(),
+              faker.internet.email(),
+              randomDate,
+              faker.number.binary({ min: 0, max: 1 }),
+              hashed,
+              0,
+              faker.image.avatarGitHub(),
+            ]
+          );
+        })
+      );
+    }
+    await Promise.all(queries);
+  } catch (err) {
+    console.error("Error inserting users:", err.message);
+    throw err; // Re-throw the error to be caught in the main seed function
+  }
+}
 
 async function insertFilms() {
   // Similar to insertUsers, but for the Film table
@@ -177,7 +177,7 @@ async function seed() {
     await database.query("TRUNCATE `Commentaire_film`");
 
     await insertAdmin();
-    // await insertUsers();
+    await insertUsers();
     await insertFilms();
     await insertCategories();
 

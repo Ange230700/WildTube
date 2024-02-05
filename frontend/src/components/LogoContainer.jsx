@@ -8,7 +8,7 @@ function LogoContainer() {
     <div className="logo-container">
       <img
         className="logo"
-        src="/src/assets/icons/logo.svg"
+        src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/logo.svg`}
         alt="wildtube logo"
       />
     </div>
@@ -16,7 +16,7 @@ function LogoContainer() {
     <div className="logo-container">
       <img
         className="logo"
-        src="/src/assets/icons/logo.svg"
+        src={`${import.meta.env.VITE_BACKEND_URL}/assets/icons/logo.svg`}
         alt="wildtube logo"
       />
       {/* <ToggleSwitch /> */}

@@ -18,7 +18,9 @@ function MovieLoginRequired({ movie }) {
               <div className="play-button-container">
                 <img
                   className="play-button"
-                  src="/src/assets/icons/play_button_icon.svg"
+                  src={`${
+                    import.meta.env.VITE_BACKEND_URL
+                  }/assets/icons/play_button_icon.svg`}
                   alt="play button"
                 />
               </div>
