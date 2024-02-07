@@ -33,7 +33,7 @@
         right: 0;
         bottom: 0;
 
-        .play-button-container {
+        X .play-button-container {
           width: clamp(
             calc(var(--movie-slide-min-width, 34px) * 1),
             var(--movie-slide-preferred-width, 10vw),
@@ -225,6 +225,10 @@
         border-radius: var(--border-radius-constant, 10px);
         width: 90%;
         margin: 0 auto;
+
+        .login-link {
+          text-decoration: none;
+        }
 
         .registration-invitation {
           font-size: calc(var(--font-size-constant) * 2);

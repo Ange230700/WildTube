@@ -108,15 +108,6 @@ const edit = async (req, res, next) => {
       res.status(404).json({ error: "User not found" });
     }
 
-    console.warn("currentUser =>", currentUser);
-    console.warn("currentUser.hashed_password =>", currentUser.hashed_password);
-
-    console.warn(
-      "currentPassword && newPassword =>",
-      current_password,
-      new_password
-    );
-
     // Ensure currentUser has a hashed_password and it's not empty
     if (
       !currentUser.hashed_password ||
@@ -133,7 +124,7 @@ const edit = async (req, res, next) => {
         currentUser.hashed_password,
         current_password
       );
-      console.warn("isPasswordCorrect =>", isPasswordCorrect);
+
       if (!isPasswordCorrect) {
         return res.status(400).json({ error: "Incorrect current password" });
       }

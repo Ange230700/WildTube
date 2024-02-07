@@ -19,7 +19,6 @@ const count = async (request, response, next) => {
   try {
     // Fetch all items from the database
     const categories = await tables.Categorie.count();
-    console.warn(categories);
 
     // Respond with the items in JSON format
     response.json(categories);

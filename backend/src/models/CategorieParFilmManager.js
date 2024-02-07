@@ -20,8 +20,6 @@ class CategorieParFilmManager extends AbstractManager {
 
       arrDep.push(filmId, catId, unique_key);
     });
-    // console.log("querySQL =>", querySQL);
-    // console.log("arrDep =>", arrDep);
 
     // Execute the SQL INSERT query to add a new categorieParFilm to the "categorieParFilm" table
     const result = await this.database.query(`${querySQL};`, arrDep);
