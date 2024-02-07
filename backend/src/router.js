@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Import itemControllers module for handling item-related operations
 
-const { uploadImages } = require("./services/multer");
+const { uploadImages, uploadImages2 } = require("./services/multer");
 const { hashPassword, verifyToken } = require("./services/auth");
 
 const userControllers = require("./controllers/userControllers");
@@ -21,6 +21,8 @@ const categorieParFilmControllers = require("./controllers/categorieParFilmContr
 const commentaireFilmControllers = require("./controllers/commentaireFilmControllers");
 
 const authControllers = require("./controllers/authControllers");
+
+// § It seems that, when trying to upload an image for editing a film, the image is not being uploaded. The image is being uploaded when adding a new film, but not when editing an existing film (see the edit method in filmControllers.js). This is likely due to the fact that the edit method in filmControllers.js is not using the uploadImages2 middleware. How to fix this? Should we use the uploadImages2 middleware in the edit method in filmControllers.js? If so, how to do it? If not, what is the correct way to fix this issue?
 
 // Route to get a list of items
 router.get("/users", userControllers.browse);
@@ -65,7 +67,14 @@ router.get("/category/:id", categorieControllers.read);
 // Route to edit a specific item by ID
 router.put("/user/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
-router.put("/films/:id", filmControllers.edit);
+router.put(
+  "/films/:id",
+  uploadImages2.fields([
+    { name: "miniature", maxCount: 1 },
+    { name: "cover", maxCount: 1 },
+  ]),
+  filmControllers.edit
+);
 router.put("/category/:id", categorieControllers.edit);
 
 // Route to add a new item

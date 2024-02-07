@@ -48,7 +48,7 @@ function UserProfil() {
         <div className="Useroption">
           <div className="RegarderPlusTard">
             <Link to="/watchlist">
-              <h3>To watch later</h3>
+              <h3>Watchlist</h3>
             </Link>
           </div>
         </div>

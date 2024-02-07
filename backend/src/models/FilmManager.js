@@ -47,6 +47,7 @@ class FilmManager extends AbstractManager {
   async update({
     id,
     miniature_filename,
+    cover_filename,
     title,
     videoUrl,
     duration,
@@ -55,9 +56,10 @@ class FilmManager extends AbstractManager {
     IsAvailable,
   }) {
     const [result] = await this.database.query(
-      `update ${this.table} SET miniature_filename=?, title=?, videoUrl=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
+      `update ${this.table} SET miniature_filename=?, cover_filename=?, title=?, videoUrl=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
       [
         miniature_filename,
+        cover_filename,
         title,
         videoUrl,
         duration,

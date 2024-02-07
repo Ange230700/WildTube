@@ -1,5 +1,7 @@
 const tables = require("../tables");
 
+// % How to retrieve the uploaded file from the request object in the edit method?
+
 const browse = async (req, res, next) => {
   try {
     const films = await tables.Film.readAll();
@@ -25,6 +27,19 @@ const read = async (req, res, next) => {
 const edit = async (req, res, next) => {
   const { id } = req.params;
   req.body.id = id;
+
+  console.warn("req.body.cover in edit", req.body.cover);
+
+  if (req.files.cover && req.files.cover[0]) {
+    req.body.cover_filename = req.files.cover[0].filename;
+  }
+
+  console.warn("req.body.miniature in edit", req.body.miniature);
+
+  if (req.files.miniature && req.files.miniature[0]) {
+    req.body.miniature_filename = req.files.miniature[0].filename;
+  }
+
   try {
     const result = await tables.Film.update(req.body);
     if (result) {
@@ -39,6 +54,8 @@ const edit = async (req, res, next) => {
 };
 
 const add = async (req, res, next) => {
+  console.warn("req.body.images in add", req.body.images);
+
   if (req.body.images.length === 2) {
     const miniature = req.body.images[0];
     const cover = req.body.images[1];
@@ -66,17 +83,6 @@ const add = async (req, res, next) => {
         filmId: insertId,
         categoriesIds,
       });
-
-      // Utiliser Promise.all pour paralléliser les opérations asynchrones
-      // const response = await Promise.all(
-      //   categories.map(async (category) => {
-      //     // Appeler la fonction asynchrone pour la liaison catégorie-film
-      //     await tables.categorie_par_film.create({
-      //       filmId: insertId,
-      //       categorieId: category.id,
-      //     });
-      //   })
-      // );
 
       if (response) {
         res.status(200).json({ insertId });

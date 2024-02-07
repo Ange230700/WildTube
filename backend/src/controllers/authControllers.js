@@ -16,7 +16,6 @@ const login = async (req, res, next) => {
         user.hashed_password,
         req.body.password
       );
-      console.warn("verified =>", verified);
 
       if (verified) {
         // delete user.hashed_password;
