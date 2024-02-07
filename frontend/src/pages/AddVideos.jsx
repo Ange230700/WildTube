@@ -11,7 +11,6 @@ function AddVideos() {
   const [file, setFile] = useState(undefined);
   const [previewFile, setPreviewFile] = useState();
   const [previewCover, setPreviewCover] = useState();
-  const [previewVideo, setPreviewVideo] = useState();
   const [cover, setCover] = useState(undefined);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
@@ -69,7 +68,7 @@ function AddVideos() {
         duration ||
         isAvailable) === (undefined || "" || false)
     ) {
-      toast.error("champ manquant");
+      toast.error("Missing fields");
     } else if (isAvailable === "utilisateur") {
       setIsAvailable(true);
     } else if (isAvailable === "visiteur") {
@@ -133,10 +132,6 @@ function AddVideos() {
       const objectUrlCover = URL.createObjectURL(cover);
       setPreviewCover(objectUrlCover);
     }
-    if (videoFilename) {
-      const objectUrlVideo = URL.createObjectURL(videoFilename);
-      setPreviewVideo(objectUrlVideo);
-    }
   }, [file, cover]);
 
   return (
@@ -156,14 +151,43 @@ function AddVideos() {
       </div>
       <div className="Emptyfieldscontainer">
         <div className="Imageuploadercontainer">
-          <div className="inputContainer">
-            <input
-              type="text"
-              name="name"
-              className="input"
-              onChange={(e) => setVideoUrl(e.target.value)}
-              placeholder="lien de la video"
-            />
+          <div
+            style={{
+              display: "flex",
+              gap: "20px",
+              alignItems: "center",
+            }}
+            className="someContainer"
+          >
+            <div className="inputContainer">
+              <input
+                type="text"
+                name="name"
+                className="input"
+                onChange={(e) => setVideoUrl(e.target.value)}
+                placeholder="video url"
+              />
+            </div>
+            <p
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              Or
+            </p>
+            <div className="Outlineimageuploader">
+              <div className="Frame4">
+                <h4 className="AjouterUneMiniature">Add a video file</h4>
+              </div>
+              <input
+                className="input"
+                onChange={(e) => setVideoFilename(e.target.files[0])}
+                type="file"
+                accept="video/*"
+              />
+            </div>
           </div>
           <div className="Outlineimageuploader">
             <div className="Frame4">
@@ -191,20 +215,6 @@ function AddVideos() {
               onChange={(e) => setCover(e.target.files[0])}
               type="file"
               accept="image/*"
-            />
-          </div>
-          <div className="Outlineimageuploader">
-            <div className="Frame4">
-              <h4 className="AjouterUneMiniature">Add a video file</h4>
-              <div className="imageContainer2">
-                {previewVideo && <img src={previewVideo} alt="videoFile" />}
-              </div>
-            </div>
-            <input
-              className="input"
-              onChange={(e) => setVideoFilename(e.target.files[0])}
-              type="file"
-              accept="video/*"
             />
           </div>
         </div>

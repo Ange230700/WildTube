@@ -21,8 +21,6 @@ const imagesStorage = multer.diskStorage({
     if (req.body.miniature) {
       req.body.miniature = name;
     }
-
-    console.warn("req.body.images in imagesStorage", req.body.images);
     cb(null, name);
   },
 });
@@ -44,9 +42,6 @@ const imagesStorage2 = multer.diskStorage({
     if (req.body.miniature) {
       req.body.miniature = name;
     }
-
-    console.warn("req.body.cover in imagesStorage", req.body.cover);
-    console.warn("req.body.miniature in imagesStorage", req.body.miniature);
     cb(null, name);
   },
 });

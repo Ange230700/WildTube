@@ -34,17 +34,7 @@ function MoviePlayer() {
               const videoId = new URL(movie.videoUrl).searchParams.get("v");
               embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&start=0&end=30&loop=1`;
             }
-            return movie.videoUrl ? (
-              <iframe
-                key={movie.id}
-                className="movie-player-iframe"
-                src={embedUrl}
-                title={movie.title}
-                frameBorder="0"
-                allowFullScreen
-                loading="lazy"
-              />
-            ) : (
+            return movie.videoFilename ? (
               <video
                 key={movie.id}
                 className="movie-player-iframe"
@@ -56,6 +46,16 @@ function MoviePlayer() {
                   movie.videoFilename
                 }`}
                 type="video/mp4"
+              />
+            ) : (
+              <iframe
+                key={movie.id}
+                className="movie-player-iframe"
+                src={embedUrl}
+                title={movie.title}
+                frameBorder="0"
+                allowFullScreen
+                loading="lazy"
               />
             );
           })}

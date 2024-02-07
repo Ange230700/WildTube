@@ -61,7 +61,7 @@ class FilmManager extends AbstractManager {
     IsAvailable,
   }) {
     const [result] = await this.database.query(
-      `update ${this.table} SET miniature_filename=?, cover_filename=?, title=?, videoUrl=?, videoFilename=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
+      `update ${this.table} SET miniature_filename = COALESCE(?, miniature_filename), cover_filename = COALESCE(?, cover_filename), title = COALESCE(?, title), videoUrl = COALESCE(?, videoUrl), videoFilename = COALESCE(?, videoFilename), duration = COALESCE(?, duration), year = COALESCE(?, year), description = COALESCE(?, description), IsAvailable = COALESCE(?, IsAvailable) where id=?`,
       [
         miniature_filename,
         cover_filename,

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useMovies } from "../contexts/MovieContext";
 
-// § The user should be able to decide if he wanna upload a video or use a youtube link to edit a video.
+// § When uploading a video, I would like to see a preview of the video being a snapshot of the video. How can I do that?
 
 function EditVideo() {
   const { movieId } = useParams();
@@ -36,7 +36,7 @@ function EditVideo() {
         `${import.meta.env.VITE_BACKEND_URL}/api/categoriesParFilm/${uniqueKey}`
       );
       if (response.status === 200) {
-        toast.success("Success");
+        toast.success("Success deleting category");
         setCategorieVideo((prevCategorieVideo) =>
           prevCategorieVideo.filter(
             (categorie) => categorie.unique_key !== uniqueKey
@@ -44,7 +44,7 @@ function EditVideo() {
         );
       }
     } catch (e) {
-      console.error("Error deleting", e);
+      console.error("Error deleting category", e);
     }
   };
 
@@ -147,7 +147,7 @@ function EditVideo() {
         }
       );
       if (response.status === 201) {
-        toast.success("Success");
+        toast.success("Success adding category");
         fetchCategorieVideo();
       }
     } catch (e) {
@@ -178,7 +178,7 @@ function EditVideo() {
         }
       );
       if (response.status === 204) {
-        toast.success("Success");
+        toast.success("Success editing video");
         if (selectedFile) URL.revokeObjectURL(selectedFile);
         if (selectedFile2) URL.revokeObjectURL(selectedFile2);
         if (selectedFile3) URL.revokeObjectURL(selectedFile3);
@@ -195,7 +195,7 @@ function EditVideo() {
         `${import.meta.env.VITE_BACKEND_URL}/api/films/${movieId}`
       );
       if (response.status === 200) {
-        toast.success("Success");
+        toast.success("Success deleting video");
         navigate("/");
       }
     } catch (e) {
@@ -231,21 +231,6 @@ function EditVideo() {
       );
     }
     return video?.miniature_url;
-  };
-
-  const imageSrc3 = () => {
-    if (selectedFile3) {
-      return URL.createObjectURL(selectedFile3);
-    }
-    if (video.videoFilename) {
-      return (
-        video.videoFilename &&
-        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-          video?.videoFilename
-        }`
-      );
-    }
-    return video?.videoUrl;
   };
 
   useEffect(() => {
@@ -298,15 +283,6 @@ function EditVideo() {
           accept="image/*"
         />
       </div>
-      <div className="containerFormMiniature">
-        <img className="miniature" src={imageSrc3()} alt="videoFilename" />
-        <input
-          type="file"
-          className="min"
-          onChange={handleFileChange3 || ""}
-          accept="video/*"
-        />
-      </div>
       <div className="containerFormEdit">
         <input
           className="edit"
@@ -314,27 +290,49 @@ function EditVideo() {
           type="text"
           value={video?.title}
           onChange={handleInputChange || ""}
+          placeholder="Title"
         />
-        <input
-          className="edit"
-          type="text"
-          name="cover"
-          value={video?.cover}
-          onChange={handleInputChange || ""}
-        />
-        <input
-          className="edit"
-          type="text"
-          name="videoUrl"
-          value={video?.videoUrl}
-          onChange={handleInputChange || ""}
-        />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            justifyContent: "center",
+            gap: "3rem",
+          }}
+          className="someContainer"
+        >
+          <input
+            className="edit"
+            type="text"
+            name="videoUrl"
+            value={video?.videoUrl}
+            onChange={handleInputChange || ""}
+            placeholder="Youtube URL"
+          />
+          <p
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              color: "white",
+            }}
+          >
+            Or
+          </p>
+          <input
+            type="file"
+            className="min"
+            onChange={handleFileChange3 || ""}
+            accept="video/*"
+          />
+        </div>
         <input
           className="edit"
           type="text"
           name="duration"
           value={video?.duration}
           onChange={handleInputChange || ""}
+          placeholder="Duration"
         />
         <input
           className="edit"
@@ -342,6 +340,7 @@ function EditVideo() {
           name="year"
           value={video?.year}
           onChange={handleInputChange || ""}
+          placeholder="Year"
         />
         <textarea
           className="edit"
@@ -349,6 +348,7 @@ function EditVideo() {
           name="description"
           value={video?.description}
           onChange={handleInputChange || ""}
+          placeholder="Description"
         />
         <div className="categories">
           {categorieVideo.map((categorie) => (

@@ -28,13 +28,9 @@ const edit = async (req, res, next) => {
   const { id } = req.params;
   req.body.id = id;
 
-  console.warn("req.body.cover in edit", req.body.cover);
-
   if (req.files.cover && req.files.cover[0]) {
     req.body.cover_filename = req.files.cover[0].filename;
   }
-
-  console.warn("req.body.miniature in edit", req.body.miniature);
 
   if (req.files.miniature && req.files.miniature[0]) {
     req.body.miniature_filename = req.files.miniature[0].filename;
@@ -58,8 +54,6 @@ const edit = async (req, res, next) => {
 };
 
 const add = async (req, res, next) => {
-  console.warn("req.body.images in add", req.body.images);
-
   if (req.files.cover && req.files.cover[0]) {
     req.body.cover_filename = req.files.cover[0].filename;
   }
