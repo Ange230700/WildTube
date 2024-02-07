@@ -41,6 +41,20 @@ h3 {
             display: flex;
             max-width: 500px;
             position: relative;
+            background: rgba(238, 226, 226, 0.1);
+
+            border-radius: 6px;
+            overflow: hidden;
+            border-bottom: 1px #ff509a solid;
+            align-items: center;
+
+            button {
+              margin: 5px;
+              padding: 4px;
+              border: none;
+              border-radius: 4px;
+              outline: none;
+            }
 
             .input {
               width: 63vw;
@@ -48,11 +62,7 @@ h3 {
               border: none;
               height: 7vh;
               padding: 10px;
-              background: rgba(238, 226, 226, 0.1);
-              border-radius: 6px;
-              overflow: hidden;
-              border-bottom: 1px #ff509a solid;
-              align-items: center;
+              background: transparent;
               display: flex;
               &::placeholder {
                 color: var(--text-field-background-color);
