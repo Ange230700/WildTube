@@ -4,13 +4,12 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useMovies } from "../contexts/MovieContext";
 
-// § On this page, the user can edit a video. The user should be able to upload a new cover and a new miniature. I fail to handle the image upload. I tried to use the URL.createObjectURL(file) method to display the image before uploading it to the server.
+// § The user should be able to decide if he wanna upload a video or use a youtube link to edit a video.
 
 function EditVideo() {
   const { movieId } = useParams();
   const { movies } = useMovies();
   const movie = movies.find((m) => m.id === parseInt(movieId, 10));
-  console.warn("movie", movie && movie);
   const location = useLocation();
   const [categories, setCategories] = useState([]);
   const [categorieVideo, setCategorieVideo] = useState([]);
@@ -18,6 +17,7 @@ function EditVideo() {
   const [video, setVideo] = useState({
     title: "",
     videoUrl: "",
+    videoFilename: "",
     duration: "",
     year: "",
     description: "",
@@ -28,6 +28,7 @@ function EditVideo() {
   });
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFile2, setSelectedFile2] = useState(null);
+  const [selectedFile3, setSelectedFile3] = useState(null);
 
   const handleDeleteCategorie = async (uniqueKey) => {
     try {
@@ -72,13 +73,8 @@ function EditVideo() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.warn("file in handleFileChange function => ", file);
     if (file) {
       setSelectedFile(file);
-      console.warn(
-        "URL.createObjectURL(file) in handleFileChange function => ",
-        URL.createObjectURL(file)
-      );
       setVideo((prevVideo) => ({
         ...prevVideo,
         // cover_filename: URL.createObjectURL(file),
@@ -89,16 +85,23 @@ function EditVideo() {
 
   const handleFileChange2 = (e) => {
     const file = e.target.files[0];
-    console.warn("file2 in handleFileChange2 function => ", file);
     if (file) {
       setSelectedFile2(file);
-      console.warn(
-        "URL.createObjectURL(file2) in handleFileChange2 function => ",
-        URL.createObjectURL(file)
-      );
       setVideo((prevVideo) => ({
         ...prevVideo,
         // miniature_filename: URL.createObjectURL(file),
+        images: file,
+      }));
+    }
+  };
+
+  const handleFileChange3 = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile3(file);
+      setVideo((prevVideo) => ({
+        ...prevVideo,
+        // videoFilename: URL.createObjectURL(file),
         images: file,
       }));
     }
@@ -162,6 +165,7 @@ function EditVideo() {
       formData.append("description", video.description);
       if (selectedFile) formData.append("cover", selectedFile);
       if (selectedFile2) formData.append("miniature", selectedFile2);
+      if (selectedFile3) formData.append("videoFile", selectedFile3);
       formData.append("IsAvailable", movie?.IsAvailable);
       formData.append("categorie", video.categorie);
       const response = await axios.put(
@@ -177,6 +181,7 @@ function EditVideo() {
         toast.success("Success");
         if (selectedFile) URL.revokeObjectURL(selectedFile);
         if (selectedFile2) URL.revokeObjectURL(selectedFile2);
+        if (selectedFile3) URL.revokeObjectURL(selectedFile3);
         navigate(`/movies/${movieId}`);
       }
     } catch (err) {
@@ -198,15 +203,8 @@ function EditVideo() {
     }
   };
 
-  console.warn("selectedFile before imageSrc", selectedFile2);
-  console.warn("video.cover_filename before imageSrc", video.cover_filename);
   const imageSrc = () => {
     if (selectedFile) {
-      console.warn("selectedFile in imageSrc", selectedFile);
-      console.warn(
-        "URL.createObjectURL(selectedFile) in imageSrc",
-        URL.createObjectURL(selectedFile)
-      );
       return URL.createObjectURL(selectedFile);
     }
     if (video.cover_filename) {
@@ -220,18 +218,8 @@ function EditVideo() {
     return video.cover_url;
   };
 
-  console.warn("selectedFile2 before imageSrc2", selectedFile2);
-  console.warn(
-    "video.miniature_filename before imageSrc2",
-    video.miniature_filename
-  );
   const imageSrc2 = () => {
     if (selectedFile2) {
-      console.warn("selectedFile2 in imageSrc2", selectedFile2);
-      console.warn(
-        "URL.createObjectURL(selectedFile2) in imageSrc2",
-        URL.createObjectURL(selectedFile2)
-      );
       return URL.createObjectURL(selectedFile2);
     }
     if (video.miniature_filename) {
@@ -245,6 +233,21 @@ function EditVideo() {
     return video?.miniature_url;
   };
 
+  const imageSrc3 = () => {
+    if (selectedFile3) {
+      return URL.createObjectURL(selectedFile3);
+    }
+    if (video.videoFilename) {
+      return (
+        video.videoFilename &&
+        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+          video?.videoFilename
+        }`
+      );
+    }
+    return video?.videoUrl;
+  };
+
   useEffect(() => {
     return () => {
       if (selectedFile) {
@@ -252,6 +255,9 @@ function EditVideo() {
       }
       if (selectedFile2) {
         URL.revokeObjectURL(selectedFile2);
+      }
+      if (selectedFile3) {
+        URL.revokeObjectURL(selectedFile3);
       }
     };
   }, [selectedFile, selectedFile2]);
@@ -284,12 +290,21 @@ function EditVideo() {
         />
       </div>
       <div className="containerFormMiniature">
-        <img className="miniature" src={imageSrc()} alt="Miniature" />
+        <img className="miniature" src={imageSrc()} alt="cover" />
         <input
           type="file"
           className="min"
           onChange={handleFileChange || ""}
           accept="image/*"
+        />
+      </div>
+      <div className="containerFormMiniature">
+        <img className="miniature" src={imageSrc3()} alt="videoFilename" />
+        <input
+          type="file"
+          className="min"
+          onChange={handleFileChange3 || ""}
+          accept="video/*"
         />
       </div>
       <div className="containerFormEdit">

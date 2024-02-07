@@ -1,5 +1,7 @@
 const AbstractManager = require("./AbstractManager");
 
+// § Add videoFilename field in each method of the FilmManager class.
+
 class FilmManager extends AbstractManager {
   constructor() {
     super({ table: "Film" });
@@ -10,18 +12,20 @@ class FilmManager extends AbstractManager {
     cover_filename,
     title,
     videoUrl,
+    videoFilename,
     duration,
     year,
     description,
     isAvailable,
   }) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (miniature_filename, cover_filename, title, videoUrl, duration, year, description, isAvailable) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (miniature_filename, cover_filename, title, videoUrl, videoFilename, duration, year, description, isAvailable) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         miniature_filename,
         cover_filename,
         title,
         videoUrl,
+        videoFilename,
         duration,
         year,
         description,
@@ -50,18 +54,20 @@ class FilmManager extends AbstractManager {
     cover_filename,
     title,
     videoUrl,
+    videoFilename,
     duration,
     year,
     description,
     IsAvailable,
   }) {
     const [result] = await this.database.query(
-      `update ${this.table} SET miniature_filename=?, cover_filename=?, title=?, videoUrl=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
+      `update ${this.table} SET miniature_filename=?, cover_filename=?, title=?, videoUrl=?, videoFilename=?, duration=?, year=?, description=?, IsAvailable=? where id=?`,
       [
         miniature_filename,
         cover_filename,
         title,
         videoUrl,
+        videoFilename,
         duration,
         year,
         description,

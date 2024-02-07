@@ -4,15 +4,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useMovies } from "../contexts/MovieContext";
 
+// § The user should be able to decide if he wanna upload a video or use a youtube link to add a video.
+
 function AddVideos() {
   const location = useLocation();
   const [file, setFile] = useState(undefined);
   const [previewFile, setPreviewFile] = useState();
   const [previewCover, setPreviewCover] = useState();
+  const [previewVideo, setPreviewVideo] = useState();
   const [cover, setCover] = useState(undefined);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [videoFilename, setVideoFilename] = useState("");
   const [year, setYear] = useState("");
   const [duration, setDuration] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
@@ -82,8 +86,9 @@ function AddVideos() {
     formData.append("year", year);
     formData.append("isAvailable", isAvailable);
     formData.append("duration", duration);
-    formData.append("images", file);
-    formData.append("images", cover);
+    formData.append("miniature", file);
+    formData.append("cover", cover);
+    formData.append("videoFile", videoFilename);
 
     await axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/films`, formData, {
@@ -127,6 +132,10 @@ function AddVideos() {
     if (cover) {
       const objectUrlCover = URL.createObjectURL(cover);
       setPreviewCover(objectUrlCover);
+    }
+    if (videoFilename) {
+      const objectUrlVideo = URL.createObjectURL(videoFilename);
+      setPreviewVideo(objectUrlVideo);
     }
   }, [file, cover]);
 
@@ -182,6 +191,20 @@ function AddVideos() {
               onChange={(e) => setCover(e.target.files[0])}
               type="file"
               accept="image/*"
+            />
+          </div>
+          <div className="Outlineimageuploader">
+            <div className="Frame4">
+              <h4 className="AjouterUneMiniature">Add a video file</h4>
+              <div className="imageContainer2">
+                {previewVideo && <img src={previewVideo} alt="videoFile" />}
+              </div>
+            </div>
+            <input
+              className="input"
+              onChange={(e) => setVideoFilename(e.target.files[0])}
+              type="file"
+              accept="video/*"
             />
           </div>
         </div>

@@ -2,7 +2,7 @@
 const multer = require("multer");
 const { v4 } = require("uuid");
 
-// ! What is the correct way to set up the storage for the images in the backend and to pass the images to the edit method in filmControllers.js?
+// ! Implement the upload of video files for adding or editing a film with the multer package.
 
 const imagesStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -14,11 +14,14 @@ const imagesStorage = multer.diskStorage({
     // eslint-disable-next-line prefer-template
     const name = v4() + "." + extension;
 
-    if (req.body.images) {
-      req.body.images.push(name);
-    } else {
-      req.body.images = [name];
+    if (req.body.cover) {
+      req.body.cover = name;
     }
+
+    if (req.body.miniature) {
+      req.body.miniature = name;
+    }
+
     console.warn("req.body.images in imagesStorage", req.body.images);
     cb(null, name);
   },

@@ -22,7 +22,7 @@ const commentaireFilmControllers = require("./controllers/commentaireFilmControl
 
 const authControllers = require("./controllers/authControllers");
 
-// § It seems that, when trying to upload an image for editing a film, the image is not being uploaded. The image is being uploaded when adding a new film, but not when editing an existing film (see the edit method in filmControllers.js). This is likely due to the fact that the edit method in filmControllers.js is not using the uploadImages2 middleware. How to fix this? Should we use the uploadImages2 middleware in the edit method in filmControllers.js? If so, how to do it? If not, what is the correct way to fix this issue?
+// § I would to implement the upload of video files for adding or editing a film with the multer package.
 
 // Route to get a list of items
 router.get("/users", userControllers.browse);
@@ -72,6 +72,7 @@ router.put(
   uploadImages2.fields([
     { name: "miniature", maxCount: 1 },
     { name: "cover", maxCount: 1 },
+    { name: "videoFile", maxCount: 1 },
   ]),
   filmControllers.edit
 );
@@ -83,7 +84,15 @@ router.post("/users", hashPassword, userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 router.post("/comments", commentaireFilmControllers.addComment);
-router.post("/films", uploadImages.array("images", 2), filmControllers.add);
+router.post(
+  "/films",
+  uploadImages.fields([
+    { name: "miniature", maxCount: 1 },
+    { name: "cover", maxCount: 1 },
+    { name: "videoFile", maxCount: 1 },
+  ]),
+  filmControllers.add
+);
 router.post(
   "/film/:filmId/category/:categoryId",
   categorieParFilmControllers.addFilmToCategory

@@ -7,6 +7,8 @@ CREATE TABLE
         `avatar_filename` VARCHAR(255)
     );
 
+-- ! Add a videoFilename column to the Film table to store the video file name in case there is no video URL and the video is stored locally
+
 DROP TABLE IF EXISTS `Film`;
 
 CREATE TABLE
@@ -17,7 +19,8 @@ CREATE TABLE
         `cover_url` VARCHAR(255) DEFAULT NULL,
         `cover_filename` VARCHAR(255) DEFAULT NULL,
         `title` VARCHAR(255) NOT NULL,
-        `videoUrl` VARCHAR(255) NOT NULL,
+        `videoUrl` VARCHAR(255) DEFAULT NULL,
+        `videoFilename` VARCHAR(255) DEFAULT NULL,
         `duration` INT NOT NULL,
         `year` VARCHAR(4) NOT NULL,
         `description` VARCHAR(700) NOT NULL,
