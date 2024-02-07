@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Eye, EyeOff } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import LogoContainer from "../components/LogoContainer";
 import { useUser } from "../contexts/UserContext";
@@ -21,6 +22,8 @@ function Inscription() {
   const [showModal, setShowModal] = useState(false);
   const [avatars, setAvatars] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
   const toggleModal = () => {
@@ -186,7 +189,7 @@ function Inscription() {
               </div>
               <div className="inputContainer">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   className={`input ${
                     user.password && user.password.length < 8
@@ -198,13 +201,19 @@ function Inscription() {
                   onChange={handleInputChange}
                   placeholder="Password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </button>
                 {user.password && user.password.length < 8 && (
                   <p className="errorMessage">8 characters at least</p>
                 )}
               </div>
               <div className="inputContainer">
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   className={`input ${
                     confirmPassword && user.password !== confirmPassword
                       ? "errorPassword"
@@ -214,6 +223,12 @@ function Inscription() {
                   onChange={handleConfirmPasswordChange}
                   placeholder="Password Confirmation"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? <EyeOff /> : <Eye />}
+                </button>
               </div>
             </div>
             <div className="additionalInformation">
