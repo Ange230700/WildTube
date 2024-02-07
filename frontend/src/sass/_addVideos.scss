@@ -78,6 +78,12 @@
       flex-direction: column;
       display: flex;
 
+      @media (width <= 890px) {
+        .someContainer {
+          flex-direction: column;
+        }
+      }
+
       .inputContainer {
         justify-content: center;
         display: flex;

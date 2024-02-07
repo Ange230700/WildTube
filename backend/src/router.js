@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Import itemControllers module for handling item-related operations
 
-const { uploadImages } = require("./services/multer");
+const { uploadImages, uploadImages2 } = require("./services/multer");
 const { hashPassword, verifyToken } = require("./services/auth");
 
 const userControllers = require("./controllers/userControllers");
@@ -21,6 +21,8 @@ const categorieParFilmControllers = require("./controllers/categorieParFilmContr
 const commentaireFilmControllers = require("./controllers/commentaireFilmControllers");
 
 const authControllers = require("./controllers/authControllers");
+
+// § I would to implement the upload of video files for adding or editing a film with the multer package.
 
 // Route to get a list of items
 router.get("/users", userControllers.browse);
@@ -65,7 +67,15 @@ router.get("/category/:id", categorieControllers.read);
 // Route to edit a specific item by ID
 router.put("/user/:id", userControllers.edit);
 router.put("/comments/:commentId", commentaireFilmControllers.updateComment);
-router.put("/films/:id", filmControllers.edit);
+router.put(
+  "/films/:id",
+  uploadImages2.fields([
+    { name: "miniature", maxCount: 1 },
+    { name: "cover", maxCount: 1 },
+    { name: "videoFile", maxCount: 1 },
+  ]),
+  filmControllers.edit
+);
 router.put("/category/:id", categorieControllers.edit);
 
 // Route to add a new item
@@ -74,7 +84,15 @@ router.post("/users", hashPassword, userControllers.add);
 router.post("/favorites/film", favoriFilmControllers.addMovieToFavorite);
 router.post("/watchlist/film", watchlistControllers.addMovieToWatchlist);
 router.post("/comments", commentaireFilmControllers.addComment);
-router.post("/films", uploadImages.array("images", 2), filmControllers.add);
+router.post(
+  "/films",
+  uploadImages.fields([
+    { name: "miniature", maxCount: 1 },
+    { name: "cover", maxCount: 1 },
+    { name: "videoFile", maxCount: 1 },
+  ]),
+  filmControllers.add
+);
 router.post(
   "/film/:filmId/category/:categoryId",
   categorieParFilmControllers.addFilmToCategory

@@ -83,7 +83,7 @@ function EditSection() {
           })
           .catch((error) => {
             console.error(error);
-            toast.error("An error occurred");
+            toast.error("Error updating category name");
           });
       }
 
@@ -127,7 +127,7 @@ function EditSection() {
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error occurred");
+      toast.error("Error saving changes");
     } finally {
       setIsSaving(false);
     }

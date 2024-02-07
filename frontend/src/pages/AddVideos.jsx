@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useMovies } from "../contexts/MovieContext";
 
+// § The user should be able to decide if he wanna upload a video or use a youtube link to add a video.
+
 function AddVideos() {
   const location = useLocation();
   const [file, setFile] = useState(undefined);
@@ -13,6 +15,7 @@ function AddVideos() {
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [videoFilename, setVideoFilename] = useState("");
   const [year, setYear] = useState("");
   const [duration, setDuration] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
@@ -65,7 +68,7 @@ function AddVideos() {
         duration ||
         isAvailable) === (undefined || "" || false)
     ) {
-      toast.error("champ manquant");
+      toast.error("Missing fields");
     } else if (isAvailable === "utilisateur") {
       setIsAvailable(true);
     } else if (isAvailable === "visiteur") {
@@ -82,8 +85,9 @@ function AddVideos() {
     formData.append("year", year);
     formData.append("isAvailable", isAvailable);
     formData.append("duration", duration);
-    formData.append("images", file);
-    formData.append("images", cover);
+    formData.append("miniature", file);
+    formData.append("cover", cover);
+    formData.append("videoFile", videoFilename);
 
     await axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/films`, formData, {
@@ -147,14 +151,43 @@ function AddVideos() {
       </div>
       <div className="Emptyfieldscontainer">
         <div className="Imageuploadercontainer">
-          <div className="inputContainer">
-            <input
-              type="text"
-              name="name"
-              className="input"
-              onChange={(e) => setVideoUrl(e.target.value)}
-              placeholder="lien de la video"
-            />
+          <div
+            style={{
+              display: "flex",
+              gap: "20px",
+              alignItems: "center",
+            }}
+            className="someContainer"
+          >
+            <div className="inputContainer">
+              <input
+                type="text"
+                name="name"
+                className="input"
+                onChange={(e) => setVideoUrl(e.target.value)}
+                placeholder="video url"
+              />
+            </div>
+            <p
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              Or
+            </p>
+            <div className="Outlineimageuploader">
+              <div className="Frame4">
+                <h4 className="AjouterUneMiniature">Add a video file</h4>
+              </div>
+              <input
+                className="input"
+                onChange={(e) => setVideoFilename(e.target.files[0])}
+                type="file"
+                accept="video/*"
+              />
+            </div>
           </div>
           <div className="Outlineimageuploader">
             <div className="Frame4">

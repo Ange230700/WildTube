@@ -68,11 +68,53 @@
       border-radius: 10px;
       border-bottom: 1px #ff509a solid;
       &::placeholder {
-        color: red;
+        color: inherit;
       }
 
       option {
         color: var(--neutral-color-2);
+      }
+    }
+
+    .someContainer {
+      .min {
+        border-radius: 5px;
+        color: var(--text-field-background-color);
+        font-size: 0.8rem;
+        background-color: #ff509a;
+        cursor: pointer;
+        bottom: 0;
+        button {
+          border: none;
+        }
+      }
+      .edit {
+        color: var(--text-field-background-color);
+        border: none;
+        background: rgba(238, 226, 226, 0.1);
+        height: clamp(
+          calc(46.75px * 1),
+          calc(14.609375vw * 1),
+          calc(46.75px * 1 * 1.5)
+        );
+        width: 80%;
+        max-width: 350px;
+        padding-inline-start: 5px;
+        border-radius: 10px;
+        border-bottom: 1px #ff509a solid;
+        &::placeholder {
+          color: inherit;
+        }
+
+        option {
+          color: var(--neutral-color-2);
+        }
+      }
+    }
+
+    @media (width <= 750px) {
+      .someContainer {
+        flex-direction: column;
       }
     }
 

@@ -77,11 +77,11 @@ function CategoryDisplay({ categorie, getCategories }) {
         toast.success("Category deleted");
         getCategories();
       } else {
-        toast.error("An error occurred");
+        toast.error("Error deleting category");
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error occurred");
+      toast.error("Error deleting category");
     } finally {
       setIsDeleting(false);
     }

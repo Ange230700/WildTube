@@ -288,7 +288,7 @@ FreeMovie.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     cover_filename: PropTypes.string,
-    cover_url: PropTypes.string.isRequired,
+    cover_url: PropTypes.string,
     title: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,

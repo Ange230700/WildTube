@@ -2,24 +2,33 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useMovies } from "../contexts/MovieContext";
+
+// § When uploading a video, I would like to see a preview of the video being a snapshot of the video. How can I do that?
 
 function EditVideo() {
   const { movieId } = useParams();
+  const { movies } = useMovies();
+  const movie = movies.find((m) => m.id === parseInt(movieId, 10));
   const location = useLocation();
   const [categories, setCategories] = useState([]);
   const [categorieVideo, setCategorieVideo] = useState([]);
   const navigate = useNavigate();
   const [video, setVideo] = useState({
-    miniature_url: "",
     title: "",
     videoUrl: "",
+    videoFilename: "",
     duration: "",
     year: "",
-    miniature_filename: "",
     description: "",
     categorie: "",
+    cover: "",
+    miniature: "",
+    IsAvailable: movie?.IsAvailable,
   });
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile2, setSelectedFile2] = useState(null);
+  const [selectedFile3, setSelectedFile3] = useState(null);
 
   const handleDeleteCategorie = async (uniqueKey) => {
     try {
@@ -27,7 +36,7 @@ function EditVideo() {
         `${import.meta.env.VITE_BACKEND_URL}/api/categoriesParFilm/${uniqueKey}`
       );
       if (response.status === 200) {
-        toast.success("Success");
+        toast.success("Success deleting category");
         setCategorieVideo((prevCategorieVideo) =>
           prevCategorieVideo.filter(
             (categorie) => categorie.unique_key !== uniqueKey
@@ -35,7 +44,7 @@ function EditVideo() {
         );
       }
     } catch (e) {
-      console.error("Error deleting", e);
+      console.error("Error deleting category", e);
     }
   };
 
@@ -68,7 +77,32 @@ function EditVideo() {
       setSelectedFile(file);
       setVideo((prevVideo) => ({
         ...prevVideo,
-        miniature: URL.createObjectURL(file),
+        // cover_filename: URL.createObjectURL(file),
+        images: file,
+      }));
+    }
+  };
+
+  const handleFileChange2 = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile2(file);
+      setVideo((prevVideo) => ({
+        ...prevVideo,
+        // miniature_filename: URL.createObjectURL(file),
+        images: file,
+      }));
+    }
+  };
+
+  const handleFileChange3 = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile3(file);
+      setVideo((prevVideo) => ({
+        ...prevVideo,
+        // videoFilename: URL.createObjectURL(file),
+        images: file,
       }));
     }
   };
@@ -113,7 +147,7 @@ function EditVideo() {
         }
       );
       if (response.status === 201) {
-        toast.success("Success");
+        toast.success("Success adding category");
         fetchCategorieVideo();
       }
     } catch (e) {
@@ -123,18 +157,35 @@ function EditVideo() {
 
   const handleEditClick = async () => {
     try {
+      const formData = new FormData();
+      formData.append("title", video.title);
+      formData.append("videoUrl", video.videoUrl);
+      formData.append("duration", video.duration);
+      formData.append("year", video.year);
+      formData.append("description", video.description);
+      if (selectedFile) formData.append("cover", selectedFile);
+      if (selectedFile2) formData.append("miniature", selectedFile2);
+      if (selectedFile3) formData.append("videoFile", selectedFile3);
+      formData.append("IsAvailable", movie?.IsAvailable);
+      formData.append("categorie", video.categorie);
       const response = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/films/${movieId}`,
-        video
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       if (response.status === 204) {
-        toast.success("Edited video");
+        toast.success("Success editing video");
+        if (selectedFile) URL.revokeObjectURL(selectedFile);
+        if (selectedFile2) URL.revokeObjectURL(selectedFile2);
+        if (selectedFile3) URL.revokeObjectURL(selectedFile3);
         navigate(`/movies/${movieId}`);
-      } else {
-        toast.error("A problem appeared");
       }
-    } catch (e) {
-      console.error("Error for editing");
+    } catch (err) {
+      console.error("Error editing", err);
     }
   };
 
@@ -144,7 +195,7 @@ function EditVideo() {
         `${import.meta.env.VITE_BACKEND_URL}/api/films/${movieId}`
       );
       if (response.status === 200) {
-        toast.success("Success");
+        toast.success("Success deleting video");
         navigate("/");
       }
     } catch (e) {
@@ -156,19 +207,48 @@ function EditVideo() {
     if (selectedFile) {
       return URL.createObjectURL(selectedFile);
     }
+    if (video.cover_filename) {
+      return (
+        video.cover_filename &&
+        `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+          video?.cover_filename
+        }`
+      );
+    }
+    return video.cover_url;
+  };
+
+  const imageSrc2 = () => {
+    if (selectedFile2) {
+      return URL.createObjectURL(selectedFile2);
+    }
     if (video.miniature_filename) {
       return (
         video.miniature_filename &&
         `${import.meta.env.VITE_BACKEND_URL}/assets/images/${
-          video.miniature_filename
+          video?.miniature_filename
         }`
       );
     }
-    return video.miniature_url;
+    return video?.miniature_url;
   };
 
+  useEffect(() => {
+    return () => {
+      if (selectedFile) {
+        URL.revokeObjectURL(selectedFile);
+      }
+      if (selectedFile2) {
+        URL.revokeObjectURL(selectedFile2);
+      }
+      if (selectedFile3) {
+        URL.revokeObjectURL(selectedFile3);
+      }
+    };
+  }, [selectedFile, selectedFile2]);
+
   return (
-    <div
+    <form
       className="ContainerEditVideo"
       style={
         location.pathname.includes("/EditVideo/")
@@ -177,56 +257,98 @@ function EditVideo() {
             }
           : {}
       }
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleEditClick();
+      }}
     >
       <div className="titlePage">
         <h3 className="Edit">Edit video</h3>
       </div>
-      <form className="containerFormMiniature">
-        <img className="miniature" src={imageSrc()} alt="Miniature" />
-        <input type="file" className="min" onChange={handleFileChange} />
-      </form>
-      <form className="containerFormEdit">
+      <div className="containerFormMiniature">
+        <img className="miniature" src={imageSrc2()} alt="Miniature" />
+        <input
+          type="file"
+          className="min"
+          onChange={handleFileChange2 || ""}
+          accept="image/*"
+        />
+      </div>
+      <div className="containerFormMiniature">
+        <img className="miniature" src={imageSrc()} alt="cover" />
+        <input
+          type="file"
+          className="min"
+          onChange={handleFileChange || ""}
+          accept="image/*"
+        />
+      </div>
+      <div className="containerFormEdit">
         <input
           className="edit"
           name="title"
           type="text"
-          value={video.title}
-          onChange={handleInputChange}
+          value={video?.title}
+          onChange={handleInputChange || ""}
+          placeholder="Title"
         />
-        <input
-          className="edit"
-          type="text"
-          name="cover"
-          value={video.cover}
-          onChange={handleInputChange}
-        />
-        <input
-          className="edit"
-          type="text"
-          name="videoUrl"
-          value={video.videoUrl}
-          onChange={handleInputChange}
-        />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            justifyContent: "center",
+            gap: "3rem",
+          }}
+          className="someContainer"
+        >
+          <input
+            className="edit"
+            type="text"
+            name="videoUrl"
+            value={video?.videoUrl}
+            onChange={handleInputChange || ""}
+            placeholder="Youtube URL"
+          />
+          <p
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              color: "white",
+            }}
+          >
+            Or
+          </p>
+          <input
+            type="file"
+            className="min"
+            onChange={handleFileChange3 || ""}
+            accept="video/*"
+          />
+        </div>
         <input
           className="edit"
           type="text"
           name="duration"
-          value={video.duration}
-          onChange={handleInputChange}
+          value={video?.duration}
+          onChange={handleInputChange || ""}
+          placeholder="Duration"
         />
         <input
           className="edit"
           type="text"
           name="year"
-          value={video.year}
-          onChange={handleInputChange}
+          value={video?.year}
+          onChange={handleInputChange || ""}
+          placeholder="Year"
         />
         <textarea
           className="edit"
           type="text"
           name="description"
-          value={video.description}
-          onChange={handleInputChange}
+          value={video?.description}
+          onChange={handleInputChange || ""}
+          placeholder="Description"
         />
         <div className="categories">
           {categorieVideo.map((categorie) => (
@@ -253,7 +375,7 @@ function EditVideo() {
           onChange={(e) => handleAddCategorie(e.target.value)}
           className="edit"
           name="category"
-          value={video.categorie}
+          value={video?.categorie}
         >
           <option value="">Choose a category</option>
           {categories
@@ -270,19 +392,15 @@ function EditVideo() {
             ))}
         </select>
         <div className="containerButtonEdit">
-          <button
-            className="editButton"
-            type="button"
-            onClick={handleEditClick}
-          >
+          <button className="editButton" type="submit">
             Edit
           </button>
           <button className="delete" type="button" onClick={handleDelete}>
             Delete
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
 

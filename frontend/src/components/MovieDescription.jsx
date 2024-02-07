@@ -22,7 +22,7 @@ MovieDescription.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     cover_filename: PropTypes.string,
-    cover_url: PropTypes.string.isRequired,
+    cover_url: PropTypes.string,
     year: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
     IsAvailable: PropTypes.number.isRequired,
