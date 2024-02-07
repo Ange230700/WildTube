@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import CommentsSection from "./CommentsSection";
 
@@ -51,9 +51,11 @@ function MovieLoginRequired({ movie }) {
         </div>
         <div className="upper-layer">
           <div className="registration-invitation-container">
-            <p className="registration-invitation">
-              Log in to watch this movie.
-            </p>
+            <NavLink to="/connection" className="login-link">
+              <p className="registration-invitation">
+                Log in to watch this movie.
+              </p>
+            </NavLink>
           </div>
         </div>
       </div>
