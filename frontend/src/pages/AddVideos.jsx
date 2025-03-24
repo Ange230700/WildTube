@@ -288,7 +288,7 @@ Movie title"
         </div>
       </div>
       <div className="Grantingscontainer">
-        <div className="Autorisation">Authorisation</div>
+        <div className="Autorisation">Authorization</div>
         <div className="Input">
           <input
             name="visiteur"
@@ -299,7 +299,7 @@ Movie title"
             checked={isAvailable === "0" || ""}
             onChange={(e) => setIsAvailable(e.target.value)}
           />
-          <div className="Visiteur">Visitor</div>
+          <div className="Visiteur">Guest</div>
         </div>
         <div className="Input">
           <input

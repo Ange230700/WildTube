@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { Eye, EyeOff } from "react-feather";
 import toast from "react-hot-toast";
 import LogoContainer from "../components/LogoContainer";
 import { useUser } from "../contexts/UserContext";
@@ -10,6 +11,7 @@ function Connection() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const { updateUser } = useUser();
 
@@ -66,13 +68,19 @@ function Connection() {
           </div>
           <div className="inputContainer">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={user.password}
               className="input"
               placeholder="Password :"
               onChange={handleInputChange}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff /> : <Eye />}
+            </button>
           </div>
           <div className="buttonContainer">
             <div className="connectionButton">

@@ -21,9 +21,24 @@
   }
   .inputContainer {
     padding-bottom: 25px;
+<<<<<<< HEAD
     display: inline-flex;
     justify-content: center;
     max-width: 500px;
+=======
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    position: relative;
+
+    button {
+      margin: 5px;
+      padding: 4px;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+    }
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
   }
   .input {
     width: 63vw;

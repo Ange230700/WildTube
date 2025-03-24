@@ -68,7 +68,7 @@ function AddSection() {
 
         await Promise.all(movieAddPromises);
 
-        toast.success("Category created");
+        toast.success("film(s) added to category");
         setIsAdminMode(!isAdminMode);
         navigate("/");
       }

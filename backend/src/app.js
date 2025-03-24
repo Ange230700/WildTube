@@ -1,4 +1,4 @@
-// const path = require("path");
+const path = require("path");
 // Load the express module to create a web application
 
 const express = require("express");
@@ -146,8 +146,8 @@ app.use(logErrors);
 
 /* ************************************************************************* */
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "/../public/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../public/index.html"));
+});
 
 module.exports = app;

@@ -18,18 +18,49 @@
       padding: 0;
     }
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
   .containerFormMiniature {
     display: flex;
     justify-content: center;
     position: relative;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
     .miniature {
       object-fit: cover;
       border-radius: 5px;
       background: rgba(238, 226, 226, 0.1);
       border-bottom: 1px #ff509a solid;
+<<<<<<< HEAD
       height: 20vh;
       width: 80%;
       max-width: 350px;
+=======
+      width: clamp(
+        calc(var(--hero-movie-slide-min-width, 288px) * 1 / 2),
+        calc(var(--hero-movie-slide-preferred-width, 90vw) * 1 / 2),
+        calc(
+          var(
+              --hero-movie-slide-max-width,
+              calc(var(--hero-movie-slide-min-width, 288px) * 2.25)
+            ) * 1 / 2
+        )
+      );
+      height: clamp(
+        calc(var(--hero-movie-slide-min-height, 288px) * 0.5 / 2),
+        calc(var(--hero-movie-slide-preferred-height, 90vw) * 0.5 / 2),
+        calc(
+          var(
+              --hero-movie-slide-max-height,
+              calc(var(--hero-movie-slide-min-height, 288px) * 2.25)
+            ) * 0.5 / 2
+        )
+      );
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
     }
     .min {
       position: absolute;
@@ -44,6 +75,55 @@
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+  .containerFormMiniature2 {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    .miniature {
+      object-fit: cover;
+      border-radius: 5px;
+      background: rgba(238, 226, 226, 0.1);
+      border-bottom: 1px #ff509a solid;
+      width: clamp(
+        calc(var(--movie-slide-min-width, 70px) * 1 * 1.25),
+        calc(var(--movie-slide-preferred-width, 22vw) * 1 * 1.25),
+        calc(
+          var(
+              --movie-slide-max-width,
+              calc(var(--movie-slide-min-width, 70px) * 2)
+            ) * 1 * 1.25
+        )
+      );
+      height: clamp(
+        calc(var(--movie-slide-min-width, 70px) * 1.25 * 1.3),
+        calc(var(--movie-slide-preferred-width, 22vw) * 1.25 * 1.3),
+        calc(
+          var(
+              --movie-slide-max-width,
+              calc(var(--movie-slide-min-width, 70px) * 2)
+            ) * 1.25 * 1.3
+        )
+      );
+    }
+    .min {
+      position: absolute;
+      border-radius: 5px;
+      color: var(--text-field-background-color);
+      font-size: 0.8rem;
+      background-color: #ff509a;
+      cursor: pointer;
+      bottom: 0;
+      button {
+        border: none;
+      }
+    }
+  }
+
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
   .containerFormEdit {
     display: flex;
     flex-wrap: wrap;
@@ -206,4 +286,153 @@
     color: hsla(0, 0%, 86%, 1);
     max-width: 250px;
   }
+<<<<<<< HEAD
+=======
+
+  .Grantingscontainer {
+    align-self: stretch;
+    height: clamp(calc(150px * 1), calc(46.875vw * 1), calc(150px * 1 * 1.5));
+    padding-left: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    padding-right: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    flex-direction: column;
+    gap: clamp(
+      calc(var(--spacing-constant) * 1),
+      calc(2.5vw * 1),
+      calc(var(--spacing-constant) * 1 * 1.5)
+    );
+    display: flex;
+
+    .Autorisation {
+      text-align: center;
+      color: #f0e063;
+    }
+
+    .Input {
+      max-width: 500px;
+      align-self: stretch;
+      padding: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      background: rgba(238, 226, 226, 0.1);
+      border-radius: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      overflow: hidden;
+      border: 1px #ff509a solid;
+      align-items: center;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      display: flex;
+
+      .SquareCheckRegular1 {
+        width: clamp(
+          calc(var(--spacing-constant) * 2),
+          calc(2.5vw * 2),
+          calc(var(--spacing-constant) * 2 * 1.5)
+        );
+        height: clamp(
+          calc(var(--spacing-constant) * 2),
+          calc(2.5vw * 2),
+          calc(var(--spacing-constant) * 2 * 1.5)
+        );
+        position: relative;
+
+        .Vector {
+          width: clamp(
+            calc(var(--spacing-constant) * 2),
+            calc(2.5vw * 2),
+            calc(var(--spacing-constant) * 2 * 1.5)
+          );
+          height: clamp(
+            calc(var(--spacing-constant) * 2),
+            calc(2.5vw * 2),
+            calc(var(--spacing-constant) * 2 * 1.5)
+          );
+          left: 0px;
+          top: 1px;
+          position: absolute;
+          background: #dbdbdb;
+        }
+      }
+
+      .Visiteur {
+        text-align: center;
+        color: #dbdbdb;
+        font-size: clamp(calc(9px * 1), calc(2.5vw * 1), calc(9px * 1 * 1.5));
+        font-weight: 400;
+      }
+    }
+
+    .Input {
+      align-self: stretch;
+      padding: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      background: rgba(238, 226, 226, 0.1);
+      border-radius: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      overflow: hidden;
+      align-items: center;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      display: flex;
+    }
+
+    .Input {
+      align-self: center;
+      padding: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      background: rgba(238, 226, 226, 0.1);
+      border-radius: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      overflow: hidden;
+      align-items: center;
+      gap: clamp(
+        calc(var(--spacing-constant) * 1),
+        calc(2.5vw * 1),
+        calc(var(--spacing-constant) * 1 * 1.5)
+      );
+      display: flex;
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: clamp(
+          calc(var(--spacing-constant) * 1),
+          calc(2.5vw * 1),
+          calc(var(--spacing-constant) * 1 * 1.5)
+        );
+      }
+    }
+  }
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
 }

@@ -291,6 +291,7 @@ function Inscription() {
                 )}
               </div>
               <div className="avatar-choice">
+<<<<<<< HEAD
                 <button
                   className="avatarButton"
                   type="button"
@@ -302,6 +303,8 @@ function Inscription() {
                     alt="Avatar"
                   />
                 </button>
+=======
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
                 {avatars.map((avatar) => (
                   <button
                     key={avatar.id}

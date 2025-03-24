@@ -62,6 +62,7 @@ h3 {
               border: none;
               height: 7vh;
               padding: 10px;
+              position: relative;
               background: transparent;
               display: flex;
               &::placeholder {
@@ -77,6 +78,7 @@ h3 {
               position: absolute;
               font-size: 12px;
               left: 10px;
+              top: 0;
             }
 
             .errorEmail {

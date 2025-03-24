@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+<<<<<<< HEAD
+=======
+import { Eye, EyeOff } from "react-feather";
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
 import axios from "axios";
 import ModalInscription from "../components/ModalInscription";
 import formatDate from "../utils/formatDate"; // Import a utility function for date formatting
@@ -16,6 +20,12 @@ function UserProfileEditor() {
   const navigate = useNavigate();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [showModal, setShowModal] = useState(false);
+<<<<<<< HEAD
+=======
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -203,17 +213,34 @@ function UserProfileEditor() {
                 </div>
                 <div className="inputContainer">
                   <input
+<<<<<<< HEAD
                     type="password"
+=======
+                    type={showCurrentPassword ? "text" : "password"}
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
                     name="current_password"
                     className="input"
                     value={currentPassword}
                     onChange={handleInputChange}
                     placeholder="Mot de passe actuel"
                   />
+<<<<<<< HEAD
                 </div>
                 <div className="inputContainer">
                   <input
                     type="password"
+=======
+                  <button
+                    type="button"
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  >
+                    {showCurrentPassword ? <EyeOff /> : <Eye />}
+                  </button>
+                </div>
+                <div className="inputContainer">
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
                     name="new_password"
                     className={`input ${
                       newPassword && newPassword.length < 8
@@ -225,13 +252,26 @@ function UserProfileEditor() {
                     onChange={handleInputChange}
                     placeholder="New Password"
                   />
+<<<<<<< HEAD
+=======
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  >
+                    {showNewPassword ? <EyeOff /> : <Eye />}
+                  </button>
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
                   {newPassword && newPassword.length < 8 && (
                     <p className="errorMessage">8 characters at least</p>
                   )}
                 </div>
                 <div className="inputContainer">
                   <input
+<<<<<<< HEAD
                     type="password"
+=======
+                    type={showConfirmNewPassword ? "text" : "password"}
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
                     name="confirm_new_password"
                     className={`input ${
                       confirmNewPassword && confirmNewPassword !== newPassword
@@ -242,6 +282,17 @@ function UserProfileEditor() {
                     onChange={handleInputChange}
                     placeholder="Confirmation du nouveau mot de passe"
                   />
+<<<<<<< HEAD
+=======
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setShowConfirmNewPassword(!showConfirmNewPassword)
+                    }
+                  >
+                    {showConfirmNewPassword ? <EyeOff /> : <Eye />}
+                  </button>
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
                 </div>
               </div>
 

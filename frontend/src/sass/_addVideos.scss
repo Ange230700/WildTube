@@ -339,6 +339,10 @@
         calc(var(--spacing-constant) * 1 * 1.5)
       );
       display: flex;
+<<<<<<< HEAD
+=======
+      justify-content: center;
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
       height: clamp(calc(150px * 1), calc(46.875vw * 1), calc(150px * 1 * 1.5));
 
       .Input {
@@ -349,6 +353,10 @@
         );
         height: 100%;
         width: 100%;
+<<<<<<< HEAD
+=======
+        max-width: 500px;
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
         padding: clamp(
           calc(var(--spacing-constant) * 1),
           calc(2.5vw * 1),
@@ -427,11 +435,19 @@
         calc(var(--spacing-constant) * 3 * 1.5)
       );
       display: flex;
+<<<<<<< HEAD
+=======
+      justify-content: center;
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
       height: clamp(calc(150px * 1), calc(46.875vw * 1), calc(150px * 1 * 1.5));
 
       .Input {
         height: 100%;
         width: 100%;
+<<<<<<< HEAD
+=======
+        max-width: 500px;
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
         padding: clamp(
           calc(var(--spacing-constant) * 1),
           calc(2.5vw * 1),
@@ -496,6 +512,10 @@
     }
 
     .Input {
+<<<<<<< HEAD
+=======
+      max-width: 500px;
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
       align-self: stretch;
       padding: clamp(
         calc(var(--spacing-constant) * 1),
@@ -581,7 +601,11 @@
     }
 
     .Input {
+<<<<<<< HEAD
       align-self: stretch;
+=======
+      align-self: center;
+>>>>>>> b860b8a (chore: 🤖  re-establish the link 'tween remote and local)
       padding: clamp(
         calc(var(--spacing-constant) * 1),
         calc(2.5vw * 1),

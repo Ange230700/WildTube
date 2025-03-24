@@ -5,6 +5,7 @@ import axios from "axios";
 import { useMovies } from "../contexts/MovieContext";
 
 // § When uploading a video, I would like to see a preview of the video being a snapshot of the video. How can I do that?
+// § Regarding the authorization, when the movie is available, the input radio with the guest label should be checked, and when the movie is not available, the input radio with the user label should be checked, and It should be possible to change the authorization by clicking on the input radio, and it should be visible when arriving on the page. After clicking on the edit button, the authorization should be updated in the database if it has been changed. How to do that?
 
 function EditVideo() {
   const { movieId } = useParams();
@@ -29,6 +30,7 @@ function EditVideo() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFile2, setSelectedFile2] = useState(null);
   const [selectedFile3, setSelectedFile3] = useState(null);
+  const [isAvailable, setIsAvailable] = useState(false);
 
   const handleDeleteCategorie = async (uniqueKey) => {
     try {
@@ -178,14 +180,15 @@ function EditVideo() {
         }
       );
       if (response.status === 204) {
-        toast.success("Success editing video");
+        toast.success("Video updated successfully");
         if (selectedFile) URL.revokeObjectURL(selectedFile);
         if (selectedFile2) URL.revokeObjectURL(selectedFile2);
         if (selectedFile3) URL.revokeObjectURL(selectedFile3);
         navigate(`/movies/${movieId}`);
       }
     } catch (err) {
-      console.error("Error editing", err);
+      console.error("Error updating the video", err);
+      toast.error("Error updating video");
     }
   };
 
@@ -247,6 +250,12 @@ function EditVideo() {
     };
   }, [selectedFile, selectedFile2]);
 
+  useEffect(() => {
+    if (movie) {
+      setIsAvailable(movie.IsAvailable === 1);
+    }
+  }, [movie]);
+
   return (
     <form
       className="ContainerEditVideo"
@@ -265,7 +274,7 @@ function EditVideo() {
       <div className="titlePage">
         <h3 className="Edit">Edit video</h3>
       </div>
-      <div className="containerFormMiniature">
+      <div className="containerFormMiniature2">
         <img className="miniature" src={imageSrc2()} alt="Miniature" />
         <input
           type="file"
@@ -391,14 +400,41 @@ function EditVideo() {
               </option>
             ))}
         </select>
-        <div className="containerButtonEdit">
-          <button className="editButton" type="submit">
-            Edit
-          </button>
-          <button className="delete" type="button" onClick={handleDelete}>
-            Delete
-          </button>
+      </div>
+      <div className="Grantingscontainer">
+        <div className="Autorisation">Authorization</div>
+        <div className="Input">
+          <label>
+            <p>Guest</p>
+            <input
+              type="radio"
+              name="IsAvailable"
+              value="1"
+              checked={isAvailable}
+              onChange={() => setIsAvailable(true)}
+            />
+          </label>
         </div>
+        <div className="Input">
+          <label>
+            <p>User</p>
+            <input
+              type="radio"
+              name="IsAvailable"
+              value="0"
+              checked={!isAvailable}
+              onChange={() => setIsAvailable(false)}
+            />
+          </label>
+        </div>
+      </div>
+      <div className="containerButtonEdit">
+        <button className="editButton" type="submit">
+          Edit
+        </button>
+        <button className="delete" type="button" onClick={handleDelete}>
+          Delete
+        </button>
       </div>
     </form>
   );
